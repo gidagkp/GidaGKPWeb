@@ -316,8 +316,12 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="ChalanDocumentFileName" Type="varchar" MaxLength="500" />
           <Property Name="ChalanDocumentFileType" Type="varchar" MaxLength="50" />
           <Property Name="TransactionType" Type="varchar" MaxLength="50" />
-          <Property Name="ApprovalStatus" Type="varchar" MaxLength="50" />
-          <Property Name="RejectedComment" Type="varchar(max)" />
+          <Property Name="AMApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="MApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="GMApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="AMComment" Type="varchar(max)" />
+          <Property Name="MComment" Type="varchar(max)" />
+          <Property Name="GMComment" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ApplicantUploadDoc">
           <Key>
@@ -381,8 +385,12 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="ApplicantSignatureFileName" Type="varchar" MaxLength="500" />
           <Property Name="ApplicantSignatureFileType" Type="varchar" MaxLength="50" />
           <Property Name="CreationDate" Type="datetime" />
-          <Property Name="ApprovalStatus" Type="varchar" MaxLength="50" />
-          <Property Name="RejectedComment" Type="varchar(max)" />
+          <Property Name="AMApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="ClerkApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="SIApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="AMComment" Type="varchar(max)" />
+          <Property Name="ClerkComment" Type="varchar(max)" />
+          <Property Name="SIComment" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ApplicantUser">
           <Key>
@@ -1622,8 +1630,12 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="ChalanDocumentFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ChalanDocumentFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TransactionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RejectedComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantTransactionDetail_ApplicantApplicationDetail" FromRole="ApplicantTransactionDetail" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="ApplicantUploadDoc">
@@ -1688,8 +1700,12 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="ApplicantSignatureFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ApplicantSignatureFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RejectedComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClerkApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SIApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClerkComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SIComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantUploadDoc_ApplicantApplicationDetail" FromRole="ApplicantUploadDoc" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="ApplicantUser">
@@ -2622,8 +2638,12 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <EntitySetMapping Name="ApplicantTransactionDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantTransactionDetail">
               <MappingFragment StoreEntitySet="ApplicantTransactionDetail">
-                <ScalarProperty Name="RejectedComment" ColumnName="RejectedComment" />
-                <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+                <ScalarProperty Name="GMComment" ColumnName="GMComment" />
+                <ScalarProperty Name="MComment" ColumnName="MComment" />
+                <ScalarProperty Name="AMComment" ColumnName="AMComment" />
+                <ScalarProperty Name="GMApprovalStatus" ColumnName="GMApprovalStatus" />
+                <ScalarProperty Name="MApprovalStatus" ColumnName="MApprovalStatus" />
+                <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
                 <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
                 <ScalarProperty Name="ChalanDocumentFileType" ColumnName="ChalanDocumentFileType" />
                 <ScalarProperty Name="ChalanDocumentFileName" ColumnName="ChalanDocumentFileName" />
@@ -2649,8 +2669,12 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <EntitySetMapping Name="ApplicantUploadDocs">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantUploadDoc">
               <MappingFragment StoreEntitySet="ApplicantUploadDoc">
-                <ScalarProperty Name="RejectedComment" ColumnName="RejectedComment" />
-                <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+                <ScalarProperty Name="SIComment" ColumnName="SIComment" />
+                <ScalarProperty Name="ClerkComment" ColumnName="ClerkComment" />
+                <ScalarProperty Name="AMComment" ColumnName="AMComment" />
+                <ScalarProperty Name="SIApprovalStatus" ColumnName="SIApprovalStatus" />
+                <ScalarProperty Name="ClerkApprovalStatus" ColumnName="ClerkApprovalStatus" />
+                <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="ApplicantSignatureFileType" ColumnName="ApplicantSignatureFileType" />
                 <ScalarProperty Name="ApplicantSignatureFileName" ColumnName="ApplicantSignatureFileName" />

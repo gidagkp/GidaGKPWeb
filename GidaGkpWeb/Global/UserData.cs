@@ -99,6 +99,32 @@ namespace GidaGkpWeb.Global
             }
             set { HttpContext.Current.Session["UserType"] = value; }
         }
+        public static string Department
+        {
+            get
+            {
+                if (System.Web.HttpContext.Current.Session["Department"] != null)
+                {
+                    return HttpContext.Current.Session["Department"].ToString();
+                }
+                else
+                    return string.Empty;
+            }
+            set { HttpContext.Current.Session["Department"] = value; }
+        }
+        public static string Designation
+        {
+            get
+            {
+                if (System.Web.HttpContext.Current.Session["Designation"] != null)
+                {
+                    return HttpContext.Current.Session["Designation"].ToString();
+                }
+                else
+                    return string.Empty;
+            }
+            set { HttpContext.Current.Session["Designation"] = value; }
+        }
         public static List<UserPermission> UserPermissions
         {
             get

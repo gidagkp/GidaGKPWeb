@@ -51,6 +51,8 @@ namespace GidaGkpWeb.BAL.Login
                 UserData.UserId = _userRow.Id;
                 UserData.Username = _userRow.UserName;
                 UserData.UserType = Convert.ToString(_userRow.UserRoleId);
+                UserData.Department = _db.Lookups.Where(x => x.LookupId == _userRow.Department).FirstOrDefault().LookupName;
+                UserData.Designation = _db.Lookups.Where(x => x.LookupId == _userRow.Designation).FirstOrDefault().LookupName;
                 var permissionList = _db.RoleWisePermissions.Where(x => x.DepartmentId == _userRow.Department && x.DesignationId == _userRow.Designation && x.RoleId == _userRow.UserRoleId).ToList();
                 var permissiondata = new List<UserPermission>();
                 permissionList.ForEach(x =>

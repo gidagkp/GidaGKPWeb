@@ -6,7 +6,7 @@
 @{
 
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var UserData = ViewData["UserDetail"] as ApplicationUserModel;
+    var UserDataModel = ViewData["UserDetail"] as ApplicationUserModel;
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
 <script src="~/Scripts/App/Masters/SchemeWiseApplicationList.js"></script>
@@ -40,8 +40,8 @@
         }
 </style>
 <div class="container">
-    <input type="hidden" value="@UserData.ApplicationId" id="hdnApplicationId" />
-    <input type="hidden" value="@UserData.SchemeNameId" id="hdnSchemeNameId" />
+    <input type="hidden" value="@UserDataModel.ApplicationId" id="hdnApplicationId" />
+    <input type="hidden" value="@UserDataModel.SchemeNameId" id="hdnSchemeNameId" />
     <div class="row">
         <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 30px;">
             <h3 style="font-size:18px;">Application Status </h3>
@@ -50,15 +50,15 @@
 
         <div class="form-group col-sm-4 col-xs-12">
             <label>Application Number</label>
-            <input type="number" class="form-control" placeholder="@UserData.ApplicationNumber" readonly>
+            <input type="number" class="form-control" placeholder="@UserDataModel.ApplicationNumber" readonly>
         </div>
         <div class="form-group col-sm-4 col-xs-12">
             <label>Applicant Name</label>
-            <input type="text" class="form-control" placeholder="@UserData.FullName" readonly>
+            <input type="text" class="form-control" placeholder="@UserDataModel.FullName" readonly>
         </div>
         <div class="form-group col-sm-3 col-xs-12">
             <label>Mobile Number</label>
-            <input type="Mobile" class="form-control" placeholder="@UserData.ContactNo" readonly>
+            <input type="Mobile" class="form-control" placeholder="@UserDataModel.ContactNo" readonly>
         </div>
 
         @*<div class="form-group col-sm-1 col-xs-12">
@@ -84,26 +84,69 @@
                         <td class="text-center">2</td>
                         <td>View Financial Status & Verify </td>
                         <td>
-                            @if (!string.IsNullOrEmpty(UserData.PaymentStatus) && UserData.PaymentStatus == "Approved")
+                            @if (UserDataModel.AMPaymentStatus == "Approved")
                             {
-                                <span style="color:green">@UserData.PaymentStatus</span>
+                                <span style="color:green">Assistance Manager - @UserDataModel.AMPaymentStatus</span>
                             }
-                            else
+                            else if (UserDataModel.AMPaymentStatus == "Not Approved")
                             {
-                                <span style="color:red">@UserData.PaymentStatus</span>
+                                <span style="color:red">Assistance Manager - @UserDataModel.AMPaymentStatus</span>
+                            }
+                            <br />
+                            @if (UserDataModel.MPaymentStatus == "Approved")
+                            {
+                                <span style="color:green">Manager - @UserDataModel.MPaymentStatus</span>
+                            }
+                            else if (UserDataModel.MPaymentStatus == "Not Approved")
+                            {
+                                <span style="color:red">Manager - @UserDataModel.MPaymentStatus</span>
+                            }
+                            <br />
+                            @if (UserDataModel.GMPaymentStatus == "Approved")
+                            {
+                                <span style="color:green">General Manager - @UserDataModel.GMPaymentStatus</span>
+                            }
+                            else if (UserDataModel.GMPaymentStatus == "Not Approved")
+                            {
+                                <span style="color:red">General Manager - @UserDataModel.GMPaymentStatus</span>
                             }
                         </td>
                         <td class="text-right">
-                            @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Finance Approval ")
+                            @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Finance Approval")
                                 && hasPermission(PermissionName.AllAccess))
                             {
-                                if (!string.IsNullOrEmpty(UserData.PaymentStatus))
+                                if (UserData.Department == "Finance & Accounts" && UserData.Designation == "Assistance Manager")
                                 {
-                                    <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
+                                    if (string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
+                                    {
+                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
+                                    }
                                 }
-                                else
+                                else if (UserData.Department == "Finance & Accounts" && UserData.Designation == "Manager")
                                 {
-                                    <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                    if (!string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && string.IsNullOrEmpty(UserDataModel.MPaymentStatus))
+                                    {
+                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
+                                    }
+                                }
+                                else if (UserData.Department == "Finance & Accounts" && UserData.Designation == "General Manager")
+                                {
+                                    if (!string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && !string.IsNullOrEmpty(UserDataModel.MPaymentStatus) && string.IsNullOrEmpty(UserDataModel.GMPaymentStatus))
+                                    {
+                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
+                                    }
                                 }
                             }
                         </td>
@@ -112,23 +155,70 @@
                         <td class="text-center">3</td>
                         <td>View Uploaded Documents Status & Verify </td>
                         <td>
-                            @if (!string.IsNullOrEmpty(UserData.DocumentStatus) && UserData.DocumentStatus == "Approved")
+                            @if (UserDataModel.ClerkDocumentStatus == "Approved")
                             {
-                                <span style="color:green">@UserData.DocumentStatus</span>
+                                <span style="color:green">Clerk - @UserDataModel.ClerkDocumentStatus</span>
                             }
-                            else
+                            else if (UserDataModel.ClerkDocumentStatus == "Not Approved")
                             {
-                                <span style="color:red">@UserData.DocumentStatus</span>
+                                <span style="color:red">Clerk - @UserDataModel.ClerkDocumentStatus</span>
+                            }
+                            <br />
+                            @if (UserDataModel.AMDocumentStatus == "Approved")
+                            {
+                                <span style="color:green">Assistance Manager - @UserDataModel.AMDocumentStatus</span>
+                            }
+                            else if (UserDataModel.AMDocumentStatus == "Not Approved")
+                            {
+                                <span style="color:red">Assistance Manager - @UserDataModel.AMDocumentStatus</span>
+                            }
+                            <br />
+                            @if (UserDataModel.SIDocumentStatus == "Approved")
+                            {
+                                <span style="color:green">Section Incharge - @UserDataModel.SIDocumentStatus</span>
+                            }
+                            else if (UserDataModel.SIDocumentStatus == "Not Approved")
+                            {
+                                <span style="color:red">Section Incharge - @UserDataModel.SIDocumentStatus</span>
                             }
                         </td>
                         <td class="text-right">
-                            @if (!string.IsNullOrEmpty(UserData.DocumentStatus))
+                            @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Document Approval")
+                               && hasPermission(PermissionName.AllAccess))
                             {
-                                <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
-                            }
-                            else
-                            {
-                                <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                                if (UserData.Department == "Property" && UserData.Designation == "Clerk")
+                                {
+                                    if (string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus))
+                                    {
+                                        <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                                    }
+                                }
+                                else if (UserData.Department == "Property" && UserData.Designation == "Assistance Manager")
+                                {
+                                    if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && string.IsNullOrEmpty(UserDataModel.AMDocumentStatus))
+                                    {
+                                        <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                                    }
+                                }
+                                else if (UserData.Department == "Property" && UserData.Designation == "Section Incharge")
+                                {
+                                    if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && string.IsNullOrEmpty(UserDataModel.SIDocumentStatus))
+                                    {
+                                        <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                                    }
+                                }
                             }
                         </td>
                     </tr>
@@ -180,61 +270,61 @@
                 <div class="row">
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">User Name</label>
-                        <input type="text" class="form-control" placeholder="@UserData.UserName">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.UserName">
 
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Applicant Name</label>
-                        <input type="text" class="form-control" placeholder="@UserData.FullName">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.FullName">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Father Name</label>
-                        <input type="text" class="form-control" placeholder="@UserData.FatherName">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.FatherName">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Application Number</label>
-                        <input type="text" class="form-control" placeholder="@UserData.ApplicationNumber">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.ApplicationNumber">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Plot Area</label>
-                        <input type="text" class="form-control" placeholder="@UserData.PlotArea">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.PlotArea">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Amount Paid(In Rs.)</label>
-                        <input type="text" class="form-control" placeholder="@UserData.PaidAmount">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.PaidAmount">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Contact Number</label>
-                        <input type="text" class="form-control" placeholder="@UserData.ContactNo">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.ContactNo">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Email</label>
-                        <input type="text" class="form-control" placeholder="@UserData.Email">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.Email">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Aadhar Number</label>
-                        <input type="text" class="form-control" placeholder="@UserData.AadharNumber">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.AadharNumber">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">D.O.B.</label>
-                        <input type="text" class="form-control" placeholder="@UserData.DOB">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.DOB">
                     </div>
 
                     @*<div class="form-group col-sm-6 col-xs-12">
                             <label for="user" class="">Comapny</label>
-                            <input type="text" class="form-control" placeholder="@UserData.com">
+                            <input type="text" class="form-control" placeholder="@UserDataModel.com">
                         </div>*@
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Total Investment Amount(In Rs.)</label>
-                        <input type="text" class="form-control" placeholder="@UserData.TotalInvestment">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.TotalInvestment">
                     </div>
                     @*<div class="form-group col-sm-6 col-xs-12">
                             <label for="user" class="">Employement</label>
-                            <input type="text" class="form-control" placeholder="@UserData.emp">
+                            <input type="text" class="form-control" placeholder="@UserDataModel.emp">
                         </div>*@
                     <div class="form-group col-sm-12 col-xs-12">
                         <label for="user" class="">Current Address</label>
-                        <input type="text" class="form-control" placeholder="@UserData.CAddress">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.CAddress">
                     </div>
 
 
@@ -245,19 +335,19 @@
 
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Bank Name</label>
-                        <input type="text" class="form-control" placeholder="@UserData.BankName">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.BankName">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Payment Mode</label>
-                        <input type="text" class="form-control" placeholder="@UserData.PaymentMode">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.PaymentMode">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Transaction ID</label>
-                        <input type="text" class="form-control" placeholder="@UserData.TransactionID">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.TransactionID">
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Payment  Date</label>
-                        <input type="text" class="form-control" placeholder="@UserData.TransactionDate">
+                        <input type="text" class="form-control" placeholder="@UserDataModel.TransactionDate">
                     </div>
                 </div>
             </div>
@@ -296,18 +386,18 @@
                             </tr>
                             <tr>
                                 <td class="text-center">1</td>
-                                <td class="text-center">@UserData.ApplicationNumber</td>
-                                <td class="text-center">@UserData.FullName</td>
-                                <td class="text-center">@UserData.FatherName</td>
-                                <td class="text-center">@UserData.TransactionID</td>
-                                <td class="text-center">@UserData.TransactionDate</td>
-                                <td class="text-center">@UserData.FormFee</td>
-                                <td class="text-center">@UserData.GSTAmount</td>
-                                <td class="text-center">@UserData.EarnestMoney</td>
-                                <td class="text-center">@UserData.PaidAmount</td>
+                                <td class="text-center">@UserDataModel.ApplicationNumber</td>
+                                <td class="text-center">@UserDataModel.FullName</td>
+                                <td class="text-center">@UserDataModel.FatherName</td>
+                                <td class="text-center">@UserDataModel.TransactionID</td>
+                                <td class="text-center">@UserDataModel.TransactionDate</td>
+                                <td class="text-center">@UserDataModel.FormFee</td>
+                                <td class="text-center">@UserDataModel.GSTAmount</td>
+                                <td class="text-center">@UserDataModel.EarnestMoney</td>
+                                <td class="text-center">@UserDataModel.PaidAmount</td>
                                 @*<td class="text-center">
                                         <a style="background-color: green; color: white;" class="btn btn-success"
-                                           href="/Admin/ApprovePayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                           href="/Admin/ApprovePayment?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>
                                         <br />
                                         <br />
                                         <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedPayment"><strong>Not Approved</strong></a>
@@ -327,7 +417,7 @@
             </div>
             <div class="modal-footer">
                 <a style="background-color: green; color: white;" class="btn btn-success"
-                   href="/Admin/ApprovePayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                   href="/Admin/ApprovePayment?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>
                 <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedPayment"><strong>Not Approved</strong></a>
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
@@ -356,11 +446,11 @@
                             </tr>
                             <tr>
                                 <td class="text-center">1</td>
-                                <td class="text-center">@UserData.ApplicationNumber</td>
+                                <td class="text-center">@UserDataModel.ApplicationNumber</td>
                                 <td class="text-center">
                                     @*<button type="button" class="submit_plot_master353" style="background:rgb(27, 180, 73);" value="button">Download</button>*@
                                     <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
-                                       href="/Admin/DownloadAttachment?applicationId=@UserData.ApplicationId"><strong>View/Download</strong></a>
+                                       href="/Admin/DownloadAttachment?applicationId=@UserDataModel.ApplicationId"><strong>View/Download</strong></a>
                                 </td>
                                 <td class="text-center">
                                     @*<a href="#" onclick="editPageMaster(@data.Id); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>*@
@@ -369,11 +459,11 @@
                                 </td>
                                 @*<td class="text-center">
                                                                 <a style="background-color: green; color: white;" class="btn btn-success"
-                                                                   href="/Admin/ApproveDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                                                   href="/Admin/ApproveDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>
                                                                 <br />
                                                                 <br />
                                                                 <a style="background-color: orangered; color: white;" class="btn btn-success"
-                                    href="/Admin/ApproveRejectDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
+                                    href="/Admin/ApproveRejectDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
                                                                 <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedDocument"><strong>Not Approved</strong></a>
                                                             </td>*@
                             </tr>
@@ -390,9 +480,9 @@
             </div>
             <div class="modal-footer">
                 <a style="background-color: green; color: white;" class="btn btn-success"
-                   href="/Admin/ApproveDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                   href="/Admin/ApproveDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>
                 <a style="background-color: orangered; color: white;" class="btn btn-success"
-                   href="/Admin/ApproveRejectDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
+                   href="/Admin/ApproveRejectDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
                 @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>*@
             </div>
@@ -426,24 +516,24 @@
                                 </tr>
                                 <tr>
                                     <td class="text-center">1</td>
-                                    <td class="text-center">@UserData.ApplicationNumber</td>
-                                    <td class="text-center">@UserData.FullName</td>
-                                    <td class="text-center">@UserData.FatherName</td>
-                                    <td class="text-center">@UserData.ContactNo</td>
-                                    <td class="text-center">@UserData.Email</td>
-                                    <td class="text-center">@UserData.PlotArea</td>
+                                    <td class="text-center">@UserDataModel.ApplicationNumber</td>
+                                    <td class="text-center">@UserDataModel.FullName</td>
+                                    <td class="text-center">@UserDataModel.FatherName</td>
+                                    <td class="text-center">@UserDataModel.ContactNo</td>
+                                    <td class="text-center">@UserDataModel.Email</td>
+                                    <td class="text-center">@UserDataModel.PlotArea</td>
                                     <td class="text-center">
                                         <button type="button" class="submit_plot_master353" style="background:rgb(27, 180, 73);" value="button">Download</button>
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
-                                           href="/Admin/DownloadAttachment?applicationId=@UserData.ApplicationId"><strong>Download</strong></a>
+                                           href="/Admin/DownloadAttachment?applicationId=@UserDataModel.ApplicationId"><strong>Download</strong></a>
                                     </td>
                                     <td class="text-center">
                                         <a style="background-color: green; color: white;" class="btn btn-success"
-                                           href="/Admin/ApproveDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                           href="/Admin/ApproveDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>
                                         <br />
                                         <br />
                                         <a style="background-color: orangered; color: white;" class="btn btn-success"
-            href="/Admin/ApproveRejectDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
+            href="/Admin/ApproveRejectDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
                                         <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedDocument"><strong>Not Approved</strong></a>
                                     </td>
                                 </tr>

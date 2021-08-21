@@ -131,10 +131,18 @@ namespace GidaGkpWeb.BAL
                             GST = plotDetail != null ? plotDetail.GST.ToString() : "",
                             EarnestMoney = plotDetail != null ? plotDetail.EarnestMoney.ToString() : "",
                             SchemeNameId = plotDetail != null ? plotDetail.SchemeName.ToString() : "",
-                            PaymentStatus = transaction != null ? transaction.ApprovalStatus : "",
-                            DocumentStatus = doc != null ? doc.ApprovalStatus : "",
-                            PaymentRejectionComment = transaction != null ? transaction.RejectedComment : "",
-                            DocumentRejectionComment = doc != null ? doc.RejectedComment : "",
+                            AMPaymentStatus = transaction != null ? transaction.AMApprovalStatus : "",
+                            MPaymentStatus = transaction != null ? transaction.MApprovalStatus : "",
+                            GMPaymentStatus = transaction != null ? transaction.GMApprovalStatus : "",
+                            AMDocumentStatus = doc != null ? doc.AMApprovalStatus : "",
+                            ClerkDocumentStatus = doc != null ? doc.ClerkApprovalStatus : "",
+                            SIDocumentStatus = doc != null ? doc.SIApprovalStatus : "",
+                            AMPaymentComment = transaction != null ? transaction.AMComment : "",
+                            MPaymentComment = transaction != null ? transaction.MComment : "",
+                            GMPaymentComment = transaction != null ? transaction.GMComment : "",
+                            AMDocumentComment = doc != null ? doc.AMComment : "",
+                            ClerkDocumentComment = doc != null ? doc.ClerkComment : "",
+                            SIDocumentComment = doc != null ? doc.SIComment : "",
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
@@ -173,8 +181,12 @@ namespace GidaGkpWeb.BAL
                             FormFee = x.ApplicationFee,
                             GSTAmount = x.GST,
                             SchemeNameId = x.SchemeNameId,
-                            PaymentStatus = x.PaymentStatus == "Not Approved" ? x.PaymentStatus + "(Comment : " + x.PaymentRejectionComment + ")" : x.PaymentStatus,
-                            DocumentStatus = x.DocumentStatus == "Not Approved" ? x.DocumentStatus + "(Comment : " + x.DocumentRejectionComment + ")" : x.DocumentStatus,
+                            AMPaymentStatus = !string.IsNullOrEmpty(x.AMPaymentComment) ? x.AMPaymentStatus + "(Comment : " + x.AMPaymentComment + ")" : x.AMPaymentStatus,
+                            MPaymentStatus = !string.IsNullOrEmpty(x.MPaymentComment) ? x.MPaymentStatus + "(Comment : " + x.MPaymentComment + ")" : x.MPaymentStatus,
+                            GMPaymentStatus = !string.IsNullOrEmpty(x.GMPaymentComment) ? x.GMPaymentStatus + "(Comment : " + x.GMPaymentComment + ")" : x.AMPaymentStatus,
+                            AMDocumentStatus = !string.IsNullOrEmpty(x.AMDocumentComment) ? x.AMDocumentStatus + "(Comment : " + x.AMDocumentComment + ")" : x.AMDocumentStatus,
+                            ClerkDocumentStatus = !string.IsNullOrEmpty(x.ClerkDocumentComment) ? x.ClerkDocumentStatus + "(Comment : " + x.ClerkDocumentComment + ")" : x.ClerkDocumentStatus,
+                            SIDocumentStatus = !string.IsNullOrEmpty(x.SIDocumentComment) ? x.SIDocumentStatus + "(Comment : " + x.SIDocumentComment + ")" : x.SIDocumentStatus,
                         }).ToList();
             }
             catch (DbEntityValidationException e)
@@ -725,8 +737,22 @@ namespace GidaGkpWeb.BAL
                     var transactionDetail = _db.ApplicantTransactionDetails.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (transactionDetail != null)
                     {
-                        transactionDetail.ApprovalStatus = status;
-                        transactionDetail.RejectedComment = comment;
+                        if (UserData.Designation == "Assistance Manager")
+                        {
+                            transactionDetail.AMApprovalStatus = status;
+                            transactionDetail.AMComment = comment;
+                        }
+                        else if (UserData.Designation == "Manager")
+                        {
+                            transactionDetail.MApprovalStatus = status;
+                            transactionDetail.MComment = comment;
+                        }
+                        else if (UserData.Designation == "General Manager")
+                        {
+                            transactionDetail.GMApprovalStatus = status;
+                            transactionDetail.GMComment = comment;
+                        }
+
                         _db.Entry(transactionDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                         return Enums.CrudStatus.Updated;
@@ -757,8 +783,22 @@ namespace GidaGkpWeb.BAL
                     var documentDetail = _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (documentDetail != null)
                     {
-                        documentDetail.ApprovalStatus = status;
-                        documentDetail.RejectedComment = comment;
+                        if (UserData.Designation == "Assistance Manager")
+                        {
+                            documentDetail.AMApprovalStatus = status;
+                            documentDetail.AMComment = comment;
+                        }
+                        else if (UserData.Designation == "Clerk")
+                        {
+                            documentDetail.ClerkApprovalStatus = status;
+                            documentDetail.ClerkComment = comment;
+                        }
+                        else if (UserData.Designation == "Section Incharge")
+                        {
+                            documentDetail.SIApprovalStatus = status;
+                            documentDetail.SIComment = comment;
+                        }
+
                         _db.Entry(documentDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                         return Enums.CrudStatus.Updated;

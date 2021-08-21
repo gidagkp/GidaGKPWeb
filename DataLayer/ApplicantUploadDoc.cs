@@ -72,8 +72,12 @@ namespace DataLayer
         public string ApplicantSignatureFileName { get; set; }
         public string ApplicantSignatureFileType { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
-        public string ApprovalStatus { get; set; }
-        public string RejectedComment { get; set; }
+        public string AMApprovalStatus { get; set; }
+        public string ClerkApprovalStatus { get; set; }
+        public string SIApprovalStatus { get; set; }
+        public string AMComment { get; set; }
+        public string ClerkComment { get; set; }
+        public string SIComment { get; set; }
     
         public virtual ApplicantApplicationDetail ApplicantApplicationDetail { get; set; }
     }
