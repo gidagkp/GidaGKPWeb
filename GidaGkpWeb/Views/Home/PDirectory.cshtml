@@ -1,0 +1,330 @@
+﻿
+@{
+    ViewBag.Title = "PDirectory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div id="main" class="container" style="background:#eee;">
+        <div class="row">
+            <div class="col-xs-2">
+                <br />
+                <div class="region region-sidebar-left">
+
+
+                    <div id="block-block-80" class="block block-block">
+
+                        @{
+                            Html.RenderPartial("_LatestNotice");
+                        }
+
+                    </div>
+                </div>
+                <br />
+                <div id="mainleft">
+                    <!--<br />-->
+                    <div class="region region-side-featured2">
+
+                        <!--<div id="block-block-90" class="block block-block">
+
+
+                      <div class="content">
+                        <div>
+                    <p class="text-center"><img alt="औद्योगिक विकास निगम (आईडीसी)" class="img-responsive img-thumbnail" src="files/assets/ceo_sanjeev ranjan.jpg" width="75%" /></p>
+                    <h5 class="text-center"><strong>आईडीसी, गोरखपुर</strong></h5>
+                    <h6 class="text-center">औद्योगिक विकास निगम (आईडीसी)</h6>
+                    </div>
+                      </div>
+                    </div>-->
+                        <div id="block-block-5" class="block block-block">
+
+
+                            <div class="content">
+                                <p></p>
+                                <p align="center"><a target="_blank" href="http://niveshmitra.up.nic.in/"><img width="100%" src="~/Content/files/assets/nm2.png" /></a></p>
+                                <p align="center"><a target="_blank" href="http://www.udyogbandhu.com/"><img width="100%" src="~/Content/files/assets/udhyog.png" /></a></p>
+                                <!--<p align="center"><a target="_blank" href="http://www.nvsp.in/"><img width="70%" src="files/assets/nvsplogo.png" /></a></p>-->
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+            <div id="mainmid" class="col-xs-8">
+                <br />
+                <h4 class="title text-primary">About GIDA (Gorakhpur Industrial Development Authority)</h4>
+                <div class="tabs"> </div>
+                <div class="region region-content">
+                    <div id="block-block-44" class="block block-block">
+
+
+                        <div class="content">
+                            <div class="row">
+                                <h4 class="text-primary" style="font-weight:bold;text-align:center;"> Who's Who </h4>
+                                <!--<div class="serviceMainContainer clearfix">
+                                      <div class="serviceHeadingCont">
+                                        <p>Filter Who's Who divisions wise</p>
+                                      </div>
+                                      <div class="serviceSearchContainer clearfix">
+
+                                        <div class="selectsearchContainer">
+                                          <div class="field has-addons">
+                                            <p class="control is-expanded">
+
+                                             <select class="input" id="divisions">
+                                              <option value="-1">All</option>
+                                                                                      <option value="351">Police Department</option>
+                                                                                                            <option value="54">Development Official</option>
+                                                                                                            <option value="53">Revenue / Adminstrative Official</option>
+                                                                                                                                                    <option value="1274">Team DDMA</option>
+                                                                                      </select>
+                                            </p>
+                                            --<p class="control">
+                                              <a href="javascript:void(0);" title="Filter" class="button is-info ww_cat_filter">
+                                                <span class="icon-search"></span> Filter                  </a>
+                                            </p>--
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </div>-->
+                                <div id="featured">
+                                    <div class="col-sm-12" role="complementary">
+
+                                        <!--<h6><p><strong>Revenue / Adminstrative Official</strong></p></h6>-->
+                                        <table class="table table-striped table-hover table-bordered table-responsive">
+
+                                            <tr>
+                                                <td><p><strong>Name</strong></p></td>
+                                                <td><p><strong>Designation</strong></p></td>
+                                                <td><p><strong>Phone</strong></p></td>
+                                                <td><p><strong>Email ID</strong></p></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shri Ravindra Yadav </td>
+                                                <td>O.S.D. (Property)</td>
+                                                <td>+91  9580509206</td>
+                                                <td></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Shri Ramendra Kushwaha</td>
+                                                <td>Managar (General/Adminstration)/ Property</td>
+                                                <td>+91  9580509204 </td>
+                                                <td></td>
+                                            </tr>                                            
+
+                                            <tr>
+                                                <td>Shri  Brajesh Kumar</td>
+                                                <td>Accountant (Finance)</td>
+                                                <td>+91  9580509212</td>
+                                                <td></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Shri Shravan Singh </td>
+                                                <td>Technical Support (I.T.)  </td>
+                                                <td>+91  8004293447</td>
+                                                <td></td>
+                                            </tr>
+
+
+                                        </table>
+                                        <!--<h6><p><strong>Development Official</strong></p></h6>
+                                    <table class="table table-striped table-hover table-bordered table-responsive">
+
+                                        <tr>
+                                            <td><p><strong>Name</strong></p></td>
+                                            <td><p><strong>Designation</strong></p></td>
+                                            <td><p><strong>Email</strong></p></td>
+                                            <td><p><strong>Address/Department</strong></p></td>
+                                            <td><p><strong>Phone</strong></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shri Inderjit Singh</td>
+                                            <td>Chief Development Officer</td>
+                                            <td>cdogor@nic.in</td>
+                                            <td>Vikas Bahawan, Gorakhpur</td>
+                                            <td>+91 9454416251</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Shri Anil Kumar Singh</td>
+                                            <td>District Development Officer</td>
+                                            <td>ddogor@nic.in</td>
+                                            <td>Vikas Bahawan, Gorakhpur</td>
+                                            <td>+91 9415849578 </td>
+                                        </tr>
+                                    </table>
+                                    <h6><p><strong>Police Department</strong></p></h6>
+                                    <table class="table table-striped table-hover table-bordered table-responsive">
+
+                                        <tr>
+                                            <td><p><strong>Name</strong></p></td>
+                                            <td><p><strong>Designation</strong></p></td>
+                                            <td><p><strong>Email</strong></p></td>
+                                            <td><p><strong>Address/Department</strong></p></td>
+                                            <td><p><strong>Phone</strong></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shri Dava Sherpa</td>
+                                            <td>ADG, Gorakhpur Zone</td>
+                                            <td>igzonegkr-up@nic.in</td>
+                                            <td>Gorakhpur</td>
+                                            <td>+91 9454400141</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Shri Rajesh D. Modak</td>
+                                            <td>DIG</td>
+                                            <td>digrgkr@nic.in</td>
+                                            <td>Gorakhpur</td>
+                                            <td>+91 9454400209 </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shri Joginder Singh</td>
+                                            <td>SSP</td>
+                                            <td>sspgr-up@nic.in</td>
+                                            <td>SSP Office, Collectorate</td>
+                                            <td>+91 9454400273 </td>
+                                        </tr>
+                                    </table>-->
+                                        <br />
+                                        <h4 class="text-primary" style="font-weight:bold;text-align:center;"> Contact Us/Send Us an Email </h4>
+                                        <div class="container-fluid" style="background:#eeeeee !important;height:12em;padding:0.0em;">
+                                            <div class="row">
+                                                <div class="container">
+                                                    <div class="col-xs-10">
+                                                        <address style="font-size:1em;">
+                                                            <strong>Gorakhpur Industrial Development Authority(GIDA)</strong><br />
+                                                            Sec.-7, GIDA, Gorakhpur<br />
+                                                            Uttar Pradesh 273212<br />
+                                                            <abbr title="Phone">Phone:</abbr> 0551-2580010,2580090  <br />
+                                                            <abbr title="Phone">Fax:</abbr> 0551-2580020<br />
+                                                            <abbr title="Email">Email:</abbr> ceogida-up@up.gov.in<br />
+                                                        </address>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div id="block-system-main" class="block block-system">
+
+
+                  <div class="content">
+                    <div id="first-time"><p>No front page content has been created yet.</p></div>  </div>
+                </div>-->
+
+                </div>
+
+                <!--<br /><br /><br />
+            <!--<div class="hr"><hr /></div>--
+            <br /><br /><br />-->
+            </div>
+
+            <div id="mainright" class="col-xs-2">
+                <div id="rightsidebar">
+                    <br />
+                    <div class="region region-sidebar-right">
+
+
+                        <div id="block-block-102" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="margin-top:1em;margin-bottom:1em;">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">GIDA INDUSTRIAL GIS </a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="block-block-100" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="margin-top:1em;margin-bottom:1em;">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">ONLINE APPLICATION FOR<br /> INDUSTRIAL PLOT 2020</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="block-block-96" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="margin-top:1em;margin-bottom:1em;">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">eAUCTION OF<br />COMMERCIAL PROPERTY </a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="block-block-98" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="margin-top:1em;margin-bottom:1em;">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">GRIEVANCES REDRESSAL</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="block-block-105" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="margin-top:1em;margin-bottom:1em;">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">EASE OF DOING <br />BUSINESS</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="block-block-103" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="margin-top:1em;margin-bottom:1em;">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">ONLINE SERVICES<br />&amp; ONLINE PAYMENT </a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="block-block-43" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="" margin-top:1em="">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">ACCOUNT STATUS &amp;<br /> ONLINE PAYMENTS</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="block-block-108" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="" margin-top:1em="">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">TENDER CORNER</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="block-block-95" class="block block-block">
+
+
+                            <div class="content">
+                                <div style="margin-top:1em;margin-bottom:1em;">
+                                    <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">SOLID WASTE<br />MANAGEMENT </a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+

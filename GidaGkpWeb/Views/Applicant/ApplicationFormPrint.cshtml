@@ -1,0 +1,511 @@
+﻿@{
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+body{
+    margin-top:20px;
+    background:#f5f5f5;
+}
+/**
+ * Panels
+ */
+/*** General styles ***/
+.aknowgmnt .panel {
+  box-shadow: none;
+}
+.aknowgmnt .panel-heading {
+  border-bottom: 0;
+}
+.aknowgmnt .panel-title {
+    font-size: 17px;
+    font-weight: 600;
+}
+.aknowgmnt .panel-title > small {
+  font-size: .75em;
+  color: #999999;
+}
+.aknowgmnt .panel-body *:first-child {
+  margin-top: 0;
+}
+.aknowgmnt .panel-footer {
+  border-top: 0;
+}
+
+.aknowgmnt .panel-default > .panel-heading {
+    color: #333333;
+    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.07);
+}
+
+/**
+ * Profile
+ */
+/*** Profile: Header  ***/
+.profile__avatar {
+    float: right;
+    width: 60px;
+    height: 60px;
+    border-radius: 0;
+    margin-right: 20px;
+    border: 2px solid #ececec;
+    overflow: hidden;
+}
+.profile__avatar > img {
+  width: 100%;
+  height: auto;
+}
+.profile__header {
+  overflow: hidden;
+}
+.profile__header p {
+  margin: 20px 0;
+}
+/*** Profile: Table ***/
+/*** Profile: Recent activity ***/
+.profile-comments__item {
+  position: relative;
+  padding: 15px 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.profile-comments__item:last-child {
+  border-bottom: 0;
+}
+.profile-comments__item:hover,
+.profile-comments__item:focus {
+  background-color: #f5f5f5;
+}
+.profile-comments__item:hover .profile-comments__controls,
+.profile-comments__item:focus .profile-comments__controls {
+  visibility: visible;
+}
+.profile-comments__controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  visibility: hidden;
+}
+.profile-comments__controls > a {
+  display: inline-block;
+  padding: 2px;
+  color: #999999;
+}
+.profile-comments__controls > a:hover,
+.profile-comments__controls > a:focus {
+  color: #333333;
+}
+.profile-comments__avatar {
+  display: block;
+  float: left;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile-comments__avatar > img {
+  width: 100%;
+  height: auto;
+}
+.profile-comments__body {
+  overflow: hidden;
+}
+.profile-comments__sender {
+  color: #333333;
+  font-weight: 500;
+  margin: 5px 0;
+}
+.profile-comments__sender > small {
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #999999;
+}
+.profile-comments__content {
+  color: #999999;
+}
+/*** Profile: Contact ***/
+.profile__contact-btn {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+}
+.profile__contact-hr {
+  position: relative;
+  border-color: rgba(0, 0, 0, 0.1);
+  margin: 40px 0;
+}
+.profile__contact-hr:before {
+  content: "OR";
+  display: block;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #f5f5f5;
+  color: #c6c6cc;
+}
+.profile__contact-info-item {
+  margin-bottom: 30px;
+}
+.profile__contact-info-item:before,
+.profile__contact-info-item:after {
+  content: " ";
+  display: table;
+}
+.profile__contact-info-item:after {
+  clear: both;
+}
+.profile__contact-info-item:before,
+.profile__contact-info-item:after {
+  content: " ";
+  display: table;
+}
+.profile__contact-info-item:after {
+  clear: both;
+}
+.profile__contact-info-icon {
+  float: left;
+  font-size: 18px;
+  color: #999999;
+}
+.profile__contact-info-body {
+  overflow: hidden;
+  padding-left: 20px;
+  color: #999999;
+}
+.profile__contact-info-body a {
+  color: #999999;
+}
+.profile__contact-info-body a:hover,
+.profile__contact-info-body a:focus {
+  color: #999999;
+  text-decoration: none;
+}
+.profile__contact-info-heading {
+  margin-top: 2px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #999999;
+}
+h4.main_cla_profile {
+    font-size: 20px;
+    font-weight: 700;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+.checkbox input[type=checkbox] {
+    position: relative;
+    margin-top: 4px\9;
+    margin-left: -11px;
+    margin-top: 2px;
+    float: left;
+    margin-right: 9px;
+}
+.signture {
+    float: right;
+    width: 200px;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container aknowgmnt">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+
+                <!-- User profile -->
+                <div class="panel panel-default" style="padding: 30px;">
+                    <div class="panel-heading">
+                        <div class="">
+                            <center><img src="~/Content/files/Gida-mainlogo.png" alt="Logo" style="width:143px; height:83px;"></center>
+                        </div>
+                        <h4 class="panel-title text-center main_cla_profile">
+                            Gorakhpur Industrial Development Authority (GIDA)<br>गोरखपुर औद्योगिक विकास प्राधिकरण  (गीडा)<br>
+                            Sec.-7,GIDA, Gorakhpur,Uttar Pradesh 273212<br><br>
+                        </h4>
+                        <h4 class="panel-title text-center main_cla_profile">गीडा औद्योगिक परिक्षेत्र में भूखंड / शेड के आवंटन हेतु आवेदन पत्र</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="profile__avatar">
+                            <img src="https://image.freepik.com/free-vector/businessman-character-avatar-icon-vector-illustration-design_24877-18271.jpg" alt="...">
+                        </div>
+                        <div class="profile__header">
+                            <h4><small>सेवा में, <br>मुख्य कार्यपालक अधिकारी<br> गोरखपुर औद्योगिक विकास प्राधिकरण <br>गोरखपुर</small></h4>
+                            <p class="text-muted">
+                                महोदय,<br>मैं प्राधिकरण के गीडा औद्योगिक सेक्टर में भूखंड / शेड के लिए आवेदन करता हूं | गीडा के किसी भी औद्योगिक सेक्टर में भूखंड के लिए मैं तैयार हूं/ नहीं हूं | <br> विस्तृत सूचनाएं नीचे दी गई हैं :-
+                            </p>
+                            <!--<p>
+                              <a href="#">bootdey.com</a>
+                            </p>-->
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="panel-heading">
+                        <h4 class="panel-title">1. भूखंड का विवरण</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td><strong>सेक्टर संख्या जिसमें भूखंड की आवश्यकता है </strong></td>
+                                    <td><strong>भूखंड का कुल क्षेत्रफल </strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>xxxxx </strong></td>
+                                    <td><strong>xxxx</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">2. आवेदक का पूर्ण विवरण यथा व्यक्ति /संस्था जिसके नाम पर भूखंड / शेड का आवंटन होना है तथा इकाई का नाम :- </h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+
+                                    <td><strong>आवेदक का यथा व्यक्ति / संस्था प्रकार</strong></td>
+                                    <td><strong>आवेदक का यथा व्यक्ति / संस्था विवरण </strong></td>
+                                    <td><strong>इकाई का नाम</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">3. आवेदन पत्र पर हस्ताक्षर करने वाले व्यक्ति का पूरा नाम व पता एवं उसकी प्रास्थिति / आवेदक से संबंध :- </h4>
+                    </div>
+                    <div class="panel-body">
+                        नाम आयु स्थाई पता एवं दूरभाष नंबर वर्तमान पता व दूरभाष नंबर प्रस्थिति ऑब्लिक संबंध
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+
+                                    <td><strong>आवेदक का नाम</strong></td>
+                                    <td><strong>आवेदक की जन्म तिथि</strong></td>
+                                    <td><strong> स्थाई पता व दूरभाष नंबर व वर्तमान पता</strong></td>
+                                    <td><strong> वर्तमान पता व दूरभाष नंबर</strong></td>
+                                    <td><strong>प्रास्थिति / संबंध</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">4. स्थापना के लिए प्रस्तावित उद्योग का प्रकार :-    xxxxxxx</h4>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">5. परियोजना का विवरण</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td><strong>परियोजना की आगणित लागत </strong></td>
+                                    <td><strong>आगणित रोजगार सृजन</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>xxxxx </strong></td>
+                                    <td><strong>xxxx</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">6. मुख्यतः निम्न को दर्शाते हुए भूमि उपयोग अभिन्यास नक्शा </h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td><strong>आच्छादित क्षेत्रफल </strong></td>
+                                    <td><strong>प्रयोजनीय अनाच्छादित क्षेत्रफल एवं उसका उद्देश्य</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>xxxxx </strong></td>
+                                    <td><strong>xxxx</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">7. प्रस्तावित विनियोजन का विवरण निम्न पदों पर दिया जाए :- </h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+
+                                    <td><strong>भूमि</strong></td>
+                                    <td><strong>भवन </strong></td>
+                                    <td><strong>यंत्र एवं यांत्रिक सामग्री</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">8. उत्पादन प्रक्रिया के कारण क्या कोई दुएं उत्पन्न होंगे यदि हां तो उनकी प्रकृति एवं मात्रा :-</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td><strong>xxxxx </strong></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">9. औधोगिक निस्न्रण / उच्छिष्ट   :- </h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+
+                                    <td><strong>नाम</strong></td>
+                                    <td><strong>मात्रा </strong></td>
+                                    <td><strong> रासायनिक संरचना</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>(i) द्रव</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>(ii) ठोस </strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>(iii) वाष्पीय</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">10. प्रस्तावित निस्न्रण / उच्छिष्ट उपचार प्रक्रियाएं :-    xxxxxxx</h4>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">11.  विद्युत शब्द की आवश्यकता ( कि. वा. में) :-    xxxxxxx</h4>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">12. दूरभाष / फैक्स की आवश्यकता ( कि. वा. में) :-    xxxxxxx</h4>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">13. धरोहर राशि के लिए दी गई चालान की धनराशि तथा अन्य विवरण :- </h4>
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table profile__table table-bordered">
+                            <tbody>
+                                <tr>
+
+                                    <td><strong>धनराशि (रुपए में)</strong></td>
+                                    <td><strong>चालान संख्या  </strong></td>
+                                    <td><strong> दिनांक</strong></td>
+                                    <td><strong> बैंक का नाम जहां चालान जमा किया गया</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                    <td><strong>xxx</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">घोषणापत्र:-</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="profile__comments">
+                            <div class="profile-comments__item">
+                                <div class="profile-comments__body">
+                                    <div class="profile-comments__content">
+                                        उपरोक्त आवेदन पत्र में दी गई सूचनाएं मेरी जानकारी और विश्वास में सही हैं गीडा औद्योगिक सेक्टरो में भूखंड / शेड आवंटन तथा पट्टी पर भूमि देने के लिए इस आवेदन पत्र में वांछित सभी सामान्य शर्तें मेरे द्वारा ध्यान पूर्वक पढ़ वह समझ ली गई हैं एवं वह मुझे पूर्ण रूप से स्वीकार हैं | प्राधिकरण द्वारा समय-समय पर भविष्य में सामान्य शर्तो में किया गया कोई भी या सभी परिवर्तन बिना शर्त / आपत्ति मुझे स्वीकार होगा |<br>
+                                        दिनांक:-			<br>
+                                        स्थान :-
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <p class="simple-reg-terms col-sm-12 col-xs-12">
+                            <label>
+                                <span class="checkbox">
+                                    <input title="Please tick" name="accept_terms" type="checkbox" class="required" />
+                                    I accept the terms &amp; conditions
+                                </span>
+                            </label>
+                        </p>
+
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="signture">
+                                <img style="width:150px;" src="https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png">
+                                <p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>

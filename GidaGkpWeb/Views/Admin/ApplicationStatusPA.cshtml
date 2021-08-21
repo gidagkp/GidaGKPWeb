@@ -1,0 +1,467 @@
+﻿@using DataLayer;
+@using GidaGkpWeb.Models;
+@using GidaGkpWeb.Global
+@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Infrastructure.Utility;
+@{
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var UserData = ViewData["UserDetail"] as ApplicationUserModel;
+}
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/SchemeWiseApplicationList.js"></script>
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<style>
+    button.submit_plot_master353 {
+        background: #ff2e2e;
+        color: #fff;
+        border: 0px;
+        padding: 3px 10px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    #DocModal {
+        width: 100%;
+        left: -185px;
+    }
+
+        #DocModal .modal-content {
+            width: 160%;
+        }
+
+    #basicModal {
+        width: 100%;
+        left: -185px;
+    }
+
+        #basicModal .modal-content {
+            width: 160%;
+        }
+</style>
+<div class="container">
+    <input type="hidden" value="@UserData.ApplicationId" id="hdnApplicationId" />
+    <input type="hidden" value="@UserData.SchemeNameId" id="hdnSchemeNameId" />
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 30px;">
+            <h3 style="font-size:18px;">Application Status </h3>
+            <hr />
+        </div>
+
+        <div class="form-group col-sm-4 col-xs-12">
+            <label>Application Number</label>
+            <input type="number" class="form-control" placeholder="@UserData.ApplicationNumber" readonly>
+        </div>
+        <div class="form-group col-sm-4 col-xs-12">
+            <label>Applicant Name</label>
+            <input type="text" class="form-control" placeholder="@UserData.FullName" readonly>
+        </div>
+        <div class="form-group col-sm-3 col-xs-12">
+            <label>Mobile Number</label>
+            <input type="Mobile" class="form-control" placeholder="@UserData.ContactNo" readonly>
+        </div>
+
+        @*<div class="form-group col-sm-1 col-xs-12">
+                <button type="button" class="submit_plot_master" value="button" style="padding:7px 15px; margin-top: 23px;">Search</button>
+            </div>*@
+        <div class="col-sm-12 col-xs-12">
+
+            <div class="table-responsive" style="padding:10px 0 80px 0;">
+                <table class="table table_css_main_cl table-bordered">
+                    <tr>
+                        <th class="text-center">S.No.</th>
+                        <th class="text-center">Items</th>
+                        <th class="text-center">Current Status</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>View Application Details </td>
+                        <td></td>
+                        <td class="text-right"> <button type="button" data-toggle="modal" data-target="#myModal" class="submit_plot_master353" value="button">View Details </button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>View Financial Status & Verify </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(UserData.PaymentStatus) && UserData.PaymentStatus == "Approved")
+                            {
+                                <span style="color:green">@UserData.PaymentStatus</span>
+                            }
+                            else
+                            {
+                                <span style="color:red">@UserData.PaymentStatus</span>
+                            }
+                        </td>
+                        <td class="text-right">
+                            @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Finance Approval ")
+                                && hasPermission(PermissionName.AllAccess))
+                            {
+                                if (!string.IsNullOrEmpty(UserData.PaymentStatus))
+                                {
+                                    <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
+                                }
+                                else
+                                {
+                                    <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>View Uploaded Documents Status & Verify </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(UserData.DocumentStatus) && UserData.DocumentStatus == "Approved")
+                            {
+                                <span style="color:green">@UserData.DocumentStatus</span>
+                            }
+                            else
+                            {
+                                <span style="color:red">@UserData.DocumentStatus</span>
+                            }
+                        </td>
+                        <td class="text-right">
+                            @if (!string.IsNullOrEmpty(UserData.DocumentStatus))
+                            {
+                                <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                            }
+                            else
+                            {
+                                <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                            }
+                        </td>
+                    </tr>
+                    @*<tr>
+                            <td class="text-center">4</td>
+                            <td>View Allotment Notesheet </td>
+                            <td></td>
+                            <td class="text-right"> <button type="button" class="submit_plot_master353" value="button">View Details </button></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">5</td>
+                            <td>Generate Allotment Letter </td>
+                            <td></td>
+                            <td class="text-right"> <button type="button" class="submit_plot_master353" value="button">Read Comments </button></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">6</td>
+                            <td>Send </td>
+                            <td></td>
+                            <td class="text-right">
+                                <div class="col-sm-8 col-xs-12">
+                                    <select style="border: 1px solid rgb(207 207 207); padding: 3px;">
+                                        <option>Manager</option>
+                                        <option>CEO</option>
+                                        <option>HOD</option>
+                                        <option>GM</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-xs-12" style="padding:0;">
+                                    <button type="button" class="submit_plot_master353" style="background:rgb(2, 2, 2);" value="button">Share Application</button>
+                                </div>
+                            </td>
+                        </tr>*@
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Application Details</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">User Name</label>
+                        <input type="text" class="form-control" placeholder="@UserData.UserName">
+
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Applicant Name</label>
+                        <input type="text" class="form-control" placeholder="@UserData.FullName">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Father Name</label>
+                        <input type="text" class="form-control" placeholder="@UserData.FatherName">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Application Number</label>
+                        <input type="text" class="form-control" placeholder="@UserData.ApplicationNumber">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Plot Area</label>
+                        <input type="text" class="form-control" placeholder="@UserData.PlotArea">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Amount Paid(In Rs.)</label>
+                        <input type="text" class="form-control" placeholder="@UserData.PaidAmount">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Contact Number</label>
+                        <input type="text" class="form-control" placeholder="@UserData.ContactNo">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Email</label>
+                        <input type="text" class="form-control" placeholder="@UserData.Email">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Aadhar Number</label>
+                        <input type="text" class="form-control" placeholder="@UserData.AadharNumber">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">D.O.B.</label>
+                        <input type="text" class="form-control" placeholder="@UserData.DOB">
+                    </div>
+
+                    @*<div class="form-group col-sm-6 col-xs-12">
+                            <label for="user" class="">Comapny</label>
+                            <input type="text" class="form-control" placeholder="@UserData.com">
+                        </div>*@
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Total Investment Amount(In Rs.)</label>
+                        <input type="text" class="form-control" placeholder="@UserData.TotalInvestment">
+                    </div>
+                    @*<div class="form-group col-sm-6 col-xs-12">
+                            <label for="user" class="">Employement</label>
+                            <input type="text" class="form-control" placeholder="@UserData.emp">
+                        </div>*@
+                    <div class="form-group col-sm-12 col-xs-12">
+                        <label for="user" class="">Current Address</label>
+                        <input type="text" class="form-control" placeholder="@UserData.CAddress">
+                    </div>
+
+
+                    <div class="col-sm-12 col-xs-12" style="padding:5px 15px 10px 15px; margin-bottom: 10px; border-bottom:1px solid #f5f5f5;">
+                        <h3 style="font-size:15px;">Payment Details</h3>
+                    </div>
+
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Bank Name</label>
+                        <input type="text" class="form-control" placeholder="@UserData.BankName">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Payment Mode</label>
+                        <input type="text" class="form-control" placeholder="@UserData.PaymentMode">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Transaction ID</label>
+                        <input type="text" class="form-control" placeholder="@UserData.TransactionID">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Payment  Date</label>
+                        <input type="text" class="form-control" placeholder="@UserData.TransactionDate">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-default" style="background:rgb(194, 63, 63); color:#fff;">Close</button>-->
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Applicant Payment Verify</h4>
+            </div>
+            <div class="modal-body pull-left" style="width:100%;">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="table-responsive" style="padding:10px 0 0px 0;">
+                        <table class="table table_css_main_cl table-bordered">
+                            <tr>
+                                <th class="text-center">S.No.</th>
+                                <th class="text-center">Application Number</th>
+                                <th class="text-center">Applicant Name</th>
+                                <th class="text-center">Father's Name</th>
+                                <th class="text-center">Transaction Number</th>
+                                <th class="text-center">Transaction Date</th>
+                                <th class="text-center">Form Fee Amount (₹)</th>
+                                <th class="text-center">GST Amount (₹)</th>
+                                <th class="text-center">Earnest Money Deposit Amount (₹)</th>
+                                <th class="text-center">Total Paid Amount (₹)</th>
+                                @*<th class="text-center">Verify</th>*@
+                            </tr>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center">@UserData.ApplicationNumber</td>
+                                <td class="text-center">@UserData.FullName</td>
+                                <td class="text-center">@UserData.FatherName</td>
+                                <td class="text-center">@UserData.TransactionID</td>
+                                <td class="text-center">@UserData.TransactionDate</td>
+                                <td class="text-center">@UserData.FormFee</td>
+                                <td class="text-center">@UserData.GSTAmount</td>
+                                <td class="text-center">@UserData.EarnestMoney</td>
+                                <td class="text-center">@UserData.PaidAmount</td>
+                                @*<td class="text-center">
+                                        <a style="background-color: green; color: white;" class="btn btn-success"
+                                           href="/Admin/ApprovePayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                        <br />
+                                        <br />
+                                        <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedPayment"><strong>Not Approved</strong></a>
+
+                                    </td>*@
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <label for="usertype" class="text-uppercase">
+                        Write Comments:
+                        <span class="required-field"></span>
+                    </label>
+                    <textarea name="paymentRejectedComment" id="paymentRejectedComment" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a style="background-color: green; color: white;" class="btn btn-success"
+                   href="/Admin/ApprovePayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedPayment"><strong>Not Approved</strong></a>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DocModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">CheckList Document Verify</h4>
+            </div>
+            <div class="modal-body pull-left" style="width:100%;">
+                <div class="col-sm-12 col-xs-12">
+
+                    <div class="table-responsive" style="padding:10px 0 0px 0;">
+                        <table class="table table_css_main_cl table-bordered">
+
+                            <tr>
+                                <th class="text-center">S.No.</th>
+                                <th class="text-center">CheckList Document Name</th>
+                                <th class="text-center">View/Download</th>
+                                <th class="text-center">Verify</th>
+                            </tr>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center">@UserData.ApplicationNumber</td>
+                                <td class="text-center">
+                                    @*<button type="button" class="submit_plot_master353" style="background:rgb(27, 180, 73);" value="button">Download</button>*@
+                                    <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
+                                       href="/Admin/DownloadAttachment?applicationId=@UserData.ApplicationId"><strong>View/Download</strong></a>
+                                </td>
+                                <td class="text-center">
+                                    @*<a href="#" onclick="editPageMaster(@data.Id); return false;"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>*@
+                                    <a><input type="checkbox" /></a>
+                                    @*<a><i class="fa fa-crosshairs" aria-hidden="true"></i></a>*@
+                                </td>
+                                @*<td class="text-center">
+                                                                <a style="background-color: green; color: white;" class="btn btn-success"
+                                                                   href="/Admin/ApproveDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                                                <br />
+                                                                <br />
+                                                                <a style="background-color: orangered; color: white;" class="btn btn-success"
+                                    href="/Admin/ApproveRejectDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
+                                                                <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedDocument"><strong>Not Approved</strong></a>
+                                                            </td>*@
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <label for="usertype" class="text-uppercase">
+                        Write Comments
+                        <span class="required-field"></span>
+                    </label>
+                    <textarea name="paymentRejectedComment" id="documentRejectedComment" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a style="background-color: green; color: white;" class="btn btn-success"
+                   href="/Admin/ApproveDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                <a style="background-color: orangered; color: white;" class="btn btn-success"
+                   href="/Admin/ApproveRejectDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade" id="DocModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">CheckList Document Verify</h4>
+                </div>
+                <div class="modal-body pull-left" style="width:100%;">
+                    <div class="col-sm-12 col-xs-12">
+
+                        <div class="table-responsive" style="padding:10px 0 0px 0;">
+                            <table class="table table_css_main_cl table-bordered">
+
+                                <tr>
+                                    <th class="text-center">S.No.</th>
+                                    <th class="text-center">Application Number</th>
+                                    <th class="text-center">Applicant Name</th>
+                                    <th class="text-center">Father's Name</th>
+                                    <th class="text-center">Contact Number</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Plot Area</th>
+                                    <th class="text-center">All Uploaded Doc</th>
+                                    <th class="text-center">Verify</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td class="text-center">@UserData.ApplicationNumber</td>
+                                    <td class="text-center">@UserData.FullName</td>
+                                    <td class="text-center">@UserData.FatherName</td>
+                                    <td class="text-center">@UserData.ContactNo</td>
+                                    <td class="text-center">@UserData.Email</td>
+                                    <td class="text-center">@UserData.PlotArea</td>
+                                    <td class="text-center">
+                                        <button type="button" class="submit_plot_master353" style="background:rgb(27, 180, 73);" value="button">Download</button>
+                                        <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
+                                           href="/Admin/DownloadAttachment?applicationId=@UserData.ApplicationId"><strong>Download</strong></a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a style="background-color: green; color: white;" class="btn btn-success"
+                                           href="/Admin/ApproveDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                        <br />
+                                        <br />
+                                        <a style="background-color: orangered; color: white;" class="btn btn-success"
+            href="/Admin/ApproveRejectDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
+                                        <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedDocument"><strong>Not Approved</strong></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xs-12">
+                        <label for="usertype" class="text-uppercase">
+                            write Comment when Not Approved
+                            <span class="required-field"></span>
+                        </label>
+                        <textarea name="paymentRejectedComment" id="documentRejectedComment" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>*@

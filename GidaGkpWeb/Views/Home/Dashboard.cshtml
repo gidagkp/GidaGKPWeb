@@ -1,0 +1,414 @@
+﻿@using GidaGkpWeb.Global
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var publicNotice = GetNoticeByType("Public Notice");
+}
+
+<div id="main" class="container" style="background:#eee;">
+    <div class="row">
+        <div class="col-xs-2">
+            <br />
+            <div class="region region-sidebar-left">
+                <div id="block-block-72" class="block block-block">
+
+
+                    <div class="content">
+                        <div>
+                            <p class="text-center"><img alt="श्री योगी आदित्यनाथ" class="img-responsive img-thumbnail" src="~/Content/files/assets/adityayogi.jpg" width="75%" /></p>
+                            <!--<h5 class="text-center"><strong>श्री योगी आदित्यनाथ</strong></h5>Hon’ble
+                            <h6 class="text-center">माननीय मुख्यमंत्री, उ० प्र०</h6>-->
+                            <h5 class="text-center"><strong>Shri Yogi Adityanath</strong></h5>
+                            <h6 class="text-center">Hon'ble Chief Minister, U.P.</h6>
+                        </div>
+                    </div>
+                </div>
+                <div id="block-block-104" class="block block-block">
+
+
+                    <div class="content">
+                        <div>
+                            <p class="text-center"><img alt="श्री सतीश महाना" class="img-responsive img-thumbnail" src="~/Content/files/assets/satishmahana.jpg" width="75%" /></p>
+                            <!--<h5 class="text-center"><strong>श्री सतीश महाना</strong></h5>
+                            <h6 class="text-center">माननीय  मंत्री औद्योगिक विकास, उoप्रo</h6>-->
+                            <h5 class="text-center"><strong>Shri Satish Mahana</strong></h5>
+                            <h6 class="text-center">Hon'ble Cabinet Minister, U.P.</h6>
+                        </div>
+                    </div>
+                </div>
+                <div id="block-block-80" class="block block-block">
+
+                    @{
+                        Html.RenderPartial("_LatestNotice");
+                    }
+
+                </div>
+            </div>
+            <br />
+            <div id="mainleft">
+                <!--<br />-->
+                <div class="region region-side-featured2">
+
+                    <!--<div id="block-block-90" class="block block-block">
+
+
+                      <div class="content">
+                        <div>
+                    <p class="text-center"><img alt="औद्योगिक विकास निगम (आईडीसी)" class="img-responsive img-thumbnail" src="files/assets/ceo_sanjeev ranjan.jpg" width="75%" /></p>
+                    <h5 class="text-center"><strong>आईडीसी, गोरखपुर</strong></h5>
+                    <h6 class="text-center">औद्योगिक विकास निगम (आईडीसी)</h6>
+                    </div>
+                      </div>
+                    </div>-->
+                    <div id="block-block-5" class="block block-block">
+
+
+                        <div class="content">
+                            <p></p>
+                            <p align="center"><a target="_blank" href="http://niveshmitra.up.nic.in/"><img width="100%" src="~/Content/files/assets/nm2.png" /></a></p>
+                            <p align="center"><a target="_blank" href="http://www.udyogbandhu.com/"><img width="100%" src="~/Content/files/assets/udhyog.png" /></a></p>
+                            <!--<p align="center"><a target="_blank" href="http://www.nvsp.in/"><img width="70%" src="files/assets/nvsplogo.png" /></a></p>-->
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+
+        <div id="mainmid" class="col-xs-8">
+            <br />
+            <h4 class="title text-primary">Welcome to Gorakhpur Industrial Development Authority (GIDA)</h4>
+            <div class="tabs"> </div>
+            <div class="region region-content">
+                <div id="block-block-44" class="block block-block">
+
+
+                    <div class="content">
+                        <div class="row">
+                            <h4 class="text-primary" style="font-weight:bold; text-align:center;">Welcome to Gorakhpur Industrial Development Authority (GIDA)</h4>
+                            <div id="featured">
+                                <div class="col-sm-12" role="complementary">
+                                    <h4 class="text-primary" style="font-weight:bold; text-align:center;">About GIDA </h4>
+                                    <p style="text-align:justify">
+                                        For the complete and planned development of Eastern Uttar Pradesh, Gorakhpur Industrial Development Authority was incorporated, by the Uttar Pradesh Government on 30th November 1989 under Uttar Pradesh Industrial Development Act 1976. GIDA under its development plan has a total area of 13,135 Acres. Currently the development plan has been subdivided in to 32 sectors in which there are  <br>
+                                        <li style="text-align:justify;">1.	11 Residential Schemes</li>
+                                        <li style="text-align:justify;">2.	4 Residential / Commercial Schemes</li>
+                                        <li style="text-align:justify;">3.	1 Residential / Industrial Scheme</li>
+                                        <li style="text-align:justify;">4.	1 Transport / Commercial Scheme</li>
+                                        <li style="text-align:justify;">5.	2 Institutional Scheme</li>
+                                        <li style="text-align:justify;">6.	1 Institutional/ Commercial Scheme</li>
+                                        <li style="text-align:justify;">7.	12 Industrial Sectors</li>
+                                        Till now 1543 Acres have been developed by GIDA and 1170.49 Acres have been allotted by GIDA.<br>
+                                        <h4 class="text-primary" style="font-weight:bold; text-align:center;">Prominent Companies Operating at GIDA </h4>
+
+                                        <div class="col-sm-6" role="complementary">
+                                            <li style="text-align:justify; margin-left:100px">1.	Gallant Steel</li>
+                                            <li style="text-align:justify; margin-left:100px">2.	India Glycols</li>
+                                            <li style="text-align:justify; margin-left:100px">3.	IGL Distillery</li>
+                                            <li style="text-align:justify; margin-left:100px">4.	ABR Petro</li>
+                                            <li style="text-align:justify; margin-left:100px">5.	Nemani Plywoods</li>
+                                        </div>
+
+                                        <div class="col-sm-6" role="complementary">
+                                            <li style="text-align:justify; margin-left:100px">6.	Aazam Rubbers</li>
+                                            <li style="text-align:justify; margin-left:100px">7.	Trident Steel</li>
+                                            <li style="text-align:justify; margin-left:100px">8.	Vinayak Udhyog</li>
+                                            <li style="text-align:justify; margin-left:100px">9.	S&J Beverages</li>
+                                            <li style="text-align:justify; margin-left:100px">10.	Modi Chemicals</li><br>
+                                        </div><br>
+                                        <h4 class="text-primary" style="font-weight:bold; text-align:center;">Major Type of Industries Present in the City </h4>
+
+                                        <div class="col-sm-6" role="complementary">
+                                            <li style="text-align:justify; margin-left:100px">1.	Terracotta</li>
+                                            <li style="text-align:justify; margin-left:100px">2.	Chemical</li>
+                                            <li style="text-align:justify; margin-left:100px">3.	Fertilizers</li>
+                                            <li style="text-align:justify; margin-left:100px">4.	Pesticides</li>
+                                            <li style="text-align:justify; margin-left:100px">5.	Beverages</li>
+                                            <li style="text-align:justify; margin-left:100px">6.	Food Products</li>
+                                        </div>
+
+                                        <div class="col-sm-6" role="complementary">
+                                            <li style="text-align:justify; margin-left:100px">7.	Wood Products</li>
+                                            <li style="text-align:justify; margin-left:100px">8.	Medical</li>
+                                            <li style="text-align:justify; margin-left:100px">9.	Surgical Equipment</li>
+                                            <li style="text-align:justify; margin-left:100px">10.	Rubber</li>
+                                            <li style="text-align:justify; margin-left:100px">11.	Plastic Metal</li>
+                                            <li style="text-align:justify; margin-left:100px">12.	Nonmetal Products Industries</li><br>
+                                        </div>
+                                        <br>
+                                        <h4 class="text-primary" style="font-weight:bold; text-align:center;">About Gorakhpur </h4>
+                                        <h4 class="text-primary" style="font-weight:bold; text-align:center;">Geographical & Demographic Information of Gorakhpur </h4>
+                                    <p style="text-align:justify">
+                                        <img src="~/Content/files/assets/regcon.png" style="margin-right:5px" align="left" height="200px" width="220px" />At an elevation of 84 m with an area of 3483.8 Sq  Km, Gorakhpur is situated along the banks of the Rapti River. Gorakhpur is 273 KM away from State Capital Lucknow, 100 KM away from the Nepal, 193 KM away from Varanasi and 260 KM away from Patna.<br>
+                                        As of 2011 Indian Census Gorakhpur had a total population of 6,73,446 of which were 3,53,907 male and 3,19,539 were females. Gorakhpur has a literary rate of 75.2%.<br>
+                                        <strong>Gorakhpur is connected by all the modern ways of transportation such as</strong><br>
+                                        a)	Roadways.<br>
+                                        b)	Airways.<br>
+                                        c)	Railways.<br><br><br><br>
+                                        <!--<li style="text-align:justify;">a)	Roadways.</li>
+                                        <li style="text-align:justify;">b)	Airways. </li>
+                                        <li style="text-align:justify;">c)	Railways.</li><br>-->
+                                        <!--<h5 class="text-primary" style="font-weight:bold;">History of Gorakhpur:- </h5>
+                                        <p style="text-align:justify"><strong>Ancient Period-</strong> Roots of Gorakhpur lies in 6th century BC when the region was controlled by the scions of Solar Dynasty, IKSVAKU. Since then the region came under the accession of Ram. Since then many dynasties such as Maurya, Shunga, Kushana, Gupta and Harsh dynasties. From 900 – 950 AD the region was controlled by the Tharu King Mausen of Madan Singh.</p>
+                                        <p style="text-align:justify"><strong>Medieval Period-</strong> The region was controlled by Qutub- Din- Aibak to Bahadur Shah. After Akbar’s reorganization of the empire, Gorakhpur gave its name to one of the five Sirkars comprising the province of the Awadh.</p>
+                                        <p style="text-align:justify"><strong>Modern Period–</strong> The region was transferred to the East India Company by the Awadhs in 1801. With this cession the Gorakhpur was raised to the status of the district. The first collector of the region was Mr Routledge. In 1829 Gorakhpur was made the head quarter of a division of the same name, comprising the district of Gorakhpur, Ghazipur and Azamgarh. Mr R M Baid was made the first commissioner of this region. In 1865 Basti was carved out of Gorakhpur. In 1946 Deoria was carved out of the Gorakhpur and in 1989 Maharajganj was carved out of the Gorakhpur.</p>-->
+                                        <h4 class="text-primary" style="font-weight:bold;text-align:center;">Cultural and Historical Importance of Gorakhpur </h4>
+                                    <p style="text-align:justify">Gorakhpur is associated with the Great Lord Buddha, founder of Buddhism. The 24th Tirthankar Lord Mahavir, founder of Jainism also has his roots associated with the Gorakhpur. Lord Gorakhnath took his Samadhi, the date of which is not fixed yet, in Gorakhpur. Sant Kabir travelled from Varanasi to Magahar, where he has worked for a very long time and gave the preaching to live in peace and religious harmony. The famous Chauri- Chaura event, which is considered as a turning point in the history of India’s struggle for freedom also happened in Gorakhpur.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div id="block-system-main" class="block block-system">
+
+
+                  <div class="content">
+                    <div id="first-time"><p>No front page content has been created yet.</p></div>  </div>
+                </div>-->
+                <div id="block-block-107" class="block block-block">
+
+
+                    <div class="content">
+                        <hr width="100%" style="color:#ADD8E6	;border:0.1px solid #ADD8E6	;" />
+                        <div class="row">
+                            <h5 class="text-primary" style="font-weight:bold;">Public Notices, Due Dates, Office Orders</h5>
+                            <div style="background:#eee;padding:0.5em;">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" style="border:0;">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                                        <li data-target="#myCarousel" data-slide-to="4"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <img src="~/Content/files/assets/Gida_1.jpg">
+                                            <div class="carousel-caption caption-shadow-large caption-left">
+                                                <!--<h3 class="white">Welcome to GIDA</h3>
+                                                <p class="white" style="letter-spacing:0.06em;margin-top:-0.75em">Gorakhpur Industrial Development Authority</p>-->
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <img src="~/Content/files/assets/Gida_2.jpg">
+                                            <!--<div class="carousel-caption caption-shadow-large caption-left">
+                                                    <h3 class="white" style="">Highway Safety Improvement</h3>
+                                            <p class="white" style="margin-top:-0.75em">Project for construction, reconstruction of a development highway</p>
+                                                </div>-->
+                                        </div>
+                                        <div class="item">
+                                            <img src="~/Content/files/assets/Gida_4.jpg">
+                                            <!--<div class="carousel-caption caption-shadow-large caption-left">
+                                                    <h3 class="white" style="">Gautam Buddha University</h3>
+                                            <p class="white" style="margin-top:-0.75em;font-size:0.9;">Estd. vide U.P. GBU Act 2002 UP Act no. 9 of 2002</p>
+                                                </div>-->
+                                        </div>
+                                        <!--<div class="item">
+                                                <img src="files/assets/Gida_5.jpg">
+                                                    <!--<div class="carousel-caption caption-shadow-large caption-left">
+                                                    <h3 class="white" style="">Highly Developed Social Infrastructure</h3>
+                                            <p class="white" style="margin-top:-0.75em;">Green Area, Parks & Recreational Infrastructure</p>
+                                                </div>--
+                                        </div>-->
+                                        <!--<div class="item">
+                                                <img src="files/assets/Residential.jpg">
+                                                    <!--<div class="carousel-caption caption-shadow-large caption-left">
+                                                    <h3 class="white" style="">GIDA Administration Gorakhpur</h3>
+                                            <p class="white" style="margin-top:-0.75em;">GIDA is industrial area of Gorakhpur in the state of Uttar Pradesh</p>
+                                                </div>--
+                                        </div>-->
+                                    </div>
+                                    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                                    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </div>
+                                <!--<img width="100%" height="80" src="files/assets/gorakhnath.jpg" /><br /><br />-->
+                                <div id="igrid" style="column-count: 1;">
+                                    <div class="view view-igrid view-id-igrid view-display-id-block view-dom-id-050e66f1322bdd5410a946c6c4c2f75c">
+
+
+
+                                        <div class="view-content">
+                                            <table class="igrid views-table cols-3">
+                                                <thead>
+                                                    <tr>
+                                                        <th class=" views-align-left" scope="col">
+                                                            Date
+                                                        </th>
+                                                        <th class=" views-align-left" scope="col">
+                                                            Title / Description
+                                                        </th>
+                                                        <th class=" views-align-left" scope="col">
+                                                            Department
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (publicNotice.Count > 0)
+                                                    {
+                                                        foreach (var data in publicNotice)
+                                                        {
+                                                            <tr>
+                                                                <td class="distri_column10">
+                                                                    @data.Notice_Date.Value.ToString("dd/MM/yyyy")
+                                                                </td>
+                                                                <td class="distri_column65">
+                                                                    <a target="_blank" href="/Home/GetNoticeFile?noticeId=@CryptoEngine.Encrypt(data.Id.ToString())">@data.Notice_title</a>
+                                                                    @if (data.NoticeNewTag.HasValue && data.NoticeNewTag.Value)
+                                                                    {
+                                                                        <em></em>
+                                                                    }
+                                                                </td>
+                                                                <td class="distri_column25">
+                                                                    @data.DepartmentName
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+
+
+
+
+                                    </div>  <br />
+                                    <div id="arrows">
+                                        <a class="pull-right" href="javascript:void(0);">Read More ...</a>
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<br /><br /><br />
+            <!--<div class="hr"><hr /></div>--
+            <br /><br /><br />-->
+        </div>
+
+        <div id="mainright" class="col-xs-2">
+            <div id="rightsidebar">
+                <br />
+                <div class="region region-sidebar-right">
+                    <!--<div id="block-block-72" class="block block-block">
+
+
+                      <div class="content">
+                        <div>
+                    <p class="text-center"><img alt="श्री योगी आदित्यनाथ" class="img-responsive img-thumbnail" src="files/assets/adityayogi.jpg" width="75%" /></p>
+                    <h5 class="text-center"><strong>श्री योगी आदित्यनाथ</strong></h5>
+                    <h6 class="text-center">माननीय मुख्यमंत्री, उ० प्र०</h6>
+                    </div>
+                      </div>
+                    </div>-->
+                    <div id="block-block-90" class="block block-block">
+
+
+                        <div class="content">
+                            <div>
+                                <p class="text-center"><img alt="Shri Arvind Kumar" class="img-responsive img-thumbnail" src="~/Content/files/assets/arvin.jpeg" width="75%" /></p>
+                                <!--<h5 class="text-center"><strong>श्री आलोक टंडन</strong></h5>
+                                <h6 class="text-center">आई डी सी, गोरखपुर औद्योगिक विकास प्राधिकरण </h6>-->
+                                <h5 class="text-center"><strong>Shri Arvind Kumar (I.A.S.)</strong></h5>
+                                <h6 class="text-center">Chairman (GIDA) / Additional Chief Secretary, Infrastructure and Industrial Development Department</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="block-block-90" class="block block-block">
+
+                        <div class="content">
+                            <div>
+                                <p class="text-center"><img alt="Shri Pavan Agarwal" class="img-responsive img-thumbnail" src="~/Content/files/assets/ceo_Pavan_Agarwal.jpeg" width="75%" /></p>
+                                <!--<h5 class="text-center"><strong>श्री संजीव रंजन</strong></h5>
+                                <h6 class="text-center"> सी ई ओ, गोरखपुर औद्योगिक विकास प्राधिकरण</h6>-->
+                                <h5 class="text-center"><strong>Shri Pavan Agarwal (I.A.S.)</strong></h5>
+                                <h6 class="text-center"> CEO, GIDA, U.P.</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="block-block-102" class="block block-block">
+
+
+                        <div class="content">
+                            <div style="margin-top:1em;margin-bottom:1em;">
+                                <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">GIDA INDUSTRIAL GIS </a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="block-block-96" class="block block-block">
+
+
+                        <div class="content">
+                            <div style="margin-top:1em;margin-bottom:1em;">
+                                <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">e-AUCTION OF<br />COMMERCIAL PROPERTY </a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="block-block-98" class="block block-block">
+
+
+                        <div class="content">
+                            <div style="margin-top:1em;margin-bottom:1em;">
+                                <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">GRIEVANCES REDRESSAL</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="block-block-105" class="block block-block">
+
+
+                        <div class="content">
+                            <div style="margin-top:1em;margin-bottom:1em;">
+                                <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">EASE OF DOING <br />BUSINESS</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="block-block-103" class="block block-block">
+
+
+                        <div class="content">
+                            <div style="margin-top:1em;margin-bottom:1em;">
+                                <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">ONLINE SERVICES<br />&amp; ONLINE PAYMENT </a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="block-block-43" class="block block-block">
+
+
+                        <div class="content">
+                            <div style="" margin-top:1em="">
+                                <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">ACCOUNT STATUS &amp;<br /> ONLINE PAYMENTS</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="block-block-108" class="block block-block">
+
+
+                        <div class="content">
+                            <div style="" margin-top:1em="">
+                                <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">TENDER CORNER</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="block-block-95" class="block block-block">
+
+
+                        <div class="content">
+                            <div style="margin-top:1em;margin-bottom:1em;">
+                                <p align="center" id="linkcolor"><a class="btn btn-block btn-online" href="javascript:void(0);">SOLID WASTE<br />MANAGEMENT </a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+﻿
+@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    ViewBag.Title = "ApplicantFormSubmitted";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    //var ApplicantData = ViewData["ApplicantData"] as List<ApplicationUserModel>;
+    //int index = 1;
+}
+<script src="~/Scripts/App/Masters/AdminLookup.js"></script>
+<link href="~/styles/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1" style="min-height:350px">
+        <div class="container">
+            @*<form action="~/Admin/ApplicantFormSubmitted" method="post">*@
+            <div class="row">
+                <div class="form-group col-sm-4 col-xs-12">
+                    <label for="usertype" class="text-uppercase">Scheme Type<span class="required-field"></span></label>
+                    <select name="SchemeType" id="SchemeType" class="form-control"></select>
+                </div>
+                <div class="form-group col-sm-4 col-xs-12">
+                    <label for="usertype" class="text-uppercase">Scheme Name<span class="required-field"></span></label>
+                    <select name="SchemeName" id="SchemeName" class="form-control"></select>
+                </div>
+                <div class="form-group col-sm-2 col-xs-12">
+                    <input type="submit" id="btnSearchFormSubmitted" class="btn btn-primary" value="Search" style=" float: right; position: relative; margin:20px 0;" />
+                </div>
+            </div>
+            @*</form>*@
+            @*@if (ApplicantData != null && ApplicantData.Count > 0)
+                {*@
+            <div class="row justify-content-center mt-0" style="padding:30px 20px">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="row">
+                        <h2 class="col-sm-6 col-xs-12" style="padding:0 15px 20px 15px;">Plot Registered, Payment not Done</h2>
+                        <div class="col-sm-6 col-xs-12">
+                            @using (Html.BeginForm("ExportFormSubmitted", "Admin", FormMethod.Post))
+                            {
+                                <input type="hidden" name="GridHtml" />
+                                <input type="submit" id="btnSubmit" class="btn btn-primary" value="Export to Excel" style=" float: right; position: relative; margin:20px 0;" />
+                            }
+                        </div>
+                        <div class="table-responsive" id="divExport" style="width:100%">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>User Name</th>
+                                        <th>Applicant Name</th>
+                                        <th>Application Number</th>
+                                        <th>Plot Area</th>
+                                        <th>Father Name</th>
+                                        <th>Contact Number</th>
+                                        <th>Email</th>
+                                        <th>Aadhar Number</th>
+                                        <th>User Type</th>
+                                        <th>DOB</th>
+                                        <th>Current Address</th>
+                                        <th>Permanent Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyData">
+                                    @*@foreach (var data in ApplicantData)
+                                        {
+                                            <tr>
+                                                <th scope="row">@index</th>
+                                                <td>@data.UserName</td>
+                                                <td>@data.FullName</td>
+                                                <td>@data.ApplicationNumber</td>
+                                                <td>@data.PlotArea</td>
+                                                <td>@data.FatherName</td>
+                                                <td>@data.ContactNo</td>
+                                                <td>@data.Email</td>
+                                                <td>@data.AadharNumber</td>
+                                                <td>@data.UserType</td>
+                                                @if (data.DOB != null)
+                                                {
+                                                    <td>@data.DOB.Value.ToString("dd/MM/yyyy")</td>
+                                                }
+                                                else
+                                                {
+                                                    <td></td>
+                                                }
+                                                <td>@data.CAddress</td>
+                                                <td>@data.PAddress</td>
+                                            </tr>
+                                            index++;
+                                        }*@
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*}
+                else
+                {
+                    <span>No Record Found.</span>
+                }*@
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Admin/ApplicantFormSubmitted"]').parent().parent().parent().addClass('active')
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#divExport").html());
+        });
+    });
+</script>

@@ -1,0 +1,482 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container aknowgmnt" id="">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <!-- User profile -->
+            <div class="panel panel-default" style="padding: 30px;">
+                <div class="panel-heading">
+                    <div class="">
+                        <center><img src="https://gidagkp.in/Content/files/Gida-mainlogo.png" alt="Logo" style="width:143px; height:83px;"></center>
+                    </div>
+                    <h4 class="panel-title text-center main_cla_profile">
+                        Gorakhpur Industrial Development Authority (GIDA)<br>गोरखपुर औद्योगिक विकास प्राधिकरण  (गीडा)<br>
+                        Sec.-7,GIDA, Gorakhpur,Uttar Pradesh 273212<br>
+                        Website: www.gidagkp.org    Email:  ceogida-up@up.gov.in
+                    </h4><br />
+                    <h4 class="panel-title text-center main_cla_profile">आवंटन पत्र / Allotment Letter</h4><br />
+                    <h4 class="panel-title text-center main_cla_profile">योजना का नाम / Name of Scheme: </h4>
+                    @*<div class="" style="position: relative;top: -183px;left: 827px;">
+                <p style=" padding-bottom: 0px; margin-bottom: 0px;">Application Number :@pData.ApplicationNumber</p>
+                <p>
+                    Date :@pData.PaymentDate.Value.ToString("dd/MM/yyyy")
+                </p>
+            </div>*@
+                </div>
+                <div class="panel-body">
+                    <div class="profile__header" style="text-align:right">
+                        <h4>दिनांक / Date : </h4>
+                    </div>
+                    <div class="profile__header">
+                        <h4>आवंटन पत्र संख्या: </h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="profile__header">
+                        <h4>
+                            MEDALLION AUTO SALES PVT LTD<br />
+                            Throo Shri DHIRENDRA MOHAN DAS<br />
+                            S/o HARI MOHAN DAS
+                        </h4>
+                        <h4>
+                            R/o 371B, Anand Bhawan, AD Tower,<br />
+                            Bank Road, Gorakhpur
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    <h4 class="panel-title"> विषय:     के लिए भूमि का आवंटन</h4><br />
+                    <h4 class="panel-title"> Sub: Allotment of Land for  </h4><br />
+                </div>
+                <div class="panel-body">
+                    <div class="profile__header">
+                        <p>
+                            प्रिय महोदय/महोदया,<br>आपको सहर्ष सूचित किया जाता है कि औद्योगिक योजना-2021 के अन्तर्गत भूखण्ड आवंटन हेतु आपके आन-लाईन आवेदन पत्र दिनांक 15.02.2021 के क्रम में दिनांक 22.06.2021 को गीडा कार्यालय में सम्पन्न लाटरी/साक्षात्कार के आधार पर आपके पक्ष में भूखण्ड संख्या सी-22, सेक्टर-26 में उत्पाद Auto mobile service center  करने वाली इकाई के स्थापनार्थ निम्नांकित विवरण एवं शर्तो पर आवंटित किया जाता है। आवंटित भूखण्ड का क्षेत्रफल 3996.35 वर्ग मीटर (विवरण संलग्न साईट प्लान के अनुसार) है।
+                        </p>
+                        <p>
+                            Dear Sir/Madam,<br />
+                            In reference to your online application for allotment of Industrial Plot Scheme-2021, we are happy to inform you that Plot No C-22 in Sector-26 is being hereby allotted to you on the basis of Lottery/Interview held on 15-02-2021, for manufacturing of Auto mobile service center on the terms & conditions mentioned as below. The area of the allotted plot is 3996.35 Sqm. (Details as per site plan annexed)
+
+                        </p>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="panel-heading">
+                    <h4 class="panel-title text-center">आवंटित भूखण्ड संख्या:      का प्रोविजनल प्रीमियम की गणना निम्नवत् हैः-</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><strong>सेक्टर संख्या जिसमें भूखंड की आवश्यकता है </strong></td>
+                                <td><strong>भूखंड का कुल क्षेत्रफल (वर्ग मीटर में) </strong></td>
+                                <td><strong>भूखंड का कुल क्षेत्रफल (वर्ग मीटर में) </strong></td>
+                                <td><strong>भूखंड का कुल क्षेत्रफल (वर्ग मीटर में) </strong></td>
+                                <td><strong>भूखंड का कुल क्षेत्रफल (वर्ग मीटर में) </strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 </strong></td>
+                                @*<td><strong>@pData.PlotArea</strong></td>
+                        <td><strong>@pData.PlotArea</strong></td>
+                        <td><strong>@pData.PlotArea</strong></td>
+                        <td><strong>@pData.PlotArea</strong></td>*@
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @*
+        <div class="panel-heading">
+            <h4 class="panel-title">2. आवेदक का पूर्ण विवरण यथा व्यक्ति /संस्था जिसके नाम पर भूखंड का आवंटन होना है तथा इकाई का नाम :- </h4>
+        </div>
+        <div class="panel-body">
+            <table class="table profile__table table-bordered">
+                <tbody>
+                    <tr>
+
+                        <td><strong>आवेदक का यथा व्यक्ति / संस्था प्रकार</strong></td>
+                        <td><strong>आवेदक का यथा व्यक्ति / संस्था विवरण </strong></td>
+                        <td><strong>इकाई का नाम</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@pData.IndustryOwnership</strong></td>
+                        <td><strong>@pData.IndustryOwnership</strong></td>
+                        <td><strong>@pData.UnitName</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">3. आवेदन पत्र पर हस्ताक्षर करने वाले व्यक्ति का पूरा नाम व पता एवं उसकी प्रास्थिति / आवेदक से संबंध :- </h4>
+        </div>
+        <div class="panel-body">
+            <table class="table profile__table table-bordered">
+                <tbody>
+                    <tr>
+
+                        <td><strong>आवेदक का नाम</strong></td>
+                        <td><strong>आवेदक की जन्म तिथि</strong></td>
+                        <td><strong> स्थाई पता व दूरभाष नंबर</strong></td>
+                        <td><strong> वर्तमान पता व दूरभाष नंबर</strong></td>
+                        <td><strong>प्रास्थिति / संबंध</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@pData.FullApplicantName</strong></td>
+                        <td><strong>@pData.SignatryDateOfBirth.Value.ToString("dd/MM/yyyy")</strong></td>
+                        <td><strong>@pData.SignatryPermanentAddress &nbsp;@pData.SignatryPermanentPhoneNumber</strong></td>
+                        <td><strong>@pData.SignatryPresentAddress &nbsp;@pData.SignatryPresentPhoneNumber</strong></td>
+                        <td><strong>@pData.RelationshipStatus</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">4. स्थापना के लिए प्रस्तावित उद्योग का प्रकार :- @pData.ProposedIndustryType</h4>
+        </div>
+        <div class="panel-heading">
+            <h4 class="panel-title">5. परियोजना का विवरण</h4>
+        </div>
+        <div class="panel-body">
+            <table class="table profile__table table-bordered">
+                <tbody>
+                    <tr>
+                        <td><strong>परियोजना की आगणित लागत (रुपए में)</strong></td>
+                        <td><strong>आगणित रोजगार सृजन</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@pData.ProjectEstimatedCost </strong></td>
+                        <td><strong>@((int.TryParse(pData.Skilled, out intSkilled) ? intSkilled : 0) + (int.TryParse(pData.UnSkilled, out intUnSkilled) ? intUnSkilled : 0))</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">6. मुख्यतः निम्न को दर्शाते हुए भूमि उपयोग हेतु ले-आउट प्लान </h4>
+        </div>
+        <div class="panel-body">
+            <table class="table profile__table table-bordered">
+                <tbody>
+                    <tr>
+                        <td><strong>आच्छादित क्षेत्रफल </strong></td>
+                        <td><strong>प्रयोजनीय अनाच्छादित क्षेत्रफल एवं उसका उद्देश्य</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@pData.ProposedCoveredArea </strong></td>
+                        <td><strong>@pData.ProposedOpenArea &nbsp; @pData.PurpuseOpenArea</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">7. प्रस्तावित विनियोजन का विवरण निम्न मदों पर दिया जाए :- </h4>
+        </div>
+        <div class="panel-body">
+            <table class="table profile__table table-bordered">
+                <tbody>
+                    <tr>
+
+                        <td><strong>भूमि</strong></td>
+                        <td><strong>भवन </strong></td>
+                        <td><strong>यंत्र एवं यांत्रिक सामग्री</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@pData.ProposedInvestmentLand</strong></td>
+                        <td><strong>@pData.ProposedInvestmentBuilding</strong></td>
+                        <td><strong>@pData.ProposedInvestmentPlant</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">8. उत्पादन प्रक्रिया के कारण क्या कोई धुएं उत्पन्न होंगे यदि हां तो उनकी प्रकृति एवं मात्रा :-</h4>
+        </div>
+        <div class="panel-body">
+            <table class="table profile__table table-bordered">
+                <tbody>
+                    <tr>
+                        <td><strong>@pData.FumesNatureQuantity </strong></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">9. औधोगिक निस्त्रण / उच्छिष्ट   :- </h4>
+        </div>
+        <div class="panel-body">
+            <table class="table profile__table table-bordered">
+                <tbody>
+                    <tr>
+
+                        <td><strong>नाम</strong></td>
+                        <td><strong>मात्रा </strong></td>
+                        <td><strong> रासायनिक संरचना</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>(i) द्रव</strong></td>
+                        <td><strong>@pData.LiquidQuantity</strong></td>
+                        <td><strong>@pData.LiquidChemicalComposition</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>(ii) ठोस </strong></td>
+                        <td><strong>@pData.SolidQuantity</strong></td>
+                        <td><strong>@pData.SolidChemicalComposition</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>(iii) वाष्पीय</strong></td>
+                        <td><strong>@pData.GasQuantity</strong></td>
+                        <td><strong>@pData.GasChemicalComposition</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">10. प्रस्तावित निस्त्रण / उच्छिष्ट उपचार प्रक्रियाएं :-    @pData.EffluentTreatmentMeasures</h4>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">11.  विद्युत शक्ति की आवश्यकता ( कि. वा. में) :-    @pData.PowerRequirement</h4>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">12. दूरभाष / फैक्स की आवश्यकता :-    @pData.FirstYearNoOfTelephone</h4>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">13. धरोहर राशि के लिए दी गई चालान की धनराशि तथा अन्य विवरण :- </h4>
+        </div>
+
+        <div class="panel-body">
+            <table class="table profile__table table-bordered">
+                <tbody>
+                    <tr>
+
+                        <td><strong>धनराशि (रुपए में)</strong></td>
+                        <td><strong>चालान संख्या  </strong></td>
+                        <td><strong> दिनांक</strong></td>
+                        <td><strong> बैंक का नाम जहां चालान जमा किया गया</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@pData.NetAmount</strong></td>
+                        <td><strong>@pData.PaymentReferenceNumber</strong></td>
+                        <td><strong>@pData.PaymentDate.Value.ToString("dd/MM/yyyy")</strong></td>
+                        <td><strong>@pData.BankName</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>*@
+                <hr>
+
+                <div class="panel-heading" style="text-align:center">
+                    <h4 class="panel-title">Term and Conditions / नियम एवं शर्ते</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="profile__comments">
+                        <div class="profile-comments__item">
+                            <div class="profile-comments__body">
+                                <div class="profile-comments__content">
+                                    <p style="text-align:justify">
+                                        1. The area of the plot is 3996.35 square meter. The precise measurement and the area of the plot is as per the site plan attached herewith.<br />
+                                        भूखण्ड का क्षेत्रफल 3996.35 वर्ग मीटर है। भूखण्ड की सही नाप और उसकी भूमि का क्षेत्रफल संलग्न स्थल मानचित्र के अनुसार है।
+                                    </p>
+                                    <p style="text-align:justify">
+                                        2. The date of issuance this letter will be treated as the date of allotment of the above plot in your favour.<br />
+                                        इस पत्र की जारी होने की तिथि आपके पक्ष में उपर्युक्त भूखण्ड के आवंटन की तिथि मानी जाएगी।
+                                    </p>
+                                    <p style="text-align:justify">
+                                        3. The interest chargeable as per clause 5 below on the (total) balance outstanding premium will be computed from the date of allotment as defined in clause 2 above and payable half yearly on 1st day of January and 1st day of July each year. The first of such payments will be due on 01-07-2022.<br />
+                                        ऊपर प्रस्तर 2 के परिभाषित तिथि से भूखण्ड के अवशेष प्रीमियम पर नीचे प्रस्तर 5 के अनुसार ब्याज हर छमाही पहली जनवरी और पहली जुलाई को देय होगा। ऐसा पहला भुगतान 01-07-2021 को देय होगा।
+                                    </p>
+                                    <p style="text-align:justify">
+                                        4. You shall have to deposit at this office an amount of Rs. 2357810.00 (Earnest Money of Rs. 40000.00 has been adjusted) towards Alltoment Money in respect of the above plot latest by (date) 19-09-2021. This amount (together with Earnest money) is approximately Rs. 2397810.00 equal to 10% of the total premium of the plot as per the Slab Rates decided by GIDA, given at page No. 2 of this Allotment Letter and Locational Charges per sqm. as given in the table on page No. 2 of this Allotment Letter for first five acres and is subject to adjustment according to actual measurement of the plot.
+                                        If the above amount falls short of the amount equal to 10% of the total premium according to actual measurement, the balance will be deposited by you within seven days of the receipt of the demand from us. If the payments are not made as stipulated above this allotment will stand automatically cancelled and the whole amount of Earnest Money deposited by you will stand forfeited to this Authority, even if the area of the plot either exceeds or is less than the area applied for to the extent of 20% or less of the area applied for. However, if the area of the land allotted either exceeds the area applied for or falls short of the area applied for by an area more than 20% of it, the Earnest Money will not be forfeited if this allotment is not accepted, provided an intimation is sent to us in this respect by the date stipulated above.<br />
+                                        <strong>NOTE :</strong> The premium mentioned herein is provisional and is liable to be enhanced in accordance with the provisions of Lease Deed.<br />
+                                        आपको इस कार्यालय में दिनांक 19-09-2021 तक उपर्युक्त भूखण्ड की आवंटन धनराशि रु. 2357810.00 (धरोहर धनराशि रु. 40000.00 का समायोजन करने के पशचात) जमा करनी होगी। यह धनराशि (धरोहर धनराशि समेत) रु. 2397810.00 जो आवंटन पत्र के पृष्ठ संख्या-2 पर गीडा द्वारा निर्धारित स्लैब सारणी के अनुसार भूखण्ड के कुल प्रीमियम के 10 प्रतिशत के बराबर है एवं तदर्थ भूमि प्रीमियम का लगभग 10 प्रतिशत लोकेशनल चार्ज लागू होगा जो आवंटन पात्र के पृष्ठ संख्या-2 पर उल्लिखित स्लैब सारणी के अनुसार भूखण्ड के वास्तविक नाम के आधार पर संशोधित किया जाएगा।
+                                        यदि उपर्युक्त धनराशि वास्तविक नाप के आधार पर उपर्युक्त दरों पर गणना किए गए कुल तदर्थ भूमि प्रीमियम के 10% से कम होगी तो आपको ऐसी धनराशि का भुगतान गीडा से मांग प्राप्त होने से सात दिन के भीतर करना होगा। यदि उपर्युक्त विधि से भुगतान नहीं होगा तो यह आवंटन स्वतः निरस्त हो जायेगा और आपके द्वारा जमा की गई पूरी धरोहर प्राधिकरण के पक्ष में जब्त हो जाएगी, चाहे आवंटित भूमि का क्षेत्रफल आवेदित क्षेत्रफल से 20% तक कम या अधिक हो। हाँ यदि आवेदित क्षेत्रफल और आवंटित क्षेत्र का 20% से अधिक अन्तर है तो इस आवंटन के अस्वीकार कर दिए जाने की दशा में धरोहर धनराशि जब्त नहीं होगी बशर्ते असहमति की सूचना प्राधिकरण को प्रस्तर 4 में उल्लिखित आरक्षण धनराशि जमा करने की अन्तिम तिथि तक दे दी जाए।<br />
+                                        <strong>नोट: </strong> ऊपर वर्णित भूमि प्रीमियम केवल तदर्थ है जिससे पट्टा विलेख के प्राविधानों के अनुसार वृद्धि हो सकती है।
+                                    </p>
+                                    <p style="text-align:justify">
+                                        5. Normal Interest  08.50% per annum shall be charged on the outstanding (balance) premium with effect from the date of allotment and will be payable half yearly on the 1st day of January and 1st day of July each year. The first installment of such payment will fall due on 01-07-2022. The remaining Rs. 21580290.00 of the provisional premium shall have to be paid by you after two years in eight equal half yearly installments each of which will be due for payment on 1st day of January and 1st day of July each year along with interest. The first installment of such payment will fall due for payment on 01-01-2024  The second and subsequent installments of premium will fall due on 01-07-2024  and   01-01-2025 respectively. Penal interest  03.00% p.a. compounded half yeraly shall be payable above the normal rate of ineterest on the defaulted amount for the defaulted period. The amount of the balance premium and the interest due on it from time to time shall remain first charge on the land and the building and machinery erected thereon till it is (they are) paid in full.<br />
+                                        <strong>NOTE:</strong><br />
+                                        <strong>a)</strong> The premium mentioned here in is provisional and is liable to be enhanced in accordance with the provisions of Lease Deed.<br />
+                                        <strong>b)</strong> The balance premium may also be deposited earlier and in this case interest will be calculated accordingly.<br />
+                                        आवंटन की तिथि से अवशेष भूमि प्रीमियम पर 08.50% वार्षिक की दर से प्रत्येक वर्ष 1 जनवरी/1 जुलाई को सामान्य ब्याज अर्धवार्षिक देय होगा। इस प्रकार ब्याज की प्रथम किस्त का भुगतान दिनाँक 01-07-2022 को देय होगा। भूमि प्रीमियम के शेष रु. 21580290.00 का भुगतान ब्याज सहित आठ बराबर छमाही किश्तों में जमा किया जायेगा, जो प्रत्येक वर्ष 1 जनवरी/1 जुलाई को ब्याज सहित प्रीमियम के किश्त के साथ देय होगा। इस प्रकार की अदायगी की प्रथम किस्त की देय तिथि              01-01-2024  होगी तथा द्वितीय किश्त की देय तिथि  01-07-2024  होगी एवं क्रमशः अगली किश्त की देय तिथि 01-01-2025 होगी। इसके पश्चात विलम्ब से जमा करायी गयी किश्तों पर विलम्ब की अवधि का अतिरिक्त 03.00% वार्षिक, छमाही चक्रवृद्वि दण्ड ब्याज देय होगा। जब तक भूमि प्रीमियम और उस पर देय ब्याज की पूरी अदायगी नहीं हो जाती तब तक आवंटित भूमि, उस पर बने भवन और उस पर लगाई मशीनों का प्राधिकरण का प्रथम प्रभार बना रहेगा।<br />
+                                        <strong>नोट:</strong><br />
+                                        <strong>क)</strong> ऊपर वर्णित भूमि प्रीमियम केवल तदर्थ है जिसमें पट्टा विलेख के प्राविधानों के अनुसार वृद्धि हो सकती है।<br />
+                                        <strong>ख)</strong> अवशेष प्रीमियम की धनराशि पहले भी जमा की जा सकती है। इस दशा में ब्याज की गणना तद्नुसार होगी।
+                                    </p>
+                                    <p style="text-align:justify">
+                                        6. The stamp duty, the registration charges and legal expenses involved in the execution of the Lease Deed and other agreements from time to time will have to be borne by you.<br />
+                                        पट्टा विलेख और समय-समय पर निष्पादित किए जाने वाले अन्य अनुबन्धों से सम्बन्धित स्टाम्प शुल्क तथा निबन्धन शुल्क तथा विधि व्ययों का भार आपको वहन करना होगा।
+                                    </p>
+                                    <p style="text-align:justify">
+                                        7. In the event of cancellation of allotment on account of any default on your part, the following amounts will stand forfeited to the Gorakhpur Industrial Development Authority (GIDA), Gorakhpur.<br />
+                                        आपकी किसी त्रुटि के कारण आवंटन निरस्त हो जाने की दशा में निम्नांकित धनराशियाँ गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा), गोरखपुर के पक्ष में जब्त हो जायेगी।<br />
+                                        <strong>a)</strong> Interest 11.50% per annum from the date of allotment on the total unpaid premium from time to time till the date of cancellation of allotment.<br />
+                                        आवंटन की तिथि से आवंटन निरस्त होने की तिथि तक समय-समय पर कुल शेष भूमि प्रीमियम पर 11.50% वार्षिक की दर से ब्याज।<br />
+                                    <p style="text-align:center">
+                                        <strong>AND / तथा</strong>
+                                    </p>
+                                    <strong>b)</strong> Use and Occupation charges/Lease Rent from the date of allotment upto the date of cancellation.<br />
+                                    आवंटन की तिथि से आवंटन निरस्त होने की तिथि तक उपयोग शुल्क/लीज़ रेंट।
+                                    </p>
+                                    <p style="text-align:justify">
+                                        8. In the event of surrender of the allotment, the following amounts will stand forfeited to the Gorakhpur Industrial Development Authority (GIDA), Gorakhpur.<br />
+                                        आवंटन के समर्पण की दशा में, निम्नांकित धनराशियाँ गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा), गोरखपुर के पक्ष में जब्त हो जायेंगीः<br />
+                                        <strong>a)</strong> Interest 11.50% per annum froInterest 08.50% per annum from the date of allotment upto the date of surrender of the allotment on the total balance unpaid, premium from time to timem the date of allotment on the total unpaid premium from time to time till the date of cancellation of allotment.<br />
+                                        आवंटन की तिथि से आवंटन के समर्पण की तिथि तक समय-समय पर कुल शेष भूमि प्रीमियम पर 08.50% वार्षिक की दर से ब्याज।
+                                    </p>
+                                    <p style="text-align:center">
+                                        <strong>AND / तथा</strong>
+                                    </p>
+                                    <p style="text-align:center">
+                                        <strong>b)</strong> Use and Occupation Charges/Lease Rent from the date of allotment till the date of surrender.<br />
+                                        आवंटन की तिथि से समर्पण की तिथि तक उपयोग शुल्क/लीज़ रेंट।
+                                    </p>
+                                    <p style="text-align:center">
+                                        <strong>c)</strong>The balance amount, if any, out of the deposits made by you till the date of surrender after deducting the amounts to be forfeited as above, will be refundable<b />
+                                        उपर्युक्त ढंग से जब्त होने वाली धनराशियाँ काट कर आप द्वारा जमा धनराशियों में से जो भी शेष बचेगा वह आप को लौटाया जा सकेगा।
+                                    </p>
+                                    <p style="text-align:justify">
+                                        9. The plot has been allotted "As is Where is" basis and leveling etc. if any, is to be undertaken by you at your expenses. You will pay to the Gorakhpur Industrial Development Authority in the month of January each year such recurring fee in the nature of service and/or maintenance charges as determined by the Authority. In case of default you will be liable to pay interest 11.50% p.a. on the amount due.<br />
+                                        आपको यह भूखण्ड ‘जैसा है, जहाँ है’ के आधार पर आवंटित किया गया है और आपको आवश्यकतानुसार समतल कराना, आदि कार्य अपने खर्च पर कराने होंगे। आप गोरखपुर औद्योगिक विकास प्राधिकरण द्वारा निर्धारित सेवा तथा/अथवा रख रखाव शुल्क की प्रकृति के आवर्ती शुल्क का भुगतान प्रत्येक वर्ष के माह जनवरी में कर देंगे अन्यथा उक्त धनराशि पर 11.50% वार्षिक की दर से ब्याज देय होगा।<br />
+                                    </p>
+                                    <p style="text-align:justify">
+                                        10.<br />(a) You will obey and submit to the rules of Municipal or other authority now existing or hereafter to exist so far as the same relate to the immovable property in the GIDA or so far as the affect the health, safety and convenience of the other inhabitants of the place, and will not release any obnoxious gaseous, liquid or solid effluents from your premises in any case.<br />
+                                        आप नगरीय अथवा किसी प्राधिकरण के, जो इस समय विद्यमान है, अथवा भविष्य में अस्तित्व में आयेगा, उन नियमों को उस सीमा तक स्वीकार करेंगे और पालन करेंगे जहाँ तक ये गीडा औद्योगिक क्षेत्र स्थित अचल सम्पत्ति से सम्बन्धित होंगे या जहाँ तक उनका प्रभाग उस स्थान के अन्य निवासियों के स्वास्थ्य, सुरक्षा पर पड़ता होगा आप किसी भी दशा में अपनी इकाई से कोई भी अहितकर गैसीय द्रव या ठोस उत्प्रवाह विसर्जित नहीं करेंगे।<br />
+                                        (b) You will establish at your own cost an appropriate and efficient treatment system/plant and will ensure that it is ready and functional as per the norms and specifications expected laid down or stipulated by the State Effluent Board /U.P. Pollution Control Board and any other authority established by law for the time being in force before the production is commenced in the unit set up on the plot of land covered by this letter.<br />
+                                        आप स्वयं अपने खर्चे पर एक उपर्युक्त तथा कुशल उत्प्रवाह शोधन प्रणाली/संयंत्र स्थापित करेंगे और सुनिश्चित करेंगे कि यह राज्य उत्प्रवाह परिषद/उ.प्र. प्रदूषण नियन्त्रण परिषद तथा किसी अन्य प्राधिकरण जो विधि द्वारा स्थापित हो, द्वारा अपेक्षित एवं निर्धारित मानकों तथा विशेष निर्देशों जो उस समय प्रभावी हों, के अनुरूप हों और कार्यकारी हों। आपको यह कार्य इस पत्र द्वारा आवंटित भूमि पर स्थापित इकाई में उत्पादन/व्यवसाय प्रारम्भ करने के पूर्व करना होगा।<br />
+                                        (c) Whenever Nagar Nigam or Board, Cantonment Board, Zila Parishad, Town Area or (any) other local bodies (body) take over this industrial sector of GIDA, you will become liable to pay and discharge all rates, taxes, charges, claims and outgoing chargeable imposed and assessment of every description, which may be assessed, charged or imposed upon them by the said local body and you will abide by the laws, rules and directions of the local body.<br />
+                                        जब कभी नगर निगम या नगरपालिका, छावनी परिषद, जिला परिषद, टाउन एरिया अथवा अन्य (कोई) अधिसूचित स्थानीय निकाय को गीडा का यह सेक्टर हस्तान्तरित हो जाता है, तब आपका दायित्व होगा कि उक्त स्थानीय निकाय द्वारा निर्धारित या लगाये गये करों, शुल्कों, माँगों और निर्गामी प्रभारों को अदा करें, उनके द्वारा किये गये कर निर्धारण को स्वीकार करके उसके आधार पर भुगतान करें और स्थानीय निकाय की विधि, नियमों तथा निर्देशों का पालन करें।<br />
+                                        (d) In case boiler is to be installed/coal is to be used, you will obtain clearance from the authorities concerned.<br />
+                                        यदि बायलर स्थापित करना/कोयले का प्रयोग करना हो, तो आपको सम्बन्धित अधिकारियों से अनुमति प्राप्त करनी होगी।<br />
+                                        (e) You will, make appropriate arrangements at your own cost for proper disposal of waste water produced in your unit.<br />
+                                        आप अपने खर्च पर अपनी इकाई के उच्छिष्ठ जल के निस्तारण की उपयुक्त व्यवस्था करेंगे।<br />
+                                    </p>
+                                    <p style="text-align:justify">
+                                        11. You will apply for and obtain power connection from the Local Agency / U.P. Power Corporation Ltd. as the case may be at your end and cost.<br />
+                                        आप स्वयं अपने स्तर तथा खर्च पर स्थानीय अधिकरण/उ.प्र. पावर कार्पोरेशन लि. से, जैसे भी स्थिति हो अपनी इकाई हेतु आवश्यक विद्युत भार के लिये आवेदन करेंगे और उसे प्राप्त करेंगे।<br />
+                                    </p>
+                                    <p style="text-align:justify">
+                                        12. Before execution of lease deed you shall have to :-<br />(i) submit valid provisional S.S.I. registration certificate issued by Gorakhpur Industrial Development Authority / Competent Authority for manufacturing the item for which this allotment is made.<br />
+                                        (ii) clear all dues upto the date of executing Lease Deed as mentioned in clause-3, 4 and 5 of this letter.<br />
+                                        (iii) other formalities required, if any.<br />
+                                        पट्टा विलेख निष्पादित करने से पूर्व आपको :
+                                        (I) जिस उत्पाद हेतु भूखण्ड का आवंटन किया गया है, गोरखपुर औद्योगिक विकास प्राधिकरण/सक्षम प्राधिकारी द्वारा निर्गत वैध अस्थायी लघु पंजीकरण प्रमाण-पत्र प्रस्तुत करना होगा।.<br />
+                                        (II) इस आवंटन पत्र के प्रस्तर 3, 4 व 5 में उल्लिखित अद्यतन देयों का भुगतान पट्टा विलेख निष्पादन के पूर्व करना होगा।.<br />
+                                        (III) अन्य आवश्यक वांछित औपचारिकतायें, यदि कोई हों, पूरी करनी होगी।.<br />
+                                    </p>
+                                    <p style="text-align:justify">
+                                        13. You will have to take over possession of the land executing the Lease Deed within 30 days from the date of inviting you to do so or within 3 months from the date of this letter whichever is earlier.<br />
+                                        आप पटटा विलेख निष्पादन के बाद कब्जा लिये जाने हेतु जारी आमंत्रण की तिथि से 30 दिन के अन्दर या इस पत्र की तिथि से तीन माह के अन्दर जो भी पहले समाप्त हो, भूमि का कब्जा प्राप्त कर लेंगे।<br />
+                                    </p>
+                                    <p style="text-align:justify">
+                                        14. The Allottee shall establish and make his/her unit functional within a period of two years from the date of allotment of the plot or a time frame as decided by GIDA. If the unit is not established & made functional within this time period, time extension, in exceptional circumstances, may be granted on payment of time extension charges as has been decided by GIDA. The time to establish and make the unit functional shall not be extended beyond five years, in any circumstances.<br />
+                                        आवंटी को भूखण्ड के आवंटन की तिथि से 02 वर्षों के भीतर अथवा गीडा द्वारा निर्धारित समय-सारणी के अनुसार, इकाई की स्थापना करते हुये क्रियाशील करना होगा। यदि निर्धारित समयावधि के भीतर इकाई की स्थापना करते हुये क्रियाशील नहीं किया जाता है तो, विशेष परिस्थितियों में, गीडा द्वारा निर्धारित समय विस्तारीकरण शुल्क लेकर समय विस्तारीकरण प्रदान किया जा सकता है। इकाई की स्थापना करते हुये क्रियाशील किये जाने का समय, किसी भी दशा में पांच वर्ष से अधिक विस्तारित नहीं किया जायेगा।<br />
+                                    </p>
+                                    <p style="text-align:justify">
+                                        15. The Allotee/Lessee shall obtain the Functional Certificate from GIDA, aftermaking the unit functional.<br />
+                                        इकाई के क्रियाशील होने के पश्चात आवंटी/पट्टाधारक को गीडा से क्रियाशील प्रमाण पत्र प्राप्त करना होगा।<br />
+                                    </p>
+                                    <p style="text-align:justify">
+                                        16. The Allottee/Lessee shall obtain Functional Certificate from GIDA before transfer of industrial plot<br />
+                                        भूखण्ड हस्तान्तरण से पूर्व आवंटी/पट्टाधारक को गीडा से क्रियाशील प्रमाण पत्र प्राप्त करना होगा।<br />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">घोषणापत्र:-</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="profile__comments">
+                        <div class="profile-comments__item">
+                            <div class="profile-comments__body">
+                                <div class="profile-comments__content">
+                                    उपरोक्त आवेदन पत्र में दी गई सूचनाएं मेरी जानकारी और विश्वास में सही हैं गीडा औद्योगिक सेक्टरो में भूखंड आवंटन तथा पट्टे पर भूमि देने के लिए इस आवेदन पत्र में वांछित सभी सामान्य शर्तें मेरे द्वारा ध्यान पूर्वक पढ़ वह समझ ली गई हैं एवं वह मुझे पूर्ण रूप से स्वीकार हैं | प्राधिकरण द्वारा समय-समय पर भविष्य में सामान्य शर्तो में किया गया कोई भी या सभी परिवर्तन बिना शर्त / आपत्ति मुझे स्वीकार होगा |<br>
+                                    दिनांक:-			<br>
+                                    स्थान :-
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    @*<p class="simple-reg-terms col-sm-12 col-xs-12">
+                <label>
+                    <span class="checkbox">
+                        <input title="Please tick" name="accept_terms" type="checkbox" class="required" />
+                        I accept the terms &amp; conditions
+                    </span>
+                </label>
+            </p>*@
+                    <div class="col-sm-6 col-xs-6">
+                        <input type="submit" name="next" id="btnPrint" class="btn btn-primary" value="Print Receipt" />
+                        <input type="submit" name="next" style="display:none" id="btnPrintDocument" class="btn btn-primary" value="Print Receipt" onclick="window.print();" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <div class="signture">
+                            @*<img style="width:150px;" src="@imgSignaturesrc">*@
+                            <p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on('click', '#btnPrint', function () {
+        var pageTitle = 'Acknowledgement Reciept';
+        stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+            pageStyleSheet = 'https://gidagkp.in/styles/style.css',
+            win = window.open('', 'Print', 'width=1000,height=1000');
+        $('#btnPrint').css('display', 'none');
+        $('#btnPrintDocument').css('display', 'block');
+
+        var dd = $('#aknowgmntDiv').clone();
+        win.document.write('<html><head><title>' + pageTitle + '</title>' +
+            '<link rel="stylesheet" href="' + stylesheet + '">' +
+            '<link rel="stylesheet" href="' + pageStyleSheet + '">' +
+            '</head><body>' + dd.html() + '</body ></html > ');
+        win.document.close();
+        //win.print();
+        $('#btnPrint').css('display', 'block');
+        $('#btnPrintDocument').css('display', 'none');
+        //win.close();
+        return false;
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/PaymentResponseSuccess"]').parent().addClass('active')
+    });
+</script>

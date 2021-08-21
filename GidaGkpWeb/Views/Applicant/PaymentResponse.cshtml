@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "PaymentResponse";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/PaymentResponse"]').parent().addClass('active')
+    });
+</script>

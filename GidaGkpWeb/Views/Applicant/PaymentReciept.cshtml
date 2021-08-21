@@ -1,0 +1,154 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+@{
+    ViewBag.Title = "Payment Reciept";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+    var applicationData = ViewData["UserData"] as ApplicationDetailModel;
+}
+<link href="~/styles/style.css" rel="stylesheet" />
+<section class="form" id="sectionPrint">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1">
+        <div class="container">
+            <div class="row">
+                <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+                    <div class="row">
+                        <div class="receipt-header">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="receipt-left">
+                                    <img class="img-responsive" alt="GIDA" src="~/Content/files/Gida-mainlogo.png" style="width: 71px; border-radius: 43px;">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                                <div class="receipt-right">
+                                    <h5>Gorakhpur Industrial Development Authority (GIDA)</h5>
+                                    <h5>गोरखपुर औद्योगिक विकास प्राधिकरण  (गीडा)</h5>
+                                    <p>Sec.-7, GIDA, Gorakhpur, Uttar Pradesh 273212</p>
+                                    <p>0551-2580010,2580090 <i class="fa fa-phone"></i></p>
+                                    <p>ceogida-up@up.gov.in <i class="fa fa-envelope-o"></i></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="receipt-header receipt-header-mid">
+                            <center><h2>Receipt</h2></center>
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                <div class="receipt-header">
+                                    <h5><b>Application Number :</b> @applicationData.ApplicationNumber</h5>
+                                    <h5><b>Bank UTR/Reference No :</b> @applicationData.PaymentReferenceNumber</h5>
+                                    <h5><b>Name :</b> @applicationData.FullApplicantName</h5>
+                                    <p><b>Mobile :</b> @applicationData.Mobile</p>
+                                    <p><b>Email :</b> @applicationData.Emaild</p>
+                                    <p><b>Address :</b> @applicationData.CAddress</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Amount (In Rs.)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-9">Application Fee</td>
+                                    <td class="col-md-3"><i class="fa fa-inr"></i> @applicationData.ApplicationFee</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-9">GST Amount (Applicable as per govt. rule)</td>
+                                    <td class="col-md-3"><i class="fa fa-inr"></i> @applicationData.GST</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-9">Earnest Money Deposit (EMD)</td>
+                                    <td class="col-md-3"><i class="fa fa-inr"></i> @applicationData.EarnestMoneyDeposit</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">
+                                        <p>
+                                            <strong>Total Amount (Fee + GST): </strong>
+                                        </p>
+                                        <p>
+                                            <strong>Late Fees: </strong>
+                                        </p>
+                                        <p>
+                                            <strong>Payable Amount (Total Amnt + EMD): </strong>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <strong><i class="fa fa-inr"></i>@applicationData.TotalAmount</strong>
+                                        </p>
+                                        <p>
+                                            <strong><i class="fa fa-inr"></i> 0.00</strong>
+                                        </p>
+                                        <p>
+                                            <strong><i class="fa fa-inr"></i> @applicationData.NetAmount</strong>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td class="text-right"><h2><strong>Total: </strong></h2></td>
+                                    <td class="text-left text-danger"><h2><strong><i class="fa fa-inr"></i> @applicationData.NetAmount</strong></h2></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="receipt-header receipt-header-mid receipt-footer">
+                            <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                                <div class="receipt-right">
+                                    <p><b>Date :</b> @applicationData.PaymentDate.Value.ToString("dd/MM/yyyy")</p>                                    
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 text-right">
+                                <div class="receipt-right">
+                                    <input type="submit" name="next" id="btnPrint" class="btn btn-primary" value="Print Receipt" />
+                                    <input type="submit" name="next" style="display:none" id="btnPrintDocument" class="btn btn-primary" value="Print Receipt" onclick="window.print();" />
+                                </div>
+                            </div>
+                            <center><h5 style="color: rgb(140, 140, 140);">Thank you!</h5></center>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).on('click', '#btnPrint', function () {
+        var pageTitle = 'Plot Registration Payment Reciept';
+        stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+            pageStyleSheet = 'https://gidagkp.in/styles/style.css',
+            win = window.open('', 'Print', 'width=1000,height=1000');
+        $('#btnPrint').css('display', 'none');
+        $('#btnPrintDocument').css('display', 'block');
+
+        var dd = $('#sectionPrint').clone();
+        win.document.write('<html><head><title>' + pageTitle + '</title>' +
+            '<link rel="stylesheet" href="' + stylesheet + '">' +
+            '<link rel="stylesheet" href="' + pageStyleSheet + '">' +
+            '</head><body>' + dd.html() + '</body ></html > ');
+        win.document.close();
+        //win.print();
+        $('#btnPrint').css('display', 'block');
+        $('#btnPrintDocument').css('display', 'none');
+        //win.close();
+        return false;
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/PaymentResponseSuccess"]').parent().addClass('active')
+    });
+</script>

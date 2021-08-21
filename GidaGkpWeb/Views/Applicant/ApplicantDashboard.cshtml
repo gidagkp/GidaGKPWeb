@@ -1,0 +1,868 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    ViewBag.Title = "ApplicantDashboard";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+
+    //var UserData = ViewData["UserData"] as List<ApplicationDetailModel>;
+    //int index = 1;
+
+
+}
+<script src="~/Scripts/App/Masters/ApplicantPlotRegistration.js"></script>
+<link href="~/styles/style.css" rel="stylesheet" />
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1">
+        <div class="container">
+            <div class="row justify-content-center mt-0" style="padding:30px 20px" id="divNewPlotRegistration">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="col-sm-6 col-xs-6">
+                                <h2><strong>Plot Details</strong></h2>
+                                <p>Fill all form field to go to next step</p>
+                            </div>
+                            <div class="col-sm-6 col-xs-6" id="divApplicationNumber" style="display:none;background-color:burlywood">
+                                Application Number
+                                <span id="spanApplicationNumber"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mx-0">
+                                <div id="msform">
+                                    <!-- progressbar -->
+                                    <ul id="progressbar">
+                                        <li class="active" id="PlotDetail"><strong>Plot Details</strong></li>
+                                        <li id="ApplicantDetail"><strong>Applicant Details</strong></li>
+                                        <li id="ProjectDetail"><strong>Project Details</strong></li>
+                                        <li id="BankDetail"><strong>Bank Details</strong></li>
+                                        <li id="AttachDocument"><strong>Attach Documents</strong></li>
+                                        @*<li id="MakePayment"><strong>Make Payment</strong></li>*@
+                                    </ul>
+                                    <!-- Step1 fieldsets -->
+                                    <fieldset>
+                                        <form>
+                                            <div class="form-card">
+                                                <h2 class="fs-title">Plot Details</h2>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-12 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Applied For<span class="required-field"></span></label>
+                                                            <select name="AppliedFor" id="AppliedFor" class="form-control" required></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Scheme Type<span class="required-field"></span></label>
+                                                            <select name="SchemeType" id="SchemeType" class="form-control"></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Plot Range (In Square Meter)<span class="required-field"></span></label>
+                                                            <select name="PlotRange" id="PlotRange" class="form-control"></select>
+
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Scheme Name<span class="required-field"></span></label>
+                                                            <select name="SchemeName" id="SchemeName" class="form-control"></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase" id="labelPlotArea">
+                                                                Plot Area
+                                                                <span class="required-field" id="spanMandatory"></span>
+                                                            </label>
+                                                            <input type="number" name="plotArea" id="plotArea" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Sector Name<span class="required-field"></span></label>
+                                                            <select name="SectorName" id="SectorName" class="form-control"></select>
+                                                            <input type="hidden" id="SectorDescription" name="SectorDescription" />
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12 hidden">
+                                                            <label for="usertype" class="text-uppercase">Estimated Rate (In Rs.)</label>
+                                                            <input type="number" step="0.01" name="EstimatedRate" id="EstimatedRate" class="form-control" readonly>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Paymemt Schedule<span class="required-field"></span></label>
+                                                            <select name="PaymemtSchedule" id="PaymemtSchedule" class="form-control" disabled="disabled"></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Estimated Cost of Plot (In Rs.)</label>
+                                                            <input type="number" step="0.01" name="TotalInvestment" id="TotalInvestment" class="form-control" readonly>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Application Fee (In Rs.)</label>
+                                                            <input type="number" step="0.01" name="ApplicationFee" id="ApplicationFee" class="form-control" value="1000" readonly>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Earnest Money Deposite (In Rs.)</label>
+                                                            <input type="number" step="0.01" name="EarnestMoneyDeposite" id="EarnestMoneyDeposite" class="form-control" readonly>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">GST (In Rs.)</label>
+                                                            <input type="number" step="0.01" name="GST" id="GST" class="form-control" value="50" readonly>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Net Amount(Payable In Rs.)</label>
+                                                            <input type="number" step="0.01" name="NetAmount" id="NetAmount" class="form-control" readonly>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Total Amount (In Rs.)</label>
+                                                            <input type="number" step="0.01" name="TotalAmount" id="TotalAmount" class="form-control" value="1050" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h2 class="fs-title">Full Particular of the applicant</h2>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Industry Ownership Type<span class="required-field"></span></label>
+                                                            <select name="IndustryOwnershipType" id="IndustryOwnershipType" class="form-control"></select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Unit Name<span class="required-field"></span></label>
+                                                            <input name="UnitName" id="UnitName" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h2 class="fs-title">Signing Person Detail</h2>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Name<span class="required-field"></span></label>
+                                                            <input name="Name" id="Name" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Date of Birth<span class="required-field"></span></label>
+                                                            <input name="dob" type="date" id="dob" class="form-control" placeholder="Date of Birth">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Present Address<span class="required-field"></span></label>
+                                                            <textarea name="PresentAddress" id="PresentAddress" class="form-control"></textarea>
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Permanent Address and Contact No<span class="required-field"></span></label>
+                                                            <textarea name="PermanentAddress" id="PermanentAddress" class="form-control"></textarea>
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12 hidden">
+                                                            <label for="usertype" class="text-uppercase">Relationship Status<span class="required-field"></span></label>
+                                                            <select name="RelationshipStatus" id="RelationshipStatus" class="form-control"></select>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-xs-12">
+                                                <input type="button" id="btnPlotDetailSave" name="next" class="next action-button pull-right" value="Save & Next" />
+                                                <input type="button" id="btnStep1Skip" name="next" class="next action-button pull-right hidden" value="Next" />
+                                            </div>
+
+                                        </form>
+                                    </fieldset>
+                                    <!-- Step2 fieldsets -->
+                                    <fieldset>
+                                        <form>
+                                            <div class="form-card">
+                                                <h3 class="fs-title">Applicant Peronal Details</h3>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Full Name of Applicant<span class="required-field"></span></label>
+                                                            <input name="FullName" id="FullName" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Father's Name<span class="required-field"></span></label>
+                                                            <input name="FatherName" id="FName" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Mother's Name<span class="required-field"></span></label>
+                                                            <input name="MotherName" id="MName" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Spouce Name</label>
+                                                            <input name="SpouceName" id="SName" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Date of Birth<span class="required-field"></span></label>
+                                                            <input name="DOB" type="date" id="DOB" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Gender<span class="required-field"></span></label>
+                                                            <select name="Gender" id="Gender" class="form-control">
+                                                                <option value="">Select</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
+                                                                <option value="Others">Others</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Category<span class="required-field"></span></label>
+                                                            <select name="Category" id="Category" class="form-control">
+                                                                <option value="">Select</option>
+                                                                <option value="General">General</option>
+                                                                <option value="OBC">OBC</option>
+                                                                <option value="SC">SC</option>
+                                                                <option value="ST">ST</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Nationality<span class="required-field"></span></label>
+                                                            <select name="Nationality" id="Nationality" class="form-control">
+                                                                <option value="Indian">Indian</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Adhaar Number<span class="required-field"></span></label>
+                                                            <input type="text" pattern="\d*" maxlength="12" name="AdhaarNo" id="AdhaarNo" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">PAN Number<span class="required-field"></span></label>
+                                                            <input name="PAN" id="PAN" class="form-control" maxlength="10" value="">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Mobile Number<span class="required-field"></span></label>
+                                                            <input type="text" pattern="\d*" name="MobileNo" id="MobileNo" maxlength="10" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Phone Number</label>
+                                                            <input type="text" pattern="\d*" name="Phone" id="Phone" maxlength="11" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Email ID<span class="required-field"></span></label>
+                                                            <input type="email" name="Email" id="Email" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Religion</label>
+                                                            <select name="Religion" id="Religion" class="form-control">
+                                                                <option value="">Select</option>
+                                                                <option value="Hinduism">Hinduism</option>
+                                                                <option value="Buddhism">Buddhism</option>
+                                                                <option value="Islam">Islam</option>
+                                                                <option value="Sikhism">Sikhism</option>
+                                                                <option value="Christianity">Christianity</option>
+                                                                <option value="Jainism">Jainism</option>
+                                                                <option value="Other">Other</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Sub-Category</label>
+                                                            <input name="SubCategory" id="SubCategory" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h3 class="fs-title">Applicant Identity Details</h3>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Current Address<span class="required-field"></span></label>
+                                                    <input name="CAddress" id="CAddress" class="form-control">
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Permanent Address<span class="required-field"></span></label>
+                                                    <input name="PAddress" id="PAddress" class="form-control">
+                                                </div>
+
+                                                <h3 class="fs-title">Applicant Identity Proof<span class="required-field"></span></h3>
+                                                <div class="form-check col-sm-12 col-xs-12" style="padding-top:10px;">
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <input type="radio" id="IDPassport" name="IdentityProof" value="Passport">
+                                                            <label for="Passport">Passport</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="radio" id="IDPAN" name="IdentityProof" value="PAN">
+                                                            <label for="PAN">PAN</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="radio" id="IDvoterIDCard" name="IdentityProof" value="Voter ID Card">
+                                                            <label for="OterIDCard">Voter ID Card</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <input type="radio" id="IDDrivingLiecence" name="IdentityProof" value="Driving Liecence">
+                                                            <label for="DrivingLiecence">Driving Liecence</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="radio" id="IDAdhaarCard" name="IdentityProof" value="AdhaarCard">
+                                                            <label for="AdhaarCard">Adhaar Card</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="radio" id="IDCompanyIDCard" name="IdentityProof" value="Company ID Card">
+                                                            <label for="CompanyIDCard">Company ID Card</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h3 class="fs-title">Applicant Residential Proof<span class="required-field"></span></h3>
+                                                <div class="form-check col-sm-12 col-xs-12" style="padding-top:10px;">
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <input type="radio" id="RPElectricBill" name="ResidentialProof" value="Electric Bill">
+                                                            <label for="ElectricBill">Electric Bill</label>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="radio" id="RPITR" name="ResidentialProof" value="ITR">
+                                                            <label for="ITR">ITR</label>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="radio" id="RPTelephoneBill" name="ResidentialProof" value="Telephone Bill">
+                                                            <label for="TelephoneBill">Telephone Bill</label>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="radio" id="RPBankPassbook" name="ResidentialProof" value="Bank Passbook Account Detail">
+                                                            <label for="BankPassbook">Bank Passbook Account Detail</label>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="radio" id="RPPassport" name="ResidentialProof" value="Passport">
+                                                            <label for="Passport">Passport</label>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="radio" id="RPVoterIDCard" name="ResidentialProof" value="Voter ID Card">
+                                                            <label for="VoterIDCard">Voter ID Card</label>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="radio" id="RPHRBill" name="ResidentialProof" value="HR Bill">
+                                                            <label for="HRBill">House Rent Bill/Aggreement</label>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="radio" id="RPDrivingLiecence" name="ResidentialProof" value="Driving Liecence">
+                                                            <label for="DrivingLiecence">Driving Liecence</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-xs-12">
+                                                <input type="button" name="previous" id="Step2PreviousButton" class="previous action-button-previous pull-right" value="Previous" />
+                                                <input type="button" id="btnStep2Skip" name="next" class="next action-button pull-right hidden" value="Next" />
+                                                <input type="button" name="next" id="Step2NextButton" class="next action-button pull-right" value="Save & Next" />
+                                            </div>
+                                        </form>
+                                    </fieldset>
+                                    <!-- Step3 fieldsets -->
+                                    <fieldset>
+                                        <form>
+                                            <div class="form-card">
+                                                <h3 class="fs-title">Particular Project Details</h3>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Type of Industry Proposed to be Set up<span class="required-field"></span></label>
+                                                            <input name="ProposedIndustryType" id="ProposedIndustryType" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Estimated Cost of The Project (in RS)<span class="required-field"></span></label>
+                                                            <input type="number" name="ProjectEstimatedCost" id="ProjectEstimatedCost" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h3>Proposed Layout Plan of Land</h3>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Covered Area (In Square Meter)<span class="required-field"></span></label>
+                                                            <input type="number" name="CoveredArea" id="CoveredArea" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Open Area (In Square Meter)<span class="required-field"></span></label>
+                                                            <input type="number" name="OpenArea" id="OpenArea" class="form-control" readonly>
+                                                        </div>
+                                                        <div class="form-group col-sm-12 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Purpose for open area<span class="required-field"></span></label>
+                                                            <input type="text" name="Purposeforopenarea" id="Purposeforopenarea" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h3>Deatails of Proposed Investment</h3>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Investment in land (In RS)<span class="required-field"></span></label>
+                                                            <input type="number" step="0.01" name="Investmentland" id="Investmentland" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Investment in Building & Factory Shed( In Rs )<span class="required-field"></span></label>
+                                                            <input type="number" step="0.01" name="InvestmentBuilding" id="InvestmentBuilding" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-12 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Investment in Plant, Machinery & Equipment (in Rs.)<span class="required-field"></span></label>
+                                                            <input type="number" step="0.01" name="InvestmentPlant" id="InvestmentPlant" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h3>Fumes & Industrial Effluents Detail</h3>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-12 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">
+                                                                Would any fumes be generated in the process of manufacture and if so,their nature and quantity (Yes/No)
+                                                                <span class="required-field"></span>
+                                                            </label>
+                                                            <input name="processofmanufacture" id="processofmanufacture" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-12 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Industrial Efflunets</label>
+                                                            <table class="table table-bordered responsive disabledAnchor" id="tableIndustrialEfflunets">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>Name of the Effluent</th>
+                                                                        <th>Quantity</th>
+                                                                        <th>Chemical Composition</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th row-header="Table heading" scope="row">1</th>
+                                                                        <td row-header="Table">Liquid (Litres)</td>
+                                                                        <td row-header="Table heading"><input type="text" name="LiquidQuantity" id="LiquidQuantity" class="form-control"></td>
+                                                                        <td row-header="heading"><input name="LiquidChemicalComposition" id="LiquidChemicalComposition" class="form-control"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th row-header="Table heading" scope="row">2</th>
+                                                                        <td row-header="Table heading">Solid (kg/Quintal/Tons)</td>
+                                                                        <td row-header="Table heading"><input type="text" name="SolidQuantity" id="SolidQuantity" class="form-control"></td>
+                                                                        <td row-header="Table heading"><input name="SolidChemicalComposition" id="SolidChemicalComposition" class="form-control"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th row-header="Table heading" scope="row">3</th>
+                                                                        <td row-header="Table heading">Gas (Quibic Meters)</td>
+                                                                        <td row-header="Table heading"><input type="text" name="GasQuantity" id="GasQuantity" class="form-control"></td>
+                                                                        <td row-header="Table heading"><input name="GasChemicalComposition" id="GasChemicalComposition" class="form-control"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h3>Industry Requirements</h3>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Power Requirement(in KW)</label>
+                                                            <input type="number" name="PowerRequirement" id="PowerRequirement" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-12 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase hidden">Industrial Efflunets</label>
+                                                            <table class="table table-bordered responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>No of Telephonic Connection</th>
+                                                                        <th>No of Fax Connection</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td row-header="Table heading"><input type="number" name="FirstYearTelephonicConnection" id="FirstYearTelephonicConnection" class="form-control"></td>
+                                                                        <td row-header="Table heading"><input type="number" name="FirstYearFaxConnection" id="FirstYearFaxConnection" class="form-control"></td>
+                                                                    </tr>
+                                                                    <tr class="hidden">
+                                                                        <td row-header="Table heading"><input type="number" name="UltimateRequirementTelephonicConnection" id="UltimateRequirementTelephonicConnection" class="form-control"></td>
+                                                                        <td row-header="Table heading"><input type="number" name="UltimateRequirementFaxConnection" id="UltimateRequirementFaxConnection" class="form-control"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h3>Employement Generation</h3>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Skilled</label>
+                                                            <input type="number" name="Skilled" id="Skilled" class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="usertype" class="text-uppercase">Unskilled</label>
+                                                            <input type="number" name="Unskilled" id="Unskilled" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-xs-12">
+                                                <input type="button" name="previous" id="Step3PreviousButton" class="previous action-button-previous pull-right" value="Previous" />
+                                                <input type="button" name="next" id="Step3NextButton" class="next action-button pull-right" value="Save & Next" />
+                                                <input type="button" id="btnStep3Skip" name="next" class="next action-button pull-right hidden" value="Next" />
+                                            </div>
+                                        </form>
+                                    </fieldset>
+                                    <!-- Step4 fieldsets -->
+                                    <fieldset>
+                                        <form>
+                                            <div class="form-card">
+                                                <h2 class="fs-title">Bank Account Details</h2>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Bank Account Holder Name<span class="required-field"></span></label>
+                                                    <input name="BankAccountName" id="BankAccountName" class="form-control">
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Bank Account Number<span class="required-field"></span></label>
+                                                    <input type="text" pattern="\d*" name="BankAccountNo" id="BankAccountNo" maxlength="20" class="form-control">
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Bank Name<span class="required-field"></span></label>
+                                                    <input name="BankName" id="BankName" class="form-control">
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Branch Name<span class="required-field"></span></label>
+                                                    <input name="BranchName" id="BranchName" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Branch Address<span class="required-field"></span></label>
+                                                    <input name="BranchAddress" id="BranchAddress" class="form-control">
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Bank IFSC Code<span class="required-field"></span></label>
+                                                    <input name="IFSCCode" id="IFSCCode" maxlength="15" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-xs-12">
+                                                <input type="button" name="previous" id="Step4PreviousButton" class="previous action-button-previous pull-right" value="Previous" />
+                                                <input type="button" name="next" id="Step4NextButton" class="next action-button pull-right" value="Save & Next" />
+                                                <input type="button" id="btnStep4Skip" name="next" class="next action-button pull-right hidden" value="Next" />
+                                            </div>
+                                        </form>
+                                    </fieldset>
+                                    <!-- Step5 fieldsets -->
+                                    <fieldset>
+                                        <form id="formSaveDocument" action="~/Applicant/SaveApplicantDocument" method="post" enctype="multipart/form-data">
+                                            <div class="form-card">
+                                                <h3 class="fs-title">Attached Ducuments Detail</h3>
+                                                <p class="paragraph">
+                                                    Note: Scan all required self attested document and upload by 'Select File'. The file to be uploaded .jpg, .jpeg, .png, .doc, .pdf
+                                                    <br />(Please Attach maximum 3 MB file size in each field Except Applicant Photo and Signature.)
+                                                </p>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">Project Reports<span class="required-field"></span></label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="ProjectReportsfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" name="ProjectReports" id="ProjectReports" onchange="this.form.ProjectReportsfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 500 KB</p>*@
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">Proposed plan of land usage<span class="required-field"></span></label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="Proposedplanfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="Proposedplan" name="Proposedplan" onchange="this.form.Proposedplanfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 500 KB</p>*@
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Partnership Deed/Memorandum & Articles of Association/ Certificate of Incorporation of the Company, as applicable
+
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="PartnershipDeedfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="PartnershipDeed" name="PartnershipDeed" onchange="this.form.PartnershipDeedfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 500 KB</p>*@
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">Scan copy of Pan Card<span class="required-field"></span></label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="PanCardfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="PanCard" name="PanCard" onchange="this.form.PanCardfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">Scan copy of Address Proof<span class="required-field"></span></label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="AddressProoffilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="AddressProof" name="AddressProof" onchange="this.form.AddressProoffilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">As per IT Act past three financial years (F.Y. 2019-20, 2018-19, 2017-18) Audited Balance Sheet and Profit and Loss Statement (If applicable)</label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="BalanceSheetfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="BalanceSheet" name="BalanceSheet" onchange="this.form.BalanceSheetfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 500 KB</p>*@
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                As per IT Act past three financial years (F.Y. 2019-20, 2018-19, 2017-18) Income Tax Return  and computation of income or Any document supporting Networth of the applicant
+                                                                <span class="required-field"></span>
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="IncomeTaxreturnfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="IncomeTaxreturn" name="IncomeTaxreturn" onchange="this.form.IncomeTaxreturnfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 500 KB</p>*@
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Experience proof for industry establishment.(GST Return-if Applicable, ITR, Electricity Bill, Sales/Purchase Vouchers)
+
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="Experienceprooffilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="Experienceproof" name="Experienceproof" onchange="this.form.Experienceprooffilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select a file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Applicant's educational / technical qualification.<span class="required-field"></span>
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="educationalqualificationfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="educationalqualification" name="educationalqualification" onchange="this.form.educationalqualificationfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                If expansion or diversification of pre-established industry, then Xerox copy of latest electricity bill & other documents
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="electricitybillfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="electricitybill" name="electricitybill" onchange="this.form.electricitybillfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Full financial details for industry establishment if applicable
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="financialdetailsfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="financialdetails" name="financialdetails" onchange="this.form.financialdetailsfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                If any other document related to proposed industry
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="Otherproposedindustryfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" name="Otherproposedindustry" onchange="this.form.Otherproposedindustryfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Scan copy of Caste Certificate
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="CasteCertificatefilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" name="CasteCertificate" onchange="this.form.CasteCertificatefilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Scan copy of Identity Proof<span class="required-field"></span>
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="IdentityProoffilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="IdentityProof" name="IdentityProof" onchange="this.form.IdentityProoffilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                If Industrial Unit established outside GIDA, then attach related documents issued within last
+                                                                one year from the date of application
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="outsideGIDAElectricitybillfilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" name="outsideGIDAElectricitybill" onchange="this.form.outsideGIDAElectricitybillfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Related bank verified signature.<span class="required-field"></span>
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="BankVerifiedSignaturefilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="BankVerifiedSignature" name="BankVerifiedSignature" onchange="this.form.BankVerifiedSignaturefilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            @*<p class="paragraph">File Size cannot exceed the limit 200 KB</p>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h3 class="fs-title">Applicant Signatory</h3>
+                                                <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                                    <div class="row">
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Applicant Photo<span class="required-field"></span>
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="ApplicantPhotofilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="ApplicantPhoto" name="ApplicantPhoto" onchange="this.form.ApplicantPhotofilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            <p class="paragraph">File Size cannot exceed the limit 200 KB</p>
+                                                        </div>
+
+                                                        <div class="form-group col-sm-6 col-xs-12">
+                                                            <label for="file" class="sr-only">
+                                                                Applicant Signature<span class="required-field"></span>
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="ApplicantSignaturefilename" class="form-control" placeholder="No file selected" readonly>
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                        <input type="file" id="ApplicantSignature" name="ApplicantSignature" onchange="this.form.ApplicantSignaturefilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            <p class="paragraph">File Size cannot exceed the limit 200 KB</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-xs-12">
+                                                <input type="button" name="previous" id="Step5PreviousButton" class="previous action-button-previous pull-right" value="Previous" />
+                                                <input type="button" name="next" id="Step5NextButton" class="next action-button pull-right" value="Save & Pay" />
+                                                <input type="button" id="btnStep5Skip" name="next" class="next action-button pull-right hidden" value="Next & Pay" />
+                                            </div>
+                                        </form>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/ApplyForPlot"]').parent().addClass('active')
+    });
+</script>

@@ -1,0 +1,109 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    ViewBag.Title = "Applicant Financial Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    //var ApplicantData = ViewData["ApplicantData"] as List<ApplicationUserModel>;
+    //int index = 1;
+}
+<script src="~/Scripts/App/Masters/AdminLookup.js"></script>
+<link href="~/styles/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1" style="min-height:350px">
+        <div class="container">
+            <div class="row">
+                <div class="form-group col-sm-4 col-xs-12">
+                    <label for="usertype" class="text-uppercase">Scheme Type<span class="required-field"></span></label>
+                    <select name="SchemeType" id="SchemeType" class="form-control"></select>
+                </div>
+                <div class="form-group col-sm-4 col-xs-12">
+                    <label for="usertype" class="text-uppercase">Scheme Name<span class="required-field"></span></label>
+                    <select name="SchemeName" id="SchemeName" class="form-control"></select>
+                </div>
+                <div class="form-group col-sm-2 col-xs-12">
+                    <input type="submit" id="btnSearchFinancialDetail" class="btn btn-primary" value="Search" style=" float: right; position: relative; margin:20px 0;" />
+                </div>
+            </div>
+            @*@if (ApplicantData != null && ApplicantData.Count > 0)
+                {*@
+            <div class="row justify-content-center mt-0" style="padding:30px 20px">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="row">
+                        <h2 class="col-sm-6 col-xs-12" style="padding:0 15px 20px 15px;">Financial Details of Applicant</h2>
+                        <div class="col-sm-6 col-xs-12">
+                            @using (Html.BeginForm("ExportFormRejetced", "Admin", FormMethod.Post))
+                            {
+                                <input type="hidden" name="GridHtml" />
+                                <input type="submit" id="btnSubmit" class="btn btn-primary" value="Export to Excel" style=" float: right; position: relative; margin:20px 0;" />
+                            }
+                        </div>
+                        <div class="table-responsive" id="divExport" style="width:100%">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Applicant Name</th>
+                                        <th>Application Number</th>
+                                        <th>Plot Area</th>
+                                        <th>Amount Paid(In Rs.)</th>
+                                        <th>Father Name</th>
+                                        <th>Contact Number</th>
+                                        <th>Account Number</th>
+                                        <th>Bank Name</th>
+                                        <th>Branch Name</th>
+                                        <th>IFSC Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyData">
+                                    @*@foreach (var data in ApplicantData)
+                                        {
+                                            <tr>
+                                                <th scope="row">@index</th>
+                                                <td>@data.FullName</td>
+                                                <td>@data.ApplicationNumber</td>
+                                                <td>@data.PlotArea</td>
+                                                <td>@data.PaidAmount</td>
+                                                <td>@data.FatherName</td>
+                                                <td>@data.ContactNo</td>
+                                                <td>@data.AccoutnNumber</td>
+                                                <td>@data.BankName</td>
+                                                <td>@data.BranchName</td>
+                                                <td>@data.IFSCCode</td>
+                                            </tr>
+                                            index++;
+                                        }*@
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*}
+                else
+                {
+                    <span>No Record Found.</span>
+                }*@
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Admin/ApplicantFinancialDetails"]').parent().parent().parent().addClass('active')
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#divExport").html());
+        });
+    });
+</script>

@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<div class="container">
+    <div class="col-sm-12 col-xs-12" style="padding:10px 0 10px 0; margin-bottom: 50px; border-bottom:1px solid rgb(170, 170, 170);">
+        <h3 style="font-size:18px; padding-top: 13px;"> List of selected candidates after interview  </h3>
+    </div>
+    <div class="col-sm-12 col-xs-12" style="padding: 0px;">
+        <div class="row">
+            <div class="form-group col-sm-4 col-xs-12">
+                <label for="user" class=""> Individual Applicant   </label>
+                <select>
+                    <option>Approval </option>
+                    <option>Not Approval </option>
+                </select>
+            </div>
+            <div class="form-group col-sm-4 col-xs-12">
+                <label for="user" class=""> Interview   </label>
+                <select>
+                    <option>Given</option>
+                    <option>Not Given</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-4 col-xs-12">
+                <label for="user" class=""> Search by Application ID </label>
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+        </div>
+        <div class="table-responsive" style="padding:10px 0 0px 0;">
+            <table class="table table_css_main_cl table-bordered">
+                <tr>
+                    <th class="text-center">S.No.</th>
+                    <th class="text-center">Application Number</th>
+                    <th class="text-center">Individual Applicant Approval by Screening Committee</th>
+                    <th class="text-center">Invitation for interview/ lottery given or not </th>
+                    <th class="text-center">Action</th>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">45675643</td>
+                    <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
+                    <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
+                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"> <i class="fa fa-envelope" aria-hidden="true"></i> Send </button></td>
+                </tr>
+                <tr>
+                    <td class="text-center">2</td>
+                    <td class="text-center">45675643</td>
+                    <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
+                    <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
+                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"><i class="fa fa-envelope" aria-hidden="true"></i> Send </button></td>
+                </tr>
+                <tr>
+                    <td class="text-center">3</td>
+                    <td class="text-center">45675643</td>
+                    <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
+                    <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
+                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"> <i class="fa fa-envelope" aria-hidden="true"></i> Send</button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-12 col-xs-12" style="padding:0px 0 20px 0;">
+            <button type="button" class="pull-right addCommittee_btn">Sumbit</button>
+        </div>
+    </div>
+</div>

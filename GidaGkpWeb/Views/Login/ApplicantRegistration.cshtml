@@ -1,0 +1,572 @@
+﻿@{
+    ViewBag.Title = "ApplicantRegistration";
+    Layout = null;
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Applicant Registration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/lib/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/App/Global/Utility.js"></script>
+    <script src="~/Scripts/App/Masters/ApplicantRegistration.js"></script>
+    <link href="~/styles/style.css" rel="stylesheet" />
+
+    <style>
+
+        .required-field::before {
+            content: "*";
+            color: red;
+        }
+
+        .login-block {
+            background: #DE6262; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            float: left;
+            width: 100%;
+            padding: 0;
+        }
+
+        .banner-sec {
+            background: url(../../images/id.jpg);
+            background-size: cover;
+            height: 100%;
+            /*position: fixed;*/
+            background-attachment: inherit;
+            background-position: -15px 0;
+            display: flex;
+            min-height: 658px;
+        }
+
+        .login-sec {
+            padding: 30px 50px;
+            position: absolute;
+            background: #f9f9f9;
+            width: 40%;
+            /*margin-left: 60%;*/
+            right: 0;
+            float: right;
+            overflow: auto;
+            height: 100%;
+        }
+
+        .text-uppercase {
+            text-transform: capitalize;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .logo_class {
+            float: right;
+            width: 130px;
+            margin-bottom: -16%;
+        }
+
+        .login-sec .copy-text {
+            position: absolute;
+            width: 80%;
+            bottom: 20px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .login-sec h2 {
+            margin-bottom: 0px;
+            font-weight: 600;
+            font-size: 24px;
+            color: #082860;
+            font-family: poppins;
+        }
+
+        form.login-form {
+            float: left;
+            width: 100%;
+            padding: 10px 0px;
+        }
+
+        .login-sec h2:after {
+            content: " ";
+            width: 100px;
+            height: 5px;
+            background: #FEB58A;
+            display: block;
+            margin-top: 20px;
+            border-radius: 3px;
+            margin-left: 0;
+            margin-right: auto
+        }
+
+        .btn-login, .btn-login:hover {
+            background: #892a26;
+            width: 100%;
+            float: left;
+            padding: 10px;
+            margin-top: 20px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 38px;
+            padding: 7px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+
+        p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            line-height: 30px;
+            color: var(--white);
+            -webkit-transition: all 300ms linear;
+            transition: all 300ms linear;
+        }
+
+        mark {
+            color: var(--white);
+            background-color: var(--black);
+        }
+
+        .section {
+            position: relative;
+            width: 100%;
+            display: block;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .over-hide {
+            overflow: hidden;
+        }
+
+        .z-bigger {
+            z-index: 100 !important;
+        }
+
+
+        .background-color {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-blue);
+            z-index: 1;
+            -webkit-transition: all 300ms linear;
+            transition: all 300ms linear;
+        }
+
+        .checkbox:checked ~ .background-color {
+            background-color: var(--white);
+        }
+
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 100;
+        }
+
+        [type="checkbox"]:checked,
+        [type="checkbox"]:not(:checked),
+        [type="radio"]:checked,
+        [type="radio"]:not(:checked) {
+            position: absolute;
+            left: -9999px;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+        }
+
+
+        .checkbox-tools:checked + label,
+        .checkbox-tools:not(:checked) + label {
+            position: relative;
+            display: inline-block;
+            padding: 20px 0px;
+            width: 100%;
+            font-size: 13px;
+            line-height: 20px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            text-align: center;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            color: var(--white);
+            -webkit-transition: all 300ms linear;
+            transition: all 300ms linear;
+        }
+
+        .checkbox-tools:not(:checked) + label {
+            background-color: #fff;
+            border: 1px solid #d6d6d6;
+        }
+
+        .checkbox-tools:checked + label {
+            background-color: #282828;
+            color: #fff;
+        }
+
+        .checkbox-tools:not(:checked) + label:hover {
+            background-color: #bdbdbd;
+            color: #000;
+        }
+
+        .checkbox-tools:checked + label::before,
+        .checkbox-tools:not(:checked) + label::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            background-image: linear-gradient(298deg, var(--red), var(--yellow));
+            z-index: -1;
+        }
+
+        .checkbox-tools:checked + label .uil,
+        .checkbox-tools:not(:checked) + label .uil {
+            font-size: 24px;
+            line-height: 24px;
+            display: block;
+            padding-bottom: 10px;
+        }
+
+        .checkbox:checked ~ .section .container .row .col-12 .checkbox-tools:not(:checked) + label {
+            background-color: var(--light);
+            color: var(--dark-blue);
+            box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .forgotpass {
+            padding: 30px 20px 0px 20px;
+            float: left;
+            margin-bottom: 0px;
+        }
+
+        #can {
+            display: flex;
+            justify-content: center;
+            float: left;
+            padding-top: 20px;
+            width: 99%;
+        }
+
+        canvas {
+            height: 34px;
+            width: 130px;
+            float: left;
+            font-size: 50px;
+            /* border: 1px solid black; */
+        }
+
+        #ant {
+            height: 33px;
+            width: 100%;
+            font-weight: normal;
+            font-size: 13px;
+            float: left;
+            color: #082860;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .ok {
+            color: green;
+            font-weight: 900;
+            font-size: 25px;
+            margin-top: 0;
+        }
+
+        .fal {
+            color: red;
+            font-weight: 900;
+            font-size: 25px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    @{
+        bool registerPage = false;
+        if (Convert.ToString(ViewData["registerAction"]) != "getotpscreen")
+        {
+            registerPage = true;
+        }
+    }
+
+    <section class="login-block banner-sec">
+
+        <div class="login-sec">
+            <!-- <div class="col-sm-12" style="padding:0px;"><img src="http://equaze.in/assets/images/logo.png" class="logo_class"></div>
+            -->
+
+            @if (registerPage == true)
+            {
+                @*@((User as CustomPrincipal).FirstName)*@
+                <div class="col-sm-6 col-xs-12" style="padding:0 15px;">
+                    <h2 class="text-left">Sign Up Now</h2>
+                </div>
+                <form class="login-form" action="/login/ApplicantLoginOTP" method="POST">
+
+                    <div class="form-group col-sm-12 col-xs-12">
+                        <label for="usertype" class="text-uppercase">Select User Type<span class="required-field"></span></label>
+                        <select name="usertype" id="usertype" class="form-control">
+                            <option value="">Select</option>
+                            <option value="New Applicant">New Applicant</option>
+                            <option value="Ex Applicant">Ex Applicant</option>
+                        </select>
+                    </div>
+
+                    <div id="divExAlotee" style="display:none">
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label for="usertype" class="text-uppercase">Scheme Type<span class="required-field"></span></label>
+                            <select name="SchemeType" id="SchemeType" class="form-control">
+                                <option value="">Select</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="GroupHousing">Group Housing</option>
+                                <option value="Institutional">Institutional</option>
+                                <option value="Transport Nagar">Transport Nagar</option>
+                                <option value="Residential">Residential</option>
+                                <option value="Commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label for="usertype" class="text-uppercase">Scheme Name<span class="required-field"></span></label>
+                            <select name="SchemeName" id="SchemeName" class="form-control"></select>
+                        </div>
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label for="usertype" class="text-uppercase">Sector Name<span class="required-field"></span></label>
+                            <select name="SectorName" id="SectorName" class="form-control"></select>
+                        </div>
+
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label for="exampleInputEmail1" class="text-uppercase">Allotment Number<span class="required-field"></span></label>
+                            <input name="AllotmentNumber" id="AllotmentNumber" class="form-control" placeholder="Allotment Number">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="exampleInputEmail1" class="text-uppercase">Full Name<span class="required-field"></span></label>
+                        <input name="fullName" id="fullName" class="form-control" placeholder="Full Name">
+                    </div>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="exampleInputEmail1" class="text-uppercase">Father Name<span class="required-field"></span></label>
+                        <input name="FName" id="FName" class="form-control" placeholder="Father's Name">
+                    </div>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="exampleInputEmail1" class="text-uppercase">Email<span class="required-field"></span></label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                    </div>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="exampleInputEmail1" class="text-uppercase">Mobile Number<span class="required-field"></span></label>
+                        <input type="text" pattern="\d*" maxlength="10" name="contactno" id="contact" class="form-control" placeholder="Contact No.">
+                    </div>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="exampleInputEmail1" class="text-uppercase">Aadhar Number<span class="required-field"></span></label>
+                        <input type="text" pattern="\d*" maxlength="12" name="Adhaar" id="Adhaar" class="form-control" placeholder="Adhaar No">
+                    </div>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="exampleInputEmail1" class="text-uppercase">Date of Birth<span class="required-field"></span></label>
+                        <input name="dob" type="date" id="dob" class="form-control" placeholder="Date of Birth">
+                    </div>
+
+                    <div class="form-group col-sm-12 col-xs-12">
+                        <label for="exampleInputEmail1" class="text-uppercase">Username<span class="required-field"></span></label>
+                        <input name="usrName" id="usrName" class="form-control" maxlength="20" placeholder="Username">
+                    </div>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="exampleInputPassword1" class="text-uppercase">Password<span class="required-field"></span></label>
+                        <input type="password" name="password" id="password" class="form-control" maxlength="20" placeholder="Password">
+                    </div>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="exampleInputPassword1" class="text-uppercase">Confirm Password<span class="required-field"></span></label>
+                        <input type="password" name="cpassword" id="cpassword" class="form-control" maxlength="20" placeholder="Enter Password Again">
+                    </div>
+
+
+                    @*<div class="form-group col-sm-6 col-xs-12">
+                            <label for="exampleInputEmail1" class="text-uppercase">Select State</label>
+                            <select name="state" id="state" class="form-control">
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                <option value="Daman and Diu">Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Puducherry">Puducherry</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                            </select>
+
+                        </div>*@
+                    @*<div class="form-group col-sm-6 col-xs-12">
+                            <label for="exampleInputEmail1" class="text-uppercase">Select City</label>
+                            <select name="state" id="state" class="form-control">
+                                <option value="Andhra Pradesh">City</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label for="exampleInputEmail1" class="text-uppercase">Pincode</label>
+                            <input type="number" class="form-control" placeholder="">
+
+                        </div>
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label for="exampleInputEmail1" class="text-uppercase">Address</label>
+                            <input type="text" class="form-control" placeholder="">
+
+                        </div>*@
+
+                    <div class="form-check col-sm-12 col-xs-12">
+                        <button type="submit" class="btn btn-login float-right">Submit</button>
+                    </div>
+
+                </form>
+            }
+            else
+            {
+                <form id="OTP_form" class="form-horizontal" action="verifyOTP" method="post" autocomplete="off">
+                    <h2>Verify OTP</h2>
+                    <p style="margin-bottom:0px;">
+                        Verify Your OTP
+                    </p>
+                    <div class="clearfix"></div>
+                    <hr style="width:100%" />
+                    <div class="col-lg-12">
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="user_OTP" placeholder="Enter OTP Here" value="" name="OTP" data-valid="required">
+                            </div>
+                        </div>
+                        @*<div class="col-sm-4 col-lg-4">
+                                <div class="form-group">
+                                    <a href="~/Home/ResendOTP" style="float:right;width:165px;font-weight: bold;margin-top:12px;" class="not-active" id="resendOtp">Resend OTP</a>
+                                </div>
+                            </div>*@
+                        <div class="col-sm-4 col-lg-4" style="padding-left: 40px;">
+                            <div class="form-group">
+                                <input type="submit" name="verifyOTP" class="btn btn-primary btn-blue btn-block btn-lg" value="Continue">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            }
+
+
+            <p class="col-sm-12 col-xs-12" style="padding:10px 20px; float: left;">Have an account? <a href="/Login/ApplicantLogin">Sign In </a></p>
+        </div>
+
+    </section>
+
+    @if (TempData["Alert_Title"] != null)
+    {
+        <div id="dialog" title="@TempData["Alert_Title"].ToString()">
+            @if (TempData["Alert_Message"] != null)
+            {
+                <p>@TempData["Alert_Message"].ToString()</p>
+            }
+            else
+            {
+                <p>Success..!</p>
+            }
+        </div>
+    }
+    @*Alert*@
+    <div id="alertModel" style="display:none;" title="">
+        <p></p>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.nav-item a.active').removeClass('active');
+            $('.nav-item a[href]').each(function (ind, ele) {
+                if ($(ele).attr('href').toLowerCase().indexOf(location.pathname.toLowerCase()) > -1) {
+                    $(ele).parent().addClass('active');
+                    $(ele).parent().parent().show();
+                }
+            });
+
+            $("#dialog").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        function aadhaarvalidation() {
+            var regexp = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+            var x = document.getElementById("aadhaar").value;
+            if (regexp.test(x)) {
+                window.alert("Valid Aadhar no.");
+            }
+            else {
+                window.alert("Invalid Aadhar no.");
+            }
+    </script>
+    <script src="~/Scripts/lib/jquery-ui.js"></script>
+    <link href="~/styles/jquery-ui.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+

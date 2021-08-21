@@ -1,0 +1,79 @@
+﻿@using DataLayer;
+@using GidaGkpWeb.Models;
+@{
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var UserData = ViewData["PageData"] as List<PageMasterModel>;
+
+}
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<style>
+    button.submit_plot_master353 {
+        background: #ff2e2e;
+        color: #fff;
+        border: 0px;
+        padding: 3px 10px;
+        font-size: 12px;
+        text-align: center;
+    }
+</style>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 30px;">
+            <h3 style="font-size:18px;">Total Allotment List </h3>
+            <hr />
+        </div>
+
+        <div class="form-group col-sm-3 col-xs-12">
+            <label for="usertype">Scheme Type<span class="required-field"></span></label>
+            <select name="SchemeType" id="SchemeType" class="form-control"></select>
+        </div>
+        <div class="form-group col-sm-4 col-xs-12">
+            <label for="usertype">Scheme Name<span class="required-field"></span></label>
+            <select name="SchemeName" id="SchemeName" class="form-control"></select>
+        </div>
+        <div class="form-group col-sm-4 col-xs-12">
+            <label for="usertype">Sector Name<span class="required-field"></span></label>
+            <select name="SectorName" id="SectorName" class="form-control"></select>
+        </div>
+
+        <div class="form-group col-sm-1 col-xs-12">
+            <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearchTransactionCompleted">Search</button>
+        </div>
+
+
+
+        <div class="col-sm-12 col-xs-12">
+
+            <div class="table-responsive" style="padding:10px 0 40px 0;">
+                <table class="table table_css_main_cl table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">S.No.</th>
+                            <th class="text-center">Application Number</th>
+                            <th class="text-center">Name of Candidate</th>
+                            <th class="text-center">Plot No </th>                            
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyData">
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td class="text-center"><a href="#" data-toggle="modal" data-target="#myModal">948584 </a></td>
+                            <td>Vijay Kumar</td>
+                            <td class="text-center">K13 </td>
+                            <td class="text-center"> <a href="/Admin/AllotmentStatus">Allotment Status</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>

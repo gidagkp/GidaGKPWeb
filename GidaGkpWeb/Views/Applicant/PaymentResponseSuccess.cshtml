@@ -1,0 +1,125 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+@{
+    ViewBag.Title = "PaymentResponseSuccess";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+    var ApplicationData = ViewData["ApplicationData"] as List<ApplicationDetailModel>;
+}
+
+<link href="~/styles/style.css" rel="stylesheet" />
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1" style="min-height:350px">
+        <div class="container">
+            <div class="row justify-content-center mt-0">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                        <div class="col-sm-12 col-xs-12">
+                            <center><h2><strong>Payment/Acknowledgement Detail</strong></h2></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (ApplicationData != null && ApplicationData.Count > 0)
+            {
+                <div class="row justify-content-center mt-0" id="divExitingPlotRegistration">
+                    <div class="col-sm-12 col-xs-12">
+                        <h2 style="padding:20px 0;">Print Submitted Application Detail</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Application Number</th>
+                                        <th>Applicant Name</th>
+                                        <th>Scheme Type</th>
+                                        <th>Scheme Name</th>
+                                        <th>Sector Type</th>
+                                        <th>Plot Area</th>
+                                        <th>Amount Paid</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var data in ApplicationData)
+                                    {
+                                        <tr>
+                                            <th scope="row">
+                                                <input type="radio" name="rdoApplication" id="rdoApplication" value="@data.ApplicationId" />
+                                            </th>
+                                            <td>@data.ApplicationNumber</td>
+                                            <td>@data.FullApplicantName</td>
+                                            <td>@data.SchemeType</td>
+                                            <td>@data.SchemeName</td>
+                                            <td>@data.SectorName</td>
+                                            <td>@data.PlotArea</td>
+                                            <td>@data.NetAmount</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style=" padding: 20px 20px; ">
+                    <div class="col-md-12 mx-0">
+                        <div class="col-sm-6 col-xs-6">
+                            <a name="next" id="printReciept" href="/Applicant/PaymentReciept" target="_blank" class="btn btn-primary pull-right disabledAnchor">Print Payment Reciept</a>
+
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <a name="next" id="printAcknowledge" href="/Applicant/PaymentAcknowledgement" target="_blank" class="btn btn-primary pull-left disabledAnchor">Print Acknowledgement Form</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Convert.ToBoolean(ViewData["PrintReciept"]) == true)
+            {
+                <div class="row" style=" padding: 20px 20px; ">
+                    <div class="col-md-12 mx-0">
+                        <div class="col-sm-6 col-xs-12">
+                            <a name="next" id="printReciept" href="/Applicant/PaymentReciept" target="_blank" class="btn btn-primary pull-right">Print Payment Reciept</a>
+
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <a name="next" id="printAcknowledge" href="/Applicant/PaymentAcknowledgement" target="_blank" class="btn btn-primary pull-left">Print Acknowledgement Form</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[name*=rdoApplication]').change(function () {
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: '{applicationId: "' + $(this).val() + '"}',
+                url: '/Applicant/SetApplicantId',
+                success: function (data) {
+                    console.log('applicationId set');
+                    $('#printReciept').removeClass('disabledAnchor');
+                    $('#printAcknowledge').removeClass('disabledAnchor');
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+    })
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/PaymentResponseSuccess"]').parent().addClass('active')
+    });
+</script>

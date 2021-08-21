@@ -1,0 +1,123 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+@using GidaGkpWeb.Global;
+@{
+    ViewBag.Title = "PaymentRequest";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+    var UserAppData = ViewData["UserData"] as ApplicationDetailModel;
+}
+
+<link href="~/styles/style.css" rel="stylesheet" />
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1">
+        <div class="container" id="printContainer" style="margin-top: -70px">
+            <div class="row justify-content-center mt-0">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                        <div class="col-sm-12 col-xs-12">
+                            <center><h2><strong>Make Payment</strong></h2></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mx-0" id="sectionPrint">
+
+                <div class="col-sm-12 col-xs-12" style="padding:15px;">
+                    <div class="col-sm-6 col-xs-12 text-right">
+                        <label for="usertype" class="text-uppercase">Net Payble Total Amount(In Rs.):</label>
+                        <label for="usertype" class="text-uppercase"><b>@Convert.ToString(UserAppData.NetAmount)</b></label>
+
+                    </div>
+                    <div class="col-sm-6 col-xs-12 text-left">
+                        <label for="usertype" class="text-uppercase">Application Number:</label>
+                        <label for="usertype" class="text-uppercase"><b>@Convert.ToString(UserAppData.ApplicationNumber)</b></label>
+                    </div>
+                </div>
+
+                @*<div class="form-group col-sm-6 col-xs-6" style="border-right:1px solid #333;">
+
+                        <div class="col-sm-12 col-xs-12">
+                            <span style="color: #ca2121;text-decoration: underline;">SBI/ICICI/Allahabad/Axis Bank is not supported Online NetBanking Payment, Please Pay through <b>NEFT/RTGS/IMPS</b> only on below mention account detail</span><br />
+                            <span style="color: #FF0040; text-decoration: underline">Print details of bank account where net payable amount has to be deposited (For applicants reference)</span>
+                            <hr style="margin-top: 10px;margin-bottom: 10px;width: 60%;" />
+                            <ul>
+                                <li>Account Name : <b>Gorakhpur Industrial Development Authority</b></li>
+                                <li> Bank Name : <b>ICICI BANK</b></li>
+                                <li> Account Number : <b>740901000088</b></li>
+                                <li> IFSC Code : <b>ICIC0003201</b></li>
+
+                                <li>
+                                    After Payment, Please go to <a href="/Applicant/ApplicantUploadTransactionDetail"><b>Enter Payment Detail(After NEFT/RTGS/IMPS)</b></a> Link to enter payment related information.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 col-xs-12">
+                            <input type="submit" name="next" id="btnPrint" class="btn btn-primary" value="Print Account Information" />
+                            <input type="submit" name="next" style="display:none" id="btnPrintDocument" class="btn btn-primary" value="Print Account Information" onclick="window.print();" />
+
+                        </div>
+                        <label class="text-uppercase" style="position: absolute; top: 50%; right: -20px; font-weight: bold; background: #000; padding: 10px; border-radius: 100%; color: #fff;">OR</label>
+                    </div>*@
+
+
+                <div class="form-group col-sm-12 col-xs-12" style=" text-align:center;">
+
+
+                    <div class="coll-sm-12 col-xs-12">
+                        <form method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
+                            <input type="hidden" id="encRequest" name="encRequest" value="@Convert.ToString(Session["strEncRequest"])" />
+                            <input type="hidden" name="access_code" id="Hidden1" value="@Convert.ToString(Session["strAccessCode"])" />
+
+                            <input type="submit" name="next" id="btnMakePayment"
+                                   class="btn btn-primary" value="Make Online Payment" style="margin-top:5%; margin-bottom:10%" />
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-12 mx-0 col-md-offset-4">
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).on('click', '#btnPrint', function () {
+        var pageTitle = 'GIDA Plot Registration Chalan';
+        stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+            pageStyleSheet = 'https://gidagkp.in/styles/style.css',
+            win = window.open('', 'Print', 'width=1000,height=1000');
+        $('#btnPrint').css('display', 'none');
+        $('#btnMakePayment').css('display', 'none');
+        $('#btnPrintDocument').css('display', 'block');
+
+        var dd = $('#printContainer').clone();
+        win.document.write('<html><head><title>' + pageTitle + '</title>' +
+            '<link rel="stylesheet" href="' + stylesheet + '">' +
+            '<link rel="stylesheet" href="' + pageStyleSheet + '">' +
+            '</head><body>' + dd.html() + '</body ></html > ');
+        win.document.close();
+        //win.print();
+        $('#btnPrint').css('display', 'block');
+        $('#btnMakePayment').css('display', 'block');
+        $('#btnPrintDocument').css('display', 'none');
+        //win.close();
+        return false;
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/PaymentRequest"]').parent().addClass('active')
+    });
+</script>
+<script type="text/javascript">
+    $(document).bind("contextmenu", function (e) {
+        e.preventDefault();
+    });
+</script>

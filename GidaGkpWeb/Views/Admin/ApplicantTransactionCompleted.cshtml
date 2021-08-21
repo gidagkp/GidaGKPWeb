@@ -1,0 +1,136 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    ViewBag.Title = "ApplicantTransactionCompleted";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    //var ApplicantData = ViewData["ApplicantData"] as List<ApplicationUserModel>;
+    //int index = 1;
+}
+<script src="~/Scripts/App/Masters/AdminLookup.js"></script>
+<link href="~/styles/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1" style="min-height:350px">
+        <div class="container">
+            <div class="row">
+                <div class="form-group col-sm-4 col-xs-12">
+                    <label for="usertype" class="text-uppercase">Scheme Type<span class="required-field"></span></label>
+                    <select name="SchemeType" id="SchemeType" class="form-control"></select>
+                </div>
+                <div class="form-group col-sm-4 col-xs-12">
+                    <label for="usertype" class="text-uppercase">Scheme Name<span class="required-field"></span></label>
+                    <select name="SchemeName" id="SchemeName" class="form-control"></select>
+                </div>
+                <div class="form-group col-sm-2 col-xs-12">
+                    <input type="submit" id="btnSearchTransactionCompleted" class="btn btn-primary" value="Search" style=" float: right; position: relative; margin:20px 0;" />
+                </div>
+            </div>
+            @*@if (ApplicantData != null && ApplicantData.Count > 0)
+                {*@
+            <div class="row justify-content-center mt-0" style="padding:30px 20px">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="row">
+                        <h2 class="col-sm-6 col-xs-12" style="padding:0 15px 20px 15px;">Plot Registered and Paid</h2>
+                        <div class="col-sm-6 col-xs-12">
+                            @using (Html.BeginForm("ExportFormCompleted", "Admin", FormMethod.Post))
+                            {
+                                <input type="hidden" name="GridHtml" />
+                                <input type="submit" id="btnSubmit" class="btn btn-primary" value="Export to Excel" style=" float: right; position: relative; margin:20px 0;" />
+                            }
+                        </div>
+                        <div class="table-responsive" id="divExport" style="width:100%">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>User Name</th>
+                                        <th>Applicant Name</th>
+                                        <th>Application Number</th>
+                                        <th>Plot Area</th>
+                                        <th>Amount Paid(In Rs.)</th>
+                                        <th>Father Name</th>
+                                        <th>Contact Number</th>
+                                        <th>Email</th>
+                                        <th>Aadhar Number</th>
+                                        <th>User Type</th>
+                                        <th>DOB</th>
+                                        <th>Company Name</th>
+                                        <th>Total Investment Amount(In Rs.)</th>
+                                        <th>Employement</th>
+                                        <th>Current Address</th>
+                                        <th>Permanent Address</th>
+                                        <th>Download Attachment</th>
+                                        <th>Application Reciept</th>
+                                        <th>Acknowlegment</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyData">
+                                    @*@foreach (var data in ApplicantData)
+                                        {
+                                            <tr>
+                                                <th scope="row">@index</th>
+                                                <td>@data.UserName</td>
+                                                <td>@data.FullName</td>
+                                                <td>@data.ApplicationNumber</td>
+                                                <td>@data.PlotArea</td>
+                                                <td>@data.PaidAmount</td>
+                                                <td>@data.FatherName</td>
+                                                <td>@data.ContactNo</td>
+                                                <td>@data.Email</td>
+                                                <td>@data.AadharNumber</td>
+                                                <td>@data.UserType</td>
+                                                @if (data.DOB != null)
+                                                {
+                                                    <td>@data.DOB.Value.ToString("dd/MM/yyyy")</td>
+                                                }
+                                                else
+                                                {
+                                                    <td></td>
+                                                }
+                                                <td>@data.UnitName</td>
+                                                <td>@data.TotalInvestment</td>
+                                                <td>@data.Skilled</td>
+                                                <td>@data.CAddress</td>
+                                                <td>@data.PAddress</td>
+                                                <td>
+                                                    <a target="_blank" href="/Admin/DownloadAttachment?applicationId=@data.ApplicationId"><strong>Download</strong></a>
+                                                </td>
+                                                <td><a class="previous action-button-previous pull-right" target="_blank" href="/Applicant/PaymentReciept?applicationId=@data.ApplicationId">Print Reciept</a></td>
+                                                <td><a class="previous action-button-previous pull-right" target="_blank" href="/Applicant/PaymentAcknowledgement?applicationId=@data.ApplicationId">Print Acknowlegement</a></td>
+                                            </tr>
+                                            index++;
+                                        }*@
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*}
+                else
+                {
+                    <span>No Record Found.</span>
+                }*@
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Admin/ApplicantTransactionCompleted"]').parent().parent().parent().addClass('active')
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#divExport").html());
+        });
+    });
+</script>

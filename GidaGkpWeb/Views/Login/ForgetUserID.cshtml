@@ -1,0 +1,448 @@
+﻿@{
+    ViewBag.Title = "ApplicantLogin";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Foret User Name</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/lib/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/App/Global/Utility.js"></script>
+    <style>
+
+        .required-field::before {
+            content: "*";
+            color: red;
+        }
+
+        .login-block {
+            background: #DE6262; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            float: left;
+            width: 100%;
+            padding: 0;
+        }
+
+        .banner-sec {
+            background: url('../../images/id.jpg');
+            background-size: cover;
+            height: 100%;
+            background-attachment: inherit;
+            background-position: -15px 0;
+            display: flex;
+            min-height: 657px;
+        }
+
+        .login-sec {
+            padding: 30px 50px;
+            position: absolute;
+            background: #f9f9f9;
+            width: 32%;
+            right: 0;
+            float: right;
+            height: 100%;
+        }
+
+        .text-uppercase {
+            text-transform: capitalize;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .logo_class {
+            float: right;
+            width: 130px;
+            margin-bottom: -16%;
+        }
+
+        .login-sec .copy-text {
+            position: absolute;
+            width: 80%;
+            bottom: 20px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .login-sec h2 {
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 24px;
+            color: #082860;
+            font-family: poppins;
+        }
+
+        form.login-form {
+            float: left;
+            width: 100%;
+            padding: 10px 0px;
+        }
+
+        .login-sec h2:after {
+            content: " ";
+            width: 100px;
+            height: 5px;
+            background: #FEB58A;
+            display: block;
+            margin-top: 20px;
+            border-radius: 3px;
+            margin-left: 0;
+            margin-right: auto
+        }
+
+        .btn-login, .btn-login:hover {
+            background: #892a26;
+            width: 100%;
+            float: left;
+            padding: 10px;
+            margin-top: 20px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 38px;
+            padding: 7px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+
+        p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            line-height: 30px;
+            color: var(--white);
+            -webkit-transition: all 300ms linear;
+            transition: all 300ms linear;
+        }
+
+        mark {
+            color: var(--white);
+            background-color: var(--black);
+        }
+
+        .section {
+            position: relative;
+            width: 100%;
+            display: block;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .over-hide {
+            overflow: hidden;
+        }
+
+        .z-bigger {
+            z-index: 100 !important;
+        }
+
+
+        .background-color {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-blue);
+            z-index: 1;
+            -webkit-transition: all 300ms linear;
+            transition: all 300ms linear;
+        }
+
+        .checkbox:checked ~ .background-color {
+            background-color: var(--white);
+        }
+
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 100;
+        }
+
+        [type="checkbox"]:checked,
+        [type="checkbox"]:not(:checked),
+        [type="radio"]:checked,
+        [type="radio"]:not(:checked) {
+            position: absolute;
+            left: -9999px;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+        }
+
+
+        .checkbox-tools:checked + label,
+        .checkbox-tools:not(:checked) + label {
+            position: relative;
+            display: inline-block;
+            padding: 20px 0px;
+            width: 100%;
+            font-size: 13px;
+            line-height: 20px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            text-align: center;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            color: var(--white);
+            -webkit-transition: all 300ms linear;
+            transition: all 300ms linear;
+        }
+
+        .checkbox-tools:not(:checked) + label {
+            background-color: #fff;
+            border: 1px solid #d6d6d6;
+        }
+
+        .checkbox-tools:checked + label {
+            background-color: #282828;
+            color: #fff;
+        }
+
+        .checkbox-tools:not(:checked) + label:hover {
+            background-color: #bdbdbd;
+            color: #000;
+        }
+
+        .checkbox-tools:checked + label::before,
+        .checkbox-tools:not(:checked) + label::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            background-image: linear-gradient(298deg, var(--red), var(--yellow));
+            z-index: -1;
+        }
+
+        .checkbox-tools:checked + label .uil,
+        .checkbox-tools:not(:checked) + label .uil {
+            font-size: 24px;
+            line-height: 24px;
+            display: block;
+            padding-bottom: 10px;
+        }
+
+        .checkbox:checked ~ .section .container .row .col-12 .checkbox-tools:not(:checked) + label {
+            background-color: var(--light);
+            color: var(--dark-blue);
+            box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .forgotpass {
+            padding: 30px 20px 0px 20px;
+            float: left;
+            margin-bottom: 0px;
+        }
+
+        #can {
+            display: flex;
+            justify-content: center;
+            float: left;
+            padding-top: 20px;
+            width: 99%;
+        }
+
+        canvas {
+            height: 34px;
+            width: 130px;
+            float: left;
+            font-size: 50px;
+            /* border: 1px solid black; */
+        }
+
+        #ant {
+            height: 33px;
+            width: 100%;
+            font-weight: normal;
+            font-size: 13px;
+            float: left;
+            color: #082860;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .ok {
+            color: green;
+            font-weight: 900;
+            font-size: 25px;
+            margin-top: 0;
+        }
+
+        .fal {
+            color: red;
+            font-weight: 900;
+            font-size: 12px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <section class="login-block banner-sec">
+
+        <div class="login-sec" style="padding:50px">
+
+            <div class="col-sm-12 col-xs-12" style="padding:0 15px 20px 15px;">
+                <h2 class="text-left">Forget User Name</h2>
+            </div>
+
+            <form id="form" class="form-horizontal" action="ForgetUserID" method="post" autocomplete="off">
+                <div>
+                    @if (!string.IsNullOrEmpty(Convert.ToString(ViewData["msg"])))
+                    {
+                        <div class="form-group">
+                            <label>@Convert.ToString(ViewData["msg"])</label>
+                        </div>
+                        <div class="form-group">
+                            <a href="/Login/ApplicantLogin" class="btn btn-warning pull-right" style="margin:0 20px;">Go To Login</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <div class="form-group">
+                                <label>Enter Mobile Number/Email Id</label>
+                                <div>
+                                    <input type="text" value="" name="emailmobile" required data-valid="required" class="form-control"
+                                           id="emailmobile" placeholder="Mobile Number/Email" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label></label>
+                                <div>
+                                    <div>
+                                        <input type="submit" name="Submit" class="btn btn-warning pull-left" value="Submit">
+                                        <a href="/Login/ApplicantLogin" class="btn btn-warning pull-left" style="margin:0 20px;">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+    <script>
+
+        var zeichen = ['+', '-', '*'];
+        var maxnr = 10;
+        function makeRandomImages() {
+            var zahl1 = Math.floor(Math.random() * maxnr);
+            var zahl2 = Math.floor(Math.random() * maxnr);
+            var wat = Math.floor(Math.random() * 2);
+
+            switch (zeichen[wat]) {
+                case "+": ergebnis = zahl1 + zahl2;
+                    break;
+                case "-": ergebnis = zahl1 - zahl2;
+                    break;
+                case "*": ergebnis = zahl1 * zahl2;
+                    break;
+            }
+
+            if (zeichen[wat] == '-') {
+
+                if (zahl1 < zahl2) {
+                    makeRandomImages();
+                    return
+                }
+            }
+            var canvas = $("<canvas></canvas>");
+            canvas.attr({ width: "130", height: "30" });
+            $("#canvas").append(canvas);
+            canvas.drawText({
+                fillStyle: '#9cf',
+                strokeStyle: '#25a',
+                strokeWidth: 2,
+                x: 60, y: 15,
+                fontSize: 28,
+                fontFamily: 'Verdana, sans-serif',
+                text: zahl1 + ' ' + zeichen[wat] + ' ' + zahl2 + ' ='
+            });
+
+            console.log(zahl1 + ' ' + zeichen[wat] + ' ' + zahl2 + ' =')
+            mark = (function () {
+                inpu = $('#ant').val();
+                if (inpu == ergebnis) {
+                    $('#rein').html('<p class="ok"></p>');
+                    $('[type="submit"]').prop('disabled', false);
+                } else {
+                    $('#canvas').html('');
+                    $('#rein').html('<p class="fal">wrong</p>');
+                    $('[type="submit"]').prop('disabled', true);
+                    makeRandomImages();
+                }
+            });
+            $("input[name='ant']").on("change", mark);
+        }
+        makeRandomImages();
+
+    </script>
+    @if (TempData["Alert_Title"] != null)
+    {
+        <div id="dialog" title="@TempData["Alert_Title"].ToString()">
+            @if (TempData["Alert_Message"] != null)
+            {
+                <p>@TempData["Alert_Message"].ToString()</p>
+            }
+            else
+            {
+                <p>Success..!</p>
+            }
+        </div>
+    }
+    @*Alert*@
+    <div id="alertModel" style="display:none;" title="">
+        <p></p>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.nav-item a.active').removeClass('active');
+            $('.nav-item a[href]').each(function (ind, ele) {
+                if ($(ele).attr('href').toLowerCase().indexOf(location.pathname.toLowerCase()) > -1) {
+                    $(ele).parent().addClass('active');
+                    $(ele).parent().parent().show();
+                }
+            });
+
+            $("#dialog").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="~/Scripts/lib/jquery-ui.js"></script>
+    <link href="~/styles/jquery-ui.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

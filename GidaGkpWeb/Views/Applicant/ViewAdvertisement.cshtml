@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "ViewAdvertisement";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+
+<script src="~/Scripts/App/Masters/ApplicantPlotRegistration.js"></script>
+<link href="~/styles/style.css" rel="stylesheet" />
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1" style="min-height:350px">
+        <div class="container">
+            
+            
+                <div class="row justify-content-center mt-0" style="padding:30px 20px" id="divExitingPlotRegistration">
+                    <div class="col-sm-12 col-xs-12">
+                        <h2 style="padding:20px 0;">Advertisement Details</h2>
+                        <div class="table-responsive" style="width:100%;">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Scheme Name</th>
+                                        <th>Advt. Number</th>
+                                        <th>Advt. Date</th>
+                                        <th>Start Date For Online Apply</th>
+                                        <th>Last Date For Online Apply</th>
+                                        <th>Layout Plan</th>
+                                        <th>Checklist</th>
+                                        <th>Instruction</th>
+                                        <th>View Advertisement</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Industrial Plot Scheme-2021</td>
+                                        <td>--</td>
+                                        <td>09/01/2021</td>
+                                        <td>15/01/2021</td>
+                                        <td>09/03/2021</td>
+                                        <td><a target="_blank" href="~/Content/files/assets/BHITI_RAWAT_LAY_OUT.jpg">Layout Plan</a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/CHECKLIST_INDUSTRIAL_ALLOTMENT2021.pdf">Checklist</a></a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/terms_and_condition.pdf">Term & Condition</a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/GIDA_Ad.pdf">Advertisement</a></td>
+                                        <td>
+                                            @*<a class="btn btn-primary" href="/Applicant/ApplicantDashboard">Apply</a>*@
+                                            <a class="btn btn-primary disabled" href="javascript:void(0);">Apply</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Industrial Plot Scheme-2021 2nd phase</td>
+                                        <td>--</td>
+                                        <td>19/07/2021</td>
+                                        <td>20/07/2021</td>
+                                        <td>10/08/2021</td>
+                                        <td><a target="_blank" href="~/Content/files/assets/BHITI_RAWAT_LAY_OUT.jpg">Layout Plan</a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/CHECKLIST_INDUSTRIAL_ALLOTMENT2021.pdf">Checklist</a></a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/terms_and_condition.pdf">Term & Condition</a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/advertisement bhiti rawat19072021.pdf">Advertisement</a></td>
+                                        <td>
+                                            @*<a class="btn btn-primary" href="/Applicant/ApplicantDashboard">Apply</a>*@
+                                            <a class="btn btn-primary disabled" href="javascript:void(0);">Apply</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Garments Cluster/ Park Scheme-2021</td>
+                                        <td>--</td>
+                                        <td>17/08/2021</td>
+                                        <td>18/08/2021</td>
+                                        <td>10/09/2021</td>
+                                        <td><a target="_blank" href="~/Content/files/assets/Layout_for_garment_cluster.pdf">Layout Plan</a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/CHECKLIST_INDUSTRIAL_ALLOTMENT2021.pdf">Checklist</a></a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/terms_and_condition.pdf">Term & Condition</a></td>
+                                        <td><a target="_blank" href="~/Content/files/pdf/ADVERTISEMENT_INDUSTRY17082021.pdf">Advertisement</a></td>
+                                        <td>
+                                            <a class="btn btn-primary" href="/Applicant/ApplicantDashboard">Apply</a>
+                                            @*<a class="btn btn-primary disabled" href="javascript:void(0);">Apply</a>*@
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/ApplyForPlot"]').parent().addClass('active')
+    });
+</script>

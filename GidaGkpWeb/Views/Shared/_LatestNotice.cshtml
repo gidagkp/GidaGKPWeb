@@ -1,0 +1,39 @@
+﻿@using GidaGkpWeb.Global
+
+@{
+    var latestNotice = GetNoticeByType("Latest Notice");
+}
+<div class="content">
+    <div class="bg-info" style="border-radius:5px; padding:5px; padding-left:10px; margin-top:10px;">
+        <h5>Latest Notices:</h5>
+        <div id="ticker">
+            <div class="view view-ticker view-id-ticker view-display-id-block view-dom-id-19f9c2997472a49402257ef24b345023">
+                <div class="view-content">
+                    <!-- start scroll -->
+                    <div class='view view-ticker'>
+                        <div class='view-content view-content-ticker'>
+                            <div id='views-ticker-vTicker-ticker'>
+                                <ul id='vtick'>
+                                    @if (latestNotice.Count > 0)
+                                    {
+                                        foreach (var data in latestNotice)
+                                        {
+                                            <li style="width:90%">
+                                                <div class="views-field views-field-title">
+                                                    <span class="field-content">
+                                                        <a target="_blank" href="/Home/GetNoticeFile?noticeId=@CryptoEngine.Encrypt(data.Id.ToString())">@data.Notice_title</a>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end scroll -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

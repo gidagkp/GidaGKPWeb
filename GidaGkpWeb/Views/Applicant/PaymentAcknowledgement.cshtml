@@ -1,0 +1,343 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    ViewBag.Title = "PaymentAcknowledgement";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+    var pData = ViewData["UserData"] as AcknowledgementDetailModel;
+    int intSkilled, intUnSkilled;
+    string imgPhotosrc = "https://image.freepik.com/free-vector/businessman-character-avatar-icon-vector-illustration-design_24877-18271.jpg";
+    if (pData != null && pData.ApplicantPhoto != null)
+    {
+        var base64 = Convert.ToBase64String(pData.ApplicantPhoto);
+        imgPhotosrc = string.Format("data:image/jpg;base64,{0}", base64);
+    }
+
+    string imgSignaturesrc = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    if (pData != null && pData.ApplicantSignature != null)
+    {
+        var base64 = Convert.ToBase64String(pData.ApplicantSignature);
+        imgSignaturesrc = string.Format("data:image/jpg;base64,{0}", base64);
+    }
+}
+
+<div class="container aknowgmnt" id="aknowgmntDiv">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <!-- User profile -->
+            <div class="panel panel-default" style="padding: 30px;">
+                <div class="panel-heading">
+                    <div class="">
+                        <center><img src="https://gidagkp.in/Content/files/Gida-mainlogo.png" alt="Logo" style="width:143px; height:83px;"></center>
+                    </div>
+                    <h4 class="panel-title text-center main_cla_profile">
+                        Gorakhpur Industrial Development Authority (GIDA)<br>गोरखपुर औद्योगिक विकास प्राधिकरण  (गीडा)<br>
+                        Sec.-7,GIDA, Gorakhpur,Uttar Pradesh 273212<br><br>
+                    </h4>
+                    <h4 class="panel-title text-center main_cla_profile">गीडा औद्योगिक परिक्षेत्र में भूखंड के आवंटन हेतु आवेदन पत्र</h4>
+                    <div class="" style="position: relative;top: -183px;left: 827px;">
+                        <p style=" padding-bottom: 0px; margin-bottom: 0px;">Application Number :@pData.ApplicationNumber</p>
+                        <p>
+                            Date :@pData.PaymentDate.Value.ToString("dd/MM/yyyy")
+                        </p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="profile__avatar">
+                        <img style="width:150px" src="@imgPhotosrc" alt="...">
+                    </div>
+                    <div class="profile__header">
+                        <h4><small>सेवा में, <br>मुख्य कार्यपालक अधिकारी<br> गोरखपुर औद्योगिक विकास प्राधिकरण <br>गोरखपुर</small></h4>
+                        <p class="text-muted">
+                            महोदय,<br>मैं प्राधिकरण के गीडा औद्योगिक सेक्टर में भूखंड के लिए आवेदन करता हूं | गीडा के किसी भी औद्योगिक सेक्टर में भूखंड के लिए मैं तैयार हूं| <br> विस्तृत सूचनाएं नीचे दी गई हैं :-
+                        </p>
+                        <!--<p>
+                          <a href="#">bootdey.com</a>
+                        </p>-->
+                    </div>
+                </div>
+                <hr />
+                <div class="panel-heading">
+                    <h4 class="panel-title">1. भूखंड का विवरण</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><strong>सेक्टर संख्या जिसमें भूखंड की आवश्यकता है </strong></td>
+                                <td><strong>भूखंड का कुल क्षेत्रफल (वर्ग मीटर में) </strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@pData.SectorName </strong></td>
+                                <td><strong>@pData.PlotArea</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">2. आवेदक का पूर्ण विवरण यथा व्यक्ति /संस्था जिसके नाम पर भूखंड का आवंटन होना है तथा इकाई का नाम :- </h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+
+                                <td><strong>आवेदक का यथा व्यक्ति / संस्था प्रकार</strong></td>
+                                <td><strong>आवेदक का यथा व्यक्ति / संस्था विवरण </strong></td>
+                                <td><strong>इकाई का नाम</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@pData.IndustryOwnership</strong></td>
+                                <td><strong>@pData.IndustryOwnership</strong></td>
+                                <td><strong>@pData.UnitName</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">3. आवेदन पत्र पर हस्ताक्षर करने वाले व्यक्ति का पूरा नाम व पता एवं उसकी प्रास्थिति / आवेदक से संबंध :- </h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+
+                                <td><strong>आवेदक का नाम</strong></td>
+                                <td><strong>आवेदक की जन्म तिथि</strong></td>
+                                <td><strong> स्थाई पता व दूरभाष नंबर</strong></td>
+                                <td><strong> वर्तमान पता व दूरभाष नंबर</strong></td>
+                                <td><strong>प्रास्थिति / संबंध</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@pData.FullApplicantName</strong></td>
+                                <td><strong>@pData.SignatryDateOfBirth.Value.ToString("dd/MM/yyyy")</strong></td>
+                                <td><strong>@pData.SignatryPermanentAddress &nbsp;@pData.SignatryPermanentPhoneNumber</strong></td>
+                                <td><strong>@pData.SignatryPresentAddress &nbsp;@pData.SignatryPresentPhoneNumber</strong></td>
+                                <td><strong>@pData.RelationshipStatus</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">4. स्थापना के लिए प्रस्तावित उद्योग का प्रकार :- @pData.ProposedIndustryType</h4>
+                </div>
+                <div class="panel-heading">
+                    <h4 class="panel-title">5. परियोजना का विवरण</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><strong>परियोजना की आगणित लागत (रुपए में)</strong></td>
+                                <td><strong>आगणित रोजगार सृजन</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@pData.ProjectEstimatedCost </strong></td>
+                                <td><strong>@((int.TryParse(pData.Skilled, out intSkilled)?intSkilled:0)  + (int.TryParse(pData.UnSkilled, out intUnSkilled)? intUnSkilled : 0))</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">6. मुख्यतः निम्न को दर्शाते हुए भूमि उपयोग हेतु ले-आउट प्लान </h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><strong>आच्छादित क्षेत्रफल </strong></td>
+                                <td><strong>प्रयोजनीय अनाच्छादित क्षेत्रफल एवं उसका उद्देश्य</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@pData.ProposedCoveredArea </strong></td>
+                                <td><strong>@pData.ProposedOpenArea &nbsp; @pData.PurpuseOpenArea</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">7. प्रस्तावित विनियोजन का विवरण निम्न मदों पर दिया जाए :- </h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+
+                                <td><strong>भूमि</strong></td>
+                                <td><strong>भवन </strong></td>
+                                <td><strong>यंत्र एवं यांत्रिक सामग्री</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@pData.ProposedInvestmentLand</strong></td>
+                                <td><strong>@pData.ProposedInvestmentBuilding</strong></td>
+                                <td><strong>@pData.ProposedInvestmentPlant</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">8. उत्पादन प्रक्रिया के कारण क्या कोई धुएं उत्पन्न होंगे यदि हां तो उनकी प्रकृति एवं मात्रा :-</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><strong>@pData.FumesNatureQuantity </strong></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">9. औधोगिक निस्त्रण / उच्छिष्ट   :- </h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+
+                                <td><strong>नाम</strong></td>
+                                <td><strong>मात्रा </strong></td>
+                                <td><strong> रासायनिक संरचना</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>(i) द्रव</strong></td>
+                                <td><strong>@pData.LiquidQuantity</strong></td>
+                                <td><strong>@pData.LiquidChemicalComposition</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>(ii) ठोस </strong></td>
+                                <td><strong>@pData.SolidQuantity</strong></td>
+                                <td><strong>@pData.SolidChemicalComposition</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>(iii) वाष्पीय</strong></td>
+                                <td><strong>@pData.GasQuantity</strong></td>
+                                <td><strong>@pData.GasChemicalComposition</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">10. प्रस्तावित निस्त्रण / उच्छिष्ट उपचार प्रक्रियाएं :-    @pData.EffluentTreatmentMeasures</h4>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">11.  विद्युत शक्ति की आवश्यकता ( कि. वा. में) :-    @pData.PowerRequirement</h4>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">12. दूरभाष / फैक्स की आवश्यकता :-    @pData.FirstYearNoOfTelephone</h4>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">13. धरोहर राशि के लिए दी गई चालान की धनराशि तथा अन्य विवरण :- </h4>
+                </div>
+
+                <div class="panel-body">
+                    <table class="table profile__table table-bordered">
+                        <tbody>
+                            <tr>
+
+                                <td><strong>धनराशि (रुपए में)</strong></td>
+                                <td><strong>चालान संख्या  </strong></td>
+                                <td><strong> दिनांक</strong></td>
+                                <td><strong> बैंक का नाम जहां चालान जमा किया गया</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@pData.NetAmount</strong></td>
+                                <td><strong>@pData.PaymentReferenceNumber</strong></td>
+                                <td><strong>@pData.PaymentDate.Value.ToString("dd/MM/yyyy")</strong></td>
+                                <td><strong>@pData.BankName</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">घोषणापत्र:-</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="profile__comments">
+                        <div class="profile-comments__item">
+                            <div class="profile-comments__body">
+                                <div class="profile-comments__content">
+                                    उपरोक्त आवेदन पत्र में दी गई सूचनाएं मेरी जानकारी और विश्वास में सही हैं गीडा औद्योगिक सेक्टरो में भूखंड आवंटन तथा पट्टे पर भूमि देने के लिए इस आवेदन पत्र में वांछित सभी सामान्य शर्तें मेरे द्वारा ध्यान पूर्वक पढ़ वह समझ ली गई हैं एवं वह मुझे पूर्ण रूप से स्वीकार हैं | प्राधिकरण द्वारा समय-समय पर भविष्य में सामान्य शर्तो में किया गया कोई भी या सभी परिवर्तन बिना शर्त / आपत्ति मुझे स्वीकार होगा |<br>
+                                    दिनांक:-			<br>
+                                    स्थान :-
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    @*<p class="simple-reg-terms col-sm-12 col-xs-12">
+                            <label>
+                                <span class="checkbox">
+                                    <input title="Please tick" name="accept_terms" type="checkbox" class="required" />
+                                    I accept the terms &amp; conditions
+                                </span>
+                            </label>
+                        </p>*@
+                    <div class="col-sm-6 col-xs-6">
+                        <input type="submit" name="next" id="btnPrint" class="btn btn-primary" value="Print Receipt" />
+                        <input type="submit" name="next" style="display:none" id="btnPrintDocument" class="btn btn-primary" value="Print Receipt" onclick="window.print();" />
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <div class="signture">
+                            <img style="width:150px;" src="@imgSignaturesrc">
+                            <p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on('click', '#btnPrint', function () {
+        var pageTitle = 'Acknowledgement Reciept';
+        stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+            pageStyleSheet = 'https://gidagkp.in/styles/style.css',
+            win = window.open('', 'Print', 'width=1000,height=1000');
+        $('#btnPrint').css('display', 'none');
+        $('#btnPrintDocument').css('display', 'block');
+
+        var dd = $('#aknowgmntDiv').clone();
+        win.document.write('<html><head><title>' + pageTitle + '</title>' +
+            '<link rel="stylesheet" href="' + stylesheet + '">' +
+            '<link rel="stylesheet" href="' + pageStyleSheet + '">' +
+            '</head><body>' + dd.html() + '</body ></html > ');
+        win.document.close();
+        //win.print();
+        $('#btnPrint').css('display', 'block');
+        $('#btnPrintDocument').css('display', 'none');
+        //win.close();
+        return false;
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/PaymentResponseSuccess"]').parent().addClass('active')
+    });
+</script>

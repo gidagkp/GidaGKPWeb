@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "ApplicantUploadTransactionInDetail";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+
+<link href="~/styles/style.css" rel="stylesheet" />
+<section class="form">
+    @*<form id="formSaveDocument" action="~/Applicant/SaveApplicantChalanDocument" method="post" enctype="multipart/form-data">*@
+        <form id="formSaveDocument" method="post" enctype="multipart/form-data">
+            <div class="container-fluid" id="grad1" style="min-height:350px">
+                <div class="container">
+                    <h2 class="fs-title">Enter Payment Information(Done through <b>NEFT/RTGS/IMPS</b>)</h2>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="usertype" class="text-uppercase">Enter Bank UTR/Reference Number<span class="required-field"></span></label>
+                        <input name="BankReferenceNo" id="BankReferenceNo" class="form-control" maxlength="30">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="usertype" class="text-uppercase">Payment Mode<span class="required-field"></span></label>
+                        <select name="PaymentMode" id="PaymentMode" class="form-control">
+                            <option value="">Select</option>
+                            <option value="NEFT">NEFT</option>
+                            <option value="RTGS">RTGS</option>
+                            <option value="IMPS">IMPS</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="usertype" class="text-uppercase">Amount Paid<span class="required-field"></span></label>
+                        <input type="text" pattern="\d*" name="AmountPaid" id="AmountPaid" class="form-control" maxlength="30">
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="usertype" class="text-uppercase">Transaction Date<span class="required-field"></span></label>
+                        <input name="TransactionDate" type="date" id="TransactionDate" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="file" class="sr-only">Upload bank Slip<span class="required-field"></span></label>
+                        <div class="input-group">
+                            <input type="text" name="bankSlipfilename" class="form-control" placeholder="No file selected" readonly>
+                            <span class="input-group-btn">
+                                <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                    <input type="file" name="bankSlip" id="bankSlip" onchange="this.form.bankSlipfilename.value = this.files.length ? this.files[0].name : ''" />
+                                    <i class="fa fa-file-pdf-o"></i> &nbsp; Select file
+                                </div>
+                            </span>
+                        </div>
+                        <p class="paragraph">File Size cannot exceed the limit 500 KB</p>
+                    </div>
+                    <div class="form-group col-sm-12 col-xs-12 col-md-offset-5">
+                        <input type="submit" name="next" id="btnSave" class="btn btn-primary" value="Save" />
+                    </div>
+                </div>
+            </div>
+        </form>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/ApplicantUploadTransactionDetail"]').parent().addClass('active')
+    });
+</script>
+<script type="text/javascript">
+    $(document).bind("contextmenu", function (e) {
+        e.preventDefault();
+    });
+</script>
+
+

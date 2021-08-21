@@ -1,0 +1,86 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    ViewBag.Title = "Notice";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/App/Masters/AdminNotice.js"></script>
+<link href="~/styles/style.css" rel="stylesheet" />
+<section class="form">
+    <div class="container-fluid" id="grad1">
+        <div class="container">
+            <div class="row justify-content-center mt-0" style="padding:30px 20px">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="col-sm-6 col-xs-6">
+                                <h2><strong>Uplaod Notice</strong></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mx-0">
+                                <form action="~/Admin/SaveNotice" method="post" enctype="multipart/form-data">
+                                    <div class="form-card">
+                                        <div class="col-sm-12 col-xs-12" style="padding:20px 0px;">
+                                            <div class="row">
+                                                <div class="form-group col-sm-12 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Notice Type<span class="required-field"></span></label>
+                                                    <select name="NoticeType" id="NoticeType" class="form-control" required></select>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Title<span class="required-field"></span></label>
+                                                    <input type="text" name="Title" id="Title" class="form-control">
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12" id="divDepartment">
+                                                    <label for="usertype" class="text-uppercase">Department<span class="required-field"></span></label>
+                                                    <select name="DepartmentNotice" id="DepartmentNotice" class="form-control"></select>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12" id="divNoticeDate">
+                                                    <label for="usertype" class="text-uppercase">Notice Date<span class="required-field"></span></label>
+                                                    <input name="NoticeDate" type="date" id="NoticeDate" class="form-control" placeholder="Date of Birth">
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="file" class="sr-only">Document<span class="required-field"></span> (Attach maximum 3 MB file size in .jpg/.jpeg/.png/.doc/.pdf) </label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="Documentfilename" id="Documentfilename" class="form-control" placeholder="No file selected" readonly>
+                                                        <span class="input-group-btn">
+                                                            <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                                                <input type="file" name="Document" id="Document" onchange="this.form.Documentfilename.value = this.files.length ? this.files[0].name : ''" />
+                                                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12" id="divNewTag">
+                                                    <label for="usertype" class="text-uppercase">New Tag Required<span class="required-field"></span></label>
+                                                    <input name="NewTag" type="checkbox" id="NewTag" />
+                                                </div>
+                                                <div class="form-group col-sm-6 col-xs-12">
+                                                    <label for="usertype" class="text-uppercase">Publish<span class="required-field"></span></label>
+                                                    <input name="Publish" type="checkbox" id="Publish" checked="checked" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-xs-12">
+                                        <input type="hidden" name="NoticeId" id="NoticeId" />
+                                        <input type="submit" id="btnSave" name="next" class=" btn btn-primary next action-button pull-right" value="Save" />
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Admin/Notice"]').parent().parent().parent().addClass('active')
+    });
+</script>

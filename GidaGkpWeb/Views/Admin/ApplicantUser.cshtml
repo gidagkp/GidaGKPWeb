@@ -1,0 +1,111 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    ViewBag.Title = "ApplicantUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var ApplicantData = ViewData["ApplicantData"] as List<ApplicationUserModel>;
+    int index = 1;
+}
+<script src="~/Scripts/App/Masters/AdminLookup.js"></script>
+<link href="~/styles/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1" style="min-height:350px">
+        <div class="container">
+            @if (ApplicantData != null && ApplicantData.Count > 0)
+            {
+                <div class="row justify-content-center mt-0" style="padding:30px 20px">
+                    <div class="col-sm-12 col-xs-12" style="padding:0px;">
+                        <div class="row">
+                            <h2 class="col-sm-6 col-xs-12" style="padding:0 15px 20px 15px;">Total Active Applicant User</h2>
+                            <div class="col-sm-6 col-xs-12">
+                                @using (Html.BeginForm("ExportApplicantUser", "Admin", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="GridHtml" />
+                                    <input type="submit" id="btnSubmit" class="btn btn-primary" value="Export to Excel" style=" float: right; position: relative; margin:20px 0; " />
+                                }
+                            </div>
+
+                        </div>
+
+                        <div class="table-responsive" id="divExport" style="width:100%">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>User Name</th>
+                                        <th>Applicant Name</th>
+                                        <th>Father Name</th>
+                                        <th>Contact Number</th>
+                                        <th>Email</th>
+                                        <th>Aadhar Number</th>
+                                        <th>User Type</th>
+                                        <th>DOB</th>
+                                        <th>Scheme Type</th>
+                                        <th>Scheme Name</th>
+                                        <th>Sector Type</th>
+                                        <th>Current Address</th>
+                                        <th>Permanent Address</th>
+                                        <th>Is Active</th>
+                                        @*<th>Action</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var data in ApplicantData)
+                                    {
+                                    <tr>
+                                        <th scope="row">@index</th>
+                                        <td>@data.UserName</td>
+                                        <td>@data.FullName</td>
+                                        <td>@data.FatherName</td>
+                                        <td>@data.ContactNo</td>
+                                        <td>@data.Email</td>
+                                        <td>@data.AadharNumber</td>
+                                        <td>@data.UserType</td>
+                                        <td>@data.DOB</td>
+                                        <td>@data.SchemeType</td>
+                                        <td>@data.SchemeName</td>
+                                        <td>@data.SectorName</td>
+                                        <td>@data.CAddress</td>
+                                        <td>@data.PAddress</td>
+                                        <td>@data.IsActive</td>
+                                        @*<td row-header="Table heading">
+            <a class="previous action-button-previous pull-right" href="/Admin/ActivateDeActivateUser?userId=@data.Id">Activate/DeActivate User</a>
+        </td>*@
+                                    </tr>
+                                        index++;
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <span>No Record Found.</span>
+            }
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Admin/ApplicantUser"]').parent().parent().parent().addClass('active')
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#divExport").html());
+        });
+    });
+</script>

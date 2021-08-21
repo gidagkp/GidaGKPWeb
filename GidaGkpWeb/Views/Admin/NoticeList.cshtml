@@ -1,0 +1,92 @@
+﻿@using GidaGkpWeb.Infrastructure.Authentication;
+@using GidaGkpWeb.Models;
+
+@{
+    ViewBag.Title = "NoticeList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var ApplicantData = ViewData["ApplicantData"] as List<AdminNoticeModel>;
+    int index = 1;
+}
+
+<link href="~/styles/style.css" rel="stylesheet" />
+<section class="form">
+    <!-- MultiStep Form -->
+    <div class="container-fluid" id="grad1" style="min-height:350px">
+        <div class="container">
+            @if (ApplicantData != null && ApplicantData.Count > 0)
+            {
+                <div class="row justify-content-center mt-0" style="padding:30px 20px">
+                    <div class="col-sm-12 col-xs-12">
+                        <h2 style="padding:20px 0;">Notice List</h2>
+                        <div class="table-responsive" id="divExport">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Notice Type</th>
+                                        <th>Department</th>
+                                        <th>Notice Title</th>
+                                        <th>Document Name</th>
+                                        <th>New Tag Used</th>
+                                        <th>Notice Date</th>
+                                        <th>Publish</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var data in ApplicantData)
+                                    {
+                                    <tr>
+                                        <th scope="row">@index</th>
+                                        <td>@data.Notice_Type</td>
+                                        <td>@data.DepartmentName</td>
+                                        <td>@data.Notice_title</td>
+                                        <td>@data.NoticeDocumentName</td>
+                                        <td>@data.NoticeNewTag</td>
+                                        @if (data.Notice_Date != null)
+                                        {
+                                            <td>@data.Notice_Date.Value.ToString("dd/MM/yyyy")</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td>@data.IsActive</td>
+                                        @if (data.CreationDate != null)
+                                        {
+                                            <td>@data.CreationDate.Value.ToString("dd/MM/yyyy")</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td>
+                                            <a class="previous action-button-previous pull-right" href="/Admin/Notice?NoticeId=@data.Id">Edit Notice</a>
+                                        </td>
+                                    </tr>
+                                        index++;
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <span>No Record Found.</span>
+            }
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Admin/NoticeList"]').parent().parent().parent().addClass('active')
+    });
+</script>
