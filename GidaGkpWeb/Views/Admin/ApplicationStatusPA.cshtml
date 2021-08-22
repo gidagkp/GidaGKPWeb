@@ -84,38 +84,38 @@
                         <td class="text-center">2</td>
                         <td>View Financial Status & Verify </td>
                         <td>
-                            @if (UserDataModel.AMPaymentStatus == "Approved")
+                            @if (UserDataModel.AMPaymentStatus != null && UserDataModel.AMPaymentStatus.Contains("Not Approved"))
                             {
-                                <span style="color:green">Assistance Manager - @UserDataModel.AMPaymentStatus</span>
+                                <span style="color:red">Assistant Manager - @UserDataModel.AMPaymentStatus</span>
                             }
-                            else if (UserDataModel.AMPaymentStatus == "Not Approved")
+                            else if (UserDataModel.AMPaymentStatus != null && UserDataModel.AMPaymentStatus.Contains("Approved"))
                             {
-                                <span style="color:red">Assistance Manager - @UserDataModel.AMPaymentStatus</span>
+                                <span style="color:green">Assistant Manager - @UserDataModel.AMPaymentStatus</span>
                             }
                             <br />
-                            @if (UserDataModel.MPaymentStatus == "Approved")
-                            {
-                                <span style="color:green">Manager - @UserDataModel.MPaymentStatus</span>
-                            }
-                            else if (UserDataModel.MPaymentStatus == "Not Approved")
+                            @if (UserDataModel.MPaymentStatus != null && UserDataModel.MPaymentStatus.Contains("Not Approved"))
                             {
                                 <span style="color:red">Manager - @UserDataModel.MPaymentStatus</span>
                             }
+                            else if (UserDataModel.MPaymentStatus != null && UserDataModel.MPaymentStatus.Contains("Approved"))
+                            {
+                                <span style="color:green">Manager - @UserDataModel.MPaymentStatus</span>
+                            }
                             <br />
-                            @if (UserDataModel.GMPaymentStatus == "Approved")
+                            @if (UserDataModel.GMPaymentStatus != null && UserDataModel.GMPaymentStatus.Contains("Not Approved"))
+                            {
+                                <span style="color:red">General Manager - @UserDataModel.GMPaymentStatus   </span>
+                            }
+                            else if (UserDataModel.GMPaymentStatus != null && UserDataModel.GMPaymentStatus.Contains("Approved"))
                             {
                                 <span style="color:green">General Manager - @UserDataModel.GMPaymentStatus</span>
-                            }
-                            else if (UserDataModel.GMPaymentStatus == "Not Approved")
-                            {
-                                <span style="color:red">General Manager - @UserDataModel.GMPaymentStatus</span>
                             }
                         </td>
                         <td class="text-right">
                             @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Finance Approval")
                                 && hasPermission(PermissionName.AllAccess))
                             {
-                                if (UserData.Department == "Finance & Accounts" && UserData.Designation == "Assistance Manager")
+                                if (UserData.Department == "Finance & Accounts" && UserData.Designation == "Assistant Manager")
                                 {
                                     if (string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
                                     {
@@ -155,31 +155,31 @@
                         <td class="text-center">3</td>
                         <td>View Uploaded Documents Status & Verify </td>
                         <td>
-                            @if (UserDataModel.ClerkDocumentStatus == "Approved")
-                            {
-                                <span style="color:green">Clerk - @UserDataModel.ClerkDocumentStatus</span>
-                            }
-                            else if (UserDataModel.ClerkDocumentStatus == "Not Approved")
+                            @if (UserDataModel.ClerkDocumentStatus != null && UserDataModel.ClerkDocumentStatus.Contains("Not Approved"))
                             {
                                 <span style="color:red">Clerk - @UserDataModel.ClerkDocumentStatus</span>
                             }
-                            <br />
-                            @if (UserDataModel.AMDocumentStatus == "Approved")
+                            else if (UserDataModel.ClerkDocumentStatus != null && UserDataModel.ClerkDocumentStatus.Contains("Approved"))
                             {
-                                <span style="color:green">Assistance Manager - @UserDataModel.AMDocumentStatus</span>
-                            }
-                            else if (UserDataModel.AMDocumentStatus == "Not Approved")
-                            {
-                                <span style="color:red">Assistance Manager - @UserDataModel.AMDocumentStatus</span>
+                                <span style="color:green">Clerk - @UserDataModel.ClerkDocumentStatus</span>
                             }
                             <br />
-                            @if (UserDataModel.SIDocumentStatus == "Approved")
+                            @if (UserDataModel.AMDocumentStatus != null && UserDataModel.AMDocumentStatus.Contains("Not Approved"))
                             {
-                                <span style="color:green">Section Incharge - @UserDataModel.SIDocumentStatus</span>
+                                <span style="color:red">Assistant Manager - @UserDataModel.AMDocumentStatus</span>
                             }
-                            else if (UserDataModel.SIDocumentStatus == "Not Approved")
+                            else if (UserDataModel.AMDocumentStatus != null && UserDataModel.AMDocumentStatus.Contains("Approved"))
+                            {
+                                <span style="color:green">Assistant Manager - @UserDataModel.AMDocumentStatus</span>
+                            }
+                            <br />
+                            @if (UserDataModel.SIDocumentStatus != null && UserDataModel.SIDocumentStatus.Contains("Not Approved"))
                             {
                                 <span style="color:red">Section Incharge - @UserDataModel.SIDocumentStatus</span>
+                            }
+                            else if (UserDataModel.SIDocumentStatus != null && UserDataModel.SIDocumentStatus.Contains("Approved"))
+                            {
+                                <span style="color:green">Section Incharge - @UserDataModel.SIDocumentStatus</span>
                             }
                         </td>
                         <td class="text-right">
@@ -197,7 +197,7 @@
                                         <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
                                     }
                                 }
-                                else if (UserData.Department == "Property" && UserData.Designation == "Assistance Manager")
+                                else if (UserData.Department == "Property" && UserData.Designation == "Assistant Manager")
                                 {
                                     if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && string.IsNullOrEmpty(UserDataModel.AMDocumentStatus))
                                     {
@@ -412,12 +412,13 @@
                         Write Comments:
                         <span class="required-field"></span>
                     </label>
-                    <textarea name="paymentRejectedComment" id="paymentRejectedComment" class="form-control"></textarea>
+                    <textarea name="paymentStatusComment" id="paymentStatusComment" class="form-control"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <a style="background-color: green; color: white;" class="btn btn-success"
-                   href="/Admin/ApprovePayment?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                @*<a style="background-color: green; color: white;" class="btn btn-success"
+                    href="/Admin/ApprovePayment?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>*@
+                <a style="background-color: green; color: white;" class="btn btn-success" id="btnApprovePayment"><strong>Approved</strong></a>
                 <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedPayment"><strong>Not Approved</strong></a>
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
@@ -475,14 +476,16 @@
                         Write Comments
                         <span class="required-field"></span>
                     </label>
-                    <textarea name="paymentRejectedComment" id="documentRejectedComment" class="form-control"></textarea>
+                    <textarea name="paymentStatusComment" id="documentRejectedComment" class="form-control"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <a style="background-color: green; color: white;" class="btn btn-success"
-                   href="/Admin/ApproveDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>
-                <a style="background-color: orangered; color: white;" class="btn btn-success"
-                   href="/Admin/ApproveRejectDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>
+                <a style="background-color: green; color: white;" class="btn btn-success" id="btnApproveDocument"><strong>Approved</strong></a>
+                <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedDocument"><strong>Not Approved</strong></a>
+                @*<a style="background-color: green; color: white;" class="btn btn-success"
+                       href="/Admin/ApproveDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                    <a style="background-color: orangered; color: white;" class="btn btn-success"
+                       href="/Admin/ApproveRejectDocument?applicationId=@UserDataModel.ApplicationId&schemeName=@UserDataModel.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>*@
                 @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>*@
             </div>
@@ -545,7 +548,7 @@
                             write Comment when Not Approved
                             <span class="required-field"></span>
                         </label>
-                        <textarea name="paymentRejectedComment" id="documentRejectedComment" class="form-control"></textarea>
+                        <textarea name="paymentStatusComment" id="documentRejectedComment" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

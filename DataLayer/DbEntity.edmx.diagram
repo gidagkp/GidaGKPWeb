@@ -5,29 +5,29 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="01be503351024b0fb87558687a275238" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="GidaGKPModel.AddingNewProductDetail" Width="1.5" PointX="3" PointY="42.75" />
+        <EntityTypeShape EntityType="GidaGKPModel.AddingNewProductDetail" Width="1.5" PointX="6" PointY="47.75" />
         <EntityTypeShape EntityType="GidaGKPModel.AdminNotice" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="GidaGKPModel.AlloteeTimeEextensionFfess" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.AllotmentDetail" Width="1.5" PointX="3" PointY="11.875" />
-        <EntityTypeShape EntityType="GidaGKPModel.Allottee_Electronicform" Width="1.5" PointX="3" PointY="25.25" />
+        <EntityTypeShape EntityType="GidaGKPModel.AllotmentDetail" Width="1.5" PointX="3" PointY="28.5" />
+        <EntityTypeShape EntityType="GidaGKPModel.Allottee_Electronicform" Width="1.5" PointX="3" PointY="20" />
         <EntityTypeShape EntityType="GidaGKPModel.ApplicantApplicationDetail" Width="1.5" PointX="0.75" PointY="48.125" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantApplicationStatu" Width="1.5" PointX="3" PointY="49.625" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantBankDetail" Width="1.5" PointX="3" PointY="80.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantDetail" Width="1.5" PointX="6" PointY="47.625" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantApplicationStatu" Width="1.5" PointX="3" PointY="81.625" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantBankDetail" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantDetail" Width="1.5" PointX="3" PointY="47.625" />
         <EntityTypeShape EntityType="GidaGKPModel.ApplicantFormStep" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantInvitationLetter" Width="1.5" PointX="3" PointY="60.25" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantPlotDetail" Width="1.5" PointX="3" PointY="29.5" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantProjectDetail" Width="1.5" PointX="3" PointY="88.875" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantTransactionDetail" Width="1.5" PointX="3" PointY="96.25" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantUploadDoc" Width="1.5" PointX="3" PointY="66.375" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantUser" Width="1.5" PointX="3.75" PointY="37.25" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantInvitationLetter" Width="1.5" PointX="3" PointY="61.25" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantPlotDetail" Width="1.5" PointX="3" PointY="34.375" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantProjectDetail" Width="1.5" PointX="3" PointY="89.25" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantTransactionDetail" Width="1.5" PointX="3" PointY="54.375" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantUploadDoc" Width="1.5" PointX="3" PointY="67.375" />
+        <EntityTypeShape EntityType="GidaGKPModel.ApplicantUser" Width="1.5" PointX="0.75" PointY="42.25" />
         <EntityTypeShape EntityType="GidaGKPModel.ChangeProjectDetail" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.GidaUser" Width="1.5" PointX="0.75" PointY="42.625" />
+        <EntityTypeShape EntityType="GidaGKPModel.GidaUser" Width="1.5" PointX="3.75" PointY="42.625" />
         <EntityTypeShape EntityType="GidaGKPModel.LeaseDeedDetail" Width="1.5" PointX="6.75" PointY="5.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.LeaseRentDetail" Width="1.5" PointX="3" PointY="84.625" />
+        <EntityTypeShape EntityType="GidaGKPModel.LeaseRentDetail" Width="1.5" PointX="3" PointY="15.75" />
         <EntityTypeShape EntityType="GidaGKPModel.Lookup" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ManagerElectronicForm" Width="1.5" PointX="3" PointY="21" />
-        <EntityTypeShape EntityType="GidaGKPModel.ManufacturingUnitDetail" Width="1.5" PointX="3" PointY="53.875" />
+        <EntityTypeShape EntityType="GidaGKPModel.ManagerElectronicForm" Width="1.5" PointX="3" PointY="24.25" />
+        <EntityTypeShape EntityType="GidaGKPModel.ManufacturingUnitDetail" Width="1.5" PointX="3" PointY="96.625" />
         <EntityTypeShape EntityType="GidaGKPModel.MortgageDetail" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="GidaGKPModel.PageMaster" Width="1.5" PointX="0.75" PointY="1.25" />
         <EntityTypeShape EntityType="GidaGKPModel.PGTransactionInformation" Width="1.5" PointX="10.75" PointY="0.75" />
@@ -38,7 +38,7 @@
         <EntityTypeShape EntityType="GidaGKPModel.RoleWisePermission" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="GidaGKPModel.sysdiagram" Width="1.5" PointX="12.75" PointY="6.75" />
         <EntityTypeShape EntityType="GidaGKPModel.UploadedApplicantDocVerify" Width="1.5" PointX="7.75" PointY="12.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.AlloteeTimeExtensionFeesPayGateway" Width="1.5" PointX="3" PointY="17.625" />
+        <EntityTypeShape EntityType="GidaGKPModel.AlloteeTimeExtensionFeesPayGateway" Width="1.5" PointX="3" PointY="85.875" />
         <EntityTypeShape EntityType="GidaGKPModel.TransfereeUploadDoc" Width="1.5" PointX="12.75" PointY="9.75" />
         <EntityTypeShape EntityType="GidaGKPModel.TransferrerUploadDoc" Width="1.5" PointX="14.75" PointY="0.75" />
         <AssociationConnector Association="GidaGKPModel.FK_AddingNewProductDetails_ApplicantApplicationDetail" />

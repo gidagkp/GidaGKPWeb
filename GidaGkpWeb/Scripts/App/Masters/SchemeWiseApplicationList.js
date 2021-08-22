@@ -156,15 +156,39 @@ $(document).ready(function () {
             }
         });
     });
-
-    $('#btnRejectedPayment').click(function () {
-        var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#paymentRejectedComment').val();
+    $('#btnApprovePayment').click(function () {
+        var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#paymentStatusComment').val();
         if (comment != null && comment != "" && comment != undefined && comment.trim() != "") {
             $.ajax({
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 type: 'POST',
-                data: '{applicationId: "' + applicationId + '",status:"Not Approved",comment: "' + comment + '" }',
+                data: '{applicationId: "' + applicationId + '",schemeName: "' + schemeName + '",status:"Approved",comment: "' + comment + '" }',
+                url: '/Admin/ApprovePayment',
+                success: function (data) {
+                    utility.alert.setAlert(utility.alert.alertType.success, 'payment is Approved.');
+                    location.reload();
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+        else {
+            utility.alert.setAlert(utility.alert.alertType.error, 'comment is mendatory to approved the payment.');
+        }
+    })
+    $('#btnRejectedPayment').click(function () {
+        var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#paymentStatusComment').val();
+        if (comment != null && comment != "" && comment != undefined && comment.trim() != "") {
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: '{applicationId: "' + applicationId + '",schemeName: "' + schemeName + '",status:"Not Approved",comment: "' + comment + '" }',
                 url: '/Admin/RejectPayment',
                 success: function (data) {
                     utility.alert.setAlert(utility.alert.alertType.success, 'payment is Not Approved.');
@@ -182,6 +206,31 @@ $(document).ready(function () {
             utility.alert.setAlert(utility.alert.alertType.error, 'comment is mendatory to reject the payment.');
         }
     })
+    $('#btnApproveDocument').click(function () {
+        var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#documentRejectedComment').val();
+        if (comment != null && comment != "" && comment != undefined && comment.trim() != "") {
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: '{applicationId: "' + applicationId + '",schemeName: "' + schemeName + '",status:"Approved",comment: "' + comment + '" }',
+                url: '/Admin/ApproveDocument',
+                success: function (data) {
+                    utility.alert.setAlert(utility.alert.alertType.success, 'document is Not Approved.');
+                    location.reload();
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+        else {
+            utility.alert.setAlert(utility.alert.alertType.error, 'comment is mendatory to approve the document.');
+        }
+    })
     $('#btnRejectedDocument').click(function () {
         var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#documentRejectedComment').val();
         if (comment != null && comment != "" && comment != undefined && comment.trim() != "") {
@@ -189,10 +238,10 @@ $(document).ready(function () {
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 type: 'POST',
-                data: '{applicationId: "' + applicationId + '",status:"Not Approved",comment: "' + comment + '" }',
+                data: '{applicationId: "' + applicationId + '",schemeName: "' + schemeName + '",status:"Not Approved",comment: "' + comment + '" }',
                 url: '/Admin/RejectDocument',
                 success: function (data) {
-                    utility.alert.setAlert(utility.alert.alertType.success, 'document is Not Approved.');
+                    utility.alert.setAlert(utility.alert.alertType.success, 'document is Approved.');
                     location.reload();
                 },
                 failure: function (response) {

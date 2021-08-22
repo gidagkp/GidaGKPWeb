@@ -505,6 +505,7 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="LookupName" Type="varchar" MaxLength="500" />
           <Property Name="ParentLookupId" Type="int" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="LookupNameImmutable" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ManagerElectronicForm">
           <Key>
@@ -1824,6 +1825,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="LookupName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ParentLookupId" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="LookupNameImmutable" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ManagerElectronicForm">
           <Key>
@@ -2848,6 +2850,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <EntitySetMapping Name="Lookups">
             <EntityTypeMapping TypeName="GidaGKPModel.Lookup">
               <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="LookupNameImmutable" ColumnName="LookupNameImmutable" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ParentLookupId" ColumnName="ParentLookupId" />
                 <ScalarProperty Name="LookupName" ColumnName="LookupName" />

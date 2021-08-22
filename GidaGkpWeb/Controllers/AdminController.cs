@@ -584,51 +584,28 @@ namespace GidaGkpWeb.Controllers
             ViewData["UserDetail"] = data;
             return View();
         }
-        public ActionResult ApprovePayment(int applicationId, int schemeName, string status)
+        public JsonResult ApprovePayment(int applicationId, int schemeName, string status, string comment)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.ApproveRejectPayment(applicationId, status);
-            SetAlertMessage("Payment is " + status, "Payment detail staus");
-            return RedirectToAction("ApplicationStatusPA", new { applicationId = applicationId, schemeName = schemeName });
+            return Json(_details.ApproveRejectPayment(applicationId, status, comment), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult RejectPayment(int applicationId, string status, string comment)
-        {
-            if (!string.IsNullOrEmpty(comment))
-            {
-                AdminDetails _details = new AdminDetails();
-                var data = _details.ApproveRejectPayment(applicationId, status, comment);
-                SetAlertMessage("Payment is " + status, "Payment detail staus");
-                return Json(data, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(-1, JsonRequestBehavior.AllowGet);
-            }
-
-        }
-        public ActionResult ApproveDocument(int applicationId, int schemeName, string status)
+        public JsonResult RejectPayment(int applicationId, int schemeName, string status, string comment)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.ApproveRejectDocument(applicationId, status);
-            SetAlertMessage("Document is " + status, "document detail staus");
-            return RedirectToAction("ApplicationStatusPA", new { applicationId = applicationId, schemeName = schemeName });
+            return Json(_details.ApproveRejectPayment(applicationId, status, comment), JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult ApproveDocument(int applicationId, int schemeName, string status, string comment)
+        {
+            AdminDetails _details = new AdminDetails();
+            return Json(_details.ApproveRejectDocument(applicationId, status, comment), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult RejectDocument(int applicationId, string status, string comment)
+        public JsonResult RejectDocument(int applicationId, int schemeName, string status, string comment)
         {
-            if (!string.IsNullOrEmpty(comment))
-            {
-                AdminDetails _details = new AdminDetails();
-                var data = _details.ApproveRejectDocument(applicationId, status, comment);
-                SetAlertMessage("Document is " + status, "document detail staus");
-                return Json(data, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(-1, JsonRequestBehavior.AllowGet);
-            }
-
+            AdminDetails _details = new AdminDetails();
+            return Json(_details.ApproveRejectDocument(applicationId, status, comment), JsonRequestBehavior.AllowGet);
         }
         public ActionResult CandidateListForInterview()
         {

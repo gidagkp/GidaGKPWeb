@@ -183,7 +183,7 @@ namespace GidaGkpWeb.BAL
                             SchemeNameId = x.SchemeNameId,
                             AMPaymentStatus = !string.IsNullOrEmpty(x.AMPaymentComment) ? x.AMPaymentStatus + "(Comment : " + x.AMPaymentComment + ")" : x.AMPaymentStatus,
                             MPaymentStatus = !string.IsNullOrEmpty(x.MPaymentComment) ? x.MPaymentStatus + "(Comment : " + x.MPaymentComment + ")" : x.MPaymentStatus,
-                            GMPaymentStatus = !string.IsNullOrEmpty(x.GMPaymentComment) ? x.GMPaymentStatus + "(Comment : " + x.GMPaymentComment + ")" : x.AMPaymentStatus,
+                            GMPaymentStatus = !string.IsNullOrEmpty(x.GMPaymentComment) ? x.GMPaymentStatus + "(Comment : " + x.GMPaymentComment + ")" : x.GMPaymentStatus,
                             AMDocumentStatus = !string.IsNullOrEmpty(x.AMDocumentComment) ? x.AMDocumentStatus + "(Comment : " + x.AMDocumentComment + ")" : x.AMDocumentStatus,
                             ClerkDocumentStatus = !string.IsNullOrEmpty(x.ClerkDocumentComment) ? x.ClerkDocumentStatus + "(Comment : " + x.ClerkDocumentComment + ")" : x.ClerkDocumentStatus,
                             SIDocumentStatus = !string.IsNullOrEmpty(x.SIDocumentComment) ? x.SIDocumentStatus + "(Comment : " + x.SIDocumentComment + ")" : x.SIDocumentStatus,
@@ -653,7 +653,9 @@ namespace GidaGkpWeb.BAL
                 if (permissionList.Any())
                 {
                     var roleId = permissionList[0].RoleId;
-                    var dataOfRole = _db.RoleWisePermissions.Where(x => x.RoleId == roleId).ToList();
+                    var DepartmentId = permissionList[0].DepartmentId;
+                    var DesignationId = permissionList[0].DesignationId;
+                    var dataOfRole = _db.RoleWisePermissions.Where(x => x.RoleId == roleId && x.DepartmentId == DepartmentId && x.DesignationId == DesignationId).ToList();
                     dataOfRole.ForEach(x =>
                     {
                         _db.Entry(x).State = EntityState.Deleted;
@@ -737,7 +739,7 @@ namespace GidaGkpWeb.BAL
                     var transactionDetail = _db.ApplicantTransactionDetails.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (transactionDetail != null)
                     {
-                        if (UserData.Designation == "Assistance Manager")
+                        if (UserData.Designation == "Assistant Manager")
                         {
                             transactionDetail.AMApprovalStatus = status;
                             transactionDetail.AMComment = comment;
@@ -783,7 +785,7 @@ namespace GidaGkpWeb.BAL
                     var documentDetail = _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (documentDetail != null)
                     {
-                        if (UserData.Designation == "Assistance Manager")
+                        if (UserData.Designation == "Assistant Manager")
                         {
                             documentDetail.AMApprovalStatus = status;
                             documentDetail.AMComment = comment;
