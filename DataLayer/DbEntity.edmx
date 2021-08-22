@@ -208,7 +208,7 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
           <Property Name="ApplicationId" Type="int" />
-          <Property Name="SectorName" Type="int" />
+          <Property Name="SectorName" Type="varchar" MaxLength="500" />
           <Property Name="AllotmentId" Type="int" />
           <Property Name="ApplicantAddress" Type="varchar" MaxLength="500" />
           <Property Name="PlotDetails" Type="varchar" MaxLength="500" />
@@ -1520,7 +1520,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="SectorName" Type="Int32" />
+          <Property Name="SectorName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AllotmentId" Type="Int32" />
           <Property Name="ApplicantAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PlotDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />

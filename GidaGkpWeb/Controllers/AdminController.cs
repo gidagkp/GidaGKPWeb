@@ -660,7 +660,7 @@ namespace GidaGkpWeb.Controllers
             invt.UserId = Convert.ToInt32(Applicant);
             invt.ApplicationNo = ApplicationNo;
             invt.ApplicantAddress = Address;
-            invt.SectorName = Convert.ToInt32(SectorName);
+            invt.SectorName = SectorName;
             invt.PlotRange = PlotRange;
             invt.TotalNoOfPlots = TotalNoOfPlots;
             invt.InterviewDateTime = Convert.ToDateTime(InterviewDateTime);

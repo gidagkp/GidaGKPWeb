@@ -17,7 +17,7 @@ namespace DataLayer
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> ApplicationId { get; set; }
-        public Nullable<int> SectorName { get; set; }
+        public string SectorName { get; set; }
         public Nullable<int> AllotmentId { get; set; }
         public string ApplicantAddress { get; set; }
         public string PlotDetails { get; set; }
