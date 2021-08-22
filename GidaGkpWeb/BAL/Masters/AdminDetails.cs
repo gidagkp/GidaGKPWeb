@@ -143,6 +143,46 @@ namespace GidaGkpWeb.BAL
                             AMDocumentComment = doc != null ? doc.AMComment : "",
                             ClerkDocumentComment = doc != null ? doc.ClerkComment : "",
                             SIDocumentComment = doc != null ? doc.SIComment : "",
+                            ApplicantDocument = new ApplicantUploadDocumentModel()
+                            {
+                                ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
+                                ApplicantEduTechQualificationFileType = doc.ApplicantEduTechQualificationFileType,
+                                ApplicantPhotoFileName = doc.ApplicantPhotoFileName,
+                                ApplicantPhotoFileType = doc.ApplicantPhotoFileType,
+                                ApplicantSignatureFileName = doc.ApplicantSignatureFileName,
+                                ApplicantSignatureFileType = doc.ApplicantSignatureFileType,
+                                ApplicationId = doc.ApplicationId,
+                                BalanceSheetFileName = doc.BalanceSheetFileName,
+                                BalanceSheetFileType = doc.BalanceSheetFileType,
+                                BankVerifiedSignatureFileName = doc.BankVerifiedSignatureFileName,
+                                BankVerifiedSignatureFileType = doc.BankVerifiedSignatureFileType,
+                                DocProofForIndustrialEstablishedOutsideGidaFileName = doc.DocProofForIndustrialEstablishedOutsideGidaFileName,
+                                DocProofForIndustrialEstablishedOutsideGidaFileType = doc.DocProofForIndustrialEstablishedOutsideGidaFileType,
+                                ExperienceProofFileName = doc.ExperienceProofFileName,
+                                ExperienceProofFileType = doc.ExperienceProofFileType,
+                                FinDetailsEstablishedIndustriesFileName = doc.FinDetailsEstablishedIndustriesFileName,
+                                FinDetailsEstablishedIndustriesFileType = doc.FinDetailsEstablishedIndustriesFileType,
+                                ITReturnFileName = doc.ITReturnFileName,
+                                ITReturnFileType = doc.ITReturnFileType,
+                                MemorendumFileName = doc.MemorendumFileName,
+                                MemorendumFileType = doc.MemorendumFileType,
+                                OtherDocForProposedIndustryFileName = doc.OtherDocForProposedIndustryFileName,
+                                OtherDocForProposedIndustryFileType = doc.OtherDocForProposedIndustryFileType,
+                                PreEstablishedIndustriesDocFileName = doc.PreEstablishedIndustriesDocFileName,
+                                PreEstablishedIndustriesDocFileType = doc.PreEstablishedIndustriesDocFileType,
+                                ProposedPlanLandUsesFileName = doc.ProposedPlanLandUsesFileName,
+                                ProjectReportFileName = doc.ProjectReportFileName,
+                                ProjectReportFileType = doc.ProjectReportFileType,
+                                ProposedPlanLandUsesFileType = doc.ProposedPlanLandUsesFileType,
+                                ScanAddressProofFileName = doc.ScanAddressProofFileName,
+                                ScanAddressProofFileType = doc.ScanAddressProofFileType,
+                                ScanCastCertFileName = doc.ScanCastCertFileName,
+                                ScanCastCertFileType = doc.ScanCastCertFileType,
+                                ScanIDFileName = doc.ScanIDFileName,
+                                ScanIDFileType = doc.ScanIDFileType,
+                                ScanPANFileName = doc.ScanPANFileName,
+                                ScanPANFileType = doc.ScanPANFileType,
+                            }
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
@@ -187,6 +227,45 @@ namespace GidaGkpWeb.BAL
                             AMDocumentStatus = !string.IsNullOrEmpty(x.AMDocumentComment) ? x.AMDocumentStatus + "(Comment : " + x.AMDocumentComment + ")" : x.AMDocumentStatus,
                             ClerkDocumentStatus = !string.IsNullOrEmpty(x.ClerkDocumentComment) ? x.ClerkDocumentStatus + "(Comment : " + x.ClerkDocumentComment + ")" : x.ClerkDocumentStatus,
                             SIDocumentStatus = !string.IsNullOrEmpty(x.SIDocumentComment) ? x.SIDocumentStatus + "(Comment : " + x.SIDocumentComment + ")" : x.SIDocumentStatus,
+                            ApplicantDocument = new ApplicantUploadDocumentModel()
+                            {
+                                ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
+                                ScanPANFileType = x.ApplicantDocument.ScanPANFileType,
+                                ScanPANFileName = x.ApplicantDocument.ScanPANFileName,
+                                ScanIDFileType = x.ApplicantDocument.ScanIDFileType,
+                                ScanIDFileName = x.ApplicantDocument.ScanIDFileName,
+                                ScanCastCertFileType = x.ApplicantDocument.ScanCastCertFileType,
+                                ApplicantEduTechQualificationFileType = x.ApplicantDocument.ApplicantEduTechQualificationFileType,
+                                ApplicantPhotoFileName = x.ApplicantDocument.ApplicantPhotoFileName,
+                                ApplicantPhotoFileType = x.ApplicantDocument.ApplicantPhotoFileType,
+                                ApplicantSignatureFileName = x.ApplicantDocument.ApplicantSignatureFileName,
+                                ApplicantSignatureFileType = x.ApplicantDocument.ApplicantSignatureFileType,
+                                BalanceSheetFileName = x.ApplicantDocument.BalanceSheetFileName,
+                                BalanceSheetFileType = x.ApplicantDocument.BalanceSheetFileType,
+                                BankVerifiedSignatureFileName = x.ApplicantDocument.BankVerifiedSignatureFileName,
+                                BankVerifiedSignatureFileType = x.ApplicantDocument.BankVerifiedSignatureFileType,
+                                DocProofForIndustrialEstablishedOutsideGidaFileName = x.ApplicantDocument.DocProofForIndustrialEstablishedOutsideGidaFileName,
+                                DocProofForIndustrialEstablishedOutsideGidaFileType = x.ApplicantDocument.DocProofForIndustrialEstablishedOutsideGidaFileType,
+                                ExperienceProofFileName = x.ApplicantDocument.ExperienceProofFileName,
+                                ExperienceProofFileType = x.ApplicantDocument.ExperienceProofFileType,
+                                FinDetailsEstablishedIndustriesFileName = x.ApplicantDocument.FinDetailsEstablishedIndustriesFileName,
+                                FinDetailsEstablishedIndustriesFileType = x.ApplicantDocument.FinDetailsEstablishedIndustriesFileType,
+                                ITReturnFileName = x.ApplicantDocument.ITReturnFileName,
+                                ITReturnFileType = x.ApplicantDocument.ITReturnFileType,
+                                MemorendumFileName = x.ApplicantDocument.MemorendumFileName,
+                                MemorendumFileType = x.ApplicantDocument.MemorendumFileType,
+                                OtherDocForProposedIndustryFileName = x.ApplicantDocument.OtherDocForProposedIndustryFileName,
+                                OtherDocForProposedIndustryFileType = x.ApplicantDocument.OtherDocForProposedIndustryFileType,
+                                PreEstablishedIndustriesDocFileName = x.ApplicantDocument.PreEstablishedIndustriesDocFileName,
+                                PreEstablishedIndustriesDocFileType = x.ApplicantDocument.PreEstablishedIndustriesDocFileType,
+                                ProjectReportFileName = x.ApplicantDocument.ProjectReportFileName,
+                                ProjectReportFileType = x.ApplicantDocument.ProjectReportFileType,
+                                ProposedPlanLandUsesFileName = x.ApplicantDocument.ProposedPlanLandUsesFileName,
+                                ProposedPlanLandUsesFileType = x.ApplicantDocument.ProposedPlanLandUsesFileType,
+                                ScanAddressProofFileName = x.ApplicantDocument.ScanAddressProofFileName,
+                                ScanAddressProofFileType = x.ApplicantDocument.ScanAddressProofFileType,
+                                ScanCastCertFileName = x.ApplicantDocument.ScanCastCertFileName
+                            }
                         }).ToList();
             }
             catch (DbEntityValidationException e)
@@ -862,6 +941,26 @@ namespace GidaGkpWeb.BAL
                     }
                 }
                 return new List<PlotMasterModel>();
+            }
+        }
+
+        public ApplicantUploadDoc GetDocumentByApplciationId(int applicantId)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicantId).FirstOrDefault();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return new ApplicantUploadDoc();
             }
         }
     }

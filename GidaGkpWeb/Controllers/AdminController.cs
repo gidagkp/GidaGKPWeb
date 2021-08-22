@@ -685,6 +685,124 @@ namespace GidaGkpWeb.Controllers
 
 
         }
+        [HttpGet]
+        public FileResult DownloadApplicantDocument(string applicationId, string documentName)
+        {
+            AdminDetails detail = new AdminDetails();
+            var documentData = detail.GetDocumentByApplciationId(Convert.ToInt32(applicationId));
+            if (documentName == DocumentName.ApplicantEduTechQualification.ToString())
+            {
+                byte[] bytes = documentData.ApplicantEduTechQualification;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ApplicantEduTechQualificationFileName);
+            }
+            else if (documentName == DocumentName.ApplicantPhoto.ToString())
+            {
+                byte[] bytes = documentData.ApplicantPhoto;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ApplicantPhotoFileName);
+            }
+            else if (documentName == DocumentName.ApplicantSignature.ToString())
+            {
+                byte[] bytes = documentData.ApplicantSignature;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ApplicantSignatureFileName);
+            }
+            else if (documentName == DocumentName.BalanceSheet.ToString())
+            {
+                byte[] bytes = documentData.BalanceSheet;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.BalanceSheetFileName);
+            }
+            else if (documentName == DocumentName.BankVerifiedSignature.ToString())
+            {
+                byte[] bytes = documentData.BankVerifiedSignature;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.BankVerifiedSignatureFileName);
+            }
+            else if (documentName == DocumentName.DocProofForIndustrialEstablishedOutsideGida.ToString())
+            {
+                byte[] bytes = documentData.DocProofForIndustrialEstablishedOutsideGida;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.DocProofForIndustrialEstablishedOutsideGidaFileName);
+            }
+            else if (documentName == DocumentName.ExperienceProof.ToString())
+            {
+                byte[] bytes = documentData.ExperienceProof;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ExperienceProofFileName);
+            }
+            else if (documentName == DocumentName.FinDetailsEstablishedIndustries.ToString())
+            {
+                byte[] bytes = documentData.FinDetailsEstablishedIndustries;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.FinDetailsEstablishedIndustriesFileName);
+            }
+            else if (documentName == DocumentName.ITReturn.ToString())
+            {
+                byte[] bytes = documentData.ITReturn;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ITReturnFileName);
+            }
+            else if (documentName == DocumentName.Memorendum.ToString())
+            {
+                byte[] bytes = documentData.Memorendum;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.MemorendumFileName);
+            }
+            else if (documentName == DocumentName.OtherDocForProposedIndustry.ToString())
+            {
+                byte[] bytes = documentData.OtherDocForProposedIndustry;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.OtherDocForProposedIndustryFileName);
+            }
+            else if (documentName == DocumentName.PreEstablishedIndustriesDoc.ToString())
+            {
+                byte[] bytes = documentData.PreEstablishedIndustriesDoc;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.PreEstablishedIndustriesDocFileName);
+            }
+            else if (documentName == DocumentName.ProjectReport.ToString())
+            {
+                byte[] bytes = documentData.ProjectReport;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ProjectReportFileName);
+            }
+            else if (documentName == DocumentName.ProposedPlanLandUses.ToString())
+            {
+                byte[] bytes = documentData.ProposedPlanLandUses;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ProposedPlanLandUsesFileName);
+            }
+            else if (documentName == DocumentName.ScanAddressProof.ToString())
+            {
+                byte[] bytes = documentData.ScanAddressProof;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ScanAddressProofFileName);
+            }
+            else if (documentName == DocumentName.ScanCastCert.ToString())
+            {
+                byte[] bytes = documentData.ScanCastCert;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ScanCastCertFileName);
+            }
+            else if (documentName == DocumentName.ScanID.ToString())
+            {
+                byte[] bytes = documentData.ScanID;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ScanIDFileName);
+            }
+            else if (documentName == DocumentName.ScanPAN.ToString())
+            {
+                byte[] bytes = documentData.ScanPAN;
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, documentData.ScanPANFileName);
+            }
+            return null;
+        }
+    }
 
+    public enum DocumentName
+    {
+        ApplicantEduTechQualification,
+        ScanPAN,
+        ScanID,
+        ApplicantPhoto,
+        ApplicantSignature,
+        BalanceSheet,
+        BankVerifiedSignature,
+        DocProofForIndustrialEstablishedOutsideGida,
+        ExperienceProof,
+        FinDetailsEstablishedIndustries,
+        ITReturn,
+        Memorendum,
+        OtherDocForProposedIndustry,
+        PreEstablishedIndustriesDoc,
+        ProjectReport,
+        ProposedPlanLandUses,
+        ScanAddressProof,
+        ScanCastCert
     }
 }

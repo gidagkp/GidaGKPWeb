@@ -7,6 +7,10 @@ namespace GidaGkpWeb.Models
 {
     public class ApplicationUserModel
     {
+        public ApplicationUserModel()
+        {
+            ApplicantDocument = new ApplicantUploadDocumentModel();
+        }
         public int Id { get; set; }
         public int ApplicationId { get; set; }
         public string ApplicationNumber { get; set; }
@@ -58,6 +62,7 @@ namespace GidaGkpWeb.Models
         public string AMDocumentComment { get; set; }
         public string ClerkDocumentComment { get; set; }
         public string SIDocumentComment { get; set; }
+        public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 
     public class ApplicationDetailModel
