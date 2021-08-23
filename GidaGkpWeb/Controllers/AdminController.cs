@@ -708,6 +708,10 @@ namespace GidaGkpWeb.Controllers
 
 
         }
+        public ActionResult Invitation()
+        {
+            return View();
+        }
 
     }
 }

@@ -269,6 +269,7 @@
     <Compile Include="BAL\Login\LoginDetails.cs" />
     <Compile Include="BAL\Masters\AdminDetails.cs" />
     <Compile Include="BAL\Masters\InvitationDetails.cs" />
+    <Compile Include="BAL\Masters\LeasedDutyWork.cs" />
     <Compile Include="BAL\Masters\MasterDetails.cs" />
     <Compile Include="BAL\Masters\ApplicantDetails.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -308,6 +309,7 @@
     <Compile Include="Infrastructure\Utility\VerificationCodeGeneration.cs" />
     <Compile Include="Models\GidaUserPermissionModel.cs" />
     <Compile Include="Models\InvitationModel.cs" />
+    <Compile Include="Models\LeaseDutyWorkModel.cs" />
     <Compile Include="Models\LookupModel.cs" />
     <Compile Include="Models\PlotMasterModel.cs" />
     <Compile Include="Models\PageMasterModel.cs" />
@@ -459,6 +461,7 @@
     <Content Include="Scripts\App\Global\Utility.js" />
     <Content Include="Scripts\App\Login\Login.js" />
     <Content Include="Scripts\App\Masters\Invitation.js" />
+    <Content Include="Scripts\App\Masters\LeaseDeedDetails.js" />
     <Content Include="Scripts\App\Masters\navigation.js" />
     <Content Include="Scripts\App\Masters\SchemeWiseApplicationList.js" />
     <Content Include="Scripts\App\Masters\PlotMaster.js" />
@@ -667,6 +670,7 @@
     <Content Include="Views\Admin\Invitation.cshtml" />
     <Content Include="Views\Admin\PrintAllotmentLetter.cshtml" />
     <Content Include="Views\Admin\SchemeWiseAllotmentList.cshtml" />
+    <Content Include="Views\Admin\LeasedDutyWork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
