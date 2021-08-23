@@ -260,6 +260,39 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="RelationshipStatus" Type="int" />
           <Property Name="CreationDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="ApplicantProjectChangeDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicantName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ApplicationId" Type="int" />
+          <Property Name="AllotmentNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="AreaToBeUsedForProject" Type="nvarchar" MaxLength="50" />
+          <Property Name="DetailOfProjectFileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DetailOfProjectFileType" Type="nvarchar" MaxLength="50" />
+          <Property Name="DetailOfProjectFileContent" Type="varbinary(max)" />
+          <Property Name="IsEffluentMore" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsEmissionToSurrounding" Type="nvarchar" MaxLength="50" />
+          <Property Name="SSIRegistrationNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOCOfProjectFileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="NOCOfProjectFileType" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOCOfProjectFileContent" Type="varbinary(max)" />
+          <Property Name="NotarizedFileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="NotarizedFileType" Type="nvarchar" MaxLength="50" />
+          <Property Name="NotarizedFileContent" Type="varbinary(max)" />
+          <Property Name="SignatureFileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SignatureFileType" Type="nvarchar" MaxLength="50" />
+          <Property Name="SignatureFileContent" Type="varbinary(max)" />
+          <Property Name="PhotographFileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhotographFileType" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhotographFileContent" Type="varbinary(max)" />
+          <Property Name="LeaseDeedNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="PossesionNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProcessingFees" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AmountPaid" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TransactionNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ApplicantProjectDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -1044,6 +1077,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <EntitySet Name="ApplicantFormStep" EntityType="Self.ApplicantFormStep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantInvitationLetter" EntityType="Self.ApplicantInvitationLetter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantPlotDetails" EntityType="Self.ApplicantPlotDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicantProjectChangeDetails" EntityType="Self.ApplicantProjectChangeDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantProjectDetails" EntityType="Self.ApplicantProjectDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantTransactionDetail" EntityType="Self.ApplicantTransactionDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantUploadDoc" EntityType="Self.ApplicantUploadDoc" Schema="dbo" store:Type="Tables" />
@@ -1211,6 +1245,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <EntitySet Name="ApplicantFormSteps" EntityType="GidaGKPModel.ApplicantFormStep" />
           <EntitySet Name="ApplicantInvitationLetters" EntityType="GidaGKPModel.ApplicantInvitationLetter" />
           <EntitySet Name="ApplicantPlotDetails" EntityType="GidaGKPModel.ApplicantPlotDetail" />
+          <EntitySet Name="ApplicantProjectChangeDetails" EntityType="GidaGKPModel.ApplicantProjectChangeDetail" />
           <EntitySet Name="ApplicantProjectDetails" EntityType="GidaGKPModel.ApplicantProjectDetail" />
           <EntitySet Name="ApplicantTransactionDetails" EntityType="GidaGKPModel.ApplicantTransactionDetail" />
           <EntitySet Name="ApplicantUploadDocs" EntityType="GidaGKPModel.ApplicantUploadDoc" />
@@ -1573,6 +1608,39 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="RelationshipStatus" Type="Int32" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantPlotDetails_ApplicantApplicationDetail" FromRole="ApplicantPlotDetail" ToRole="ApplicantApplicationDetail" />
+        </EntityType>
+        <EntityType Name="ApplicantProjectChangeDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicantName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationId" Type="Int32" />
+          <Property Name="AllotmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AreaToBeUsedForProject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DetailOfProjectFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DetailOfProjectFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DetailOfProjectFileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsEffluentMore" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmissionToSurrounding" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SSIRegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOCOfProjectFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NOCOfProjectFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOCOfProjectFileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NotarizedFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NotarizedFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NotarizedFileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="SignatureFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SignatureFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SignatureFileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhotographFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhotographFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhotographFileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LeaseDeedNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PossesionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessingFees" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TransactionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ApplicantProjectDetail">
           <Key>
@@ -2599,6 +2667,40 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
                 <ScalarProperty Name="AppliedFor" ColumnName="AppliedFor" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicantProjectChangeDetails">
+            <EntityTypeMapping TypeName="GidaGKPModel.ApplicantProjectChangeDetail">
+              <MappingFragment StoreEntitySet="ApplicantProjectChangeDetails">
+                <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="ProcessingFees" ColumnName="ProcessingFees" />
+                <ScalarProperty Name="PossesionNumber" ColumnName="PossesionNumber" />
+                <ScalarProperty Name="LeaseDeedNumber" ColumnName="LeaseDeedNumber" />
+                <ScalarProperty Name="PhotographFileContent" ColumnName="PhotographFileContent" />
+                <ScalarProperty Name="PhotographFileType" ColumnName="PhotographFileType" />
+                <ScalarProperty Name="PhotographFileName" ColumnName="PhotographFileName" />
+                <ScalarProperty Name="SignatureFileContent" ColumnName="SignatureFileContent" />
+                <ScalarProperty Name="SignatureFileType" ColumnName="SignatureFileType" />
+                <ScalarProperty Name="SignatureFileName" ColumnName="SignatureFileName" />
+                <ScalarProperty Name="NotarizedFileContent" ColumnName="NotarizedFileContent" />
+                <ScalarProperty Name="NotarizedFileType" ColumnName="NotarizedFileType" />
+                <ScalarProperty Name="NotarizedFileName" ColumnName="NotarizedFileName" />
+                <ScalarProperty Name="NOCOfProjectFileContent" ColumnName="NOCOfProjectFileContent" />
+                <ScalarProperty Name="NOCOfProjectFileType" ColumnName="NOCOfProjectFileType" />
+                <ScalarProperty Name="NOCOfProjectFileName" ColumnName="NOCOfProjectFileName" />
+                <ScalarProperty Name="SSIRegistrationNo" ColumnName="SSIRegistrationNo" />
+                <ScalarProperty Name="IsEmissionToSurrounding" ColumnName="IsEmissionToSurrounding" />
+                <ScalarProperty Name="IsEffluentMore" ColumnName="IsEffluentMore" />
+                <ScalarProperty Name="DetailOfProjectFileContent" ColumnName="DetailOfProjectFileContent" />
+                <ScalarProperty Name="DetailOfProjectFileType" ColumnName="DetailOfProjectFileType" />
+                <ScalarProperty Name="DetailOfProjectFileName" ColumnName="DetailOfProjectFileName" />
+                <ScalarProperty Name="AreaToBeUsedForProject" ColumnName="AreaToBeUsedForProject" />
+                <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
