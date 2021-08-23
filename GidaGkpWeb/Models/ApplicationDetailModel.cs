@@ -62,6 +62,7 @@ namespace GidaGkpWeb.Models
         public string AMDocumentComment { get; set; }
         public string ClerkDocumentComment { get; set; }
         public string SIDocumentComment { get; set; }
+        public string InterviewDateTime { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 

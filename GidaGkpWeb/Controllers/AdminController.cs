@@ -609,12 +609,42 @@ namespace GidaGkpWeb.Controllers
         }
         public ActionResult CandidateListForInterview()
         {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantSubmittedForInterview();
+            ViewData["UserDetail"] = data;
             return View();
+        }
+
+        public ActionResult SendMailtoApplicantForInterview(int applicationId)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            this.SendMailToApplicantInterview(data.FullName, data.Email, data.InterviewDateTime);
+            SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
+            return RedirectToAction("CandidateListForInterview");
+        }
+
+        private async Task SendMailToApplicantInterview(string fullName, string email, string InterviewDateTime)
+        {
+            await Task.Run(() =>
+            {
+                //Send Email
+                Message msg = new Message()
+                {
+                    MessageTo = email,
+                    MessageNameTo = fullName,
+                    Subject = "Interview Schedule",
+                    Body = EmailHelper.GetINterviewScheduleMailEmail(fullName, InterviewDateTime)
+                };
+                ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
+                sendMessageStrategy.SendMessages();
+            });
         }
         public ActionResult CandidateListForAllotment()
         {
             return View();
         }
+
         public ActionResult SchemeWiseAllotmentList()
         {
             return View();

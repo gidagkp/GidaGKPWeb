@@ -963,5 +963,77 @@ namespace GidaGkpWeb.BAL
                 return new ApplicantUploadDoc();
             }
         }
+
+        public List<ApplicationUserModel> GetApplicantSubmittedForInterview()
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return (from user in _db.ApplicantUsers
+                        join appLetter in _db.ApplicantInvitationLetters on user.Id equals appLetter.UserId
+                        join applicant1 in _db.ApplicantDetails on user.Id equals applicant1.UserId into applicant2
+                        from applicant in applicant2.DefaultIfEmpty()
+                        join application1 in _db.ApplicantApplicationDetails on user.Id equals application1.UserId into application2
+                        from application in application2.DefaultIfEmpty()
+                        where user.UserType != "Test"
+                        select new
+                        {
+                            ApplicationNumber = application != null ? application.ApplicationNumber : "",
+                            ApplicationId = application != null ? application.ApplicationId : 0,
+                            AadharNumber = user.AadharNumber,
+                            ContactNo = user.ContactNo,
+                            CreationDate = user.CreationDate,
+                            Email = user.Email,
+                            FatherName = applicant != null ? applicant.FName : "",
+                            CAddress = applicant != null ? applicant.CAddress : "",
+                            PAddress = applicant != null ? applicant.PAddress : "",
+                            FullName = applicant != null ? applicant.FullApplicantName : "",
+                            Id = user.Id,
+                            SchemeName = user.SchemeName,
+                            SchemeType = user.SchemeType,
+                            SectorName = user.SectorName,
+                            UserType = user.UserType,
+                            DOB = user.DOB,
+                            UserName = user.UserName,
+                            IsActive = user.IsActive,
+                            ApplicationStatus = application.ApprovalStatus,
+                            InterviewDateTime = appLetter.InterviewDateTime
+                        }).Distinct().ToList()
+                        .Select(x => new ApplicationUserModel()
+                        {
+                            ApplicationNumber = x.ApplicationNumber,
+                            ApplicationId = x.ApplicationId,
+                            AadharNumber = x.AadharNumber,
+                            ContactNo = x.ContactNo,
+                            CreationDate = x.CreationDate,
+                            Email = x.Email,
+                            FatherName = x.FatherName,
+                            CAddress = x.CAddress,
+                            PAddress = x.PAddress,
+                            FullName = x.FullName,
+                            Id = x.Id,
+                            SchemeName = x.SchemeName,
+                            SchemeType = x.SchemeType,
+                            SectorName = x.SectorName,
+                            UserType = x.UserType,
+                            DOB = x.DOB != null ? x.DOB.Value.ToString("dd/MM/yyyy") : string.Empty,
+                            InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : string.Empty,
+                            UserName = x.UserName,
+                            IsActive = x.IsActive,
+                            ApplicationStatus = x.ApplicationStatus,
+                        }).ToList();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return new List<ApplicationUserModel>();
+            }
+        }
     }
 }
