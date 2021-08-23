@@ -19,5 +19,6 @@ namespace DataLayer
         public string LookupName { get; set; }
         public Nullable<int> ParentLookupId { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public string LookupNameImmutable { get; set; }
     }
 }

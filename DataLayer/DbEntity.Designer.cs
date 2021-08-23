@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\esheimr\Desktop\Personal\Gida\GidaGkpWeb\DataLayer\DbEntity.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\esheimr\Desktop\GIDAGKP_WEB_New\GidaGKPWeb\DataLayer\DbEntity.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

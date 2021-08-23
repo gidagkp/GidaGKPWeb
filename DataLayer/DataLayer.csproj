@@ -158,6 +158,9 @@
     <Compile Include="ApplicantPlotDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="ApplicantProjectChangeDetail.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="ApplicantProjectDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
