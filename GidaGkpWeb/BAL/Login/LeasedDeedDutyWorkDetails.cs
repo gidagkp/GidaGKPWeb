@@ -8,9 +8,10 @@ using System.Data.Entity;
 using GidaGkpWeb.Models;
 using System.Data.Entity.Validation;
 
-namespace GidaGkpWeb.BAL.Masters
+
+namespace GidaGkpWeb.BAL.Login
 {
-    public class LeasedDutyDetails
+    public class LeasedDeedDutyWorkDetails
     {
         GidaGKPEntities _db = null;
         public Enums.CrudStatus SaveLeasedDutyWork(LeaseDeedDetail LeasedDutyWork)

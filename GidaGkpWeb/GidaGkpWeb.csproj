@@ -266,10 +266,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BAL\Login\LeasedDeedDutyWorkDetails.cs" />
     <Compile Include="BAL\Login\LoginDetails.cs" />
     <Compile Include="BAL\Masters\AdminDetails.cs" />
     <Compile Include="BAL\Masters\InvitationDetails.cs" />
-    <Compile Include="BAL\Masters\LeasedDutyWork.cs" />
     <Compile Include="BAL\Masters\MasterDetails.cs" />
     <Compile Include="BAL\Masters\ApplicantDetails.cs" />
     <Compile Include="Controllers\AdminController.cs" />
