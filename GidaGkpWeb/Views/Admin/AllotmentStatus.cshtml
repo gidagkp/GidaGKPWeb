@@ -292,6 +292,24 @@
                                 <th class="text-center">Verify</th>
                             </tr>
                             <tr>
+                                @*<td class="text-center">1</td>
+                                <td class="text-center">@UserData.ApplicationNumber</td>
+                                <td class="text-center">@UserData.FullName</td>
+                                <td class="text-center">@UserData.FatherName</td>
+                                <td class="text-center">@UserData.TransactionID</td>
+                                <td class="text-center">@UserData.TransactionDate</td>
+                                <td class="text-center">@UserData.FormFee</td>
+                                <td class="text-center">@UserData.GSTAmount</td>
+                                <td class="text-center">@UserData.EarnestMoney</td>
+                                <td class="text-center">@UserData.PaidAmount</td>
+                                <td class="text-center">
+                                    <a style="background-color: green; color: white;" class="btn btn-success"
+                                       href="/Admin/ApprovePayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                    <br />
+                                    <br />
+                                    <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedPayment"><strong>Not Approved</strong></a>
+                                    @*href="/Admin/ApproveRejectPayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"*@
+                                @*</td>*@
                             </tr>
                         </table>
                     </div>
@@ -301,7 +319,7 @@
                         write Comment when Not Approved
                         <span class="required-field"></span>
                     </label>
-                    <textarea name="paymentStatusComment" id="paymentStatusComment" class="form-control"></textarea>
+                    <textarea name="paymentRejectedComment" id="paymentRejectedComment" class="form-control"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -367,7 +385,7 @@
                         write Comment when Not Approved
                         <span class="required-field"></span>
                     </label>
-                    <textarea name="paymentStatusComment" id="documentRejectedComment" class="form-control"></textarea>
+                    <textarea name="paymentRejectedComment" id="documentRejectedComment" class="form-control"></textarea>
                 </div>
             </div>
             <div class="modal-footer">

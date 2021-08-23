@@ -92,14 +92,13 @@
                             <li class="active"><a href="/Applicant/Dashboard" title="Home">Home</a></li>
                             <li><a href="/Applicant/ApplyForPlot" title="PlotDetail">Apply For Plots</a></li>
                             @*@if (EnablePaymentLink > 0)
-        {
-            <li><a href="/Applicant/ApplicantUploadTransactionDetail" title="">Enter Payment Detail(After NEFT/RTGS/IMPS)</a></li>
-        }*@
+                            {
+                                <li><a href="/Applicant/ApplicantUploadTransactionDetail" title="">Enter Payment Detail(After NEFT/RTGS/IMPS)</a></li>
+                            }*@
                             @if (EnablePrintReciptLink > 0)
                             {
                                 <li><a href="/Applicant/PaymentResponseSuccess" title="PrintDocument">Print Registration Document</a></li>
                             }
-                            <li><a href="/Applicant/Project" title="ChangeProject">Change of Project</a></li>
                         </ul>
 
                         <ul class="nav navbar-nav pull-right">

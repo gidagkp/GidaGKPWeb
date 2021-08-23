@@ -51,8 +51,6 @@ namespace GidaGkpWeb.BAL.Login
                 UserData.UserId = _userRow.Id;
                 UserData.Username = _userRow.UserName;
                 UserData.UserType = Convert.ToString(_userRow.UserRoleId);
-                UserData.Department = _db.Lookups.Where(x => x.LookupId == _userRow.Department).FirstOrDefault().LookupNameImmutable;
-                UserData.Designation = _db.Lookups.Where(x => x.LookupId == _userRow.Designation).FirstOrDefault().LookupNameImmutable;
                 var permissionList = _db.RoleWisePermissions.Where(x => x.DepartmentId == _userRow.Department && x.DesignationId == _userRow.Designation && x.RoleId == _userRow.UserRoleId).ToList();
                 var permissiondata = new List<UserPermission>();
                 permissionList.ForEach(x =>
@@ -61,7 +59,7 @@ namespace GidaGkpWeb.BAL.Login
                     {
                         PageId = x.PageId.Value,
                         PageName = _db.PageMasters.FirstOrDefault(y => y.Id == x.PageId).PageName,
-                        PermissionName = _db.Lookups.FirstOrDefault(y => y.LookupId == x.PermissionId).LookupNameImmutable
+                        PermissionName = _db.Lookups.FirstOrDefault(y => y.LookupId == x.PermissionId).LookupName
                     });
                 });
                 UserData.UserPermissions = permissiondata;
