@@ -1411,5 +1411,98 @@ namespace GidaGkpWeb.BAL
                 return Enums.CrudStatus.InternalError;
             }
         }
+        public ApplicantProjectChangeDetail GetApplicantProjectChangeDetail(int userId)
+        {
+            _db = new GidaGKPEntities();
+            var extingApplicant = _db.ApplicantApplicationDetails.Where(x => x.UserId == userId).FirstOrDefault();
+            return (extingApplicant != null) ? _db.ApplicantProjectChangeDetails.Where(x => x.ApplicationId == extingApplicant.ApplicationId)?.FirstOrDefault() : null;
+        }
+
+        public Enums.CrudStatus SaveApplicantProjectChangeDetail(ApplicantProjectChangeDetail changeProjectDetail)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+
+                var extingApplicant = _db.ApplicantApplicationDetails.Where(x => x.ApplicationId == changeProjectDetail.ApplicationId).FirstOrDefault();
+                if (extingApplicant == null)
+                {
+                    throw new Exception("Applicant not exists with given applicant id");
+                }
+
+                var extingChangeProjectDetail = _db.ApplicantProjectChangeDetails.Where(x => x.ApplicationId == changeProjectDetail.ApplicationId).FirstOrDefault();
+
+                if (extingChangeProjectDetail != null)  // update bank detail
+                {
+                    extingChangeProjectDetail.ApplicantName = !string.IsNullOrEmpty(changeProjectDetail.ApplicantName) ? changeProjectDetail.ApplicantName : extingChangeProjectDetail.ApplicantName;
+                    extingChangeProjectDetail.AllotmentNumber = !string.IsNullOrEmpty(changeProjectDetail.AllotmentNumber) ? changeProjectDetail.AllotmentNumber : extingChangeProjectDetail.AllotmentNumber;
+                    extingChangeProjectDetail.AreaToBeUsedForProject = !string.IsNullOrEmpty(changeProjectDetail.AreaToBeUsedForProject) ? changeProjectDetail.AreaToBeUsedForProject : extingChangeProjectDetail.AreaToBeUsedForProject;
+                    extingChangeProjectDetail.IsEffluentMore = !string.IsNullOrEmpty(changeProjectDetail.IsEffluentMore) ? changeProjectDetail.IsEffluentMore : extingChangeProjectDetail.IsEffluentMore;
+                    extingChangeProjectDetail.IsEmissionToSurrounding = !string.IsNullOrEmpty(changeProjectDetail.IsEmissionToSurrounding) ? changeProjectDetail.IsEmissionToSurrounding : extingChangeProjectDetail.IsEmissionToSurrounding;
+
+                    if (!string.IsNullOrEmpty(changeProjectDetail.DetailOfProjectFileName))
+                    {
+                        extingChangeProjectDetail.DetailOfProjectFileName = changeProjectDetail.DetailOfProjectFileName;
+                        extingChangeProjectDetail.DetailOfProjectFileType = changeProjectDetail.DetailOfProjectFileType;
+                        extingChangeProjectDetail.DetailOfProjectFileContent = changeProjectDetail.DetailOfProjectFileContent;
+                    }
+
+                    if (!string.IsNullOrEmpty(changeProjectDetail.NOCOfProjectFileName))
+                    {
+                        extingChangeProjectDetail.NOCOfProjectFileName = changeProjectDetail.NOCOfProjectFileName;
+                        extingChangeProjectDetail.NOCOfProjectFileType = changeProjectDetail.NOCOfProjectFileType;
+                        extingChangeProjectDetail.NOCOfProjectFileContent = changeProjectDetail.NOCOfProjectFileContent;
+                    }
+
+                    if (!string.IsNullOrEmpty(changeProjectDetail.NotarizedFileName))
+                    {
+                        extingChangeProjectDetail.NotarizedFileName = changeProjectDetail.NotarizedFileName;
+                        extingChangeProjectDetail.NotarizedFileType = changeProjectDetail.NotarizedFileType;
+                        extingChangeProjectDetail.NotarizedFileContent = changeProjectDetail.NotarizedFileContent;
+                    }
+
+                    if (!string.IsNullOrEmpty(changeProjectDetail.SignatureFileName))
+                    {
+                        extingChangeProjectDetail.SignatureFileName = changeProjectDetail.SignatureFileName;
+                        extingChangeProjectDetail.SignatureFileType = changeProjectDetail.SignatureFileType;
+                        extingChangeProjectDetail.SignatureFileContent = changeProjectDetail.SignatureFileContent;
+                    }
+
+                    if (!string.IsNullOrEmpty(changeProjectDetail.PhotographFileName))
+                    {
+                        extingChangeProjectDetail.PhotographFileName = changeProjectDetail.PhotographFileName;
+                        extingChangeProjectDetail.PhotographFileType = changeProjectDetail.PhotographFileType;
+                        extingChangeProjectDetail.PhotographFileContent = changeProjectDetail.PhotographFileContent;
+                    }
+
+                    extingChangeProjectDetail.AmountPaid = changeProjectDetail.AmountPaid > 0 ? changeProjectDetail.AmountPaid.Value : extingChangeProjectDetail.AmountPaid.Value;
+
+                    extingChangeProjectDetail.TransactionNumber = !string.IsNullOrEmpty(changeProjectDetail.TransactionNumber) ? changeProjectDetail.TransactionNumber : extingChangeProjectDetail.TransactionNumber;
+
+                    _db.Entry(extingChangeProjectDetail).State = EntityState.Modified;
+                }
+                else
+                {
+                    _db.Entry(changeProjectDetail).State = EntityState.Added;
+                }
+
+                _effectRow = _db.SaveChanges();
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+
+        }
     }
 }
