@@ -1431,56 +1431,56 @@ namespace GidaGkpWeb.BAL
                     throw new Exception("Applicant not exists with given applicant id");
                 }
 
-                var extingChangeProjectDetail = _db.ApplicantProjectChangeDetails.Where(x => x.ApplicationId == changeProjectDetail.ApplicationId).FirstOrDefault();
+                var existingChangeProjectDetail = _db.ApplicantProjectChangeDetails.Where(x => x.ApplicationId == changeProjectDetail.ApplicationId).FirstOrDefault();
 
-                if (extingChangeProjectDetail != null)  // update bank detail
+                if (existingChangeProjectDetail != null)  // update bank detail
                 {
-                    extingChangeProjectDetail.ApplicantName = !string.IsNullOrEmpty(changeProjectDetail.ApplicantName) ? changeProjectDetail.ApplicantName : extingChangeProjectDetail.ApplicantName;
-                    extingChangeProjectDetail.AllotmentNumber = !string.IsNullOrEmpty(changeProjectDetail.AllotmentNumber) ? changeProjectDetail.AllotmentNumber : extingChangeProjectDetail.AllotmentNumber;
-                    extingChangeProjectDetail.AreaToBeUsedForProject = !string.IsNullOrEmpty(changeProjectDetail.AreaToBeUsedForProject) ? changeProjectDetail.AreaToBeUsedForProject : extingChangeProjectDetail.AreaToBeUsedForProject;
-                    extingChangeProjectDetail.IsEffluentMore = !string.IsNullOrEmpty(changeProjectDetail.IsEffluentMore) ? changeProjectDetail.IsEffluentMore : extingChangeProjectDetail.IsEffluentMore;
-                    extingChangeProjectDetail.IsEmissionToSurrounding = !string.IsNullOrEmpty(changeProjectDetail.IsEmissionToSurrounding) ? changeProjectDetail.IsEmissionToSurrounding : extingChangeProjectDetail.IsEmissionToSurrounding;
+                    existingChangeProjectDetail.ApplicantName = !string.IsNullOrEmpty(changeProjectDetail.ApplicantName) ? changeProjectDetail.ApplicantName : existingChangeProjectDetail.ApplicantName;
+                    existingChangeProjectDetail.AllotmentNumber = !string.IsNullOrEmpty(changeProjectDetail.AllotmentNumber) ? changeProjectDetail.AllotmentNumber : existingChangeProjectDetail.AllotmentNumber;
+                    existingChangeProjectDetail.AreaToBeUsedForProject = !string.IsNullOrEmpty(changeProjectDetail.AreaToBeUsedForProject) ? changeProjectDetail.AreaToBeUsedForProject : existingChangeProjectDetail.AreaToBeUsedForProject;
+                    existingChangeProjectDetail.IsEffluentMore = !string.IsNullOrEmpty(changeProjectDetail.IsEffluentMore) ? changeProjectDetail.IsEffluentMore : existingChangeProjectDetail.IsEffluentMore;
+                    existingChangeProjectDetail.IsEmissionToSurrounding = !string.IsNullOrEmpty(changeProjectDetail.IsEmissionToSurrounding) ? changeProjectDetail.IsEmissionToSurrounding : existingChangeProjectDetail.IsEmissionToSurrounding;
 
                     if (!string.IsNullOrEmpty(changeProjectDetail.DetailOfProjectFileName))
                     {
-                        extingChangeProjectDetail.DetailOfProjectFileName = changeProjectDetail.DetailOfProjectFileName;
-                        extingChangeProjectDetail.DetailOfProjectFileType = changeProjectDetail.DetailOfProjectFileType;
-                        extingChangeProjectDetail.DetailOfProjectFileContent = changeProjectDetail.DetailOfProjectFileContent;
+                        existingChangeProjectDetail.DetailOfProjectFileName = changeProjectDetail.DetailOfProjectFileName;
+                        existingChangeProjectDetail.DetailOfProjectFileType = changeProjectDetail.DetailOfProjectFileType;
+                        existingChangeProjectDetail.DetailOfProjectFileContent = changeProjectDetail.DetailOfProjectFileContent;
                     }
 
                     if (!string.IsNullOrEmpty(changeProjectDetail.NOCOfProjectFileName))
                     {
-                        extingChangeProjectDetail.NOCOfProjectFileName = changeProjectDetail.NOCOfProjectFileName;
-                        extingChangeProjectDetail.NOCOfProjectFileType = changeProjectDetail.NOCOfProjectFileType;
-                        extingChangeProjectDetail.NOCOfProjectFileContent = changeProjectDetail.NOCOfProjectFileContent;
+                        existingChangeProjectDetail.NOCOfProjectFileName = changeProjectDetail.NOCOfProjectFileName;
+                        existingChangeProjectDetail.NOCOfProjectFileType = changeProjectDetail.NOCOfProjectFileType;
+                        existingChangeProjectDetail.NOCOfProjectFileContent = changeProjectDetail.NOCOfProjectFileContent;
                     }
 
                     if (!string.IsNullOrEmpty(changeProjectDetail.NotarizedFileName))
                     {
-                        extingChangeProjectDetail.NotarizedFileName = changeProjectDetail.NotarizedFileName;
-                        extingChangeProjectDetail.NotarizedFileType = changeProjectDetail.NotarizedFileType;
-                        extingChangeProjectDetail.NotarizedFileContent = changeProjectDetail.NotarizedFileContent;
+                        existingChangeProjectDetail.NotarizedFileName = changeProjectDetail.NotarizedFileName;
+                        existingChangeProjectDetail.NotarizedFileType = changeProjectDetail.NotarizedFileType;
+                        existingChangeProjectDetail.NotarizedFileContent = changeProjectDetail.NotarizedFileContent;
                     }
 
                     if (!string.IsNullOrEmpty(changeProjectDetail.SignatureFileName))
                     {
-                        extingChangeProjectDetail.SignatureFileName = changeProjectDetail.SignatureFileName;
-                        extingChangeProjectDetail.SignatureFileType = changeProjectDetail.SignatureFileType;
-                        extingChangeProjectDetail.SignatureFileContent = changeProjectDetail.SignatureFileContent;
+                        existingChangeProjectDetail.SignatureFileName = changeProjectDetail.SignatureFileName;
+                        existingChangeProjectDetail.SignatureFileType = changeProjectDetail.SignatureFileType;
+                        existingChangeProjectDetail.SignatureFileContent = changeProjectDetail.SignatureFileContent;
                     }
 
                     if (!string.IsNullOrEmpty(changeProjectDetail.PhotographFileName))
                     {
-                        extingChangeProjectDetail.PhotographFileName = changeProjectDetail.PhotographFileName;
-                        extingChangeProjectDetail.PhotographFileType = changeProjectDetail.PhotographFileType;
-                        extingChangeProjectDetail.PhotographFileContent = changeProjectDetail.PhotographFileContent;
+                        existingChangeProjectDetail.PhotographFileName = changeProjectDetail.PhotographFileName;
+                        existingChangeProjectDetail.PhotographFileType = changeProjectDetail.PhotographFileType;
+                        existingChangeProjectDetail.PhotographFileContent = changeProjectDetail.PhotographFileContent;
                     }
 
-                    extingChangeProjectDetail.AmountPaid = changeProjectDetail.AmountPaid > 0 ? changeProjectDetail.AmountPaid.Value : extingChangeProjectDetail.AmountPaid.Value;
+                    existingChangeProjectDetail.AmountPaid = changeProjectDetail.AmountPaid.HasValue  ? changeProjectDetail.AmountPaid : existingChangeProjectDetail.AmountPaid.HasValue ? existingChangeProjectDetail.AmountPaid:null;
 
-                    extingChangeProjectDetail.TransactionNumber = !string.IsNullOrEmpty(changeProjectDetail.TransactionNumber) ? changeProjectDetail.TransactionNumber : extingChangeProjectDetail.TransactionNumber;
+                    existingChangeProjectDetail.TransactionNumber = !string.IsNullOrEmpty(changeProjectDetail.TransactionNumber) ? changeProjectDetail.TransactionNumber : existingChangeProjectDetail.TransactionNumber;
 
-                    _db.Entry(extingChangeProjectDetail).State = EntityState.Modified;
+                    _db.Entry(existingChangeProjectDetail).State = EntityState.Modified;
                 }
                 else
                 {
