@@ -840,6 +840,43 @@ namespace GidaGkpWeb.Controllers
             }
             return null;
         }
+        public ActionResult LeasedDutyWork()
+        {
+            return View();
+        }
+        public ActionResult SaveNewLeasedDutyWork(string Id, string ApplicantionId, string AllotmentMoneyPaid, string BankGauranteeChallanNo, string PurchasedStampValue, string StampValueForBankGaurantee, string BankGauranteeDate, string EntityNameBehalfOfApplicant)
+        {
+            LeaseDeedDetail LeasedDutyWork1 = new LeaseDeedDetail();
+            LeasedDutyWork1.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
+            LeasedDutyWork1.ApplicationId = Convert.ToInt32(ApplicantionId);
+            LeasedDutyWork1.AllotmentMoneyPaid = Convert.ToDecimal(AllotmentMoneyPaid);
+            LeasedDutyWork1.BankGauranteeChallanNo = BankGauranteeChallanNo;
+            LeasedDutyWork1.PurchasedStampValue = Convert.ToDecimal(PurchasedStampValue);
+            LeasedDutyWork1.StampValueForBankGaurantee = Convert.ToDecimal(StampValueForBankGaurantee);
+            LeasedDutyWork1.BankGauranteeDate = Convert.ToDateTime(BankGauranteeDate);
+            LeasedDutyWork1.EntityNameBehalfOfApplicant = EntityNameBehalfOfApplicant;
+            LeasedDutyWork1.CreatedDate = DateTime.Now;
+
+            //user.CreatedBy = UserData.UserId;
+            //user.CreatedDate = DateTime.Now;
+            //user.IsActive = active == "on" ? true : false;
+            //user.Password = ConfigurationManager.AppSettings["GidaUserPassword"].ToString();
+            //user.UserType = "user";
+
+            //LeasedDutyDetails _details = new LeasedDutyDetails();
+            LeasedDeedDutyWorkDetails _details = new LeasedDeedDutyWorkDetails();
+            var result = _details.SaveLeasedDutyWork(LeasedDutyWork1);
+            if (result == Enums.CrudStatus.Saved)
+            {
+                SetAlertMessage("Leased Duty Work created", "Save Leased Duty Work");
+                //SendMailForGidaUserCreation(name, email, username, user.Password);
+            }
+            else
+                SetAlertMessage("Leased Duty Work creation failed", "Save Leased Duty Work");
+            return RedirectToAction("LeasedDutyWork");
+
+
+        }
     }
 
     public enum DocumentName
