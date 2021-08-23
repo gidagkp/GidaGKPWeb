@@ -1476,7 +1476,7 @@ namespace GidaGkpWeb.BAL
                         extingChangeProjectDetail.PhotographFileContent = changeProjectDetail.PhotographFileContent;
                     }
 
-                    extingChangeProjectDetail.AmountPaid = changeProjectDetail.AmountPaid > 0 ? changeProjectDetail.AmountPaid.Value : extingChangeProjectDetail.AmountPaid.Value;
+                    extingChangeProjectDetail.AmountPaid = changeProjectDetail.AmountPaid.HasValue  ? changeProjectDetail.AmountPaid : extingChangeProjectDetail.AmountPaid.HasValue ? extingChangeProjectDetail.AmountPaid:null;
 
                     extingChangeProjectDetail.TransactionNumber = !string.IsNullOrEmpty(changeProjectDetail.TransactionNumber) ? changeProjectDetail.TransactionNumber : extingChangeProjectDetail.TransactionNumber;
 
