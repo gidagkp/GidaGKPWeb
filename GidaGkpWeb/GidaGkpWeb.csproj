@@ -670,6 +670,7 @@
     <Content Include="Views\Applicant\Project.cshtml" />
     <Content Include="Views\Applicant\ProjectChangeRequest.cshtml" />
     <Content Include="Views\Applicant\ProjectPaymentDetail.cshtml" />
+    <Content Include="Views\Admin\LeasedDutyWork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
