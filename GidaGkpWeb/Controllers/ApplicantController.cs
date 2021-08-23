@@ -762,5 +762,116 @@ namespace GidaGkpWeb.Controllers
             HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             Response.Cookies.Add(faCookie);
         }
+        #region Project
+        public ActionResult Project()
+        {
+            //Squire box colofull
+            return View();
+        }
+        public ActionResult ProjectChangeRequest()
+        {
+            //Squire box colofull
+            return View();
+        }
+        public ActionResult ProjectPaymentDetail()
+        {
+            //Squire box colofull
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetProjectChangeRequest()
+        {
+            int userID = ((CustomPrincipal)User).Id;
+            if (userID > 0)
+            {
+                var data = new ApplicantDetails().GetApplicantProjectChangeDetail(userID);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult SaveProjectChangeRequest(FormCollection form)
+        {
+            if (form == null)
+            {
+                SetAlertMessage("Enter valid project change request parameters.", "Project Change");
+                return RedirectToAction("ProjectChangeRequest");
+            }
+
+            ApplicantProjectChangeDetail changeProjectDetail = new ApplicantProjectChangeDetail();
+            changeProjectDetail.ApplicantName = form["applicantName"];
+            changeProjectDetail.ApplicationId = Convert.ToInt32(form["applicantNumber"]);
+            changeProjectDetail.AllotmentNumber = form["allotmentNumber"];
+            changeProjectDetail.AreaToBeUsedForProject = form["areaToBeUsedForProject"];
+            changeProjectDetail.DetailOfProjectFileName = form["detailOfProjectFileName"];
+            changeProjectDetail.IsEffluentMore = form["isEffluentMore"];
+            changeProjectDetail.SSIRegistrationNo = form["ssiRegistration"];
+            changeProjectDetail.IsEmissionToSurrounding = form["isEmissionToSurrounding"];
+            if (Request.Files.Count > 0)
+            {
+                HttpPostedFileBase detailOfProjectFileName = Request.Files["detailOfProjectFileName"];
+                if (detailOfProjectFileName != null && detailOfProjectFileName.ContentLength > 0)
+                {
+                    changeProjectDetail.DetailOfProjectFileContent = new byte[detailOfProjectFileName.ContentLength];
+                    detailOfProjectFileName.InputStream.Read(changeProjectDetail.DetailOfProjectFileContent, 0, detailOfProjectFileName.ContentLength);
+                    changeProjectDetail.DetailOfProjectFileName = detailOfProjectFileName.FileName;
+                    changeProjectDetail.DetailOfProjectFileType = detailOfProjectFileName.ContentType;
+                }
+
+                HttpPostedFileBase nocOfProjectFileName = Request.Files["nocOfProjectFileName"];
+                if (nocOfProjectFileName != null && nocOfProjectFileName.ContentLength > 0)
+                {
+                    changeProjectDetail.NOCOfProjectFileContent = new byte[nocOfProjectFileName.ContentLength];
+                    nocOfProjectFileName.InputStream.Read(changeProjectDetail.NOCOfProjectFileContent, 0, nocOfProjectFileName.ContentLength);
+                    changeProjectDetail.NOCOfProjectFileName = nocOfProjectFileName.FileName;
+                    changeProjectDetail.NOCOfProjectFileType = nocOfProjectFileName.ContentType;
+                }
+
+                HttpPostedFileBase notarizedFileName = Request.Files["notarizedFileName"];
+                if (detailOfProjectFileName != null && detailOfProjectFileName.ContentLength > 0)
+                {
+                    changeProjectDetail.NotarizedFileContent = new byte[notarizedFileName.ContentLength];
+                    detailOfProjectFileName.InputStream.Read(changeProjectDetail.NotarizedFileContent, 0, notarizedFileName.ContentLength);
+                    changeProjectDetail.NotarizedFileName = notarizedFileName.FileName;
+                    changeProjectDetail.NotarizedFileType = notarizedFileName.ContentType;
+                }
+
+                HttpPostedFileBase signatureFileName = Request.Files["signatureFileName"];
+                if (detailOfProjectFileName != null && detailOfProjectFileName.ContentLength > 0)
+                {
+                    changeProjectDetail.SignatureFileContent = new byte[signatureFileName.ContentLength];
+                    signatureFileName.InputStream.Read(changeProjectDetail.SignatureFileContent, 0, signatureFileName.ContentLength);
+                    changeProjectDetail.SignatureFileName = signatureFileName.FileName;
+                    changeProjectDetail.SignatureFileType = signatureFileName.ContentType;
+                }
+
+                HttpPostedFileBase photographFileName = Request.Files["photographFileName"];
+                if (photographFileName != null && photographFileName.ContentLength > 0)
+                {
+                    changeProjectDetail.PhotographFileContent = new byte[photographFileName.ContentLength];
+                    photographFileName.InputStream.Read(changeProjectDetail.PhotographFileContent, 0, photographFileName.ContentLength);
+                    changeProjectDetail.PhotographFileName = photographFileName.FileName;
+                    changeProjectDetail.PhotographFileType = photographFileName.ContentType;
+                }
+            }
+
+            var saveResult = new ApplicantDetails().SaveApplicantProjectChangeDetail(changeProjectDetail);
+
+            if (saveResult == Enums.CrudStatus.Saved)
+            {
+                SetAlertMessage("Project change request saved", "Project Change");
+                return RedirectToAction("ProjectChangeRequest");
+            }
+            else
+            {
+                SetAlertMessage("Error in saving project change request.", "Project Change");
+                return RedirectToAction("ProjectChangeRequest");
+            }
+
+        }
+        #endregion
+
     }
 }

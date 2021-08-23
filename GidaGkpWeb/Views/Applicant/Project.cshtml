@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "ApplyForPlot";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+<link href="~/styles/style.css" rel="stylesheet" />
+
+<div class="main-container inner">
+    <!-- start: PAGE -->
+    <div class="main-content">
+
+        <div class="container" style="min-height: 65.6rem">           
+            <div class="row">
+                <div class="space30">
+
+                </div>
+            </div>
+            <!-- end: BREADCRUMB -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-white">
+                        <div class="panel-body">
+                            <div class="col-md-4">
+                                <a href="/Applicant/ProjectChangeRequest">
+                                    <div class="panel panel-dark" style="padding:15px 20px 15px 20px">
+                                        <h3> Change of project </h3>
+                                        <p>
+                                            <a id="requestForChangeProject" href="/Applicant/ProjectChangeRequest" class="btn btn-light-white">Request For Change of Project</a>
+                                        </p>
+                                    </div>
+
+                                </a>
+                            </div>
+                            @*<div class="col-md-4">
+                                <a href="/Applicant/ProjectPaymentDetail">
+                                    <div class="panel partition-green" style="padding:15px 20px 15px 20px">
+                                        <h3> Payment Details </h3>
+                                        <p>
+                                            <a id="feedInPaymentDetail" href="/Applicant/ProjectPaymentDetail" class="btn btn-light-white">feed in payment details</a>
+                                        </p>
+                                    </div>
+
+                                </a>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- end: PAGE -->
+</div>
+<style type="text/css">
+    .panel {
+        background-color: #FFFFFF;
+        -webkit-box-shadow: 0 1px 2px #c3c3c3;
+        -moz-box-shadow: 0 1px 2px #c3c3c3;
+        box-shadow: 0 1px 2px #c3c3c3;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        color: #8b91a0;
+        border: none;
+        padding: 25px;
+        position: relative;
+    }
+
+    .panel-dark, .partition-dark {
+        background-color: #f0c180;
+        position: relative;
+        background-color: #373b4a 0px;
+        color: white;
+        background-image: linear-gradient(top, #373b4a 0px, #2c2f3b 100%);
+    }
+
+    .panel-white, .partition-white {
+        background-color: white;
+        position: relative;
+        color: #8b91a0;
+    }
+
+    .panel-green, .partition-green {
+        background-color: #1fbba6;
+        position: relative;
+        background-color: #23d1b9 0px;
+        color: white;
+        background-image: linear-gradient(top, #23d1b9 0px, #1fbba6 100%);
+    }
+
+    .panel-orange, .partition-orange {
+        background-color: #f58a5c;
+        position: relative;
+        background-color: #f69b74 0px;
+        color: white;
+        background-image: linear-gradient(top, #f69b74 0px, #f58a5c 100%);
+    }
+
+    .panel-azure, .partition-azure {
+        background-color: #00bdcc;
+        position: relative;
+        background-color: #00d5e6 0px;
+        color: white;
+        background-image: linear-gradient(top, #00d5e6 0px, #00bdcc 100%);
+    }
+
+    .panel-yellow, .partition-yellow {
+        background-color: #ffb848;
+        position: relative;
+        background-color: #ffc261 0px;
+        color: white;
+        background-image: linear-gradient(top, #ffc261 0px, #ffb848 100%);
+    }
+
+    </style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Applicant/Project"]').parent().addClass('active')
+    });
+</script>
