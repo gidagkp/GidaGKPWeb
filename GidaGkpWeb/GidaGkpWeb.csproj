@@ -667,6 +667,9 @@
     <Content Include="Views\Admin\Invitation.cshtml" />
     <Content Include="Views\Admin\PrintAllotmentLetter.cshtml" />
     <Content Include="Views\Admin\SchemeWiseAllotmentList.cshtml" />
+    <Content Include="Views\Applicant\Project.cshtml" />
+    <Content Include="Views\Applicant\ProjectChangeRequest.cshtml" />
+    <Content Include="Views\Applicant\ProjectPaymentDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
