@@ -978,6 +978,7 @@ namespace GidaGkpWeb.BAL
                         where user.UserType != "Test"
                         select new
                         {
+                            PlotNumber = appLetter.TotalNoOfPlots,
                             ApplicationNumber = application != null ? application.ApplicationNumber : "",
                             ApplicationId = application != null ? application.ApplicationId : 0,
                             AadharNumber = user.AadharNumber,
@@ -1001,6 +1002,7 @@ namespace GidaGkpWeb.BAL
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
+                            PlotNumber = x.PlotNumber,
                             ApplicationNumber = x.ApplicationNumber,
                             ApplicationId = x.ApplicationId,
                             AadharNumber = x.AadharNumber,

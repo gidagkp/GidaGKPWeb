@@ -5,9 +5,6 @@
 @using GidaGkpWeb.Infrastructure.Utility;
 
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}
-@{
 
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
@@ -45,7 +42,7 @@
             <table class="table table_css_main_cl table-bordered">
                 <tr>
                     <th class="text-center">S.No.</th>
-                    <th class="text-center">Applicant Name</th>
+                    <th class="text-center">Name of Candidate</th>
                     <th class="text-center">Application Number</th>
                     <th class="text-center">Individual Applicant Approval by Screening Committee</th>
                     <th class="text-center">Invitation for interview/ lottery given or not </th>

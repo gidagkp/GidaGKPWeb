@@ -48,6 +48,16 @@ namespace GidaGkpWeb.Infrastructure.Utility
             return body;
         }
 
+        public static string GetINterviewScheduleResultMailEmail(string fullName,string result)
+        {
+            string body = string.Format("Hi {0}<br/><br/>", fullName);
+            body += "your interview Result is : <b>" + result + "</b> for plot allotment.";
+            body += "<br/><br/>";
+            body += "Thank You,<br/>";
+            body += "GIDA Gorakhpur Customer Support";
+            return body;
+        }
+
         public static string GetAppointmentSuccessEmail(string firstname, string middlename, string lastname, string doctorname, DateTime apptime, string deptname)
         {
             string body = string.Format("Hi {0} {1} {2}<br/><br/>", firstname, middlename, lastname);

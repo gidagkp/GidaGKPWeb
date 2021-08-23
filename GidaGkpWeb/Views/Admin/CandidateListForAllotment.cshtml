@@ -1,10 +1,9 @@
 ﻿@using DataLayer;
 @using GidaGkpWeb.Models;
 @{
-
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var UserData = ViewData["PageData"] as List<PageMasterModel>;
-
+    var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
+    int index = 1;
 }
 
 <link rel="stylesheet" href="~/styles/table_form.css">
@@ -15,7 +14,7 @@
         <h3 style="font-size:18px; padding-top: 13px;"> List of selected candidates after interview  </h3>
     </div>
     <div class="col-sm-12 col-xs-12" style="padding: 0px;">
-        <div class="row">
+        @*<div class="row">
             <div class="form-group col-sm-4 col-xs-12">
                 <label for="usertype">Scheme Type<span class="required-field"></span></label>
                 <select name="SchemeType" id="SchemeType" class="form-control"></select>
@@ -28,41 +27,34 @@
                 <label for="usertype">Sector Name<span class="required-field"></span></label>
                 <select name="SectorName" id="SectorName" class="form-control"></select>
             </div>
-        </div>
+        </div>*@
         <div class="table-responsive" style="padding:10px 0 0px 0;">
             <table class="table table_css_main_cl table-bordered">
                 <tr>
                     <th class="text-center">S.No.</th>
-                    <th class="text-center">Application Number</th>
                     <th class="text-center">Name of Candidate</th>
+                    <th class="text-center">Application Number</th>
                     <th class="text-center">Plot No </th>
-                    <th class="text-center">Interview Result </th>                    
+                    <th class="text-center">Interview Result </th>
                     <th class="text-center">Action</th>
                 </tr>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">45675643</td>
-                    <td class="text-center">Rakesh</td>
-                    <td class="text-center">K15</td>
-                    <td class="text-center"><select><option>Selected </option> <option>Waiting </option> <option>Rejected </option></select></td>                    
-                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"> <i class="fa fa-envelope" aria-hidden="true"></i> Send </button></td>
-                </tr>
-                <tr>
-                    <td class="text-center">2</td>
-                    <td class="text-center">45675644</td>
-                    <td class="text-center">Rohit</td>
-                    <td class="text-center">K16</td>
-                    <td class="text-center"><select><option>Selected </option> <option>Waiting </option> <option>Rejected </option></select></td>                    
-                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"><i class="fa fa-envelope" aria-hidden="true"></i> Send </button></td>
-                </tr>
-                <tr>
-                    <td class="text-center">3</td>
-                    <td class="text-center">45675645</td>
-                    <td class="text-center">Rahul</td>
-                    <td class="text-center">K17</td>
-                    <td class="text-center"><select><option>Selected </option> <option>Waiting </option> <option>Rejected </option></select></td>
-                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"> <i class="fa fa-envelope" aria-hidden="true"></i> Send</button></td>
-                </tr>
+                @foreach (var data in UserDataModel)
+                {
+                    <tr>
+                        <td class="text-center">@index</td>
+                        <td class="text-center">@data.FullName</td>
+                        <td class="text-center">@data.ApplicationNumber</td>
+                        <td class="text-center">@data.PlotNumber</td>
+                        <td class="text-center"><select><option>Selected </option> <option>Waiting </option> <option>Rejected </option></select></td>
+                        <td class="text-center">
+                            <a style="background-color: green; color: white;" class="btn btn-success"
+                               href="/Admin/SendMailtoApplicantForInterviewResult?applicationId=@data.ApplicationId">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>Send
+                            </a>
+                        </td>
+                    </tr>
+                    index++;
+                }
             </table>
         </div>
         <div class="col-sm-12 col-xs-12" style="padding:0px 0 20px 0;">
