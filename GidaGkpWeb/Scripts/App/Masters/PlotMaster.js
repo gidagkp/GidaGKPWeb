@@ -128,7 +128,7 @@ $(document).ready(function () {
                     $(this).find('td').eq(2).find('select').val(data[index].PlotRange);
                     $(this).find('td').eq(3).find('input').val(data[index].PlotRate);
                     if (data[index].PlotSideCorner)
-                        $(this).find('td').eq(4).find('input[type="checkbox"]').eq(0).prop('checked',true)
+                        $(this).find('td').eq(4).find('input[type="checkbox"]').eq(0).prop('checked', true)
                     if (data[index].PlotSideWideRoad)
                         $(this).find('td').eq(4).find('input[type="checkbox"]').eq(1).prop('checked', true)
                     if (data[index].PlotSideParkFacing)
@@ -380,6 +380,8 @@ $(document).ready(function () {
         $('body').append('<div class="modal-backdrop fade in"></div>');
     });
 
+
+
 });
 
 function editUser(id) {
@@ -444,5 +446,26 @@ function editPageMaster(id) {
     $('body').append('<div class="modal-backdrop fade in"></div>');
 }
 
+
+function sendEmailForAllotment(userid) {
+    var status = $('*[data-Status="' + userid + '"]').val();
+    $.ajax({
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        type: 'POST',
+        data: '{userId: "' + userid + '",status: "' + status + '" }',
+        url: '/Admin/SendMailtoApplicantForInterviewResult',
+        success: function (data) {
+            location.reload();
+
+        },
+        failure: function (response) {
+            console.log(response);
+        },
+        error: function (response) {
+            console.log(response.responseText);
+        }
+    });
+}
 
 

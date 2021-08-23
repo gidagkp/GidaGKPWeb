@@ -12,6 +12,7 @@ namespace GidaGkpWeb.Models
             ApplicantDocument = new ApplicantUploadDocumentModel();
         }
         public int Id { get; set; }
+        public int UserId { get; set; }
         public int ApplicationId { get; set; }
         public string ApplicationNumber { get; set; }
         public string PlotArea { get; set; }
@@ -64,6 +65,7 @@ namespace GidaGkpWeb.Models
         public string SIDocumentComment { get; set; }
         public string InterviewDateTime { get; set; }
         public string PlotNumber { get; set; }
+        public string InterviewLetterStatus { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 

@@ -615,10 +615,11 @@ namespace GidaGkpWeb.Controllers
             return View();
         }
 
-        public ActionResult SendMailtoApplicantForInterview(int applicationId)
+        public ActionResult SendMailtoApplicantForInterview(int userid)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.UserId == userid).FirstOrDefault();
+            _details.ApplicationInvitationLetterStatusChnage(userid, "InvitationSentForInterview");
             this.SendMailToApplicantInterview(data.FullName, data.Email, data.InterviewDateTime);
             SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
             return RedirectToAction("CandidateListForInterview");
@@ -643,18 +644,21 @@ namespace GidaGkpWeb.Controllers
         public ActionResult CandidateListForAllotment()
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview();
+            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "InvitationSentForInterview").ToList();
             ViewData["UserDetail"] = data;
             return View();
         }
 
-        public ActionResult SendMailtoApplicantForInterviewResult(int applicationId)
+        [HttpPost]
+        public JsonResult SendMailtoApplicantForInterviewResult(int userId, string status)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.ApplicationId == applicationId).FirstOrDefault();
-            this.SendMailToApplicantInterviewResult(data.FullName, data.Email, "Selected");
+            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.UserId == userId).FirstOrDefault();
+            _details.ApplicationInvitationLetterStatusChnage(userId, status);
+            this.SendMailToApplicantInterviewResult(data.FullName, data.Email, status);
             SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
-            return RedirectToAction("CandidateListForAllotment");
+            //return RedirectToAction("CandidateListForAllotment");
+            return Json(-1, JsonRequestBehavior.AllowGet);
         }
 
         private async Task SendMailToApplicantInterviewResult(string fullName, string email, string result)
@@ -675,6 +679,9 @@ namespace GidaGkpWeb.Controllers
         }
         public ActionResult SchemeWiseAllotmentList()
         {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "Selected").ToList();
+            ViewData["UserDetail"] = data;
             return View();
         }
         public ActionResult AllotmentStatus()

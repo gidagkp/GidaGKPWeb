@@ -998,7 +998,9 @@ namespace GidaGkpWeb.BAL
                             UserName = user.UserName,
                             IsActive = user.IsActive,
                             ApplicationStatus = application.ApprovalStatus,
-                            InterviewDateTime = appLetter.InterviewDateTime
+                            InterviewDateTime = appLetter.InterviewDateTime,
+                            UserId = user.Id,
+                            InterviewLetterStatus = appLetter.InterviewLetterStatus
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
@@ -1023,6 +1025,8 @@ namespace GidaGkpWeb.BAL
                             UserName = x.UserName,
                             IsActive = x.IsActive,
                             ApplicationStatus = x.ApplicationStatus,
+                            UserId = x.UserId,
+                            InterviewLetterStatus = x.InterviewLetterStatus
                         }).ToList();
             }
             catch (DbEntityValidationException e)
@@ -1035,6 +1039,54 @@ namespace GidaGkpWeb.BAL
                     }
                 }
                 return new List<ApplicationUserModel>();
+            }
+        }
+
+        public Enums.CrudStatus ApplicationInvitationLetterStatusChnage(int userid, string status, string comment = "")
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                if (userid > 0)
+                {
+                    var inviationDetail = _db.ApplicantInvitationLetters.Where(x => x.UserId == userid).FirstOrDefault();
+                    if (inviationDetail != null)
+                    {
+                        inviationDetail.InterviewLetterStatus = status;
+                        //if (UserData.Designation == "Assistant Manager")
+                        //{
+                        //    transactionDetail.AMApprovalStatus = status;
+                        //    transactionDetail.AMComment = comment;
+                        //}
+                        //else if (UserData.Designation == "Manager")
+                        //{
+                        //    transactionDetail.MApprovalStatus = status;
+                        //    transactionDetail.MComment = comment;
+                        //}
+                        //else if (UserData.Designation == "General Manager")
+                        //{
+                        //    transactionDetail.GMApprovalStatus = status;
+                        //    transactionDetail.GMComment = comment;
+                        //}
+
+                        _db.Entry(inviationDetail).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                        return Enums.CrudStatus.Updated;
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
             }
         }
     }
