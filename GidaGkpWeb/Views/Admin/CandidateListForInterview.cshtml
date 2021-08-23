@@ -1,15 +1,7 @@
-﻿@using DataLayer;
-@using GidaGkpWeb.Models;
-@using GidaGkpWeb.Global
-@using GidaGkpWeb.Infrastructure.Authentication;
-@using GidaGkpWeb.Infrastructure.Utility;
-
-@{
-
+﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
-    int index = 1;
 }
+
 <link rel="stylesheet" href="~/styles/table_form.css">
 <script src="~/Scripts/App/Masters/PlotMaster.js"></script>
 <script src="~/Scripts/App/Masters/navigation.js"></script>
@@ -42,33 +34,36 @@
             <table class="table table_css_main_cl table-bordered">
                 <tr>
                     <th class="text-center">S.No.</th>
-                    <th class="text-center">Name of Candidate</th>
                     <th class="text-center">Application Number</th>
                     <th class="text-center">Individual Applicant Approval by Screening Committee</th>
                     <th class="text-center">Invitation for interview/ lottery given or not </th>
                     <th class="text-center">Action</th>
                 </tr>
-                @foreach (var data in UserDataModel)
-                {
-                    <tr>
-                        <td class="text-center">@index</td>
-                        <td class="text-center">@data.FullName</td>
-                        <td class="text-center">@data.ApplicationNumber</td>
-                        <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
-                        <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
-                        <td class="text-center">
-                            <a style="background-color: green; color: white;" class="btn btn-success"
-                               href="/Admin/SendMailtoApplicantForInterview?applicationId=@data.ApplicationId">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>Send
-                            </a>
-                        </td>
-                    </tr>
-                    index++;
-                }
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">45675643</td>
+                    <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
+                    <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
+                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"> <i class="fa fa-envelope" aria-hidden="true"></i> Send </button></td>
+                </tr>
+                <tr>
+                    <td class="text-center">2</td>
+                    <td class="text-center">45675643</td>
+                    <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
+                    <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
+                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"><i class="fa fa-envelope" aria-hidden="true"></i> Send </button></td>
+                </tr>
+                <tr>
+                    <td class="text-center">3</td>
+                    <td class="text-center">45675643</td>
+                    <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
+                    <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
+                    <td class="text-center"><button type="button" class="sendnotictn" value="sendNoti"> <i class="fa fa-envelope" aria-hidden="true"></i> Send</button></td>
+                </tr>
             </table>
         </div>
-        @*<div class="col-sm-12 col-xs-12" style="padding:0px 0 20px 0;">
-                <button type="button" class="pull-right addCommittee_btn">Sumbit</button>
-            </div>*@
+        <div class="col-sm-12 col-xs-12" style="padding:0px 0 20px 0;">
+            <button type="button" class="pull-right addCommittee_btn">Sumbit</button>
+        </div>
     </div>
 </div>

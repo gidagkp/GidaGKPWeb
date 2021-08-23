@@ -131,58 +131,10 @@ namespace GidaGkpWeb.BAL
                             GST = plotDetail != null ? plotDetail.GST.ToString() : "",
                             EarnestMoney = plotDetail != null ? plotDetail.EarnestMoney.ToString() : "",
                             SchemeNameId = plotDetail != null ? plotDetail.SchemeName.ToString() : "",
-                            AMPaymentStatus = transaction != null ? transaction.AMApprovalStatus : "",
-                            MPaymentStatus = transaction != null ? transaction.MApprovalStatus : "",
-                            GMPaymentStatus = transaction != null ? transaction.GMApprovalStatus : "",
-                            AMDocumentStatus = doc != null ? doc.AMApprovalStatus : "",
-                            ClerkDocumentStatus = doc != null ? doc.ClerkApprovalStatus : "",
-                            SIDocumentStatus = doc != null ? doc.SIApprovalStatus : "",
-                            AMPaymentComment = transaction != null ? transaction.AMComment : "",
-                            MPaymentComment = transaction != null ? transaction.MComment : "",
-                            GMPaymentComment = transaction != null ? transaction.GMComment : "",
-                            AMDocumentComment = doc != null ? doc.AMComment : "",
-                            ClerkDocumentComment = doc != null ? doc.ClerkComment : "",
-                            SIDocumentComment = doc != null ? doc.SIComment : "",
-                            ApplicantDocument = new ApplicantUploadDocumentModel()
-                            {
-                                ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
-                                ApplicantEduTechQualificationFileType = doc.ApplicantEduTechQualificationFileType,
-                                ApplicantPhotoFileName = doc.ApplicantPhotoFileName,
-                                ApplicantPhotoFileType = doc.ApplicantPhotoFileType,
-                                ApplicantSignatureFileName = doc.ApplicantSignatureFileName,
-                                ApplicantSignatureFileType = doc.ApplicantSignatureFileType,
-                                ApplicationId = doc.ApplicationId,
-                                BalanceSheetFileName = doc.BalanceSheetFileName,
-                                BalanceSheetFileType = doc.BalanceSheetFileType,
-                                BankVerifiedSignatureFileName = doc.BankVerifiedSignatureFileName,
-                                BankVerifiedSignatureFileType = doc.BankVerifiedSignatureFileType,
-                                DocProofForIndustrialEstablishedOutsideGidaFileName = doc.DocProofForIndustrialEstablishedOutsideGidaFileName,
-                                DocProofForIndustrialEstablishedOutsideGidaFileType = doc.DocProofForIndustrialEstablishedOutsideGidaFileType,
-                                ExperienceProofFileName = doc.ExperienceProofFileName,
-                                ExperienceProofFileType = doc.ExperienceProofFileType,
-                                FinDetailsEstablishedIndustriesFileName = doc.FinDetailsEstablishedIndustriesFileName,
-                                FinDetailsEstablishedIndustriesFileType = doc.FinDetailsEstablishedIndustriesFileType,
-                                ITReturnFileName = doc.ITReturnFileName,
-                                ITReturnFileType = doc.ITReturnFileType,
-                                MemorendumFileName = doc.MemorendumFileName,
-                                MemorendumFileType = doc.MemorendumFileType,
-                                OtherDocForProposedIndustryFileName = doc.OtherDocForProposedIndustryFileName,
-                                OtherDocForProposedIndustryFileType = doc.OtherDocForProposedIndustryFileType,
-                                PreEstablishedIndustriesDocFileName = doc.PreEstablishedIndustriesDocFileName,
-                                PreEstablishedIndustriesDocFileType = doc.PreEstablishedIndustriesDocFileType,
-                                ProposedPlanLandUsesFileName = doc.ProposedPlanLandUsesFileName,
-                                ProjectReportFileName = doc.ProjectReportFileName,
-                                ProjectReportFileType = doc.ProjectReportFileType,
-                                ProposedPlanLandUsesFileType = doc.ProposedPlanLandUsesFileType,
-                                ScanAddressProofFileName = doc.ScanAddressProofFileName,
-                                ScanAddressProofFileType = doc.ScanAddressProofFileType,
-                                ScanCastCertFileName = doc.ScanCastCertFileName,
-                                ScanCastCertFileType = doc.ScanCastCertFileType,
-                                ScanIDFileName = doc.ScanIDFileName,
-                                ScanIDFileType = doc.ScanIDFileType,
-                                ScanPANFileName = doc.ScanPANFileName,
-                                ScanPANFileType = doc.ScanPANFileType,
-                            }
+                            PaymentStatus = transaction != null ? transaction.ApprovalStatus : "",
+                            DocumentStatus = doc != null ? doc.ApprovalStatus : "",
+                            PaymentRejectionComment = transaction != null ? transaction.RejectedComment : "",
+                            DocumentRejectionComment = doc != null ? doc.RejectedComment : "",
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
@@ -221,51 +173,8 @@ namespace GidaGkpWeb.BAL
                             FormFee = x.ApplicationFee,
                             GSTAmount = x.GST,
                             SchemeNameId = x.SchemeNameId,
-                            AMPaymentStatus = !string.IsNullOrEmpty(x.AMPaymentComment) ? x.AMPaymentStatus + "(Comment : " + x.AMPaymentComment + ")" : x.AMPaymentStatus,
-                            MPaymentStatus = !string.IsNullOrEmpty(x.MPaymentComment) ? x.MPaymentStatus + "(Comment : " + x.MPaymentComment + ")" : x.MPaymentStatus,
-                            GMPaymentStatus = !string.IsNullOrEmpty(x.GMPaymentComment) ? x.GMPaymentStatus + "(Comment : " + x.GMPaymentComment + ")" : x.GMPaymentStatus,
-                            AMDocumentStatus = !string.IsNullOrEmpty(x.AMDocumentComment) ? x.AMDocumentStatus + "(Comment : " + x.AMDocumentComment + ")" : x.AMDocumentStatus,
-                            ClerkDocumentStatus = !string.IsNullOrEmpty(x.ClerkDocumentComment) ? x.ClerkDocumentStatus + "(Comment : " + x.ClerkDocumentComment + ")" : x.ClerkDocumentStatus,
-                            SIDocumentStatus = !string.IsNullOrEmpty(x.SIDocumentComment) ? x.SIDocumentStatus + "(Comment : " + x.SIDocumentComment + ")" : x.SIDocumentStatus,
-                            ApplicantDocument = new ApplicantUploadDocumentModel()
-                            {
-                                ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
-                                ScanPANFileType = x.ApplicantDocument.ScanPANFileType,
-                                ScanPANFileName = x.ApplicantDocument.ScanPANFileName,
-                                ScanIDFileType = x.ApplicantDocument.ScanIDFileType,
-                                ScanIDFileName = x.ApplicantDocument.ScanIDFileName,
-                                ScanCastCertFileType = x.ApplicantDocument.ScanCastCertFileType,
-                                ApplicantEduTechQualificationFileType = x.ApplicantDocument.ApplicantEduTechQualificationFileType,
-                                ApplicantPhotoFileName = x.ApplicantDocument.ApplicantPhotoFileName,
-                                ApplicantPhotoFileType = x.ApplicantDocument.ApplicantPhotoFileType,
-                                ApplicantSignatureFileName = x.ApplicantDocument.ApplicantSignatureFileName,
-                                ApplicantSignatureFileType = x.ApplicantDocument.ApplicantSignatureFileType,
-                                BalanceSheetFileName = x.ApplicantDocument.BalanceSheetFileName,
-                                BalanceSheetFileType = x.ApplicantDocument.BalanceSheetFileType,
-                                BankVerifiedSignatureFileName = x.ApplicantDocument.BankVerifiedSignatureFileName,
-                                BankVerifiedSignatureFileType = x.ApplicantDocument.BankVerifiedSignatureFileType,
-                                DocProofForIndustrialEstablishedOutsideGidaFileName = x.ApplicantDocument.DocProofForIndustrialEstablishedOutsideGidaFileName,
-                                DocProofForIndustrialEstablishedOutsideGidaFileType = x.ApplicantDocument.DocProofForIndustrialEstablishedOutsideGidaFileType,
-                                ExperienceProofFileName = x.ApplicantDocument.ExperienceProofFileName,
-                                ExperienceProofFileType = x.ApplicantDocument.ExperienceProofFileType,
-                                FinDetailsEstablishedIndustriesFileName = x.ApplicantDocument.FinDetailsEstablishedIndustriesFileName,
-                                FinDetailsEstablishedIndustriesFileType = x.ApplicantDocument.FinDetailsEstablishedIndustriesFileType,
-                                ITReturnFileName = x.ApplicantDocument.ITReturnFileName,
-                                ITReturnFileType = x.ApplicantDocument.ITReturnFileType,
-                                MemorendumFileName = x.ApplicantDocument.MemorendumFileName,
-                                MemorendumFileType = x.ApplicantDocument.MemorendumFileType,
-                                OtherDocForProposedIndustryFileName = x.ApplicantDocument.OtherDocForProposedIndustryFileName,
-                                OtherDocForProposedIndustryFileType = x.ApplicantDocument.OtherDocForProposedIndustryFileType,
-                                PreEstablishedIndustriesDocFileName = x.ApplicantDocument.PreEstablishedIndustriesDocFileName,
-                                PreEstablishedIndustriesDocFileType = x.ApplicantDocument.PreEstablishedIndustriesDocFileType,
-                                ProjectReportFileName = x.ApplicantDocument.ProjectReportFileName,
-                                ProjectReportFileType = x.ApplicantDocument.ProjectReportFileType,
-                                ProposedPlanLandUsesFileName = x.ApplicantDocument.ProposedPlanLandUsesFileName,
-                                ProposedPlanLandUsesFileType = x.ApplicantDocument.ProposedPlanLandUsesFileType,
-                                ScanAddressProofFileName = x.ApplicantDocument.ScanAddressProofFileName,
-                                ScanAddressProofFileType = x.ApplicantDocument.ScanAddressProofFileType,
-                                ScanCastCertFileName = x.ApplicantDocument.ScanCastCertFileName
-                            }
+                            PaymentStatus = x.PaymentStatus == "Not Approved" ? x.PaymentStatus + "(Comment : " + x.PaymentRejectionComment + ")" : x.PaymentStatus,
+                            DocumentStatus = x.DocumentStatus == "Not Approved" ? x.DocumentStatus + "(Comment : " + x.DocumentRejectionComment + ")" : x.DocumentStatus,
                         }).ToList();
             }
             catch (DbEntityValidationException e)
@@ -732,9 +641,7 @@ namespace GidaGkpWeb.BAL
                 if (permissionList.Any())
                 {
                     var roleId = permissionList[0].RoleId;
-                    var DepartmentId = permissionList[0].DepartmentId;
-                    var DesignationId = permissionList[0].DesignationId;
-                    var dataOfRole = _db.RoleWisePermissions.Where(x => x.RoleId == roleId && x.DepartmentId == DepartmentId && x.DesignationId == DesignationId).ToList();
+                    var dataOfRole = _db.RoleWisePermissions.Where(x => x.RoleId == roleId).ToList();
                     dataOfRole.ForEach(x =>
                     {
                         _db.Entry(x).State = EntityState.Deleted;
@@ -818,22 +725,8 @@ namespace GidaGkpWeb.BAL
                     var transactionDetail = _db.ApplicantTransactionDetails.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (transactionDetail != null)
                     {
-                        if (UserData.Designation == "Assistant Manager")
-                        {
-                            transactionDetail.AMApprovalStatus = status;
-                            transactionDetail.AMComment = comment;
-                        }
-                        else if (UserData.Designation == "Manager")
-                        {
-                            transactionDetail.MApprovalStatus = status;
-                            transactionDetail.MComment = comment;
-                        }
-                        else if (UserData.Designation == "General Manager")
-                        {
-                            transactionDetail.GMApprovalStatus = status;
-                            transactionDetail.GMComment = comment;
-                        }
-
+                        transactionDetail.ApprovalStatus = status;
+                        transactionDetail.RejectedComment = comment;
                         _db.Entry(transactionDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                         return Enums.CrudStatus.Updated;
@@ -864,22 +757,8 @@ namespace GidaGkpWeb.BAL
                     var documentDetail = _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (documentDetail != null)
                     {
-                        if (UserData.Designation == "Assistant Manager")
-                        {
-                            documentDetail.AMApprovalStatus = status;
-                            documentDetail.AMComment = comment;
-                        }
-                        else if (UserData.Designation == "Clerk")
-                        {
-                            documentDetail.ClerkApprovalStatus = status;
-                            documentDetail.ClerkComment = comment;
-                        }
-                        else if (UserData.Designation == "Section Incharge")
-                        {
-                            documentDetail.SIApprovalStatus = status;
-                            documentDetail.SIComment = comment;
-                        }
-
+                        documentDetail.ApprovalStatus = status;
+                        documentDetail.RejectedComment = comment;
                         _db.Entry(documentDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                         return Enums.CrudStatus.Updated;
@@ -941,100 +820,6 @@ namespace GidaGkpWeb.BAL
                     }
                 }
                 return new List<PlotMasterModel>();
-            }
-        }
-
-        public ApplicantUploadDoc GetDocumentByApplciationId(int applicantId)
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                return _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicantId).FirstOrDefault();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return new ApplicantUploadDoc();
-            }
-        }
-
-        public List<ApplicationUserModel> GetApplicantSubmittedForInterview()
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                return (from user in _db.ApplicantUsers
-                        join appLetter in _db.ApplicantInvitationLetters on user.Id equals appLetter.UserId
-                        join applicant1 in _db.ApplicantDetails on user.Id equals applicant1.UserId into applicant2
-                        from applicant in applicant2.DefaultIfEmpty()
-                        join application1 in _db.ApplicantApplicationDetails on user.Id equals application1.UserId into application2
-                        from application in application2.DefaultIfEmpty()
-                        where user.UserType != "Test"
-                        select new
-                        {
-                            PlotNumber = appLetter.TotalNoOfPlots,
-                            ApplicationNumber = application != null ? application.ApplicationNumber : "",
-                            ApplicationId = application != null ? application.ApplicationId : 0,
-                            AadharNumber = user.AadharNumber,
-                            ContactNo = user.ContactNo,
-                            CreationDate = user.CreationDate,
-                            Email = user.Email,
-                            FatherName = applicant != null ? applicant.FName : "",
-                            CAddress = applicant != null ? applicant.CAddress : "",
-                            PAddress = applicant != null ? applicant.PAddress : "",
-                            FullName = applicant != null ? applicant.FullApplicantName : "",
-                            Id = user.Id,
-                            SchemeName = user.SchemeName,
-                            SchemeType = user.SchemeType,
-                            SectorName = user.SectorName,
-                            UserType = user.UserType,
-                            DOB = user.DOB,
-                            UserName = user.UserName,
-                            IsActive = user.IsActive,
-                            ApplicationStatus = application.ApprovalStatus,
-                            InterviewDateTime = appLetter.InterviewDateTime
-                        }).Distinct().ToList()
-                        .Select(x => new ApplicationUserModel()
-                        {
-                            PlotNumber = x.PlotNumber,
-                            ApplicationNumber = x.ApplicationNumber,
-                            ApplicationId = x.ApplicationId,
-                            AadharNumber = x.AadharNumber,
-                            ContactNo = x.ContactNo,
-                            CreationDate = x.CreationDate,
-                            Email = x.Email,
-                            FatherName = x.FatherName,
-                            CAddress = x.CAddress,
-                            PAddress = x.PAddress,
-                            FullName = x.FullName,
-                            Id = x.Id,
-                            SchemeName = x.SchemeName,
-                            SchemeType = x.SchemeType,
-                            SectorName = x.SectorName,
-                            UserType = x.UserType,
-                            DOB = x.DOB != null ? x.DOB.Value.ToString("dd/MM/yyyy") : string.Empty,
-                            InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : string.Empty,
-                            UserName = x.UserName,
-                            IsActive = x.IsActive,
-                            ApplicationStatus = x.ApplicationStatus,
-                        }).ToList();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return new List<ApplicationUserModel>();
             }
         }
     }
