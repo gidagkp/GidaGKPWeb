@@ -893,6 +893,11 @@ namespace GidaGkpWeb.Controllers
 
 
         }
+        public ActionResult SchemeWiseInvitationList()
+        {
+            return View();
+        }
+
     }
 
     public enum DocumentName
