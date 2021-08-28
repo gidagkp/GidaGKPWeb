@@ -692,6 +692,10 @@ namespace GidaGkpWeb.Controllers
         {
             return View();
         }
+        public ActionResult IndustrialDashboard()
+        {
+            return View();
+        }
         public ActionResult Logout()
         {
             Session.Abandon();

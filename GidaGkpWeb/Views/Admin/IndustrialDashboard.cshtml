@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "IndustrialDashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/styles/style.css" rel="stylesheet" />
+
+<div class="main-container inner">
+    <!-- start: PAGE -->
+    <div class="main-content" style="min-height:350px">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card bg-primary text-center white">
+                        <div class="card-header mt-3 mb-0">
+                            <h1 class="white my-0">
+                                Industrial Details
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end: BREADCRUMB -->
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h3 class="text-bold-700">
+                                            Masters
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/CreatePlotMaster">Create Plot Master</a>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h3 class="text-bold-700">
+                                            Industrial Flow
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/SchemeWiseApplicantList">Schemewise Applicant List and Application Status</a>
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/Invitation">Generate Invitation Letter for Interview/Lottery</a>
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/CandidateListForInterview">Send Invitation to Applicant for Interview/Lottery</a>
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/CandidateListForAllotment">List of Selected Candidate in Interview/Lottery</a>
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/SchemeWiseAllotmentList">Schemewise To be Allotee List </a>
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/LeasedDutyWork">Seeking the response for Lease Deed Work </a>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h3 class="text-bold-700">
+                                            Reports
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/ApplicantUser">Total Applicant Users</a>
+                                                @*<a href="/Admin/PrintAllotmentLetter">Schemewise Applicant List and Application Status</a>*@
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/ApplicantFormSubmitted">Application Form Submitted but Payment not Done</a>
+                                                @*<a href="/Admin/PrintAllotmentLetter">Generate Invitation Letter for Interview/Lottery</a>*@
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/ApplicantTransactionCompleted">Total Applicant Users whose Transaction Done</a>
+                                                @*<a href="/Admin/PrintAllotmentLetter">Send Invitation to Applicant for Interview/Lottery</a>*@
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa ft-chevron-right">
+                                            </i>
+                                            <p class="text-muted display-inline">
+                                                <a href="/Admin/ApplicantFinancialDetails">Financial Details of Applicant</a>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- end: PAGE -->
+</div><br />
+<style type="text/css">
+    .panel {
+        background-color: #FFFFFF;
+        -webkit-box-shadow: 0 1px 2px #c3c3c3;
+        -moz-box-shadow: 0 1px 2px #c3c3c3;
+        box-shadow: 0 1px 2px #c3c3c3;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        color: #8b91a0;
+        border: none;
+        padding: 25px;
+        position: relative;
+    }
+
+    .panel-dark, .partition-dark {
+        background-color: #f0c180;
+        position: relative;
+        background-color: #373b4a 0px;
+        color: white;
+        background-image: linear-gradient(top, #373b4a 0px, #2c2f3b 100%);
+    }
+
+    .panel-white, .partition-white {
+        background-color: white;
+        position: relative;
+        color: #8b91a0;
+    }
+
+    .panel-green, .partition-green {
+        background-color: #1fbba6;
+        position: relative;
+        background-color: #23d1b9 0px;
+        color: white;
+        background-image: linear-gradient(top, #23d1b9 0px, #1fbba6 100%);
+    }
+
+    .panel-orange, .partition-orange {
+        background-color: #f58a5c;
+        position: relative;
+        background-color: #f69b74 0px;
+        color: white;
+        background-image: linear-gradient(top, #f69b74 0px, #f58a5c 100%);
+    }
+
+    .panel-azure, .partition-azure {
+        background-color: #00bdcc;
+        position: relative;
+        background-color: #00d5e6 0px;
+        color: white;
+        background-image: linear-gradient(top, #00d5e6 0px, #00bdcc 100%);
+    }
+
+    .panel-yellow, .partition-yellow {
+        background-color: #ffb848;
+        position: relative;
+        background-color: #ffc261 0px;
+        color: white;
+        background-image: linear-gradient(top, #ffc261 0px, #ffb848 100%);
+    }
+</style>
+
