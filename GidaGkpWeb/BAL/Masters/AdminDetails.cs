@@ -1045,6 +1045,7 @@ namespace GidaGkpWeb.BAL
                 _db = new GidaGKPEntities();
                 return (from user in _db.ApplicantUsers
                         join appLetter in _db.ApplicantInvitationLetters on user.Id equals appLetter.UserId
+                        join plotDetail in _db.ApplicantPlotDetails on user.Id equals plotDetail.UserId
                         join applicant1 in _db.ApplicantDetails on user.Id equals applicant1.UserId into applicant2
                         from applicant in applicant2.DefaultIfEmpty()
                         join application1 in _db.ApplicantApplicationDetails on user.Id equals application1.UserId into application2
@@ -1064,9 +1065,9 @@ namespace GidaGkpWeb.BAL
                             PAddress = applicant != null ? applicant.PAddress : "",
                             FullName = applicant != null ? applicant.FullApplicantName : "",
                             Id = user.Id,
-                            SchemeName = user.SchemeName,
-                            SchemeType = user.SchemeType,
-                            SectorName = user.SectorName,
+                            SchemeName = plotDetail.SchemeName,
+                            SchemeType = plotDetail.SchemeType,
+                            SectorName = plotDetail.SectorName,
                             UserType = user.UserType,
                             DOB = user.DOB,
                             UserName = user.UserName,
@@ -1090,9 +1091,9 @@ namespace GidaGkpWeb.BAL
                             PAddress = x.PAddress,
                             FullName = x.FullName,
                             Id = x.Id,
-                            SchemeName = x.SchemeName,
-                            SchemeType = x.SchemeType,
-                            SectorName = x.SectorName,
+                            SchemeName = x.SchemeName.ToString(),
+                            SchemeType = x.SchemeType.ToString(),
+                            SectorName = x.SectorName.ToString(),
                             UserType = x.UserType,
                             DOB = x.DOB != null ? x.DOB.Value.ToString("dd/MM/yyyy") : string.Empty,
                             InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : string.Empty,

@@ -2,11 +2,11 @@
 @using GidaGkpWeb.Models;
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
-    int index = 1;
+    //var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
+    //int index = 1;
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
-<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/ApplicantAllotmentReport.js"></script>
 <script src="~/Scripts/App/Masters/navigation.js"></script>
 <style>
     button.submit_plot_master353 {
@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 30px;">
-            <h3 style="font-size:18px;">Total Allotment List </h3>
+            <h3 style="font-size:18px;">Selected Candidate Report</h3>
             <hr />
         </div>
 
@@ -34,19 +34,16 @@
             <label for="usertype">Scheme Name<span class="required-field"></span></label>
             <select name="SchemeName" id="SchemeName" class="form-control"></select>
         </div>
-        <div class="form-group col-sm-4 col-xs-12">
+        @*<div class="form-group col-sm-4 col-xs-12">
             <label for="usertype">Sector Name<span class="required-field"></span></label>
             <select name="SectorName" id="SectorName" class="form-control"></select>
-        </div>
+        </div>*@
 
         <div class="form-group col-sm-1 col-xs-12">
-            <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearchTransactionCompleted">Search</button>
+            <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearch">Search</button>
         </div>
 
-
-
         <div class="col-sm-12 col-xs-12">
-
             <div class="table-responsive" style="padding:10px 0 40px 0;">
                 <table class="table table_css_main_cl table-bordered">
                     <thead>
@@ -55,11 +52,10 @@
                             <th class="text-center">Name of Candidate</th>
                             <th class="text-center">Application Number</th>
                             <th class="text-center">Plot No </th>
-                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyData">
-                        @foreach (var data in UserDataModel)
+                        @*@foreach (var data in UserDataModel)
                         {
                             <tr>
                                 <td class="text-center">@index</td>
@@ -69,7 +65,7 @@
                                 <td class="text-center"> <a href="/Admin/AllotmentStatus">Allotment Status</a></td>
                             </tr>
                             index++;
-                        }
+                        }*@
                     </tbody>
                 </table>
             </div>
