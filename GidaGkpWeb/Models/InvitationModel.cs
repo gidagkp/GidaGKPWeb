@@ -18,5 +18,11 @@ namespace GidaGkpWeb.Models
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> InterviewDate { get; set; }
+
+        public Nullable<int> MSchemeType { get; set; }
+        public Nullable<int> MSchemeName { get; set; }
+        public string Action { get; set; }
+
+
     }
 }
