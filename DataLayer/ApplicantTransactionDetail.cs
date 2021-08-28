@@ -34,12 +34,10 @@ namespace DataLayer
         public string ChalanDocumentFileType { get; set; }
         public string TransactionType { get; set; }
         public string AMApprovalStatus { get; set; }
-        public string MApprovalStatus { get; set; }
+        public string CEOApprovalStatus { get; set; }
         public string GMApprovalStatus { get; set; }
         public string AMComment { get; set; }
-        public string MComment { get; set; }
+        public string CEOComment { get; set; }
         public string GMComment { get; set; }
-    
-        public virtual ApplicantApplicationDetail ApplicantApplicationDetail { get; set; }
     }
 }

@@ -63,6 +63,15 @@ $(document).ready(function () {
         });
     }
 
+    $('#ddlDepartment').on('change', function (e) {
+        var valueSelected = this.value;
+        var designationId = $('#ddlDesignation').val();
+        var roleId = $('#ddlRole').val();
+        if (valueSelected != "" && departmentId != "" && roleId != "") {
+            FillRoleWisePermission(valueSelected, designationId, roleId);
+        }
+    });
+
     FillDesignation();
     function FillDesignation(selectedDesignationId = null) {
         let dropdown = $('#ddlDesignation');
@@ -92,6 +101,15 @@ $(document).ready(function () {
         });
     }
 
+    $('#ddlDesignation').on('change', function (e) {
+        var valueSelected = this.value;
+        var departmentId = $('#ddlDepartment').val();
+        var roleId = $('#ddlRole').val();
+        if (valueSelected != "" && departmentId != "" && roleId != "") {
+            FillRoleWisePermission(departmentId, valueSelected, roleId);
+        }
+    });
+
     FillRole();
     function FillRole() {
         let dropdown = $('#ddlRole');
@@ -120,15 +138,19 @@ $(document).ready(function () {
 
     $('#ddlRole').on('change', function (e) {
         var valueSelected = this.value;
-        FillRoleWisePermission(valueSelected);
+        var departmentId = $('#ddlDepartment').val();
+        var designationId = $('#ddlDesignation').val();
+        if (valueSelected != "" && departmentId != "" && designationId != "") {
+            FillRoleWisePermission(departmentId, designationId, valueSelected);
+        }
     });
 
-    function FillRoleWisePermission(roleId) {
+    function FillRoleWisePermission(departmentId, DesignationId, roleId) {
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             type: 'POST',
-            data: '{departmentId: "' + $('#ddlDepartment').val() + '",designationId: "' + $('#ddlDesignation').val() + '",roleId: "' + roleId + '"}',
+            data: '{departmentId: "' + departmentId + '",designationId: "' + DesignationId + '",roleId: "' + roleId + '"}',
             url: '/Admin/GetRoleWisePermission',
             success: function (data) {
                 $.ajax({
@@ -236,7 +258,7 @@ $(document).ready(function () {
         $("#rolePermissionTBody tr").each(function () {
             for (var i = 0; i < $(this).find('td').length; i++) {
                 if ($(this).find('td').eq(3 + i).find('input[type="checkbox"]').prop('checked') == true) {
-                    dataInput.push({ 'DepartmentId': departmentId, 'DesignationId': designationId,'RoleId': roleId, 'PageId': $(this).find('td').eq(1).html(), 'PermissionId': $("#rolePermissionTHead tr").find('th').eq(3 + i).attr('data-permission-id') });
+                    dataInput.push({ 'DepartmentId': departmentId, 'DesignationId': designationId, 'RoleId': roleId, 'PageId': $(this).find('td').eq(1).html(), 'PermissionId': $("#rolePermissionTHead tr").find('th').eq(3 + i).attr('data-permission-id') });
                 }
             }
         });

@@ -75,10 +75,12 @@ namespace DataLayer
         public string AMApprovalStatus { get; set; }
         public string ClerkApprovalStatus { get; set; }
         public string SIApprovalStatus { get; set; }
+        public string CEOApprovalStatus { get; set; }
+        public string GMApprovalStatus { get; set; }
         public string AMComment { get; set; }
         public string ClerkComment { get; set; }
         public string SIComment { get; set; }
-    
-        public virtual ApplicantApplicationDetail ApplicantApplicationDetail { get; set; }
+        public string CEOComment { get; set; }
+        public string GMComment { get; set; }
     }
 }

@@ -17,21 +17,7 @@ namespace DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ApplicantApplicationDetail()
         {
-            this.AddingNewProductDetails = new HashSet<AddingNewProductDetail>();
-            this.AllotmentDetails = new HashSet<AllotmentDetail>();
-            this.Allottee_Electronicform = new HashSet<Allottee_Electronicform>();
-            this.AlloteeTimeExtensionFeesPayGateways = new HashSet<AlloteeTimeExtensionFeesPayGateway>();
-            this.ApplicantApplicationStatus = new HashSet<ApplicantApplicationStatu>();
-            this.ApplicantBankDetails = new HashSet<ApplicantBankDetail>();
-            this.ApplicantDetails = new HashSet<ApplicantDetail>();
             this.ApplicantInvitationLetters = new HashSet<ApplicantInvitationLetter>();
-            this.ApplicantPlotDetails = new HashSet<ApplicantPlotDetail>();
-            this.ApplicantProjectDetails = new HashSet<ApplicantProjectDetail>();
-            this.ApplicantTransactionDetails = new HashSet<ApplicantTransactionDetail>();
-            this.ApplicantUploadDocs = new HashSet<ApplicantUploadDoc>();
-            this.LeaseRentDetails = new HashSet<LeaseRentDetail>();
-            this.ManagerElectronicForms = new HashSet<ManagerElectronicForm>();
-            this.ManufacturingUnitDetails = new HashSet<ManufacturingUnitDetail>();
         }
     
         public int ApplicationId { get; set; }
@@ -41,34 +27,6 @@ namespace DataLayer
         public Nullable<bool> ApprovalStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AddingNewProductDetail> AddingNewProductDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AllotmentDetail> AllotmentDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Allottee_Electronicform> Allottee_Electronicform { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AlloteeTimeExtensionFeesPayGateway> AlloteeTimeExtensionFeesPayGateways { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicantApplicationStatu> ApplicantApplicationStatus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicantBankDetail> ApplicantBankDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicantDetail> ApplicantDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApplicantInvitationLetter> ApplicantInvitationLetters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicantPlotDetail> ApplicantPlotDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicantProjectDetail> ApplicantProjectDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicantTransactionDetail> ApplicantTransactionDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicantUploadDoc> ApplicantUploadDocs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LeaseRentDetail> LeaseRentDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ManagerElectronicForm> ManagerElectronicForms { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ManufacturingUnitDetail> ManufacturingUnitDetails { get; set; }
     }
 }

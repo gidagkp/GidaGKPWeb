@@ -607,6 +607,11 @@ namespace GidaGkpWeb.Controllers
             AdminDetails _details = new AdminDetails();
             return Json(_details.ApproveRejectDocument(applicationId, status, comment), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult AdminApproveRejectApplication(int applicationId, int schemeName, string status, string comment)
+        {
+            AdminDetails _details = new AdminDetails();
+            return Json(_details.ApproveRejectApplication(applicationId, status, comment), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CandidateListForInterview()
         {
             AdminDetails _details = new AdminDetails();

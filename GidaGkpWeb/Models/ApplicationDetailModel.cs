@@ -50,19 +50,25 @@ namespace GidaGkpWeb.Models
         public string GSTAmount { get; set; }
         public string EarnestMoney { get; set; }
         public string SchemeNameId { get; set; }
+
         public string AMPaymentStatus { get; set; }
-        public string MPaymentStatus { get; set; }
+        public string CEOPaymentStatus { get; set; }
         public string GMPaymentStatus { get; set; }
+        public string AMPaymentComment { get; set; }
+        public string CEOPaymentComment { get; set; }
+        public string GMPaymentComment { get; set; }
+
         public string AMDocumentStatus { get; set; }
         public string ClerkDocumentStatus { get; set; }
         public string SIDocumentStatus { get; set; }
-
-        public string AMPaymentComment { get; set; }
-        public string MPaymentComment { get; set; }
-        public string GMPaymentComment { get; set; }
-        public string AMDocumentComment { get; set; }
+        public string CEODocumentStatus { get; set; }
+        public string GMDocumentStatus { get; set; }
+        public string AMDocumentComment { get; set; }        
         public string ClerkDocumentComment { get; set; }
         public string SIDocumentComment { get; set; }
+        public string CEODocumentComment { get; set; }
+        public string GMDocumentComment { get; set; }
+
         public string InterviewDateTime { get; set; }
         public string PlotNumber { get; set; }
         public string InterviewLetterStatus { get; set; }

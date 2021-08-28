@@ -14,12 +14,6 @@ namespace DataLayer
     
     public partial class GidaUser
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GidaUser()
-        {
-            this.AddingNewProductDetails = new HashSet<AddingNewProductDetail>();
-        }
-    
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -33,8 +27,5 @@ namespace DataLayer
         public Nullable<bool> IsActive { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AddingNewProductDetail> AddingNewProductDetails { get; set; }
     }
 }

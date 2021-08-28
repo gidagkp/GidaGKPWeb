@@ -42,7 +42,5 @@ namespace DataLayer
         public string Skilled { get; set; }
         public string UnSkilled { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
-    
-        public virtual ApplicantApplicationDetail ApplicantApplicationDetail { get; set; }
     }
 }

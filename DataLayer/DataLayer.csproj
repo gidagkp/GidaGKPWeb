@@ -119,28 +119,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddingNewProductDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="AdminNotice.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="AlloteeTimeEextensionFfess.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AlloteeTimeExtensionFeesPayGateway.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AllotmentDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Allottee_Electronicform.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="ApplicantApplicationDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicantApplicationStatu.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicantBankDetail.cs">
@@ -173,9 +155,6 @@
     <Compile Include="ApplicantUser.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="ChangeProjectDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="DbEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -197,19 +176,7 @@
     <Compile Include="LeaseDeedDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="LeaseRentDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Lookup.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ManagerElectronicForm.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ManufacturingUnitDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MortgageDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="PageMaster.cs">
@@ -221,29 +188,8 @@
     <Compile Include="PlotMaster.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="PlotTransferDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Plot_Restoration.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PossessionDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleWisePermission.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TransfereeUploadDoc.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TransferrerUploadDoc.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UploadedApplicantDocVerify.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
   </ItemGroup>

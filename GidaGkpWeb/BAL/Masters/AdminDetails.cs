@@ -131,18 +131,27 @@ namespace GidaGkpWeb.BAL
                             GST = plotDetail != null ? plotDetail.GST.ToString() : "",
                             EarnestMoney = plotDetail != null ? plotDetail.EarnestMoney.ToString() : "",
                             SchemeNameId = plotDetail != null ? plotDetail.SchemeName.ToString() : "",
+
                             AMPaymentStatus = transaction != null ? transaction.AMApprovalStatus : "",
-                            MPaymentStatus = transaction != null ? transaction.MApprovalStatus : "",
+                            CEOPaymentStatus = transaction != null ? transaction.CEOApprovalStatus : "",
                             GMPaymentStatus = transaction != null ? transaction.GMApprovalStatus : "",
+
+                            AMPaymentComment = transaction != null ? transaction.AMComment : "",
+                            CEOPaymentComment = transaction != null ? transaction.CEOComment : "",
+                            GMPaymentComment = transaction != null ? transaction.GMComment : "",
+
                             AMDocumentStatus = doc != null ? doc.AMApprovalStatus : "",
                             ClerkDocumentStatus = doc != null ? doc.ClerkApprovalStatus : "",
                             SIDocumentStatus = doc != null ? doc.SIApprovalStatus : "",
-                            AMPaymentComment = transaction != null ? transaction.AMComment : "",
-                            MPaymentComment = transaction != null ? transaction.MComment : "",
-                            GMPaymentComment = transaction != null ? transaction.GMComment : "",
+                            GMDocumentStatus = doc != null ? doc.GMApprovalStatus : "",
+                            CEODocumentStatus = doc != null ? doc.CEOApprovalStatus : "",
+
                             AMDocumentComment = doc != null ? doc.AMComment : "",
                             ClerkDocumentComment = doc != null ? doc.ClerkComment : "",
                             SIDocumentComment = doc != null ? doc.SIComment : "",
+                            GMDocumentComment = doc != null ? doc.GMComment : "",
+                            CEODocumentComment = doc != null ? doc.CEOComment : "",
+
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -221,12 +230,17 @@ namespace GidaGkpWeb.BAL
                             FormFee = x.ApplicationFee,
                             GSTAmount = x.GST,
                             SchemeNameId = x.SchemeNameId,
+
                             AMPaymentStatus = !string.IsNullOrEmpty(x.AMPaymentComment) ? x.AMPaymentStatus + "(Comment : " + x.AMPaymentComment + ")" : x.AMPaymentStatus,
-                            MPaymentStatus = !string.IsNullOrEmpty(x.MPaymentComment) ? x.MPaymentStatus + "(Comment : " + x.MPaymentComment + ")" : x.MPaymentStatus,
+                            CEOPaymentStatus = !string.IsNullOrEmpty(x.CEOPaymentComment) ? x.CEOPaymentStatus + "(Comment : " + x.CEOPaymentComment + ")" : x.CEOPaymentStatus,
                             GMPaymentStatus = !string.IsNullOrEmpty(x.GMPaymentComment) ? x.GMPaymentStatus + "(Comment : " + x.GMPaymentComment + ")" : x.GMPaymentStatus,
+
                             AMDocumentStatus = !string.IsNullOrEmpty(x.AMDocumentComment) ? x.AMDocumentStatus + "(Comment : " + x.AMDocumentComment + ")" : x.AMDocumentStatus,
                             ClerkDocumentStatus = !string.IsNullOrEmpty(x.ClerkDocumentComment) ? x.ClerkDocumentStatus + "(Comment : " + x.ClerkDocumentComment + ")" : x.ClerkDocumentStatus,
                             SIDocumentStatus = !string.IsNullOrEmpty(x.SIDocumentComment) ? x.SIDocumentStatus + "(Comment : " + x.SIDocumentComment + ")" : x.SIDocumentStatus,
+                            CEODocumentStatus = !string.IsNullOrEmpty(x.CEODocumentComment) ? x.CEODocumentStatus + "(Comment : " + x.CEODocumentComment + ")" : x.CEODocumentStatus,
+                            GMDocumentStatus = !string.IsNullOrEmpty(x.GMDocumentComment) ? x.GMDocumentStatus + "(Comment : " + x.GMDocumentComment + ")" : x.GMDocumentStatus,
+
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
@@ -825,8 +839,8 @@ namespace GidaGkpWeb.BAL
                         }
                         else if (UserData.Designation == "Manager")
                         {
-                            transactionDetail.MApprovalStatus = status;
-                            transactionDetail.MComment = comment;
+                            transactionDetail.CEOApprovalStatus = status;
+                            transactionDetail.CEOComment = comment;
                         }
                         else if (UserData.Designation == "General Manager")
                         {
@@ -882,6 +896,66 @@ namespace GidaGkpWeb.BAL
 
                         _db.Entry(documentDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
+                        return Enums.CrudStatus.Updated;
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
+
+        public Enums.CrudStatus ApproveRejectApplication(int applicationId, string status, string comment = "")
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                if (applicationId > 0)
+                {
+                    var documentDetail = _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+                    if (documentDetail != null)
+                    {
+                        if (UserData.Designation == "General Manager")
+                        {
+                            documentDetail.GMApprovalStatus = status;
+                            documentDetail.GMComment = comment;
+                        }
+                        else if (UserData.Designation == "CEO")
+                        {
+                            documentDetail.CEOApprovalStatus = status;
+                            documentDetail.CEOComment = comment;
+                        }
+                        _db.Entry(documentDetail).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+
+                        var paymentDetail = _db.ApplicantTransactionDetails.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+                        if (paymentDetail != null)
+                        {
+                            if (UserData.Designation == "General Manager")
+                            {
+                                paymentDetail.GMApprovalStatus = status;
+                                paymentDetail.GMComment = comment;
+                            }
+                            else if (UserData.Designation == "CEO")
+                            {
+                                paymentDetail.CEOApprovalStatus = status;
+                                paymentDetail.CEOComment = comment;
+                            }
+                            _db.Entry(documentDetail).State = EntityState.Modified;
+                            _effectRow = _db.SaveChanges();
+
+                        }
+
                         return Enums.CrudStatus.Updated;
                     }
                 }
