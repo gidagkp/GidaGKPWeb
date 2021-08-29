@@ -1,0 +1,66 @@
+﻿@using DataLayer;
+@using GidaGkpWeb.Models;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
+    int index = 1;
+}
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<style>
+    button.submit_plot_master353 {
+        background: #ff2e2e;
+        color: #fff;
+        border: 0px;
+        padding: 3px 10px;
+        font-size: 12px;
+        text-align: center;
+    }
+</style>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <h3 style="font-size:18px;">Allotment letter to be given to the applicants  </h3>
+            <hr />
+        </div>
+
+        <div class="form-group col-sm-6 col-xs-12">
+            <label for="user" class="">Allotment Number</label>
+            <input type="text" class="form-control" placeholder="123434">
+
+        </div>
+        <div class="form-group col-sm-6 col-xs-12">
+            <label for="user" class="">Allotment date </label>
+            <input type="date" class="form-control" placeholder="12/06/2021">
+        </div>
+
+        <div class="form-group col-sm-6 col-xs-12">
+            <label for="user" class=""> Date of staring of lottery/interview </label>
+            <input type="date" class="form-control" placeholder="12/06/2021">
+        </div>
+        <div class="form-group col-sm-6 col-xs-12">
+            <label for="user" class=""> Date of end of lottery/interview </label>
+            <input type="date" class="form-control" placeholder="12/09/2021 ">
+        </div>
+        <div class="form-group col-sm-6 col-xs-12">
+            <label for="user" class=""> Digital Signature of the CEO </label>
+            <input type="file" class="form-control" placeholder=" ">
+        </div>
+
+        <div class="form-group col-sm-6 col-xs-12">
+            <label for="user" class=""> Date of allotment letter </label>
+            <input type="date" class="form-control" placeholder="12/09/2021 ">
+        </div>
+
+
+        <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
+            <button type="button" class="submit_plot_master" value="button">Submit</button>
+            <button type="button" class="cancel_plot_master" value="button">Cancel</button>
+
+        </div>
+
+    </div>
+
+</div>

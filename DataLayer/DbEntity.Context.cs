@@ -44,5 +44,6 @@ namespace DataLayer
         public virtual DbSet<PGTransactionInformation> PGTransactionInformations { get; set; }
         public virtual DbSet<PlotMaster> PlotMasters { get; set; }
         public virtual DbSet<RoleWisePermission> RoleWisePermissions { get; set; }
+        public virtual DbSet<SchemewiseTermsCondition> SchemewiseTermsConditions { get; set; }
     }
 }

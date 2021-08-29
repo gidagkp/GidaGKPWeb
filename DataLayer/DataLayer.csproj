@@ -192,6 +192,9 @@
     <Compile Include="RoleWisePermission.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="SchemewiseTermsCondition.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

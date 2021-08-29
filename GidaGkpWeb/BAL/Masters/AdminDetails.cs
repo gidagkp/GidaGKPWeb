@@ -1164,5 +1164,46 @@ namespace GidaGkpWeb.BAL
                 return Enums.CrudStatus.InternalError;
             }
         }
+
+        public Enums.CrudStatus SaveTermAndCondition(SchemewiseTermsCondition termnCondition)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                if (termnCondition.Id > 0)
+                {
+                    var termnCOnditionDb = _db.SchemewiseTermsConditions.Where(x => x.Id == termnCondition.Id).FirstOrDefault();
+                    if (termnCOnditionDb != null)
+                    {
+                        termnCondition.Firstduedateofpaymentofinterest = termnCondition.Firstduedateofpaymentofinterest;
+                        termnCondition.AllotmentMoneyDueDate = termnCondition.AllotmentMoneyDueDate;
+                        termnCondition.DateofgivingfirstInstallment = termnCondition.DateofgivingfirstInstallment;
+                        termnCondition.DateofgivingsecondInstallment = termnCondition.DateofgivingsecondInstallment;
+                        termnCondition.DateofgivingthirdInstallent = termnCondition.DateofgivingthirdInstallent;
+                        _db.Entry(termnCOnditionDb).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(termnCondition).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
     }
 }

@@ -689,8 +689,9 @@ namespace GidaGkpWeb.Controllers
             ViewData["UserDetail"] = data;
             return View();
         }
-        public ActionResult AllotmentStatus()
+        public ActionResult AllotmentStatus(int applicationId)
         {
+            ViewData["ApplicationId"] = applicationId;
             return View();
         }
         public ActionResult PrintAllotmentLetter()
@@ -898,6 +899,44 @@ namespace GidaGkpWeb.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult SaveSchemeWiseTermAndCondition(string Id, string SchemeName, string InterestDueDate, string AllotementDueDate, string FirstInstallmentDueDate, string SecondInstallmentDueDate, string ThirdInstallmentDueDate)
+        {
+            SchemewiseTermsCondition termnCondition = new SchemewiseTermsCondition();
+            termnCondition.SchemeName = Convert.ToInt32(SchemeName);
+            if (InterestDueDate != "")
+                termnCondition.Firstduedateofpaymentofinterest = Convert.ToDateTime(InterestDueDate);
+            if (AllotementDueDate != "")
+                termnCondition.AllotmentMoneyDueDate = Convert.ToDateTime(AllotementDueDate);
+            if (FirstInstallmentDueDate != "")
+                termnCondition.DateofgivingfirstInstallment = Convert.ToDateTime(FirstInstallmentDueDate);
+            if (SecondInstallmentDueDate != "")
+                termnCondition.DateofgivingsecondInstallment = Convert.ToDateTime(SecondInstallmentDueDate);
+            if (ThirdInstallmentDueDate != "")
+                termnCondition.DateofgivingthirdInstallent = Convert.ToDateTime(ThirdInstallmentDueDate);
+            if (!string.IsNullOrEmpty(Id))
+                termnCondition.Id = Convert.ToInt32(Id);
+
+            AdminDetails _details = new AdminDetails();
+            var result = _details.SaveTermAndCondition(termnCondition);
+            if (result == Enums.CrudStatus.Saved)
+                SetAlertMessage("Term and Condition has been Saved", "Term and Condition Save");
+            else
+                SetAlertMessage("Term and Condition Saving failed", "Term and Condition Save");
+            return RedirectToAction("SchemeTermsAndCondition");
+
+        }
+
+
+        public ActionResult SchemeTermsAndCondition()
+        {
+            return View();
+        }
+        public ActionResult AllocateAllotmentLetter(int applicationId)
+        {
+            return View();
+        }
     }
 
     public enum DocumentName

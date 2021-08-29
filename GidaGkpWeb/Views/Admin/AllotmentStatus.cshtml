@@ -4,6 +4,7 @@
 
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     //var UserData = ViewData["UserDetail"] as ApplicationUserModel;
+    var applicationId = Convert.ToInt32(ViewData["ApplicationId"]);
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
 <script src="~/Scripts/App/Masters/SchemeWiseApplicationList.js"></script>
@@ -38,7 +39,7 @@
 </style>
 <div class="container">
     @*<input type="hidden" value="@UserData.ApplicationId" id="hdnApplicationId" />
-    <input type="hidden" value="@UserData.SchemeNameId" id="hdnSchemeNameId" />*@
+        <input type="hidden" value="@UserData.SchemeNameId" id="hdnSchemeNameId" />*@
     <div class="row">
         <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 30px;">
             <h3 style="font-size:18px;">Application Status </h3>
@@ -81,69 +82,31 @@
                         <td class="text-center">2</td>
                         <td>View allotment money to be paid and creation of 90% of installment </td>
                         <td>
-
-                            @*@if (!string.IsNullOrEmpty(UserData.PaymentStatus) && UserData.PaymentStatus == "Approved")
-                            {
-                                <span style="color:green">@UserData.PaymentStatus</span>
-                            }
-                            else
-                            {
-                                <span style="color:red">@UserData.PaymentStatus</span>
-                            }*@
                         </td>
                         <td class="text-right">
                             <button type="button" data-toggle="modal" data-target="#myModal" class="submit_plot_master353" value="button">Check Allotment Money Installment </button>
-                            @*@if (!string.IsNullOrEmpty(UserData.PaymentStatus))
-        {
-            <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
-        }
-        else
-        {
-            <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
-        }*@
-
                         </td>
                     </tr>
                     <tr>
                         <td class="text-center">3</td>
-                        <td>Generate Allotment Letter   </td>
+                        <td>Allocate Allotment Letter to Applicant</td>
                         <td>
-                            @*@if (!string.IsNullOrEmpty(UserData.DocumentStatus) && UserData.DocumentStatus == "Approved")
-                            {
-                                <span style="color:green">@UserData.DocumentStatus</span>
-                            }
-                            else
-                            {
-                                <span style="color:red">@UserData.DocumentStatus</span>
-                            }*@
                         </td>
                         <td class="text-right">
-                            <a style="background-color:aliceblue" target="_blank" href="/Admin/PrintAllotmentLetter">Print Allotment Letter</a>
-                            @*<button type="button" href="/Admin/PrintAllotmentLetter" class="submit_plot_master353" value="button">Create Allotment Letter </button>*@
-                            @*@if (!string.IsNullOrEmpty(UserData.DocumentStatus))
-        {
-            <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
-        }
-        else
-        {
-            <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
-        }*@
+                            <a style="background-color:aliceblue" target="_blank" href="/Admin/AllocateAllotmentLetter?applicationId=@applicationId">Allocate Allotment Letter</a>
                         </td>
                     </tr>
-                    @*<tr>
-            <td class="text-center">4</td>
-            <td>View Allotment Notesheet </td>
-            <td></td>
-            <td class="text-right"> <button type="button" class="submit_plot_master353" value="button">View Details </button></td>
-        </tr>
-        <tr>
-            <td class="text-center">5</td>
-            <td>Generate Allotment Letter </td>
-            <td></td>
-            <td class="text-right"> <button type="button" class="submit_plot_master353" value="button">Read Comments </button></td>
-        </tr>*@
                     <tr>
                         <td class="text-center">4</td>
+                        <td>Generate Allotment Letter</td>
+                        <td>
+                        </td>
+                        <td class="text-right">
+                            <a style="background-color:aliceblue" target="_blank" href="/Admin/PrintAllotmentLetter?applicationId=@applicationId">Print Allotment Letter</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">5</td>
                         <td>Send </td>
                         <td></td>
                         <td class="text-right">
@@ -218,19 +181,19 @@
                         <input type="text" class="form-control" placeholder="@UserData.DOB">
                     </div>*@
 
-                    @*<div class="form-group col-sm-6 col-xs-12">
-                            <label for="user" class="">Comapny</label>
-                            <input type="text" class="form-control" placeholder="@UserData.com">
-                        </div>*@
-                    @*<div class="form-group col-sm-6 col-xs-12">
+                @*<div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Comapny</label>
+                        <input type="text" class="form-control" placeholder="@UserData.com">
+                    </div>*@
+                @*<div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class="">Total Investment Amount(In Rs.)</label>
                         <input type="text" class="form-control" placeholder="@UserData.TotalInvestment">
                     </div>*@
-                    @*<div class="form-group col-sm-6 col-xs-12">
-                            <label for="user" class="">Employement</label>
-                            <input type="text" class="form-control" placeholder="@UserData.emp">
-                        </div>*@
-                    @*<div class="form-group col-sm-12 col-xs-12">
+                @*<div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class="">Employement</label>
+                        <input type="text" class="form-control" placeholder="@UserData.emp">
+                    </div>*@
+                @*<div class="form-group col-sm-12 col-xs-12">
                         <label for="user" class="">Current Address</label>
                         <input type="text" class="form-control" placeholder="@UserData.CAddress">
                     </div>
@@ -257,15 +220,15 @@
                         <label for="user" class="">Payment  Date</label>
                         <input type="text" class="form-control" placeholder="@UserData.TransactionDate">
                     </div>*@
-                </div>
             </div>
-            <div class="modal-footer">
-                <!--<button type="button" class="btn btn-default" style="background:rgb(194, 63, 63); color:#fff;">Close</button>-->
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-
         </div>
+        <div class="modal-footer">
+            <!--<button type="button" class="btn btn-default" style="background:rgb(194, 63, 63); color:#fff;">Close</button>-->
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
     </div>
+</div>
 </div>
 
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -294,22 +257,22 @@
                             </tr>
                             <tr>
                                 @*<td class="text-center">1</td>
-                                <td class="text-center">@UserData.ApplicationNumber</td>
-                                <td class="text-center">@UserData.FullName</td>
-                                <td class="text-center">@UserData.FatherName</td>
-                                <td class="text-center">@UserData.TransactionID</td>
-                                <td class="text-center">@UserData.TransactionDate</td>
-                                <td class="text-center">@UserData.FormFee</td>
-                                <td class="text-center">@UserData.GSTAmount</td>
-                                <td class="text-center">@UserData.EarnestMoney</td>
-                                <td class="text-center">@UserData.PaidAmount</td>
-                                <td class="text-center">
-                                    <a style="background-color: green; color: white;" class="btn btn-success"
-                                       href="/Admin/ApprovePayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
-                                    <br />
-                                    <br />
-                                    <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedPayment"><strong>Not Approved</strong></a>
-                                    @*href="/Admin/ApproveRejectPayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"*@
+                                    <td class="text-center">@UserData.ApplicationNumber</td>
+                                    <td class="text-center">@UserData.FullName</td>
+                                    <td class="text-center">@UserData.FatherName</td>
+                                    <td class="text-center">@UserData.TransactionID</td>
+                                    <td class="text-center">@UserData.TransactionDate</td>
+                                    <td class="text-center">@UserData.FormFee</td>
+                                    <td class="text-center">@UserData.GSTAmount</td>
+                                    <td class="text-center">@UserData.EarnestMoney</td>
+                                    <td class="text-center">@UserData.PaidAmount</td>
+                                    <td class="text-center">
+                                        <a style="background-color: green; color: white;" class="btn btn-success"
+                                           href="/Admin/ApprovePayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                        <br />
+                                        <br />
+                                        <a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedPayment"><strong>Not Approved</strong></a>
+                                        @*href="/Admin/ApproveRejectPayment?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"*@
                                 @*</td>*@
                             </tr>
                         </table>
@@ -357,26 +320,26 @@
                             </tr>
                             <tr>
                                 @*<td class="text-center">1</td>
-                                <td class="text-center">@UserData.ApplicationNumber</td>
-                                <td class="text-center">@UserData.FullName</td>
-                                <td class="text-center">@UserData.FatherName</td>
-                                <td class="text-center">@UserData.ContactNo</td>
-                                <td class="text-center">@UserData.Email</td>
-                                <td class="text-center">@UserData.PlotArea</td>
-                                <td class="text-center">
-                                    @*<button type="button" class="submit_plot_master353" style="background:rgb(27, 180, 73);" value="button">Download</button>*@
-                                    @*<a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
-                                       href="/Admin/DownloadAttachment?applicationId=@UserData.ApplicationId"><strong>Download</strong></a>
-                                </td>
-                                <td class="text-center">
-                                    <a style="background-color: green; color: white;" class="btn btn-success"
-                                       href="/Admin/ApproveDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
-                                    <br />
-                                    <br />*@
-                                    @*<a style="background-color: orangered; color: white;" class="btn btn-success"
-                                        href="/Admin/ApproveRejectDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>*@
-                                    @*<a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedDocument"><strong>Not Approved</strong></a>
-                                </td>*@
+                                    <td class="text-center">@UserData.ApplicationNumber</td>
+                                    <td class="text-center">@UserData.FullName</td>
+                                    <td class="text-center">@UserData.FatherName</td>
+                                    <td class="text-center">@UserData.ContactNo</td>
+                                    <td class="text-center">@UserData.Email</td>
+                                    <td class="text-center">@UserData.PlotArea</td>
+                                    <td class="text-center">
+                                        @*<button type="button" class="submit_plot_master353" style="background:rgb(27, 180, 73);" value="button">Download</button>*@
+                                @*<a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
+                                           href="/Admin/DownloadAttachment?applicationId=@UserData.ApplicationId"><strong>Download</strong></a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a style="background-color: green; color: white;" class="btn btn-success"
+                                           href="/Admin/ApproveDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Approved"><strong>Approved</strong></a>
+                                        <br />
+                                        <br />*@
+                                @*<a style="background-color: orangered; color: white;" class="btn btn-success"
+                                    href="/Admin/ApproveRejectDocument?applicationId=@UserData.ApplicationId&schemeName=@UserData.SchemeNameId&status=Not Approved"><strong>Not Approved</strong></a>*@
+                                @*<a style="background-color: orangered; color: white;" class="btn btn-success" id="btnRejectedDocument"><strong>Not Approved</strong></a>
+                                    </td>*@
                             </tr>
                         </table>
                     </div>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GidaGKPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GidaGKPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminNotice">
           <Key>
             <PropertyRef Name="Id" />
@@ -449,6 +449,20 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="SchemewiseTermsCondition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchemeName" Type="int" />
+          <Property Name="AllotmentMoneyDueDate" Type="datetime" />
+          <Property Name="Firstduedateofpaymentofinterest" Type="datetime" />
+          <Property Name="DateofgivingfirstInstallment" Type="datetime" />
+          <Property Name="DateofgivingsecondInstallment" Type="datetime" />
+          <Property Name="DateofgivingthirdInstallent" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModificationDate" Type="datetime" />
+        </EntityType>
         <Association Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
           <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
           <End Role="ApplicantInvitationLetter" Type="Self.ApplicantInvitationLetter" Multiplicity="*" />
@@ -493,6 +507,7 @@
           <EntitySet Name="PGTransactionInformation" EntityType="Self.PGTransactionInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlotMaster" EntityType="Self.PlotMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleWisePermission" EntityType="Self.RoleWisePermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchemewiseTermsCondition" EntityType="Self.SchemewiseTermsCondition" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="Self.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetter" />
@@ -502,11 +517,40 @@
             <End Role="RoleWisePermission" EntitySet="RoleWisePermission" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GidaGKPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GidaGKPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminNotices" EntityType="GidaGKPModel.AdminNotice" />
+          <EntitySet Name="ApplicantApplicationDetails" EntityType="GidaGKPModel.ApplicantApplicationDetail" />
+          <EntitySet Name="ApplicantBankDetails" EntityType="GidaGKPModel.ApplicantBankDetail" />
+          <EntitySet Name="ApplicantDetails" EntityType="GidaGKPModel.ApplicantDetail" />
+          <EntitySet Name="ApplicantFormSteps" EntityType="GidaGKPModel.ApplicantFormStep" />
+          <EntitySet Name="ApplicantInvitationLetters" EntityType="GidaGKPModel.ApplicantInvitationLetter" />
+          <EntitySet Name="ApplicantPlotDetails" EntityType="GidaGKPModel.ApplicantPlotDetail" />
+          <EntitySet Name="ApplicantProjectChangeDetails" EntityType="GidaGKPModel.ApplicantProjectChangeDetail" />
+          <EntitySet Name="ApplicantProjectDetails" EntityType="GidaGKPModel.ApplicantProjectDetail" />
+          <EntitySet Name="ApplicantTransactionDetails" EntityType="GidaGKPModel.ApplicantTransactionDetail" />
+          <EntitySet Name="ApplicantUploadDocs" EntityType="GidaGKPModel.ApplicantUploadDoc" />
+          <EntitySet Name="ApplicantUsers" EntityType="GidaGKPModel.ApplicantUser" />
+          <EntitySet Name="GidaUsers" EntityType="GidaGKPModel.GidaUser" />
+          <EntitySet Name="LeaseDeedDetails" EntityType="GidaGKPModel.LeaseDeedDetail" />
+          <EntitySet Name="Lookups" EntityType="GidaGKPModel.Lookup" />
+          <EntitySet Name="PageMasters" EntityType="GidaGKPModel.PageMaster" />
+          <EntitySet Name="PGTransactionInformations" EntityType="GidaGKPModel.PGTransactionInformation" />
+          <EntitySet Name="PlotMasters" EntityType="GidaGKPModel.PlotMaster" />
+          <EntitySet Name="RoleWisePermissions" EntityType="GidaGKPModel.RoleWisePermission" />
+          <EntitySet Name="SchemewiseTermsConditions" EntityType="GidaGKPModel.SchemewiseTermsCondition" />
+          <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
+            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
+            <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMasterUser_PageMaster" Association="GidaGKPModel.FK_RoleMasterUser_PageMaster">
+            <End Role="PageMaster" EntitySet="PageMasters" />
+            <End Role="RoleWisePermission" EntitySet="RoleWisePermissions" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="AdminNotice">
           <Key>
             <PropertyRef Name="Id" />
@@ -533,7 +577,7 @@
           <Property Name="AllotmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="ApprovalStatus" Type="Boolean" />
-          <NavigationProperty Name="ApplicantInvitationLetters" Relationship="Self.FK_ApplicantInvitationLetter_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantInvitationLetter" />
+          <NavigationProperty Name="ApplicantInvitationLetters" Relationship="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantInvitationLetter" />
         </EntityType>
         <EntityType Name="ApplicantBankDetail">
           <Key>
@@ -613,7 +657,7 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ApplicationNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="Self.FK_ApplicantInvitationLetter_ApplicantApplicationDetail" FromRole="ApplicantInvitationLetter" ToRole="ApplicantApplicationDetail" />
+          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail" FromRole="ApplicantInvitationLetter" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="ApplicantPlotDetail">
           <Key>
@@ -903,7 +947,7 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="RoleWisePermissions" Relationship="Self.FK_RoleMasterUser_PageMaster" FromRole="PageMaster" ToRole="RoleWisePermission" />
+          <NavigationProperty Name="RoleWisePermissions" Relationship="GidaGKPModel.FK_RoleMasterUser_PageMaster" FromRole="PageMaster" ToRole="RoleWisePermission" />
         </EntityType>
         <EntityType Name="PGTransactionInformation">
           <Key>
@@ -953,11 +997,25 @@
           <Property Name="PermissionId" Type="Int32" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="PageMaster" Relationship="Self.FK_RoleMasterUser_PageMaster" FromRole="RoleWisePermission" ToRole="PageMaster" />
+          <NavigationProperty Name="PageMaster" Relationship="GidaGKPModel.FK_RoleMasterUser_PageMaster" FromRole="RoleWisePermission" ToRole="PageMaster" />
+        </EntityType>
+        <EntityType Name="SchemewiseTermsCondition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchemeName" Type="Int32" />
+          <Property Name="AllotmentMoneyDueDate" Type="DateTime" Precision="3" />
+          <Property Name="Firstduedateofpaymentofinterest" Type="DateTime" Precision="3" />
+          <Property Name="DateofgivingfirstInstallment" Type="DateTime" Precision="3" />
+          <Property Name="DateofgivingsecondInstallment" Type="DateTime" Precision="3" />
+          <Property Name="DateofgivingthirdInstallent" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ApplicantInvitationLetter" Type="Self.ApplicantInvitationLetter" Multiplicity="*" />
+          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
+          <End Type="GidaGKPModel.ApplicantInvitationLetter" Role="ApplicantInvitationLetter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ApplicantApplicationDetail">
               <PropertyRef Name="ApplicationId" />
@@ -968,8 +1026,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RoleMasterUser_PageMaster">
-          <End Role="PageMaster" Type="Self.PageMaster" Multiplicity="0..1" />
-          <End Role="RoleWisePermission" Type="Self.RoleWisePermission" Multiplicity="*" />
+          <End Type="GidaGKPModel.PageMaster" Role="PageMaster" Multiplicity="0..1" />
+          <End Type="GidaGKPModel.RoleWisePermission" Role="RoleWisePermission" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PageMaster">
               <PropertyRef Name="Id" />
@@ -979,36 +1037,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GidaGKPEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AdminNotices" EntityType="Self.AdminNotice" />
-          <EntitySet Name="ApplicantApplicationDetails" EntityType="Self.ApplicantApplicationDetail" />
-          <EntitySet Name="ApplicantBankDetails" EntityType="Self.ApplicantBankDetail" />
-          <EntitySet Name="ApplicantDetails" EntityType="Self.ApplicantDetail" />
-          <EntitySet Name="ApplicantFormSteps" EntityType="Self.ApplicantFormStep" />
-          <EntitySet Name="ApplicantInvitationLetters" EntityType="Self.ApplicantInvitationLetter" />
-          <EntitySet Name="ApplicantPlotDetails" EntityType="Self.ApplicantPlotDetail" />
-          <EntitySet Name="ApplicantProjectChangeDetails" EntityType="Self.ApplicantProjectChangeDetail" />
-          <EntitySet Name="ApplicantProjectDetails" EntityType="Self.ApplicantProjectDetail" />
-          <EntitySet Name="ApplicantTransactionDetails" EntityType="Self.ApplicantTransactionDetail" />
-          <EntitySet Name="ApplicantUploadDocs" EntityType="Self.ApplicantUploadDoc" />
-          <EntitySet Name="ApplicantUsers" EntityType="Self.ApplicantUser" />
-          <EntitySet Name="GidaUsers" EntityType="Self.GidaUser" />
-          <EntitySet Name="LeaseDeedDetails" EntityType="Self.LeaseDeedDetail" />
-          <EntitySet Name="Lookups" EntityType="Self.Lookup" />
-          <EntitySet Name="PageMasters" EntityType="Self.PageMaster" />
-          <EntitySet Name="PGTransactionInformations" EntityType="Self.PGTransactionInformation" />
-          <EntitySet Name="PlotMasters" EntityType="Self.PlotMaster" />
-          <EntitySet Name="RoleWisePermissions" EntityType="Self.RoleWisePermission" />
-          <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="Self.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleMasterUser_PageMaster" Association="Self.FK_RoleMasterUser_PageMaster">
-            <End Role="PageMaster" EntitySet="PageMasters" />
-            <End Role="RoleWisePermission" EntitySet="RoleWisePermissions" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1017,463 +1046,478 @@
           <EntitySetMapping Name="AdminNotices">
             <EntityTypeMapping TypeName="GidaGKPModel.AdminNotice">
               <MappingFragment StoreEntitySet="AdminNotice">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NoticeTypeId" ColumnName="NoticeTypeId" />
-                <ScalarProperty Name="Notice_title" ColumnName="Notice_title" />
-                <ScalarProperty Name="Notice_Date" ColumnName="Notice_Date" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="NoticeDocumentFile" ColumnName="NoticeDocumentFile" />
-                <ScalarProperty Name="NoticeDocumentName" ColumnName="NoticeDocumentName" />
-                <ScalarProperty Name="NoticeDocumentFileType" ColumnName="NoticeDocumentFileType" />
-                <ScalarProperty Name="NoticeNewTag" ColumnName="NoticeNewTag" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="NoticeNewTag" ColumnName="NoticeNewTag" />
+                <ScalarProperty Name="NoticeDocumentFileType" ColumnName="NoticeDocumentFileType" />
+                <ScalarProperty Name="NoticeDocumentName" ColumnName="NoticeDocumentName" />
+                <ScalarProperty Name="NoticeDocumentFile" ColumnName="NoticeDocumentFile" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Notice_Date" ColumnName="Notice_Date" />
+                <ScalarProperty Name="Notice_title" ColumnName="Notice_title" />
+                <ScalarProperty Name="NoticeTypeId" ColumnName="NoticeTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantApplicationDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantApplicationDetail">
               <MappingFragment StoreEntitySet="ApplicantApplicationDetail">
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="ApplicationNumber" ColumnName="ApplicationNumber" />
-                <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
+                <ScalarProperty Name="ApplicationNumber" ColumnName="ApplicationNumber" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantBankDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantBankDetail">
               <MappingFragment StoreEntitySet="ApplicantBankDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="BankName" ColumnName="BankName" />
-                <ScalarProperty Name="BBName" ColumnName="BBName" />
-                <ScalarProperty Name="BBAddress" ColumnName="BBAddress" />
-                <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
-                <ScalarProperty Name="AccountHolderName" ColumnName="AccountHolderName" />
-                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="AccountHolderName" ColumnName="AccountHolderName" />
+                <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
+                <ScalarProperty Name="BBAddress" ColumnName="BBAddress" />
+                <ScalarProperty Name="BBName" ColumnName="BBName" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantDetail">
               <MappingFragment StoreEntitySet="ApplicantDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="FullApplicantName" ColumnName="FullApplicantName" />
-                <ScalarProperty Name="FName" ColumnName="FName" />
-                <ScalarProperty Name="MName" ColumnName="MName" />
-                <ScalarProperty Name="SName" ColumnName="SName" />
-                <ScalarProperty Name="ApplicantDOB" ColumnName="ApplicantDOB" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-                <ScalarProperty Name="AdhaarNumber" ColumnName="AdhaarNumber" />
-                <ScalarProperty Name="PAN" ColumnName="PAN" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
-                <ScalarProperty Name="Religion" ColumnName="Religion" />
-                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
-                <ScalarProperty Name="CAddress" ColumnName="CAddress" />
-                <ScalarProperty Name="PAddress" ColumnName="PAddress" />
-                <ScalarProperty Name="IdentiyProof" ColumnName="IdentiyProof" />
-                <ScalarProperty Name="ResidentialProof" ColumnName="ResidentialProof" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ResidentialProof" ColumnName="ResidentialProof" />
+                <ScalarProperty Name="IdentiyProof" ColumnName="IdentiyProof" />
+                <ScalarProperty Name="PAddress" ColumnName="PAddress" />
+                <ScalarProperty Name="CAddress" ColumnName="CAddress" />
+                <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="AdhaarNumber" ColumnName="AdhaarNumber" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ApplicantDOB" ColumnName="ApplicantDOB" />
+                <ScalarProperty Name="SName" ColumnName="SName" />
+                <ScalarProperty Name="MName" ColumnName="MName" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="FullApplicantName" ColumnName="FullApplicantName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantFormSteps">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantFormStep">
               <MappingFragment StoreEntitySet="ApplicantFormStep">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicantStepCompleted" ColumnName="ApplicantStepCompleted" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicantStepCompleted" ColumnName="ApplicantStepCompleted" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantInvitationLetters">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantInvitationLetter">
               <MappingFragment StoreEntitySet="ApplicantInvitationLetter">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="ApplicantAddress" ColumnName="ApplicantAddress" />
-                <ScalarProperty Name="PlotDetails" ColumnName="PlotDetails" />
-                <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
-                <ScalarProperty Name="TotalNoOfPlots" ColumnName="TotalNoOfPlots" />
-                <ScalarProperty Name="InterviewMode" ColumnName="InterviewMode" />
-                <ScalarProperty Name="InterviewDateTime" ColumnName="InterviewDateTime" />
-                <ScalarProperty Name="InterviewLetterStatus" ColumnName="InterviewLetterStatus" />
-                <ScalarProperty Name="AmountToBePaid" ColumnName="AmountToBePaid" />
-                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
-                <ScalarProperty Name="CommentByFinance" ColumnName="CommentByFinance" />
-                <ScalarProperty Name="CommentByAssistant" ColumnName="CommentByAssistant" />
-                <ScalarProperty Name="PaymentStatusByFinance" ColumnName="PaymentStatusByFinance" />
-                <ScalarProperty Name="PaymentStatusByAssistant" ColumnName="PaymentStatusByAssistant" />
-                <ScalarProperty Name="Action" ColumnName="Action" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ApplicationNo" ColumnName="ApplicationNo" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="PaymentStatusByAssistant" ColumnName="PaymentStatusByAssistant" />
+                <ScalarProperty Name="PaymentStatusByFinance" ColumnName="PaymentStatusByFinance" />
+                <ScalarProperty Name="CommentByAssistant" ColumnName="CommentByAssistant" />
+                <ScalarProperty Name="CommentByFinance" ColumnName="CommentByFinance" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="AmountToBePaid" ColumnName="AmountToBePaid" />
+                <ScalarProperty Name="InterviewLetterStatus" ColumnName="InterviewLetterStatus" />
+                <ScalarProperty Name="InterviewDateTime" ColumnName="InterviewDateTime" />
+                <ScalarProperty Name="InterviewMode" ColumnName="InterviewMode" />
+                <ScalarProperty Name="TotalNoOfPlots" ColumnName="TotalNoOfPlots" />
+                <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
+                <ScalarProperty Name="PlotDetails" ColumnName="PlotDetails" />
+                <ScalarProperty Name="ApplicantAddress" ColumnName="ApplicantAddress" />
+                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantPlotDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantPlotDetail">
               <MappingFragment StoreEntitySet="ApplicantPlotDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="AppliedFor" ColumnName="AppliedFor" />
-                <ScalarProperty Name="SchemeType" ColumnName="SchemeType" />
-                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
-                <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
-                <ScalarProperty Name="PlotArea" ColumnName="PlotArea" />
-                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
-                <ScalarProperty Name="EstimatedRate" ColumnName="EstimatedRate" />
-                <ScalarProperty Name="PaymentSchedule" ColumnName="PaymentSchedule" />
-                <ScalarProperty Name="TotalInvestment" ColumnName="TotalInvestment" />
-                <ScalarProperty Name="GST" ColumnName="GST" />
-                <ScalarProperty Name="ApplicationFee" ColumnName="ApplicationFee" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="EarnestMoney" ColumnName="EarnestMoney" />
-                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
-                <ScalarProperty Name="IndustryOwnership" ColumnName="IndustryOwnership" />
-                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
-                <ScalarProperty Name="SignatryName" ColumnName="SignatryName" />
-                <ScalarProperty Name="SignatryDateOfBirth" ColumnName="SignatryDateOfBirth" />
-                <ScalarProperty Name="SignatryPresentAddress" ColumnName="SignatryPresentAddress" />
-                <ScalarProperty Name="SignatryPresentPhoneNumber" ColumnName="SignatryPresentPhoneNumber" />
-                <ScalarProperty Name="SignatryPermanentAddress" ColumnName="SignatryPermanentAddress" />
-                <ScalarProperty Name="SignatryPermanentPhoneNumber" ColumnName="SignatryPermanentPhoneNumber" />
-                <ScalarProperty Name="RelationshipStatus" ColumnName="RelationshipStatus" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="RelationshipStatus" ColumnName="RelationshipStatus" />
+                <ScalarProperty Name="SignatryPermanentPhoneNumber" ColumnName="SignatryPermanentPhoneNumber" />
+                <ScalarProperty Name="SignatryPermanentAddress" ColumnName="SignatryPermanentAddress" />
+                <ScalarProperty Name="SignatryPresentPhoneNumber" ColumnName="SignatryPresentPhoneNumber" />
+                <ScalarProperty Name="SignatryPresentAddress" ColumnName="SignatryPresentAddress" />
+                <ScalarProperty Name="SignatryDateOfBirth" ColumnName="SignatryDateOfBirth" />
+                <ScalarProperty Name="SignatryName" ColumnName="SignatryName" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="IndustryOwnership" ColumnName="IndustryOwnership" />
+                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+                <ScalarProperty Name="EarnestMoney" ColumnName="EarnestMoney" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="ApplicationFee" ColumnName="ApplicationFee" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="TotalInvestment" ColumnName="TotalInvestment" />
+                <ScalarProperty Name="PaymentSchedule" ColumnName="PaymentSchedule" />
+                <ScalarProperty Name="EstimatedRate" ColumnName="EstimatedRate" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="PlotArea" ColumnName="PlotArea" />
+                <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
+                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
+                <ScalarProperty Name="SchemeType" ColumnName="SchemeType" />
+                <ScalarProperty Name="AppliedFor" ColumnName="AppliedFor" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantProjectChangeDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantProjectChangeDetail">
               <MappingFragment StoreEntitySet="ApplicantProjectChangeDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
-                <ScalarProperty Name="AreaToBeUsedForProject" ColumnName="AreaToBeUsedForProject" />
-                <ScalarProperty Name="DetailOfProjectFileName" ColumnName="DetailOfProjectFileName" />
-                <ScalarProperty Name="DetailOfProjectFileType" ColumnName="DetailOfProjectFileType" />
-                <ScalarProperty Name="DetailOfProjectFileContent" ColumnName="DetailOfProjectFileContent" />
-                <ScalarProperty Name="IsEffluentMore" ColumnName="IsEffluentMore" />
-                <ScalarProperty Name="IsEmissionToSurrounding" ColumnName="IsEmissionToSurrounding" />
-                <ScalarProperty Name="SSIRegistrationNo" ColumnName="SSIRegistrationNo" />
-                <ScalarProperty Name="NOCOfProjectFileName" ColumnName="NOCOfProjectFileName" />
-                <ScalarProperty Name="NOCOfProjectFileType" ColumnName="NOCOfProjectFileType" />
-                <ScalarProperty Name="NOCOfProjectFileContent" ColumnName="NOCOfProjectFileContent" />
-                <ScalarProperty Name="NotarizedFileName" ColumnName="NotarizedFileName" />
-                <ScalarProperty Name="NotarizedFileType" ColumnName="NotarizedFileType" />
-                <ScalarProperty Name="NotarizedFileContent" ColumnName="NotarizedFileContent" />
-                <ScalarProperty Name="SignatureFileName" ColumnName="SignatureFileName" />
-                <ScalarProperty Name="SignatureFileType" ColumnName="SignatureFileType" />
-                <ScalarProperty Name="SignatureFileContent" ColumnName="SignatureFileContent" />
-                <ScalarProperty Name="PhotographFileName" ColumnName="PhotographFileName" />
-                <ScalarProperty Name="PhotographFileType" ColumnName="PhotographFileType" />
-                <ScalarProperty Name="PhotographFileContent" ColumnName="PhotographFileContent" />
-                <ScalarProperty Name="LeaseDeedNumber" ColumnName="LeaseDeedNumber" />
-                <ScalarProperty Name="PossesionNumber" ColumnName="PossesionNumber" />
-                <ScalarProperty Name="ProcessingFees" ColumnName="ProcessingFees" />
-                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
                 <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="ProcessingFees" ColumnName="ProcessingFees" />
+                <ScalarProperty Name="PossesionNumber" ColumnName="PossesionNumber" />
+                <ScalarProperty Name="LeaseDeedNumber" ColumnName="LeaseDeedNumber" />
+                <ScalarProperty Name="PhotographFileContent" ColumnName="PhotographFileContent" />
+                <ScalarProperty Name="PhotographFileType" ColumnName="PhotographFileType" />
+                <ScalarProperty Name="PhotographFileName" ColumnName="PhotographFileName" />
+                <ScalarProperty Name="SignatureFileContent" ColumnName="SignatureFileContent" />
+                <ScalarProperty Name="SignatureFileType" ColumnName="SignatureFileType" />
+                <ScalarProperty Name="SignatureFileName" ColumnName="SignatureFileName" />
+                <ScalarProperty Name="NotarizedFileContent" ColumnName="NotarizedFileContent" />
+                <ScalarProperty Name="NotarizedFileType" ColumnName="NotarizedFileType" />
+                <ScalarProperty Name="NotarizedFileName" ColumnName="NotarizedFileName" />
+                <ScalarProperty Name="NOCOfProjectFileContent" ColumnName="NOCOfProjectFileContent" />
+                <ScalarProperty Name="NOCOfProjectFileType" ColumnName="NOCOfProjectFileType" />
+                <ScalarProperty Name="NOCOfProjectFileName" ColumnName="NOCOfProjectFileName" />
+                <ScalarProperty Name="SSIRegistrationNo" ColumnName="SSIRegistrationNo" />
+                <ScalarProperty Name="IsEmissionToSurrounding" ColumnName="IsEmissionToSurrounding" />
+                <ScalarProperty Name="IsEffluentMore" ColumnName="IsEffluentMore" />
+                <ScalarProperty Name="DetailOfProjectFileContent" ColumnName="DetailOfProjectFileContent" />
+                <ScalarProperty Name="DetailOfProjectFileType" ColumnName="DetailOfProjectFileType" />
+                <ScalarProperty Name="DetailOfProjectFileName" ColumnName="DetailOfProjectFileName" />
+                <ScalarProperty Name="AreaToBeUsedForProject" ColumnName="AreaToBeUsedForProject" />
+                <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantProjectDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantProjectDetail">
               <MappingFragment StoreEntitySet="ApplicantProjectDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="FullApplicantName" ColumnName="FullApplicantName" />
-                <ScalarProperty Name="ProposedIndustryType" ColumnName="ProposedIndustryType" />
-                <ScalarProperty Name="ProjectEstimatedCost" ColumnName="ProjectEstimatedCost" />
-                <ScalarProperty Name="ProposedCoveredArea" ColumnName="ProposedCoveredArea" />
-                <ScalarProperty Name="ProposedOpenArea" ColumnName="ProposedOpenArea" />
-                <ScalarProperty Name="PurpuseOpenArea" ColumnName="PurpuseOpenArea" />
-                <ScalarProperty Name="ProposedInvestmentLand" ColumnName="ProposedInvestmentLand" />
-                <ScalarProperty Name="ProposedInvestmentBuilding" ColumnName="ProposedInvestmentBuilding" />
-                <ScalarProperty Name="ProposedInvestmentPlant" ColumnName="ProposedInvestmentPlant" />
-                <ScalarProperty Name="FumesNatureQuantity" ColumnName="FumesNatureQuantity" />
-                <ScalarProperty Name="LiquidQuantity" ColumnName="LiquidQuantity" />
-                <ScalarProperty Name="LiquidChemicalComposition" ColumnName="LiquidChemicalComposition" />
-                <ScalarProperty Name="SolidQuantity" ColumnName="SolidQuantity" />
-                <ScalarProperty Name="SolidChemicalComposition" ColumnName="SolidChemicalComposition" />
-                <ScalarProperty Name="GasQuantity" ColumnName="GasQuantity" />
-                <ScalarProperty Name="GasChemicalComposition" ColumnName="GasChemicalComposition" />
-                <ScalarProperty Name="EffluentTreatmentMeasures" ColumnName="EffluentTreatmentMeasures" />
-                <ScalarProperty Name="PowerRequirement" ColumnName="PowerRequirement" />
-                <ScalarProperty Name="FirstYearNoOfTelephone" ColumnName="FirstYearNoOfTelephone" />
-                <ScalarProperty Name="FirstYearNoOfFax" ColumnName="FirstYearNoOfFax" />
-                <ScalarProperty Name="UltimateNoOfTelephone" ColumnName="UltimateNoOfTelephone" />
-                <ScalarProperty Name="UltimateNoOfFax" ColumnName="UltimateNoOfFax" />
-                <ScalarProperty Name="Skilled" ColumnName="Skilled" />
-                <ScalarProperty Name="UnSkilled" ColumnName="UnSkilled" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="UnSkilled" ColumnName="UnSkilled" />
+                <ScalarProperty Name="Skilled" ColumnName="Skilled" />
+                <ScalarProperty Name="UltimateNoOfFax" ColumnName="UltimateNoOfFax" />
+                <ScalarProperty Name="UltimateNoOfTelephone" ColumnName="UltimateNoOfTelephone" />
+                <ScalarProperty Name="FirstYearNoOfFax" ColumnName="FirstYearNoOfFax" />
+                <ScalarProperty Name="FirstYearNoOfTelephone" ColumnName="FirstYearNoOfTelephone" />
+                <ScalarProperty Name="PowerRequirement" ColumnName="PowerRequirement" />
+                <ScalarProperty Name="EffluentTreatmentMeasures" ColumnName="EffluentTreatmentMeasures" />
+                <ScalarProperty Name="GasChemicalComposition" ColumnName="GasChemicalComposition" />
+                <ScalarProperty Name="GasQuantity" ColumnName="GasQuantity" />
+                <ScalarProperty Name="SolidChemicalComposition" ColumnName="SolidChemicalComposition" />
+                <ScalarProperty Name="SolidQuantity" ColumnName="SolidQuantity" />
+                <ScalarProperty Name="LiquidChemicalComposition" ColumnName="LiquidChemicalComposition" />
+                <ScalarProperty Name="LiquidQuantity" ColumnName="LiquidQuantity" />
+                <ScalarProperty Name="FumesNatureQuantity" ColumnName="FumesNatureQuantity" />
+                <ScalarProperty Name="ProposedInvestmentPlant" ColumnName="ProposedInvestmentPlant" />
+                <ScalarProperty Name="ProposedInvestmentBuilding" ColumnName="ProposedInvestmentBuilding" />
+                <ScalarProperty Name="ProposedInvestmentLand" ColumnName="ProposedInvestmentLand" />
+                <ScalarProperty Name="PurpuseOpenArea" ColumnName="PurpuseOpenArea" />
+                <ScalarProperty Name="ProposedOpenArea" ColumnName="ProposedOpenArea" />
+                <ScalarProperty Name="ProposedCoveredArea" ColumnName="ProposedCoveredArea" />
+                <ScalarProperty Name="ProjectEstimatedCost" ColumnName="ProjectEstimatedCost" />
+                <ScalarProperty Name="ProposedIndustryType" ColumnName="ProposedIndustryType" />
+                <ScalarProperty Name="FullApplicantName" ColumnName="FullApplicantName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantTransactionDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantTransactionDetail">
               <MappingFragment StoreEntitySet="ApplicantTransactionDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="tracking_id" ColumnName="tracking_id" />
-                <ScalarProperty Name="bank_ref_no" ColumnName="bank_ref_no" />
-                <ScalarProperty Name="order_status" ColumnName="order_status" />
-                <ScalarProperty Name="payment_mode" ColumnName="payment_mode" />
-                <ScalarProperty Name="card_name" ColumnName="card_name" />
-                <ScalarProperty Name="status_message" ColumnName="status_message" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="billing_name" ColumnName="billing_name" />
-                <ScalarProperty Name="billing_address" ColumnName="billing_address" />
-                <ScalarProperty Name="trans_date" ColumnName="trans_date" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
-                <ScalarProperty Name="ChalanDocument" ColumnName="ChalanDocument" />
-                <ScalarProperty Name="ChalanDocumentFileName" ColumnName="ChalanDocumentFileName" />
-                <ScalarProperty Name="ChalanDocumentFileType" ColumnName="ChalanDocumentFileType" />
-                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
-                <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
-                <ScalarProperty Name="CEOApprovalStatus" ColumnName="CEOApprovalStatus" />
-                <ScalarProperty Name="GMApprovalStatus" ColumnName="GMApprovalStatus" />
-                <ScalarProperty Name="AMComment" ColumnName="AMComment" />
-                <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
                 <ScalarProperty Name="GMComment" ColumnName="GMComment" />
+                <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
+                <ScalarProperty Name="AMComment" ColumnName="AMComment" />
+                <ScalarProperty Name="GMApprovalStatus" ColumnName="GMApprovalStatus" />
+                <ScalarProperty Name="CEOApprovalStatus" ColumnName="CEOApprovalStatus" />
+                <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="ChalanDocumentFileType" ColumnName="ChalanDocumentFileType" />
+                <ScalarProperty Name="ChalanDocumentFileName" ColumnName="ChalanDocumentFileName" />
+                <ScalarProperty Name="ChalanDocument" ColumnName="ChalanDocument" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="trans_date" ColumnName="trans_date" />
+                <ScalarProperty Name="billing_address" ColumnName="billing_address" />
+                <ScalarProperty Name="billing_name" ColumnName="billing_name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="status_message" ColumnName="status_message" />
+                <ScalarProperty Name="card_name" ColumnName="card_name" />
+                <ScalarProperty Name="payment_mode" ColumnName="payment_mode" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="bank_ref_no" ColumnName="bank_ref_no" />
+                <ScalarProperty Name="tracking_id" ColumnName="tracking_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantUploadDocs">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantUploadDoc">
               <MappingFragment StoreEntitySet="ApplicantUploadDoc">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="ProjectReport" ColumnName="ProjectReport" />
-                <ScalarProperty Name="ProjectReportFileName" ColumnName="ProjectReportFileName" />
-                <ScalarProperty Name="ProjectReportFileType" ColumnName="ProjectReportFileType" />
-                <ScalarProperty Name="ProposedPlanLandUses" ColumnName="ProposedPlanLandUses" />
-                <ScalarProperty Name="ProposedPlanLandUsesFileName" ColumnName="ProposedPlanLandUsesFileName" />
-                <ScalarProperty Name="ProposedPlanLandUsesFileType" ColumnName="ProposedPlanLandUsesFileType" />
-                <ScalarProperty Name="Memorendum" ColumnName="Memorendum" />
-                <ScalarProperty Name="MemorendumFileName" ColumnName="MemorendumFileName" />
-                <ScalarProperty Name="MemorendumFileType" ColumnName="MemorendumFileType" />
-                <ScalarProperty Name="ScanPAN" ColumnName="ScanPAN" />
-                <ScalarProperty Name="ScanPANFileName" ColumnName="ScanPANFileName" />
-                <ScalarProperty Name="ScanPANFileType" ColumnName="ScanPANFileType" />
-                <ScalarProperty Name="ScanAddressProof" ColumnName="ScanAddressProof" />
-                <ScalarProperty Name="ScanAddressProofFileName" ColumnName="ScanAddressProofFileName" />
-                <ScalarProperty Name="ScanAddressProofFileType" ColumnName="ScanAddressProofFileType" />
-                <ScalarProperty Name="BalanceSheet" ColumnName="BalanceSheet" />
-                <ScalarProperty Name="BalanceSheetFileName" ColumnName="BalanceSheetFileName" />
-                <ScalarProperty Name="BalanceSheetFileType" ColumnName="BalanceSheetFileType" />
-                <ScalarProperty Name="ITReturn" ColumnName="ITReturn" />
-                <ScalarProperty Name="ITReturnFileName" ColumnName="ITReturnFileName" />
-                <ScalarProperty Name="ITReturnFileType" ColumnName="ITReturnFileType" />
-                <ScalarProperty Name="ExperienceProof" ColumnName="ExperienceProof" />
-                <ScalarProperty Name="ExperienceProofFileName" ColumnName="ExperienceProofFileName" />
-                <ScalarProperty Name="ExperienceProofFileType" ColumnName="ExperienceProofFileType" />
-                <ScalarProperty Name="ApplicantEduTechQualification" ColumnName="ApplicantEduTechQualification" />
-                <ScalarProperty Name="ApplicantEduTechQualificationFileName" ColumnName="ApplicantEduTechQualificationFileName" />
-                <ScalarProperty Name="ApplicantEduTechQualificationFileType" ColumnName="ApplicantEduTechQualificationFileType" />
-                <ScalarProperty Name="PreEstablishedIndustriesDoc" ColumnName="PreEstablishedIndustriesDoc" />
-                <ScalarProperty Name="PreEstablishedIndustriesDocFileName" ColumnName="PreEstablishedIndustriesDocFileName" />
-                <ScalarProperty Name="PreEstablishedIndustriesDocFileType" ColumnName="PreEstablishedIndustriesDocFileType" />
-                <ScalarProperty Name="FinDetailsEstablishedIndustries" ColumnName="FinDetailsEstablishedIndustries" />
-                <ScalarProperty Name="FinDetailsEstablishedIndustriesFileName" ColumnName="FinDetailsEstablishedIndustriesFileName" />
-                <ScalarProperty Name="FinDetailsEstablishedIndustriesFileType" ColumnName="FinDetailsEstablishedIndustriesFileType" />
-                <ScalarProperty Name="OtherDocForProposedIndustry" ColumnName="OtherDocForProposedIndustry" />
-                <ScalarProperty Name="OtherDocForProposedIndustryFileName" ColumnName="OtherDocForProposedIndustryFileName" />
-                <ScalarProperty Name="OtherDocForProposedIndustryFileType" ColumnName="OtherDocForProposedIndustryFileType" />
-                <ScalarProperty Name="ScanCastCert" ColumnName="ScanCastCert" />
-                <ScalarProperty Name="ScanCastCertFileName" ColumnName="ScanCastCertFileName" />
-                <ScalarProperty Name="ScanCastCertFileType" ColumnName="ScanCastCertFileType" />
-                <ScalarProperty Name="ScanID" ColumnName="ScanID" />
-                <ScalarProperty Name="ScanIDFileName" ColumnName="ScanIDFileName" />
-                <ScalarProperty Name="ScanIDFileType" ColumnName="ScanIDFileType" />
-                <ScalarProperty Name="BankVerifiedSignature" ColumnName="BankVerifiedSignature" />
-                <ScalarProperty Name="BankVerifiedSignatureFileName" ColumnName="BankVerifiedSignatureFileName" />
-                <ScalarProperty Name="BankVerifiedSignatureFileType" ColumnName="BankVerifiedSignatureFileType" />
-                <ScalarProperty Name="DocProofForIndustrialEstablishedOutsideGida" ColumnName="DocProofForIndustrialEstablishedOutsideGida" />
-                <ScalarProperty Name="DocProofForIndustrialEstablishedOutsideGidaFileName" ColumnName="DocProofForIndustrialEstablishedOutsideGidaFileName" />
-                <ScalarProperty Name="DocProofForIndustrialEstablishedOutsideGidaFileType" ColumnName="DocProofForIndustrialEstablishedOutsideGidaFileType" />
-                <ScalarProperty Name="ApplicantPhoto" ColumnName="ApplicantPhoto" />
-                <ScalarProperty Name="ApplicantPhotoFileName" ColumnName="ApplicantPhotoFileName" />
-                <ScalarProperty Name="ApplicantPhotoFileType" ColumnName="ApplicantPhotoFileType" />
-                <ScalarProperty Name="ApplicantSignature" ColumnName="ApplicantSignature" />
-                <ScalarProperty Name="ApplicantSignatureFileName" ColumnName="ApplicantSignatureFileName" />
-                <ScalarProperty Name="ApplicantSignatureFileType" ColumnName="ApplicantSignatureFileType" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
-                <ScalarProperty Name="ClerkApprovalStatus" ColumnName="ClerkApprovalStatus" />
-                <ScalarProperty Name="SIApprovalStatus" ColumnName="SIApprovalStatus" />
-                <ScalarProperty Name="CEOApprovalStatus" ColumnName="CEOApprovalStatus" />
-                <ScalarProperty Name="GMApprovalStatus" ColumnName="GMApprovalStatus" />
-                <ScalarProperty Name="AMComment" ColumnName="AMComment" />
-                <ScalarProperty Name="ClerkComment" ColumnName="ClerkComment" />
-                <ScalarProperty Name="SIComment" ColumnName="SIComment" />
-                <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
                 <ScalarProperty Name="GMComment" ColumnName="GMComment" />
+                <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
+                <ScalarProperty Name="SIComment" ColumnName="SIComment" />
+                <ScalarProperty Name="ClerkComment" ColumnName="ClerkComment" />
+                <ScalarProperty Name="AMComment" ColumnName="AMComment" />
+                <ScalarProperty Name="GMApprovalStatus" ColumnName="GMApprovalStatus" />
+                <ScalarProperty Name="CEOApprovalStatus" ColumnName="CEOApprovalStatus" />
+                <ScalarProperty Name="SIApprovalStatus" ColumnName="SIApprovalStatus" />
+                <ScalarProperty Name="ClerkApprovalStatus" ColumnName="ClerkApprovalStatus" />
+                <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ApplicantSignatureFileType" ColumnName="ApplicantSignatureFileType" />
+                <ScalarProperty Name="ApplicantSignatureFileName" ColumnName="ApplicantSignatureFileName" />
+                <ScalarProperty Name="ApplicantSignature" ColumnName="ApplicantSignature" />
+                <ScalarProperty Name="ApplicantPhotoFileType" ColumnName="ApplicantPhotoFileType" />
+                <ScalarProperty Name="ApplicantPhotoFileName" ColumnName="ApplicantPhotoFileName" />
+                <ScalarProperty Name="ApplicantPhoto" ColumnName="ApplicantPhoto" />
+                <ScalarProperty Name="DocProofForIndustrialEstablishedOutsideGidaFileType" ColumnName="DocProofForIndustrialEstablishedOutsideGidaFileType" />
+                <ScalarProperty Name="DocProofForIndustrialEstablishedOutsideGidaFileName" ColumnName="DocProofForIndustrialEstablishedOutsideGidaFileName" />
+                <ScalarProperty Name="DocProofForIndustrialEstablishedOutsideGida" ColumnName="DocProofForIndustrialEstablishedOutsideGida" />
+                <ScalarProperty Name="BankVerifiedSignatureFileType" ColumnName="BankVerifiedSignatureFileType" />
+                <ScalarProperty Name="BankVerifiedSignatureFileName" ColumnName="BankVerifiedSignatureFileName" />
+                <ScalarProperty Name="BankVerifiedSignature" ColumnName="BankVerifiedSignature" />
+                <ScalarProperty Name="ScanIDFileType" ColumnName="ScanIDFileType" />
+                <ScalarProperty Name="ScanIDFileName" ColumnName="ScanIDFileName" />
+                <ScalarProperty Name="ScanID" ColumnName="ScanID" />
+                <ScalarProperty Name="ScanCastCertFileType" ColumnName="ScanCastCertFileType" />
+                <ScalarProperty Name="ScanCastCertFileName" ColumnName="ScanCastCertFileName" />
+                <ScalarProperty Name="ScanCastCert" ColumnName="ScanCastCert" />
+                <ScalarProperty Name="OtherDocForProposedIndustryFileType" ColumnName="OtherDocForProposedIndustryFileType" />
+                <ScalarProperty Name="OtherDocForProposedIndustryFileName" ColumnName="OtherDocForProposedIndustryFileName" />
+                <ScalarProperty Name="OtherDocForProposedIndustry" ColumnName="OtherDocForProposedIndustry" />
+                <ScalarProperty Name="FinDetailsEstablishedIndustriesFileType" ColumnName="FinDetailsEstablishedIndustriesFileType" />
+                <ScalarProperty Name="FinDetailsEstablishedIndustriesFileName" ColumnName="FinDetailsEstablishedIndustriesFileName" />
+                <ScalarProperty Name="FinDetailsEstablishedIndustries" ColumnName="FinDetailsEstablishedIndustries" />
+                <ScalarProperty Name="PreEstablishedIndustriesDocFileType" ColumnName="PreEstablishedIndustriesDocFileType" />
+                <ScalarProperty Name="PreEstablishedIndustriesDocFileName" ColumnName="PreEstablishedIndustriesDocFileName" />
+                <ScalarProperty Name="PreEstablishedIndustriesDoc" ColumnName="PreEstablishedIndustriesDoc" />
+                <ScalarProperty Name="ApplicantEduTechQualificationFileType" ColumnName="ApplicantEduTechQualificationFileType" />
+                <ScalarProperty Name="ApplicantEduTechQualificationFileName" ColumnName="ApplicantEduTechQualificationFileName" />
+                <ScalarProperty Name="ApplicantEduTechQualification" ColumnName="ApplicantEduTechQualification" />
+                <ScalarProperty Name="ExperienceProofFileType" ColumnName="ExperienceProofFileType" />
+                <ScalarProperty Name="ExperienceProofFileName" ColumnName="ExperienceProofFileName" />
+                <ScalarProperty Name="ExperienceProof" ColumnName="ExperienceProof" />
+                <ScalarProperty Name="ITReturnFileType" ColumnName="ITReturnFileType" />
+                <ScalarProperty Name="ITReturnFileName" ColumnName="ITReturnFileName" />
+                <ScalarProperty Name="ITReturn" ColumnName="ITReturn" />
+                <ScalarProperty Name="BalanceSheetFileType" ColumnName="BalanceSheetFileType" />
+                <ScalarProperty Name="BalanceSheetFileName" ColumnName="BalanceSheetFileName" />
+                <ScalarProperty Name="BalanceSheet" ColumnName="BalanceSheet" />
+                <ScalarProperty Name="ScanAddressProofFileType" ColumnName="ScanAddressProofFileType" />
+                <ScalarProperty Name="ScanAddressProofFileName" ColumnName="ScanAddressProofFileName" />
+                <ScalarProperty Name="ScanAddressProof" ColumnName="ScanAddressProof" />
+                <ScalarProperty Name="ScanPANFileType" ColumnName="ScanPANFileType" />
+                <ScalarProperty Name="ScanPANFileName" ColumnName="ScanPANFileName" />
+                <ScalarProperty Name="ScanPAN" ColumnName="ScanPAN" />
+                <ScalarProperty Name="MemorendumFileType" ColumnName="MemorendumFileType" />
+                <ScalarProperty Name="MemorendumFileName" ColumnName="MemorendumFileName" />
+                <ScalarProperty Name="Memorendum" ColumnName="Memorendum" />
+                <ScalarProperty Name="ProposedPlanLandUsesFileType" ColumnName="ProposedPlanLandUsesFileType" />
+                <ScalarProperty Name="ProposedPlanLandUsesFileName" ColumnName="ProposedPlanLandUsesFileName" />
+                <ScalarProperty Name="ProposedPlanLandUses" ColumnName="ProposedPlanLandUses" />
+                <ScalarProperty Name="ProjectReportFileType" ColumnName="ProjectReportFileType" />
+                <ScalarProperty Name="ProjectReportFileName" ColumnName="ProjectReportFileName" />
+                <ScalarProperty Name="ProjectReport" ColumnName="ProjectReport" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ApplicantUsers">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantUser">
               <MappingFragment StoreEntitySet="ApplicantUser">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-                <ScalarProperty Name="AadharNumber" ColumnName="AadharNumber" />
-                <ScalarProperty Name="SchemeType" ColumnName="SchemeType" />
-                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
-                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
-                <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
-                <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
+                <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
+                <ScalarProperty Name="SchemeType" ColumnName="SchemeType" />
+                <ScalarProperty Name="AadharNumber" ColumnName="AadharNumber" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GidaUsers">
             <EntityTypeMapping TypeName="GidaGKPModel.GidaUser">
               <MappingFragment StoreEntitySet="GidaUser">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-                <ScalarProperty Name="Designation" ColumnName="Designation" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LeaseDeedDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.LeaseDeedDetail">
               <MappingFragment StoreEntitySet="LeaseDeedDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="EarnestMoneyPaid" ColumnName="EarnestMoneyPaid" />
-                <ScalarProperty Name="EarnestMoneyChallanNo" ColumnName="EarnestMoneyChallanNo" />
-                <ScalarProperty Name="AllotmentMoneyPaid" ColumnName="AllotmentMoneyPaid" />
-                <ScalarProperty Name="RequiredStampValue" ColumnName="RequiredStampValue" />
-                <ScalarProperty Name="BankGauranteeChallanNo" ColumnName="BankGauranteeChallanNo" />
-                <ScalarProperty Name="PurchasedStampValue" ColumnName="PurchasedStampValue" />
-                <ScalarProperty Name="StampValueForBankGaurantee" ColumnName="StampValueForBankGaurantee" />
-                <ScalarProperty Name="BankGauranteeDate" ColumnName="BankGauranteeDate" />
-                <ScalarProperty Name="BankAddressOfGauranteeTaken" ColumnName="BankAddressOfGauranteeTaken" />
-                <ScalarProperty Name="EntityNameBehalfOfApplicant" ColumnName="EntityNameBehalfOfApplicant" />
-                <ScalarProperty Name="DigiSignByCEO" ColumnName="DigiSignByCEO" />
-                <ScalarProperty Name="DigiSignByAMFinance" ColumnName="DigiSignByAMFinance" />
-                <ScalarProperty Name="DigiSignByManagerPropertyGeneralAdmin" ColumnName="DigiSignByManagerPropertyGeneralAdmin" />
-                <ScalarProperty Name="DigiSignByAssistant" ColumnName="DigiSignByAssistant" />
-                <ScalarProperty Name="LeaseDeedAction" ColumnName="LeaseDeedAction" />
-                <ScalarProperty Name="LeaseDeedStatus" ColumnName="LeaseDeedStatus" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LeaseDeedStatus" ColumnName="LeaseDeedStatus" />
+                <ScalarProperty Name="LeaseDeedAction" ColumnName="LeaseDeedAction" />
+                <ScalarProperty Name="DigiSignByAssistant" ColumnName="DigiSignByAssistant" />
+                <ScalarProperty Name="DigiSignByManagerPropertyGeneralAdmin" ColumnName="DigiSignByManagerPropertyGeneralAdmin" />
+                <ScalarProperty Name="DigiSignByAMFinance" ColumnName="DigiSignByAMFinance" />
+                <ScalarProperty Name="DigiSignByCEO" ColumnName="DigiSignByCEO" />
+                <ScalarProperty Name="EntityNameBehalfOfApplicant" ColumnName="EntityNameBehalfOfApplicant" />
+                <ScalarProperty Name="BankAddressOfGauranteeTaken" ColumnName="BankAddressOfGauranteeTaken" />
+                <ScalarProperty Name="BankGauranteeDate" ColumnName="BankGauranteeDate" />
+                <ScalarProperty Name="StampValueForBankGaurantee" ColumnName="StampValueForBankGaurantee" />
+                <ScalarProperty Name="PurchasedStampValue" ColumnName="PurchasedStampValue" />
+                <ScalarProperty Name="BankGauranteeChallanNo" ColumnName="BankGauranteeChallanNo" />
+                <ScalarProperty Name="RequiredStampValue" ColumnName="RequiredStampValue" />
+                <ScalarProperty Name="AllotmentMoneyPaid" ColumnName="AllotmentMoneyPaid" />
+                <ScalarProperty Name="EarnestMoneyChallanNo" ColumnName="EarnestMoneyChallanNo" />
+                <ScalarProperty Name="EarnestMoneyPaid" ColumnName="EarnestMoneyPaid" />
+                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Lookups">
             <EntityTypeMapping TypeName="GidaGKPModel.Lookup">
               <MappingFragment StoreEntitySet="Lookup">
-                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
-                <ScalarProperty Name="LookupType" ColumnName="LookupType" />
-                <ScalarProperty Name="LookupName" ColumnName="LookupName" />
-                <ScalarProperty Name="ParentLookupId" ColumnName="ParentLookupId" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="LookupNameImmutable" ColumnName="LookupNameImmutable" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ParentLookupId" ColumnName="ParentLookupId" />
+                <ScalarProperty Name="LookupName" ColumnName="LookupName" />
+                <ScalarProperty Name="LookupType" ColumnName="LookupType" />
+                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PageMasters">
             <EntityTypeMapping TypeName="GidaGKPModel.PageMaster">
               <MappingFragment StoreEntitySet="PageMaster">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="PageName" ColumnName="PageName" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PageName" ColumnName="PageName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PGTransactionInformations">
             <EntityTypeMapping TypeName="GidaGKPModel.PGTransactionInformation">
               <MappingFragment StoreEntitySet="PGTransactionInformation">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PlotMasters">
             <EntityTypeMapping TypeName="GidaGKPModel.PlotMaster">
               <MappingFragment StoreEntitySet="PlotMaster">
-                <ScalarProperty Name="PlotId" ColumnName="PlotId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="SchemeType" ColumnName="SchemeType" />
-                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
-                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
-                <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
-                <ScalarProperty Name="PlotArea" ColumnName="PlotArea" />
-                <ScalarProperty Name="NoOfPlots" ColumnName="NoOfPlots" />
-                <ScalarProperty Name="PlotRate" ColumnName="PlotRate" />
-                <ScalarProperty Name="PlotSideCorner" ColumnName="PlotSideCorner" />
-                <ScalarProperty Name="PlotSideWideRoad" ColumnName="PlotSideWideRoad" />
-                <ScalarProperty Name="PlotSideParkFacing" ColumnName="PlotSideParkFacing" />
-                <ScalarProperty Name="RateForPlotSide" ColumnName="RateForPlotSide" />
-                <ScalarProperty Name="PlotCategory" ColumnName="PlotCategory" />
-                <ScalarProperty Name="PercentageRate" ColumnName="PercentageRate" />
-                <ScalarProperty Name="PlotCost" ColumnName="PlotCost" />
-                <ScalarProperty Name="ExtraCharge" ColumnName="ExtraCharge" />
-                <ScalarProperty Name="GrandTotalCost" ColumnName="GrandTotalCost" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GrandTotalCost" ColumnName="GrandTotalCost" />
+                <ScalarProperty Name="ExtraCharge" ColumnName="ExtraCharge" />
+                <ScalarProperty Name="PlotCost" ColumnName="PlotCost" />
+                <ScalarProperty Name="PercentageRate" ColumnName="PercentageRate" />
+                <ScalarProperty Name="PlotCategory" ColumnName="PlotCategory" />
+                <ScalarProperty Name="RateForPlotSide" ColumnName="RateForPlotSide" />
+                <ScalarProperty Name="PlotSideParkFacing" ColumnName="PlotSideParkFacing" />
+                <ScalarProperty Name="PlotSideWideRoad" ColumnName="PlotSideWideRoad" />
+                <ScalarProperty Name="PlotSideCorner" ColumnName="PlotSideCorner" />
+                <ScalarProperty Name="PlotRate" ColumnName="PlotRate" />
+                <ScalarProperty Name="NoOfPlots" ColumnName="NoOfPlots" />
+                <ScalarProperty Name="PlotArea" ColumnName="PlotArea" />
+                <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
+                <ScalarProperty Name="SchemeType" ColumnName="SchemeType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PlotId" ColumnName="PlotId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoleWisePermissions">
             <EntityTypeMapping TypeName="GidaGKPModel.RoleWisePermission">
               <MappingFragment StoreEntitySet="RoleWisePermission">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="PageId" ColumnName="PageId" />
-                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchemewiseTermsConditions">
+            <EntityTypeMapping TypeName="GidaGKPModel.SchemewiseTermsCondition">
+              <MappingFragment StoreEntitySet="SchemewiseTermsCondition">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DateofgivingthirdInstallent" ColumnName="DateofgivingthirdInstallent" />
+                <ScalarProperty Name="DateofgivingsecondInstallment" ColumnName="DateofgivingsecondInstallment" />
+                <ScalarProperty Name="DateofgivingfirstInstallment" ColumnName="DateofgivingfirstInstallment" />
+                <ScalarProperty Name="Firstduedateofpaymentofinterest" ColumnName="Firstduedateofpaymentofinterest" />
+                <ScalarProperty Name="AllotmentMoneyDueDate" ColumnName="AllotmentMoneyDueDate" />
+                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
