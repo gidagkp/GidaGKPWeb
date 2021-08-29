@@ -2,8 +2,7 @@
 @using GidaGkpWeb.Models;
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
-    int index = 1;
+    var applicationId = Convert.ToInt32(ViewData["ApplicationId"]);
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
 <script src="~/Scripts/App/Masters/PlotMaster.js"></script>
@@ -19,48 +18,53 @@
     }
 </style>
 <div class="container">
+    <form action="~/Admin/SaveAllocateAllotmentLetter" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <h3 style="font-size:18px;">Allotment letter to be given to the applicants  </h3>
+                <hr />
+            </div>
+            <input type="hidden" value="@applicationId" name="applicationId" />
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Allotment Number</label>
+                <input type="text" class="form-control" name="AllotmentNumber" placeholder="123434">
 
-    <div class="row">
-        <div class="col-sm-12 col-xs-12">
-            <h3 style="font-size:18px;">Allotment letter to be given to the applicants  </h3>
-            <hr />
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Allotment date </label>
+                <input type="date" class="form-control" name="Allotmentdate" placeholder="12/06/2021">
+            </div>
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class=""> Date of staring of lottery/interview </label>
+                <input type="date" class="form-control" name="InterviewStartDate" placeholder="12/06/2021">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class=""> Date of end of lottery/interview </label>
+                <input type="date" class="form-control" name="InterviewEndDate" placeholder="12/09/2021 ">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="file" class="sr-only">Digital Signature of the CEO </label>
+                <div class="input-group">
+                    <input type="text" name="Documentfilename" id="Documentfilename" class="form-control" placeholder="No file selected" readonly>
+                    <span class="input-group-btn">
+                        <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                            <input type="file" name="Document" id="Document" onchange="this.form.Documentfilename.value = this.files.length ? this.files[0].name : ''" />
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class=""> Date of allotment letter </label>
+                <input type="date" class="form-control" name="AllotmentLetterDate" placeholder="12/09/2021 ">
+            </div>
+
+
+            <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
+                <button type="submit" class="submit_plot_master" value="button">Submit</button>
+            </div>
+
         </div>
-
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class="">Allotment Number</label>
-            <input type="text" class="form-control" placeholder="123434">
-
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class="">Allotment date </label>
-            <input type="date" class="form-control" placeholder="12/06/2021">
-        </div>
-
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class=""> Date of staring of lottery/interview </label>
-            <input type="date" class="form-control" placeholder="12/06/2021">
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class=""> Date of end of lottery/interview </label>
-            <input type="date" class="form-control" placeholder="12/09/2021 ">
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class=""> Digital Signature of the CEO </label>
-            <input type="file" class="form-control" placeholder=" ">
-        </div>
-
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class=""> Date of allotment letter </label>
-            <input type="date" class="form-control" placeholder="12/09/2021 ">
-        </div>
-
-
-        <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
-            <button type="button" class="submit_plot_master" value="button">Submit</button>
-            <button type="button" class="cancel_plot_master" value="button">Cancel</button>
-
-        </div>
-
-    </div>
-
+    </form>
 </div>

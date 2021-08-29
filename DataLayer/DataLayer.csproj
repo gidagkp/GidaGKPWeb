@@ -122,6 +122,9 @@
     <Compile Include="AdminNotice.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="AllocateAllotmentDetail.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="ApplicantApplicationDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>

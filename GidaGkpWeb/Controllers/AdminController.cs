@@ -900,6 +900,47 @@ namespace GidaGkpWeb.Controllers
         }
 
 
+        public ActionResult AllocateAllotmentLetter(int applicationId)
+        {
+            ViewData["ApplicationId"] = applicationId;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SaveAllocateAllotmentLetter(HttpPostedFileBase Document, string applicationId, string AllotmentNumber,
+            string Allotmentdate, string InterviewStartDate, string InterviewEndDate, string AllotmentLetterDate)
+        {
+            AllocateAllotmentDetail allotementDetail = new AllocateAllotmentDetail();
+            if (Document != null && Document.ContentLength > 0)
+            {
+                allotementDetail.CEO_Sign = new byte[Document.ContentLength];
+                Document.InputStream.Read(allotementDetail.CEO_Sign, 0, Document.ContentLength);
+                allotementDetail.CEO_SignFileName = Document.FileName;
+                allotementDetail.CEO_SignFileType = Document.ContentType;
+            }
+            allotementDetail.ApplicationId = Convert.ToInt32(applicationId);
+            allotementDetail.AllotmentNumber = AllotmentNumber;
+            if (Allotmentdate != "")
+                allotementDetail.AllotmentDate = Convert.ToDateTime(Allotmentdate);
+            if (InterviewStartDate != "")
+                allotementDetail.StartingDateofInterview_L = Convert.ToDateTime(InterviewStartDate);
+            if (InterviewEndDate != "")
+                allotementDetail.EndDateofInterview_L = Convert.ToDateTime(InterviewEndDate);
+            if (AllotmentLetterDate != "")
+                allotementDetail.DateofAllotmentLetter = Convert.ToDateTime(AllotmentLetterDate);
+
+            AdminDetails _details = new AdminDetails();
+            var result = _details.SaveAllocateAllotmentLetter(allotementDetail);
+            if (result == Enums.CrudStatus.Saved)
+                SetAlertMessage("Allotment Letter has been Saved", "Allotment Letter Save");
+            else
+                SetAlertMessage("Allotment Letter Saving failed", "Allotment Letter Save");
+            return RedirectToAction("AllotmentStatus", new { applicationId = applicationId });
+
+        }
+        public ActionResult SchemeTermsAndCondition()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult SaveSchemeWiseTermAndCondition(string Id, string SchemeName, string InterestDueDate, string AllotementDueDate, string FirstInstallmentDueDate, string SecondInstallmentDueDate, string ThirdInstallmentDueDate)
         {
@@ -929,14 +970,7 @@ namespace GidaGkpWeb.Controllers
         }
 
 
-        public ActionResult SchemeTermsAndCondition()
-        {
-            return View();
-        }
-        public ActionResult AllocateAllotmentLetter(int applicationId)
-        {
-            return View();
-        }
+
     }
 
     public enum DocumentName
