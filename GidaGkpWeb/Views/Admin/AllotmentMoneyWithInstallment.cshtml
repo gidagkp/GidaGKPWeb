@@ -1,0 +1,116 @@
+﻿@using DataLayer;
+@using GidaGkpWeb.Models;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var UserData = ViewData["PageData"] as List<PageMasterModel>;
+}
+
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <h3 style="font-size:18px;">Allotment Money with Installment</h3>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4 col-xs-12">
+                <label>Application Number</label>
+                <input type="number" class="form-control" placeholder="" readonly>
+            </div>
+            <div class="form-group col-sm-4 col-xs-12">
+                <label>Applicant Name</label>
+                <input type="text" class="form-control" placeholder="" readonly>
+            </div>
+            <div class="form-group col-sm-3 col-xs-12">
+                <label>Mobile Number</label>
+                <input type="Mobile" class="form-control" placeholder="" readonly>
+            </div>
+            @*<div class="form-group col-sm-3 col-xs-12">
+            <label for="usertype">Plot Range as per the Advertisement<span class="required-field"></span></label>
+            <select name="PlotRangeA" id="PlotRangeA" class="form-control"></select>
+        </div>*@
+            <div class="col-sm-12 col-xs-12">
+                <div class="table-responsive" style="padding:10px 0 20px 0;">
+                    <table class="table plot_master_tb  table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Plot Number</th>
+                                <th>Plot Area</th>
+                                <th>Plot Range</th>
+                                <th>Plot Rate for Range (₹)</th>
+                                <th>Plot Side</th>
+                                <th> % Rate for Plot Side</th>
+                                <th> Plot Category</th>
+                                <th> Total Plot Cost</th>
+                                <th> Extra Charge</th>
+                                <th> Grand Total </th>
+                                @*<th class="text-center">Action</th>*@
+                            </tr>
+                        </thead>
+                        <tbody id="tableBodyPlot">
+                            <tr id="baseRow" style="display:none;">
+                                <td><input type="text" class="form-control" placeholder="Enter Plot No"></td>
+                                <td><input type="number" class="form-control" placeholder="Enter Plot Area" id="plotArea"></td>
+                                <td>
+                                    <select name="PlotRange" id="PlotRange" class="form-control"></select>
+                                </td>
+                                <td><input type="text" class="form-control"></td>
+                                <td style="width: 120px;">
+                                    <input type="checkbox" style="width: 22px;" />Corner Plot<br />
+                                    <input type="checkbox" style="width: 22px;" />Wide Road<br />
+                                    <input type="checkbox" style="width: 22px;" />Park Facing
+                                </td>
+
+                                <td><input type="number" class="form-control" placeholder="Enter Percentage Rate" id="PercentageRate"></td>
+                                <td>
+                                    <select name="PlotCategory" id="PlotCategory" class="form-control"></select>
+                                </td>
+                                <td><input type="number" class="form-control" placeholder="Total Plot Cost" disabled></td>
+                                <td><input type="number" class="form-control" placeholder="Enter Extra Charge" id="ExtraCharge"></td>
+                                <td><input type="number" class="form-control" placeholder="Grand Total Cost of Plot" disabled></td>
+                                @*<td class="text-center">
+                                <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                            </td>*@
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="form-control" placeholder="Enter Plot No"></td>
+                                <td><input type="number" class="form-control" placeholder="Enter Plot Area" id="plotArea"></td>
+                                <td>
+                                    <select name="PlotRange" id="PlotRange" class="form-control"></select>
+                                </td>
+                                <td><input type="text" class="form-control"></td>
+                                <td style="width: 120px;">
+                                    <input type="checkbox" style="width: 22px;" />Corner Plot<br />
+                                    <input type="checkbox" style="width: 22px;" />Wide Road<br />
+                                    <input type="checkbox" style="width: 22px;" />Park Facing
+                                </td>
+
+                                <td><input type="number" class="form-control" placeholder="Enter Percentage Rate" id="PercentageRate"></td>
+                                <td>
+                                    <select name="PlotCategory" id="PlotCategory" class="form-control"></select>
+                                </td>
+                                <td><input type="number" class="form-control" placeholder="Total Plot Cost" disabled></td>
+                                <td><input type="number" class="form-control" placeholder="Enter Extra Charge" id="ExtraCharge"></td>
+                                <td><input type="number" class="form-control" placeholder="Grand Total Cost of Plot" disabled></td>
+                                @*<td class="text-center">
+                                <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                            </td>*@
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12" style="padding:5px 15px 40px 15px;">
+                <button type="button" class="submit_plot_master" value="button" id="btnSavePlotMaster">Submit</button>
+                <button type="button" class="cancel_plot_master" value="button">Cancel</button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -702,6 +702,11 @@ namespace GidaGkpWeb.Controllers
         {
             return View();
         }
+        public ActionResult AllotmentMoneyWithInstallment(int applicationId)
+        {
+            ViewData["ApplicationId"] = applicationId;
+            return View();
+        }
         public ActionResult Logout()
         {
             Session.Abandon();
