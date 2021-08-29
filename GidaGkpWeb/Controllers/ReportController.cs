@@ -1,15 +1,11 @@
 ﻿using GidaGkpWeb.BAL;
 using GidaGkpWeb.Infrastructure.Utility;
-using System.IO;
-using System.Linq;
-using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.tool.xml.css;
-using iTextSharp.tool.xml.pipeline.css;
-using ClientDependency.Core;
+using System.IO;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace GidaGkpWeb.Controllers
 {
@@ -70,19 +66,6 @@ namespace GidaGkpWeb.Controllers
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "Rejected" && x.SchemeName == schemeName).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
-        }
-        public FileResult ExportRejectedApplicant(string GridHtml)
-        {
-            using (MemoryStream stream = new System.IO.MemoryStream())
-            {
-                StringReader sr = new StringReader(GridHtml);
-                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
-                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                pdfDoc.Open();
-                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "RejectedApplicant.pdf");
-            }
         }
     }
 }
