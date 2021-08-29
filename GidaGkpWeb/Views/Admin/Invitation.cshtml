@@ -21,57 +21,71 @@
                 <h3 style="font-size:18px;">Generate Invitation Letter </h3>
                 <hr />
             </div>
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="usertype">Scheme Type<span class="required-field"></span></label>
+                    <select name="SchemeType" id="SchemeType" class="form-control"></select>
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="usertype">Scheme Name<span class="required-field"></span></label>
+                    <select name="SchemeName" id="SchemeName" class="form-control"></select>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-group col-sm-6 col-xs-12">
+                    <input type="hidden" name="Id" value="" />
+                    <label for="user" class="">Name of the applicant who will be the lessee</label>
+                    <select id="ddlApplicant" name="Applicant"></select>
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="user" class="">Address of the Applicant </label>
+                    <input type="text" name="Address" id="Address" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="user" class=""> Sector Name </label>
+                    <input type="text" name="SectorName" id="SectorName" class="form-control">
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="user" class=""> Application Number </label>
+                    <input type="text" name="ApplicationNo" id="ApplicationNo" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="user">Plot Range<span class="required-field"></span></label>
+                    <input type="text" name="PlotRange" id="PlotRange" class="form-control">
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="user" class=""> Plot Area  </label>
+                    <input type="text" name="TotalNoOfPlots" id="TotalNoOfPlots" class="form-control">
+                    @*<input type="text" name="PlotArea" id="TotalNoOfPlots" class="form-control">*@
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="user" class=""> Date and Time of Interview   </label>
+                    <input type="datetime-local" name="InterviewDateTime" id="InterviewDateTime" class="form-control">
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="user" class=""> Interview Mode   </label>
+                    <select id="ddlinterview" name="InterviewMode">
+                        <option>Select Mode</option>
+                        <option>Interview</option>
+                        <option>Lottery</option>
+                    </select>
+                </div>
+            </div>
+                <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
 
-            <div class="form-group col-sm-12 col-xs-12">
-                <input type="hidden" name="Id" value="" />
-                <label for="user" class="">Name of the applicant who will be the lessee</label>
 
-                <select id="ddlApplicant" name="Applicant"></select>
+                    <input type="submit" id="btnSave" name="next" class=" btn btn-primary next action-button pull-right" value="Save" />
+                    <button type="button" class="cancel_plot_master" value="button">Cancel</button>
+                </div>
 
             </div>
-            <div class="form-group col-sm-12 col-xs-12">
-                <label for="user" class="">Address of the Applicant and details of the plot. </label>
-                <input type="text" name="Address" id="Address" class="form-control">
-            </div>
-
-            <div class="form-group col-sm-6 col-xs-12">
-                <label for="user" class=""> Sector Name </label>
-                <input type="text" name="SectorName" id="SectorName" class="form-control">
-            </div>
-            <div class="form-group col-sm-6 col-xs-12">
-                <label for="user" class=""> Application Number </label>
-                <input type="text" name="ApplicationNo" id="ApplicationNo" class="form-control">
-            </div>
-            <div class="form-group col-sm-6 col-xs-12">
-                <label for="user">Plot Range<span class="required-field"></span></label>
-                <input type="text" name="PlotRange" id="PlotRange" class="form-control">
-            </div>
-            <div class="form-group col-sm-6 col-xs-12">
-                <label for="user" class=""> Plot Number  </label>
-                <input type="text" name="TotalNoOfPlots" id="TotalNoOfPlots" class="form-control">
-            </div>
-
-            <div class="form-group col-sm-6 col-xs-12">
-                <label for="user" class=""> Date and Time of Interview   </label>
-                <input type="datetime-local" name="InterviewDateTime" id="InterviewDateTime" class="form-control">
-            </div>
-            <div class="form-group col-sm-6 col-xs-12">
-                <label for="user" class=""> Interview Mode   </label>
-                <select id="ddlinterview" name="InterviewMode">
-                    <option>Select Mode</option>
-                    <option>Interview</option>
-                    <option>Lottery</option>
-                </select>
-            </div>
-            <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
-
-
-                <input type="submit" id="btnSave" name="next" class=" btn btn-primary next action-button pull-right" value="Save" />
-                <button type="button" class="cancel_plot_master" value="button">Cancel</button>
-            </div>
-
-        </div>
-    </form>
+</form>
 
 </div>
 
