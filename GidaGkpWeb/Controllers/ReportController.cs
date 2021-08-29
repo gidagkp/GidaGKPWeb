@@ -1,31 +1,15 @@
-﻿using DataLayer;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Helpers;
-using System.Web.Mvc;
-using GidaGkpWeb.Global;
-using GidaGkpWeb.Models;
-using GidaGkpWeb.BAL.Login;
-using GidaGkpWeb.BAL;
-using CCA.Util;
-using System.Collections.Specialized;
+﻿using GidaGkpWeb.BAL;
 using GidaGkpWeb.Infrastructure.Utility;
-using GidaGkpWeb.Infrastructure.Authentication;
-using System.Web.Script.Serialization;
-using System.Web.Security;
-using System.Net.Http;
-using System.Net;
-using System.Text;
 using System.IO;
-using ICSharpCode.SharpZipLib.Zip;
-using System.Threading.Tasks;
-using GidaGkpWeb.Infrastructure;
-using System.Configuration;
-using GidaGkpWeb.BAL.Masters;
-
+using System.Linq;
+using System.Web.Mvc;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.tool.xml.css;
+using iTextSharp.tool.xml.pipeline.css;
+using ClientDependency.Core;
 
 namespace GidaGkpWeb.Controllers
 {
@@ -47,12 +31,58 @@ namespace GidaGkpWeb.Controllers
             var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "Selected" && x.SchemeName == schemeName).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult ExportSelectedApplicant(string GridHtml)
+        {
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "SelectedApplicant.pdf");
+            }
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult ExportRejectedApplicant(string GridHtml)
+        {
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "RejectedApplicant.pdf");
+            }
+        }
+
         [HttpPost]
         public JsonResult GetRejectedApplicant(string schemeName)
         {
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "Rejected" && x.SchemeName == schemeName).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public FileResult ExportRejectedApplicant(string GridHtml)
+        {
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "RejectedApplicant.pdf");
+            }
         }
     }
 }

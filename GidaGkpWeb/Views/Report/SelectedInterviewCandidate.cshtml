@@ -35,15 +35,28 @@
             <select name="SchemeName" id="SchemeName" class="form-control"></select>
         </div>
         @*<div class="form-group col-sm-4 col-xs-12">
-            <label for="usertype">Sector Name<span class="required-field"></span></label>
-            <select name="SectorName" id="SectorName" class="form-control"></select>
-        </div>*@
+                <label for="usertype">Sector Name<span class="required-field"></span></label>
+                <select name="SectorName" id="SectorName" class="form-control"></select>
+            </div>*@
 
         <div class="form-group col-sm-1 col-xs-12">
             <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearch">Search</button>
         </div>
 
-        <div class="col-sm-12 col-xs-12">
+        <div class="form-group col-sm-2 col-xs-12">
+            @using (Html.BeginForm("ExportSelectedApplicant", "Report", FormMethod.Post))
+            {
+                <input type="hidden" name="GridHtml" />
+                <input type="submit" id="btnSubmit" class="submit_plot_master" value="Export to Excel" style=" float: right; position: relative; margin-top: 23px;" />
+            }
+        </div>
+
+
+
+        <div class="col-sm-12 col-xs-12" id="divExport">
+            <div class="col-sm-12 col-xs-12 text-left hidden" id="divReportTitle" style="padding-bottom: 30px;">
+                <h3 style="font-size:18px;">Selected Candidate Report</h3>
+            </div>
             <div class="table-responsive" style="padding:10px 0 40px 0;">
                 <table class="table table_css_main_cl table-bordered">
                     <thead>
@@ -56,16 +69,16 @@
                     </thead>
                     <tbody id="tbodyData">
                         @*@foreach (var data in UserDataModel)
-                        {
-                            <tr>
-                                <td class="text-center">@index</td>
-                                <td class="text-center">@data.FullName</td>
-                                <td class="text-center">@data.ApplicationNumber</td>
-                                <td class="text-center">@data.PlotNumber</td>
-                                <td class="text-center"> <a href="/Admin/AllotmentStatus">Allotment Status</a></td>
-                            </tr>
-                            index++;
-                        }*@
+                            {
+                                <tr>
+                                    <td class="text-center">@index</td>
+                                    <td class="text-center">@data.FullName</td>
+                                    <td class="text-center">@data.ApplicationNumber</td>
+                                    <td class="text-center">@data.PlotNumber</td>
+                                    <td class="text-center"> <a href="/Admin/AllotmentStatus">Allotment Status</a></td>
+                                </tr>
+                                index++;
+                            }*@
                     </tbody>
                 </table>
             </div>
@@ -76,3 +89,12 @@
     </div>
 
 </div>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $('#divReportTitle').removeClass('hidden');
+            $("input[name='GridHtml']").val($("#divExport").html());
+            $('#divReportTitle').addClass('hidden');
+        });
+    });
+</script>
