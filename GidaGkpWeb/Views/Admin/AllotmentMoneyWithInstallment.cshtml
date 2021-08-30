@@ -43,41 +43,38 @@
                                 <th>Plot Area</th>
                                 <th>Plot Range</th>
                                 <th>Plot Rate for Range (₹)</th>
+                                <th>Total (₹)</th>
                                 <th>Plot Side</th>
                                 <th> % Rate for Plot Side</th>
                                 <th> Plot Category</th>
-                                <th> Total Plot Cost</th>
-                                <th> Extra Charge</th>
-                                <th> Grand Total </th>
-                                @*<th class="text-center">Action</th>*@
+                                <th> Grand Total</th>
+                                <th> 10 % of Total Premium as Allotment Money</th>
+                                <th> 90 % of Total Premium </th>
+                                <th> Deposited Earnest Money </th>
+                                <th> Allotment Money to be paid  </th>
+                                @*<th class="text-center">Action</th>deposited as Earnest Monet *@
                             </tr>
                         </thead>
                         <tbody id="tableBodyPlot">
-                            <tr id="baseRow" style="display:none;">
-                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotNumber" readonly></td>
-                                <td><input type="number" class="form-control" placeholder="Enter Plot Area" id="plotArea"></td>
-                                <td>
-                                    <select name="PlotRange" id="PlotRange" class="form-control"></select>
-                                </td>
-                                <td><input type="text" class="form-control"></td>
-                                <td style="width: 120px;">
-                                    <input type="checkbox" style="width: 22px;" />Corner Plot<br />
-                                    <input type="checkbox" style="width: 22px;" />Wide Road<br />
-                                    <input type="checkbox" style="width: 22px;" />Park Facing
-                                </td>
-
-                                <td><input type="number" class="form-control" placeholder="Enter Percentage Rate" id="PercentageRate"></td>
-                                <td>
-                                    <select name="PlotCategory" id="PlotCategory" class="form-control"></select>
-                                </td>
-                                <td><input type="number" class="form-control" placeholder="Total Plot Cost" disabled></td>
-                                <td><input type="number" class="form-control" placeholder="Enter Extra Charge" id="ExtraCharge"></td>
-                                <td><input type="number" class="form-control" placeholder="Grand Total Cost of Plot" disabled></td>
-                                @*<td class="text-center">
-                                        <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                    </td>*@
-                            </tr>
                             <tr>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotNumber" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotArea" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Plot Range" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Plot Rate" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Total" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Plot Side" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Percentage Rate" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Plot Category" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Grand Total" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="10 % of Total Premium as Allotment Money" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="90 % of Total Premium" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Deposited Earnest Money" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="Allotment Money- Earnest Money" readonly></td>
+                                @*<td class="text-center">
+            <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+        </td>*@
+                            </tr>
+                            @*<tr>
                                 <td><input type="text" class="form-control" placeholder="Enter Plot No"></td>
                                 <td><input type="number" class="form-control" placeholder="Enter Plot Area" id="plotArea"></td>
                                 <td>
@@ -96,12 +93,12 @@
                                 </td>
                                 <td><input type="number" class="form-control" placeholder="Total Plot Cost" disabled></td>
                                 <td><input type="number" class="form-control" placeholder="Enter Extra Charge" id="ExtraCharge"></td>
-                                <td><input type="number" class="form-control" placeholder="Grand Total Cost of Plot" disabled></td>
+                                <td><input type="number" class="form-control" placeholder="Grand Total Cost of Plot" disabled></td>*@
                                 @*<td class="text-center">
                                         <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                     </td>*@
-                            </tr>
-                        </tbody>
+                            @*</tr>*@
+                        @*</tbody>*@
                     </table>
                 </div>
             </div>
