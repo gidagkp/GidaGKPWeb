@@ -93,7 +93,9 @@ namespace GidaGkpWeb.BAL
                         from transaction in transaction2.DefaultIfEmpty()
                         join ProjectDetail1 in _db.ApplicantProjectDetails on application.ApplicationId equals ProjectDetail1.ApplicationId into projectDetail2
                         from ProjectDetail in projectDetail2.DefaultIfEmpty()
-                        where user.UserType != "Test" && plotDetail.SchemeName == schemeName
+                        join invitationLetter1 in _db.ApplicantInvitationLetters on application.ApplicationId equals invitationLetter1.ApplicationId into invitationLetter2
+                        from invitationLetter in invitationLetter2.DefaultIfEmpty()
+                        where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
                             ApplicationNumber = doc != null ? application.ApplicationNumber : "",
@@ -987,7 +989,7 @@ namespace GidaGkpWeb.BAL
                             CreatedDate = plot.CreatedDate,
                             ExtraCharge = plot.ExtraCharge,
                             GrandTotalCost = plot.GrandTotalCost,
-                            NoOfPlots = plot.NoOfPlots,
+                            NoOfPlots = plot.PlotNumber,
                             PercentageRate = plot.PercentageRate,
                             PlotArea = plot.PlotArea,
                             PlotCategory = plot.PlotCategory,
@@ -1050,10 +1052,12 @@ namespace GidaGkpWeb.BAL
                         from applicant in applicant2.DefaultIfEmpty()
                         join application1 in _db.ApplicantApplicationDetails on user.Id equals application1.UserId into application2
                         from application in application2.DefaultIfEmpty()
+                        join plotmaster1 in _db.PlotMasters on appLetter.PlotId equals plotmaster1.PlotId into plotmaster2
+                        from plotmaster in plotmaster2.DefaultIfEmpty()
                         where user.UserType != "Test"
                         select new
                         {
-                            PlotNumber = appLetter.TotalNoOfPlots,
+                            PlotNumber = plotmaster.PlotNumber,
                             ApplicationNumber = application != null ? application.ApplicationNumber : "",
                             ApplicationId = application != null ? application.ApplicationId : 0,
                             AadharNumber = user.AadharNumber,

@@ -695,6 +695,7 @@
     <Content Include="Views\Admin\IndustrialDashboard.cshtml" />
     <Content Include="Views\Admin\SchemeTermsAndCondition.cshtml" />
     <Content Include="Views\Admin\AllocateAllotmentLetter.cshtml" />
+    <Content Include="Views\Admin\AllotmentMoneyWithInstallment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">

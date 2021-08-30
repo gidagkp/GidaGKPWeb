@@ -113,7 +113,7 @@
           <Property Name="ApplicantAddress" Type="varchar" MaxLength="500" />
           <Property Name="PlotDetails" Type="varchar" MaxLength="500" />
           <Property Name="PlotRange" Type="varchar" MaxLength="50" />
-          <Property Name="TotalNoOfPlots" Type="varchar" MaxLength="50" />
+          <Property Name="PlotId" Type="int" />
           <Property Name="InterviewMode" Type="varchar" MaxLength="50" />
           <Property Name="InterviewDateTime" Type="datetime" />
           <Property Name="InterviewLetterStatus" Type="varchar" MaxLength="500" />
@@ -439,7 +439,7 @@
           <Property Name="SectorName" Type="int" />
           <Property Name="PlotRange" Type="int" />
           <Property Name="PlotArea" Type="varchar" MaxLength="50" />
-          <Property Name="NoOfPlots" Type="varchar" MaxLength="50" />
+          <Property Name="PlotNumber" Type="varchar" MaxLength="50" />
           <Property Name="PlotRate" Type="varchar" MaxLength="50" />
           <Property Name="PlotSideCorner" Type="bit" />
           <Property Name="PlotSideWideRoad" Type="bit" />
@@ -679,7 +679,7 @@
           <Property Name="ApplicantAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PlotDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PlotRange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TotalNoOfPlots" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlotId" Type="Int32" />
           <Property Name="InterviewMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="InterviewDateTime" Type="DateTime" Precision="3" />
           <Property Name="InterviewLetterStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -1007,7 +1007,7 @@
           <Property Name="SectorName" Type="Int32" />
           <Property Name="PlotRange" Type="Int32" />
           <Property Name="PlotArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NoOfPlots" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlotNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PlotRate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PlotSideCorner" Type="Boolean" />
           <Property Name="PlotSideWideRoad" Type="Boolean" />
@@ -1197,7 +1197,7 @@
                 <ScalarProperty Name="InterviewLetterStatus" ColumnName="InterviewLetterStatus" />
                 <ScalarProperty Name="InterviewDateTime" ColumnName="InterviewDateTime" />
                 <ScalarProperty Name="InterviewMode" ColumnName="InterviewMode" />
-                <ScalarProperty Name="TotalNoOfPlots" ColumnName="TotalNoOfPlots" />
+                <ScalarProperty Name="PlotId" ColumnName="PlotId" />
                 <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
                 <ScalarProperty Name="PlotDetails" ColumnName="PlotDetails" />
                 <ScalarProperty Name="ApplicantAddress" ColumnName="ApplicantAddress" />
@@ -1535,7 +1535,7 @@
                 <ScalarProperty Name="PlotSideWideRoad" ColumnName="PlotSideWideRoad" />
                 <ScalarProperty Name="PlotSideCorner" ColumnName="PlotSideCorner" />
                 <ScalarProperty Name="PlotRate" ColumnName="PlotRate" />
-                <ScalarProperty Name="NoOfPlots" ColumnName="NoOfPlots" />
+                <ScalarProperty Name="PlotNumber" ColumnName="PlotNumber" />
                 <ScalarProperty Name="PlotArea" ColumnName="PlotArea" />
                 <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
                 <ScalarProperty Name="SectorName" ColumnName="SectorName" />

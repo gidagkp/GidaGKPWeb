@@ -13,6 +13,7 @@ namespace GidaGkpWeb.Models
         public string SectorName { get; set; }
         public string ApplicationNumber { get; set; }
         public string PlotRange { get; set; }
+        public string PlotArea { get; set; }
         public string TotalPlot { get; set; }
         public string InterviewMode { get; set; }
         public Nullable<int> CreatedBy { get; set; }

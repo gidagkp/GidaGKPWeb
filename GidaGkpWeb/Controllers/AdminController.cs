@@ -29,6 +29,28 @@ using GidaGkpWeb.BAL.Masters;
 
 namespace GidaGkpWeb.Controllers
 {
+    public enum DocumentName
+    {
+        ApplicantEduTechQualification,
+        ScanPAN,
+        ScanID,
+        ApplicantPhoto,
+        ApplicantSignature,
+        BalanceSheet,
+        BankVerifiedSignature,
+        DocProofForIndustrialEstablishedOutsideGida,
+        ExperienceProof,
+        FinDetailsEstablishedIndustries,
+        ITReturn,
+        Memorendum,
+        OtherDocForProposedIndustry,
+        PreEstablishedIndustriesDoc,
+        ProjectReport,
+        ProposedPlanLandUses,
+        ScanAddressProof,
+        ScanCastCert
+    }
+
     [AdminSessionTimeout]
     public class AdminController : CommonController
     {
@@ -702,11 +724,6 @@ namespace GidaGkpWeb.Controllers
         {
             return View();
         }
-        public ActionResult AllotmentMoneyWithInstallment(int applicationId)
-        {
-            ViewData["ApplicationId"] = applicationId;
-            return View();
-        }
         public ActionResult Logout()
         {
             Session.Abandon();
@@ -733,7 +750,7 @@ namespace GidaGkpWeb.Controllers
             return Json(usrs, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult SaveNewInvitation(string Id, string Applicant, string Address, string SectorName, string ApplicationNo, string PlotRange, string TotalNoOfPlots, string InterviewDateTime, string InterviewMode)
+        public ActionResult SaveNewInvitation(string Id, string Applicant, string Address, string SectorName, string ApplicationNo, string PlotRange, string InterviewDateTime, string InterviewMode)
         {
             ApplicantInvitationLetter invt = new ApplicantInvitationLetter();
             invt.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
@@ -742,7 +759,7 @@ namespace GidaGkpWeb.Controllers
             invt.ApplicantAddress = Address;
             invt.SectorName = SectorName;
             invt.PlotRange = PlotRange;
-            invt.TotalNoOfPlots = TotalNoOfPlots;
+            //invt.PlotId = Convert.ToInt32(PlotId);
             invt.InterviewDateTime = Convert.ToDateTime(InterviewDateTime);
             invt.InterviewMode = InterviewMode;
 
@@ -974,29 +991,15 @@ namespace GidaGkpWeb.Controllers
 
         }
 
-
+        public ActionResult AllotmentMoneyWithInstallment(int applicationId)
+        {
+            ViewData["ApplicationId"] = applicationId;
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["UserDetail"] = data;
+            return View();
+        }
 
     }
 
-    public enum DocumentName
-    {
-        ApplicantEduTechQualification,
-        ScanPAN,
-        ScanID,
-        ApplicantPhoto,
-        ApplicantSignature,
-        BalanceSheet,
-        BankVerifiedSignature,
-        DocProofForIndustrialEstablishedOutsideGida,
-        ExperienceProof,
-        FinDetailsEstablishedIndustries,
-        ITReturn,
-        Memorendum,
-        OtherDocForProposedIndustry,
-        PreEstablishedIndustriesDoc,
-        ProjectReport,
-        ProposedPlanLandUses,
-        ScanAddressProof,
-        ScanCastCert
-    }
 }
