@@ -38,24 +38,34 @@
                     <th class="text-center">Interview Result </th>
                     <th class="text-center">Action</th>
                 </tr>
-                @foreach (var data in UserDataModel)
+                @if (UserDataModel != null && UserDataModel.Count > 0)
+                {
+                    foreach (var data in UserDataModel)
+                    {
+                        <tr>
+                            <td class="text-center">@index</td>
+                            <td class="text-center">@data.FullName</td>
+                            <td class="text-center">@data.ApplicationNumber</td>
+                            @*<td class="text-center">@data.PlotNumber</td>*@
+                            <td><select name="PlotNumber" id="PlotNumber" class="form-control"></select></td>
+                            <td class="text-center">
+                                <select data-Status="@data.UserId">
+                                    <option value="Selected">Selected </option>
+                                    <option value="Rejected">Rejected </option>
+                                </select>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-success" onclick="sendEmailForAllotment(@data.UserId); return false;"> <i class="fa fa-envelope" aria-hidden="true"></i>Send</button>
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td class="text-center">@index</td>
-                        <td class="text-center">@data.FullName</td>
-                        <td class="text-center">@data.ApplicationNumber</td>
-                        <td class="text-center">@data.PlotNumber</td>
-                        <td class="text-center">
-                            <select data-Status="@data.UserId">
-                                <option value="Selected">Selected </option>
-                                <option value="Rejected">Rejected </option>
-                            </select>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-success" onclick="sendEmailForAllotment(@data.UserId); return false;"> <i class="fa fa-envelope" aria-hidden="true"></i>Send</button>
-                        </td>
+                        <td colspan="6">No Candidate is here</td>
                     </tr>
-                    index++;
                 }
             </table>
         </div>

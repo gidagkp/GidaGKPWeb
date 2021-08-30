@@ -989,7 +989,7 @@ namespace GidaGkpWeb.BAL
                             CreatedDate = plot.CreatedDate,
                             ExtraCharge = plot.ExtraCharge,
                             GrandTotalCost = plot.GrandTotalCost,
-                            NoOfPlots = plot.PlotNumber,
+                            PlotNumber = plot.PlotNumber,
                             PercentageRate = plot.PercentageRate,
                             PlotArea = plot.PlotArea,
                             PlotCategory = plot.PlotCategory,
@@ -1121,7 +1121,7 @@ namespace GidaGkpWeb.BAL
             }
         }
 
-        public Enums.CrudStatus ApplicationInvitationLetterStatusChnage(int userid, string status, string comment = "")
+        public Enums.CrudStatus ApplicationInvitationLetterStatusChnage(int userid, string status, int? plotId)
         {
             try
             {
@@ -1133,22 +1133,7 @@ namespace GidaGkpWeb.BAL
                     if (inviationDetail != null)
                     {
                         inviationDetail.InterviewLetterStatus = status;
-                        //if (UserData.Designation == "Assistant Manager")
-                        //{
-                        //    transactionDetail.AMApprovalStatus = status;
-                        //    transactionDetail.AMComment = comment;
-                        //}
-                        //else if (UserData.Designation == "Manager")
-                        //{
-                        //    transactionDetail.MApprovalStatus = status;
-                        //    transactionDetail.MComment = comment;
-                        //}
-                        //else if (UserData.Designation == "General Manager")
-                        //{
-                        //    transactionDetail.GMApprovalStatus = status;
-                        //    transactionDetail.GMComment = comment;
-                        //}
-
+                        inviationDetail.PlotId = plotId;
                         _db.Entry(inviationDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                         return Enums.CrudStatus.Updated;
@@ -1255,6 +1240,32 @@ namespace GidaGkpWeb.BAL
                     }
                 }
                 return Enums.CrudStatus.InternalError;
+            }
+        }
+
+        public List<PlotMasterModel> GetPlotNumber()
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return (from plotmaster in _db.PlotMasters
+                        where !(_db.ApplicantInvitationLetters.Select(x => x.PlotId).Contains(plotmaster.PlotId))
+                        select new PlotMasterModel
+                        {
+                            PlotId = plotmaster.PlotId,
+                            PlotNumber = plotmaster.PlotNumber
+                        }).ToList();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return new List<PlotMasterModel>();
             }
         }
     }

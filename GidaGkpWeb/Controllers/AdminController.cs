@@ -637,7 +637,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult CandidateListForInterview()
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview();
+            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == null || x.InterviewLetterStatus == "").ToList();
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -646,7 +646,7 @@ namespace GidaGkpWeb.Controllers
         {
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantSubmittedForInterview().Where(x => x.UserId == userid).FirstOrDefault();
-            _details.ApplicationInvitationLetterStatusChnage(userid, "InvitationSentForInterview");
+            _details.ApplicationInvitationLetterStatusChnage(userid, "InvitationSentForInterview", null);
             this.SendMailToApplicantInterview(data.FullName, data.Email, data.InterviewDateTime);
             SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
             return RedirectToAction("CandidateListForInterview");
@@ -677,11 +677,11 @@ namespace GidaGkpWeb.Controllers
         }
 
         [HttpPost]
-        public JsonResult SendMailtoApplicantForInterviewResult(int userId, string status)
+        public JsonResult SendMailtoApplicantForInterviewResult(int userId, string status, int plotId)
         {
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantSubmittedForInterview().Where(x => x.UserId == userId).FirstOrDefault();
-            _details.ApplicationInvitationLetterStatusChnage(userId, status);
+            _details.ApplicationInvitationLetterStatusChnage(userId, status, plotId);
             this.SendMailToApplicantInterviewResult(data.FullName, data.Email, status);
             SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
             //return RedirectToAction("CandidateListForAllotment");
@@ -989,6 +989,13 @@ namespace GidaGkpWeb.Controllers
                 SetAlertMessage("Term and Condition Saving failed", "Term and Condition Save");
             return RedirectToAction("SchemeTermsAndCondition");
 
+        }
+
+        [HttpPost]
+        public JsonResult GetPlotNumber()
+        {
+            AdminDetails _details = new AdminDetails();
+            return Json(_details.GetPlotNumber(), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult AllotmentMoneyWithInstallment(int applicationId)

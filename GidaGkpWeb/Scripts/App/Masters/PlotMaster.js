@@ -123,7 +123,7 @@ $(document).ready(function () {
                 //$.each(data, function (key, entry) {
                 var index = 0;
                 $("#tableBodyPlot tr:not('[id*=baseRow]')").each(function () {
-                    $(this).find('td').eq(0).find('input').val(data[index].NoOfPlots);
+                    $(this).find('td').eq(0).find('input').val(data[index].PlotNumber);
                     $(this).find('td').eq(1).find('input').val(data[index].PlotArea);
                     $(this).find('td').eq(2).find('select').val(data[index].PlotRange);
                     $(this).find('td').eq(3).find('input').val(data[index].PlotRate);
@@ -312,7 +312,7 @@ $(document).ready(function () {
                 'SchemeType': $('#SchemeType').val(),
                 'SchemeName': $('#SchemeName').val(),
                 'SectorName': $('#SectorName').val(),
-                'NoOfPlots': $(this).find('td').eq(0).find('input').val(),
+                'PlotNumber': $(this).find('td').eq(0).find('input').val(),
                 'PlotArea': $(this).find('td').eq(1).find('input').val(),
                 'PlotRange': $(this).find('td').eq(2).find('select').val(),
                 'PlotRate': $(this).find('td').eq(3).find('input').val(),
@@ -380,7 +380,34 @@ $(document).ready(function () {
         $('body').append('<div class="modal-backdrop fade in"></div>');
     });
 
-
+    FillPlotNumber();
+    function FillPlotNumber() {
+        let dropdown = $('[id*=PlotNumber]');
+        dropdown.empty();
+        dropdown.append('<option value="">Select</option>');
+        dropdown.prop('selectedIndex', 0);
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: '{}',
+            url: '/Admin/GetPlotNumber',
+            success: function (data) {
+                $.each(data, function (key, entry) {
+                    dropdown.append($('<option></option>').attr('value', entry.PlotId).text(entry.PlotNumber));
+                });
+                if (selectedSchemeTypeId != null) {
+                    dropdown.val(selectedSchemeTypeId);
+                }
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    }
 
 });
 
@@ -449,11 +476,12 @@ function editPageMaster(id) {
 
 function sendEmailForAllotment(userid) {
     var status = $('*[data-Status="' + userid + '"]').val();
+    var plotId = $('*[data-Status="' + userid + '"]').parent().parent().find('td').eq(3).find('select').val()
     $.ajax({
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         type: 'POST',
-        data: '{userId: "' + userid + '",status: "' + status + '" }',
+        data: '{userId: "' + userid + '",status: "' + status + '",plotId:"' + plotId + '" }',
         url: '/Admin/SendMailtoApplicantForInterviewResult',
         success: function (data) {
             location.reload();

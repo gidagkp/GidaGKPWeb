@@ -14,7 +14,7 @@ namespace GidaGkpWeb.Models
         public Nullable<int> SectorName { get; set; }
         public Nullable<int> PlotRange { get; set; }
         public string PlotArea { get; set; }
-        public string NoOfPlots { get; set; }
+        public string PlotNumber { get; set; }
         public string PlotRate { get; set; }
         public Nullable<bool> PlotSideCorner { get; set; }
         public Nullable<bool> PlotSideWideRoad { get; set; }

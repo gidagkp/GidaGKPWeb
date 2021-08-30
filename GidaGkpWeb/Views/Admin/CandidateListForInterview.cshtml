@@ -48,22 +48,31 @@
                     <th class="text-center">Invitation for interview/ lottery given or not </th>
                     <th class="text-center">Action</th>
                 </tr>
-                @foreach (var data in UserDataModel)
+                @if (UserDataModel != null && UserDataModel.Count > 0)
+                {
+                    foreach (var data in UserDataModel)
+                    {
+                        <tr>
+                            <td class="text-center">@index</td>
+                            <td class="text-center">@data.FullName</td>
+                            <td class="text-center">@data.ApplicationNumber</td>
+                            <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
+                            <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
+                            <td class="text-center">
+                                <a style="background-color: green; color: white;" class="btn btn-success"
+                                   href="/Admin/SendMailtoApplicantForInterview?userid=@data.UserId">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>Send
+                                </a>
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td class="text-center">@index</td>
-                        <td class="text-center">@data.FullName</td>
-                        <td class="text-center">@data.ApplicationNumber</td>
-                        <td class="text-center"><select><option>Approved </option> <option>Not Approved </option></select></td>
-                        <td class="text-center"><select><option>Given </option> <option>Not Given </option></select></td>
-                        <td class="text-center">
-                            <a style="background-color: green; color: white;" class="btn btn-success"
-                               href="/Admin/SendMailtoApplicantForInterview?userid=@data.UserId">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>Send
-                            </a>
-                        </td>
+                        <td colspan="7">No Candidate to send Invitation for Interview/Lottery</td>
                     </tr>
-                    index++;
                 }
             </table>
         </div>
