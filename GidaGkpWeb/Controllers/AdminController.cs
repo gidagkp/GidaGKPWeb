@@ -730,8 +730,11 @@ namespace GidaGkpWeb.Controllers
             Session.Clear();
             return RedirectToAction("AdminLogin", "Login");
         }
-        public ActionResult Invitation()
+        public ActionResult Invitation(int applicationId, int schemeName)
         {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(schemeName).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["UserDetail"] = data;
             return View();
         }
         [HttpPost]
@@ -750,11 +753,12 @@ namespace GidaGkpWeb.Controllers
             return Json(usrs, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult SaveNewInvitation(string Id, string Applicant, string Address, string SectorName, string ApplicationNo, string PlotRange, string InterviewDateTime, string InterviewMode)
+        public ActionResult SaveNewInvitation(string Id, string applicationId, string Applicant, string Address, string SectorName, string ApplicationNo, string PlotRange, string InterviewDateTime, string InterviewMode)
         {
             ApplicantInvitationLetter invt = new ApplicantInvitationLetter();
             invt.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
             invt.UserId = Convert.ToInt32(Applicant);
+            invt.ApplicationId = Convert.ToInt32(applicationId);
             invt.ApplicationNo = ApplicationNo;
             invt.ApplicantAddress = Address;
             invt.SectorName = SectorName;
@@ -778,7 +782,7 @@ namespace GidaGkpWeb.Controllers
             }
             else
                 SetAlertMessage("User creation failed", "Save User");
-            return RedirectToAction("Invitation");
+            return RedirectToAction("CandidateListForInterview");
 
 
         }
@@ -1006,7 +1010,16 @@ namespace GidaGkpWeb.Controllers
             ViewData["UserDetail"] = data;
             return View();
         }
-
+        [HttpPost]
+        public JsonResult GetApprovedApplicantDetail(int schemeName)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(schemeName).Where(x => !string.IsNullOrEmpty(x.CEOPaymentStatus)
+                                            && !string.IsNullOrEmpty(x.CEODocumentStatus)
+                                            && !x.CEOPaymentStatus.Contains("Not Approved")
+                                            && !x.CEODocumentStatus.Contains("Not Approved")).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }

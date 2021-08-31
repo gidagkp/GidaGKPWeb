@@ -29,6 +29,7 @@ namespace GidaGkpWeb.Models
         public string SchemeType { get; set; }
         public string SchemeName { get; set; }
         public string SectorName { get; set; }
+        public string PlotSectorName { get; set; }
         public string AllotmentNumber { get; set; }
         public string UserType { get; set; }
         public string ResetCode { get; set; }

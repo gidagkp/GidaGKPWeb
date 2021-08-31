@@ -90,7 +90,7 @@ namespace GidaGkpWeb.BAL.Masters
                     {
                         applicantinvitationletter.UserId = Invitation.UserId;
                         applicantinvitationletter.ApplicationNo = Invitation.ApplicationNo;
-
+                        applicantinvitationletter.ApplicationId = Invitation.ApplicationId;
                         //applicantinvitationletter.Sector = Invitation.Sector;
                         applicantinvitationletter.ApplicantAddress = Invitation.ApplicantAddress;
                         applicantinvitationletter.PlotRange = Invitation.PlotRange;

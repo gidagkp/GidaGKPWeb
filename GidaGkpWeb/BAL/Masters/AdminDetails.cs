@@ -87,6 +87,8 @@ namespace GidaGkpWeb.BAL
                         from bankDetail in bankDetail2.DefaultIfEmpty()
                         join plotDetail1 in _db.ApplicantPlotDetails on user.Id equals plotDetail1.UserId into plotDetail2
                         from plotDetail in plotDetail2.DefaultIfEmpty()
+                        join sectorLookup1 in _db.Lookups on plotDetail.SectorName equals sectorLookup1.LookupId into sectorLookup2
+                        from sectorLookup in sectorLookup2.DefaultIfEmpty()
                         join doc1 in _db.ApplicantUploadDocs on user.Id equals doc1.UserId into doc2
                         from doc in doc2.DefaultIfEmpty()
                         join transaction1 in _db.ApplicantTransactionDetails on application.ApplicationId equals transaction1.ApplicationId into transaction2
@@ -117,6 +119,7 @@ namespace GidaGkpWeb.BAL
                             SchemeName = user.SchemeName,
                             SchemeType = user.SchemeType,
                             SectorName = user.SectorName,
+                            PlotSectorName = plotDetail != null ? sectorLookup.LookupName : "",
                             UserType = user.UserType,
                             DOB = user.DOB,
                             UserName = user.UserName,
@@ -153,7 +156,8 @@ namespace GidaGkpWeb.BAL
                             SIDocumentComment = doc != null ? doc.SIComment : "",
                             GMDocumentComment = doc != null ? doc.GMComment : "",
                             CEODocumentComment = doc != null ? doc.CEOComment : "",
-
+                            InterviewLetterStatus = invitationLetter != null && invitationLetter.InterviewLetterStatus == null ? "Invitation Generated" : invitationLetter != null ? invitationLetter.InterviewLetterStatus : "",
+                            UserId = user.Id,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -216,6 +220,7 @@ namespace GidaGkpWeb.BAL
                             SchemeName = x.SchemeName,
                             SchemeType = x.SchemeType,
                             SectorName = x.SectorName,
+                            PlotSectorName = x.PlotSectorName,
                             UserType = x.UserType,
                             DOB = x.DOB != null ? x.DOB.Value.ToString("dd/MM/yyyy") : string.Empty,
                             UserName = x.UserName,
@@ -242,7 +247,8 @@ namespace GidaGkpWeb.BAL
                             SIDocumentStatus = !string.IsNullOrEmpty(x.SIDocumentComment) ? x.SIDocumentStatus + "(Comment : " + x.SIDocumentComment + ")" : x.SIDocumentStatus,
                             CEODocumentStatus = !string.IsNullOrEmpty(x.CEODocumentComment) ? x.CEODocumentStatus + "(Comment : " + x.CEODocumentComment + ")" : x.CEODocumentStatus,
                             GMDocumentStatus = !string.IsNullOrEmpty(x.GMDocumentComment) ? x.GMDocumentStatus + "(Comment : " + x.GMDocumentComment + ")" : x.GMDocumentStatus,
-
+                            InterviewLetterStatus = !string.IsNullOrEmpty(x.InterviewLetterStatus) ? x.InterviewLetterStatus : "",
+                            UserId = x.UserId,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
@@ -1046,12 +1052,12 @@ namespace GidaGkpWeb.BAL
             {
                 _db = new GidaGKPEntities();
                 return (from user in _db.ApplicantUsers
-                        join appLetter in _db.ApplicantInvitationLetters on user.Id equals appLetter.UserId
                         join plotDetail in _db.ApplicantPlotDetails on user.Id equals plotDetail.UserId
                         join applicant1 in _db.ApplicantDetails on user.Id equals applicant1.UserId into applicant2
                         from applicant in applicant2.DefaultIfEmpty()
                         join application1 in _db.ApplicantApplicationDetails on user.Id equals application1.UserId into application2
                         from application in application2.DefaultIfEmpty()
+                        join appLetter in _db.ApplicantInvitationLetters on application.ApplicationId equals appLetter.ApplicationId
                         join plotmaster1 in _db.PlotMasters on appLetter.PlotId equals plotmaster1.PlotId into plotmaster2
                         from plotmaster in plotmaster2.DefaultIfEmpty()
                         where user.UserType != "Test"
