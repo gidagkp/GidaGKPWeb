@@ -410,10 +410,10 @@ $(document).ready(function () {
                         '<td class="text-center">' + entry.InterviewLetterStatus + '</td>';
 
                     if (entry.InterviewLetterStatus != null && entry.InterviewLetterStatus != "" && entry.InterviewLetterStatus != undefined) {
-                        rowHtml += '<td class="text-center"><a target="_blank" style="opacity: 0.5;pointer-events: none;" href="#"><strong>Application Status</strong></a></td>';
+                        rowHtml += '<td class="text-center" id="actionColumn"><a target="_blank" style="opacity: 0.5;pointer-events: none;" href="#"><strong>Application Status</strong></a></td>';
                     }
                     else {
-                        rowHtml += '<td class="text-center"><a target="_blank" href="/Admin/Invitation?applicationId=' + entry.ApplicationId + '&schemeName=' + schemeName + '"><strong>Send Invitation</strong></a></td>';
+                        rowHtml += '<td class="text-center" id="actionColumn"><a target="_blank" href="/Admin/Invitation?applicationId=' + entry.ApplicationId + '&schemeName=' + schemeName + '"><strong>Send Invitation</strong></a></td>';
                     }
                     rowHtml += '</tr>';
                     index++;

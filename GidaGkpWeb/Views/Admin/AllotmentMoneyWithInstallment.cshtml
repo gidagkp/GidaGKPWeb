@@ -8,7 +8,7 @@
 }
 
 <link rel="stylesheet" href="~/styles/table_form.css">
-<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/ApplicantAllotmentDetail.js"></script>
 <script src="~/Scripts/App/Masters/navigation.js"></script>
 <div class="container">
 
@@ -43,11 +43,10 @@
                                 <th>Plot Area</th>
                                 <th>Plot Range</th>
                                 <th>Plot Rate for Range (₹)</th>
-                                <th>Total (₹)</th>
                                 <th>Plot Side</th>
                                 <th> % Rate for Plot Side</th>
-                                <th> Plot Category</th>
-                                <th> Grand Total</th>
+                                <th> Plot Cost</th>
+                                <th> Extra Charge</th>
                                 <th> 10 % of Total Premium as Allotment Money</th>
                                 <th> 90 % of Total Premium </th>
                                 <th> Deposited Earnest Money </th>
@@ -58,21 +57,33 @@
                         <tbody id="tableBodyPlot">
                             <tr>
                                 <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotNumber" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotArea" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Plot Range" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Plot Rate" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Total" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Plot Side" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Percentage Rate" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Plot Category" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Grand Total" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="10 % of Total Premium as Allotment Money" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="90 % of Total Premium" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Deposited Earnest Money" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="Allotment Money- Earnest Money" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PMPlotArea" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotRange" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotRate" readonly></td>
+                                <td>
+                                    @if (@UserDataModel.PlotSideCorner == true)
+                                    {
+                                        <span>Corner Plot</span><br />
+                                    }
+                                    @if (@UserDataModel.PlotSideWideRoad == true)
+                                    {
+                                        <span>Wide Roadt</span><br />
+                                    }
+                                    @if (@UserDataModel.PlotSideParkFacing == true)
+                                    {
+                                        <span>Park Facing</span><br />
+                                    }
+                                </td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotSidePercentage" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotCost" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.ExtraCharge" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.TenPer_AllotmentMoney" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.NintyPer_AllotmentMoney" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.EarnestMoney" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.AllotementMoneyTobePaid" readonly></td>
                                 @*<td class="text-center">
-            <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-        </td>*@
+                                        <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                    </td>*@
                             </tr>
                             @*<tr>
                                 <td><input type="text" class="form-control" placeholder="Enter Plot No"></td>
@@ -94,11 +105,11 @@
                                 <td><input type="number" class="form-control" placeholder="Total Plot Cost" disabled></td>
                                 <td><input type="number" class="form-control" placeholder="Enter Extra Charge" id="ExtraCharge"></td>
                                 <td><input type="number" class="form-control" placeholder="Grand Total Cost of Plot" disabled></td>*@
-                                @*<td class="text-center">
-                                        <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                    </td>*@
+                            @*<td class="text-center">
+                                    <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                </td>*@
                             @*</tr>*@
-                        @*</tbody>*@
+                            @*</tbody>*@
                     </table>
                 </div>
             </div>

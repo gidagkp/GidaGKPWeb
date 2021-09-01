@@ -97,6 +97,8 @@ namespace GidaGkpWeb.BAL
                         from ProjectDetail in projectDetail2.DefaultIfEmpty()
                         join invitationLetter1 in _db.ApplicantInvitationLetters on application.ApplicationId equals invitationLetter1.ApplicationId into invitationLetter2
                         from invitationLetter in invitationLetter2.DefaultIfEmpty()
+                        join plotMaster1 in _db.PlotMasters on invitationLetter.PlotId equals plotMaster1.PlotId into plotMaster2
+                        from plotMaster in plotMaster2.DefaultIfEmpty()
                         where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
@@ -158,6 +160,21 @@ namespace GidaGkpWeb.BAL
                             CEODocumentComment = doc != null ? doc.CEOComment : "",
                             InterviewLetterStatus = invitationLetter != null && invitationLetter.InterviewLetterStatus == null ? "Invitation Generated" : invitationLetter != null ? invitationLetter.InterviewLetterStatus : "",
                             UserId = user.Id,
+                            PlotId = plotMaster != null ? plotMaster.PlotId : 0,
+                            PlotRange = invitationLetter != null ? invitationLetter.PlotRange : "",
+                            PMPlotArea = plotMaster != null ? plotMaster.PlotArea : "",
+                            PlotNumber = plotMaster != null ? plotMaster.PlotNumber : "",
+                            PlotRate = plotMaster != null ? plotMaster.PlotRate : "",
+                            PlotSideCorner = plotMaster != null ? plotMaster.PlotSideCorner : false,
+                            PlotSideParkFacing = plotMaster != null ? plotMaster.PlotSideParkFacing : false,
+                            PlotSideWideRoad = plotMaster != null ? plotMaster.PlotSideWideRoad : false,
+                            PlotSidePercentage = plotMaster != null ? plotMaster.PercentageRate : "",
+                            PlotCost = plotMaster != null ? plotMaster.PlotCost : "",
+                            ExtraCharge = plotMaster != null ? plotMaster.ExtraCharge : "",
+                            GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
+                            //TenPer_AllotmentMoney = plotMaster != null ? ((Convert.ToInt32(plotMaster.PlotCost) * 10) / 100).ToString() : "",
+                            //NintyPer_AllotmentMoney = plotMaster != null ? ((Convert.ToInt32(plotMaster.PlotCost) * 90) / 100).ToString() : "",
+                            //AllotementMoneyTobePaid = plotDetail != null && plotMaster != null ? (((Convert.ToInt32(plotMaster.PlotCost) * 90) / 100) - plotDetail.EarnestMoney).ToString() : "",
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -249,6 +266,22 @@ namespace GidaGkpWeb.BAL
                             GMDocumentStatus = !string.IsNullOrEmpty(x.GMDocumentComment) ? x.GMDocumentStatus + "(Comment : " + x.GMDocumentComment + ")" : x.GMDocumentStatus,
                             InterviewLetterStatus = !string.IsNullOrEmpty(x.InterviewLetterStatus) ? x.InterviewLetterStatus : "",
                             UserId = x.UserId,
+                            PlotId = x.PlotId,
+                            PlotRange = x.PlotRange,
+                            PMPlotArea = x.PMPlotArea,
+                            PlotNumber = x.PlotNumber,
+                            PlotRate = x.PlotRate,
+                            PlotSideCorner = x.PlotSideCorner,
+                            PlotSideParkFacing = x.PlotSideParkFacing,
+                            PlotSideWideRoad = x.PlotSideWideRoad,
+                            PlotSidePercentage = x.PlotSidePercentage,
+                            PlotCost = x.PlotCost,
+                            ExtraCharge = x.ExtraCharge,
+                            GrandTotalCost = x.GrandTotalCost,
+                            //TenPer_AllotmentMoney = x.TenPer_AllotmentMoney,
+                            //NintyPer_AllotmentMoney = x.NintyPer_AllotmentMoney,
+                            //AllotementMoneyTobePaid = x.AllotementMoneyTobePaid,
+
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,

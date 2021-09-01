@@ -73,6 +73,20 @@ namespace GidaGkpWeb.Models
         public string InterviewDateTime { get; set; }
         public string PlotNumber { get; set; }
         public string InterviewLetterStatus { get; set; }
+        public int PlotId { get; set; }
+        public string PlotRange { get; set; }
+        public string PMPlotArea { get; set; }
+        public string PlotRate { get; set; }
+        public bool? PlotSideCorner { get; set; }
+        public bool? PlotSideParkFacing { get; set; }
+        public bool? PlotSideWideRoad { get; set; }
+        public string PlotSidePercentage { get; set; }
+        public string PlotCost { get; set; }
+        public string ExtraCharge { get; set; }
+        public string GrandTotalCost { get; set; }
+        public string TenPer_AllotmentMoney { get; set; }
+        public string NintyPer_AllotmentMoney { get; set; }
+        public string AllotementMoneyTobePaid { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 

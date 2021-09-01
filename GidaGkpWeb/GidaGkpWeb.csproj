@@ -473,6 +473,7 @@
     <Content Include="images\xeditable\loading.gif" />
     <Content Include="Scripts\App\Global\Utility.js" />
     <Content Include="Scripts\App\Login\Login.js" />
+    <Content Include="Scripts\App\Masters\ApplicantAllotmentDetail.js" />
     <Content Include="Scripts\App\Masters\ApplicantProject.js" />
     <Content Include="Scripts\App\Masters\Invitation.js" />
     <Content Include="Scripts\App\Masters\LeaseDeedDetails.js" />

@@ -25,7 +25,9 @@ using System.Threading.Tasks;
 using GidaGkpWeb.Infrastructure;
 using System.Configuration;
 using GidaGkpWeb.BAL.Masters;
-
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 
 namespace GidaGkpWeb.Controllers
 {
@@ -1019,6 +1021,22 @@ namespace GidaGkpWeb.Controllers
                                             && !x.CEOPaymentStatus.Contains("Not Approved")
                                             && !x.CEODocumentStatus.Contains("Not Approved")).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult ExportSchemeWiseInvitationList(string GridHtml)
+        {
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "SchemeWiseInvitationList.pdf");
+            }
         }
     }
 

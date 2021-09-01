@@ -42,8 +42,17 @@
         <div class="form-group col-sm-1 col-xs-12">
             <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearchApprovedList">Search</button>
         </div>
-        <div class="col-sm-12 col-xs-12">
-
+        <div class="form-group col-sm-2 col-xs-12">
+            @using (Html.BeginForm("ExportSchemeWiseInvitationList", "Admin", FormMethod.Post))
+            {
+                <input type="hidden" name="GridHtml" />
+                <input type="submit" id="btnSubmit" class="submit_plot_master" value="Download PDF" style=" float: right; position: relative; margin-top: 23px;" />
+            }
+        </div>
+        <div class="col-sm-12 col-xs-12" id="divExport">
+            <div class="col-sm-12 col-xs-12 text-left hidden" id="divReportTitle" style="padding-bottom: 30px;">
+                <h3 style="font-size:18px;">Scheme Wise Invitation List</h3>
+            </div>
             <div class="table-responsive" style="padding:10px 0 40px 0;">
                 <table class="table table_css_main_cl table-bordered">
                     <thead>
@@ -54,7 +63,7 @@
                             <th class="text-center">Mobile No </th>
                             <th class="text-center">Plot Area </th>
                             <th class="text-center">Invitation Status</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center" id="actionColumn">Action</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyData">
@@ -68,3 +77,14 @@
     </div>
 
 </div>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $('#divReportTitle').removeClass('hidden');
+            $('[id*=actionColumn]').addClass('hidden')
+            $("input[name='GridHtml']").val($("#divExport").html());
+            $('#divReportTitle').addClass('hidden');
+            $('[id*=actionColumn]').removeClass('hidden')
+        });
+    });
+</script>
