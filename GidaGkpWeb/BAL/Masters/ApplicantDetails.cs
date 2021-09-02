@@ -36,14 +36,15 @@ namespace GidaGkpWeb.BAL
         }
         public string SavePlotDetail(int userId, string AppliedFor, string SchemeType, string PlotRange, string SchemeName, string plotArea, string SectorName, string SectorDescription, string EstimatedRate, string PaymemtSchedule, string TotalInvestment, string ApplicationFee, string EarnestMoneyDeposite, string GST, string NetAmount, string TotalAmount, string IndustryOwnershipType, string UnitName, string Name, string dob, string PresentAddress, string PermanentAddress, string RelationshipStatus)
         {
-            try
-            {
-                _db = new GidaGKPEntities();
-                int _effectRow = 0;
-                ApplicantApplicationDetail app = new ApplicantApplicationDetail();
 
-                var existingPlotDetail = _db.ApplicantPlotDetails.Where(x => x.ApplicationId == UserData.ApplicationId).FirstOrDefault();
-                if (existingPlotDetail != null)  // update plot detail
+            _db = new GidaGKPEntities();
+            int _effectRow = 0;
+            ApplicantApplicationDetail app = new ApplicantApplicationDetail();
+
+            var existingPlotDetail = _db.ApplicantPlotDetails.Where(x => x.ApplicationId == UserData.ApplicationId).FirstOrDefault();
+            if (existingPlotDetail != null)  // update plot detail
+            {
+                try
                 {
                     app.ApplicationNumber = _db.ApplicantApplicationDetails.Where(x => x.ApplicationId == UserData.ApplicationId).FirstOrDefault().ApplicationNumber;
                     existingPlotDetail.ApplicationFee = Convert.ToDecimal(ApplicationFee);
@@ -72,7 +73,21 @@ namespace GidaGkpWeb.BAL
                     _db.Entry(existingPlotDetail).State = EntityState.Modified;
                     _effectRow = _db.SaveChanges();
                 }
-                else //save plot detail
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                        }
+                    }
+                    return "Error";
+                }
+            }
+            else //save plot detail
+            {
+                try
                 {
                     var applciationDeatil = _db.ApplicantApplicationDetails.OrderByDescending(x => x.ApplicationId).Take(1).FirstOrDefault();
                     int maxId = 0;
@@ -129,22 +144,26 @@ namespace GidaGkpWeb.BAL
                     _db.Entry(_newRecord).State = EntityState.Added;
                     _effectRow = _db.SaveChanges();
                 }
-
-
-                return _effectRow > 0 ? app.ApplicationNumber : "Error";
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
+                catch (DbEntityValidationException e)
                 {
-                    foreach (var ve in eve.ValidationErrors)
+                    foreach (var eve in e.EntityValidationErrors)
                     {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                        }
                     }
+
+                    //delete application Id when any error found in saving plot detail
+                    var application = _db.ApplicantApplicationDetails.Where(x => x.ApplicationId == UserData.ApplicationId).FirstOrDefault();
+                    _db.Entry(application).State = EntityState.Deleted;
+                    _db.SaveChanges();
+                    return "Error";
                 }
-                return "Error";
+                
             }
 
+            return _effectRow > 0 ? app.ApplicationNumber : "Error";
 
         }
 
@@ -1476,7 +1495,7 @@ namespace GidaGkpWeb.BAL
                         existingChangeProjectDetail.PhotographFileContent = changeProjectDetail.PhotographFileContent;
                     }
 
-                    existingChangeProjectDetail.AmountPaid = changeProjectDetail.AmountPaid.HasValue  ? changeProjectDetail.AmountPaid : existingChangeProjectDetail.AmountPaid.HasValue ? existingChangeProjectDetail.AmountPaid:null;
+                    existingChangeProjectDetail.AmountPaid = changeProjectDetail.AmountPaid.HasValue ? changeProjectDetail.AmountPaid : existingChangeProjectDetail.AmountPaid.HasValue ? existingChangeProjectDetail.AmountPaid : null;
 
                     existingChangeProjectDetail.TransactionNumber = !string.IsNullOrEmpty(changeProjectDetail.TransactionNumber) ? changeProjectDetail.TransactionNumber : existingChangeProjectDetail.TransactionNumber;
 
