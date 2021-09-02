@@ -23,6 +23,7 @@ namespace GidaGkpWeb.BAL.Masters
                         join PlotNameLookup in _db.Lookups on ApplicantPlotDet.PlotRange equals PlotNameLookup.LookupId
                         join ApplicantDet in _db.ApplicantDetails on ApplicantPlotDet.ApplicationId equals ApplicantDet.ApplicationId
                         join AppApplication in _db.ApplicantApplicationDetails on ApplicantPlotDet.ApplicationId equals AppApplication.ApplicationId
+                        
                         where ApplicantPlotDet.UserId == UserId
                         select new InvitationModel
                         {

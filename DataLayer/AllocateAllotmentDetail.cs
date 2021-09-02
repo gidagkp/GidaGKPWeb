@@ -12,17 +12,19 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class UploadedApplicantDocVerify
+    public partial class AllocateAllotmentDetail
     {
         public int Id { get; set; }
         public Nullable<int> ApplicationId { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public Nullable<int> AllotmentId { get; set; }
-        public Nullable<bool> DocVerifyByFinance { get; set; }
-        public string CommentByFinance { get; set; }
-        public Nullable<bool> DocVerifyByAssistant { get; set; }
-        public string CommentByAssistant { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
+        public string AllotmentNumber { get; set; }
+        public Nullable<System.DateTime> AllotmentDate { get; set; }
+        public Nullable<System.DateTime> StartingDateofInterview_L { get; set; }
+        public Nullable<System.DateTime> EndDateofInterview_L { get; set; }
+        public Nullable<System.DateTime> DateofAllotmentLetter { get; set; }
+        public byte[] CEO_Sign { get; set; }
+        public string CEO_SignFileType { get; set; }
+        public string CEO_SignFileName { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModificationDate { get; set; }
     }
 }

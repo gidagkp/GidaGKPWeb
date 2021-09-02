@@ -22,6 +22,7 @@ namespace DataLayer
         public string FathersNameOfApplicant { get; set; }
         public string AddressOfApplicant { get; set; }
         public string SectorName { get; set; }
+        public Nullable<int> PlotId { get; set; }
         public string PlotNo { get; set; }
         public Nullable<bool> PlotPaymentStatus { get; set; }
         public string NoOfPaidInstallment { get; set; }
@@ -47,5 +48,7 @@ namespace DataLayer
         public Nullable<System.DateTime> DateOnWhichInterestDueSendToGida { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+    
+        public virtual PlotMaster PlotMaster { get; set; }
     }
 }

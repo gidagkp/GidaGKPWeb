@@ -12,20 +12,16 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class GidaUser
+    public partial class SchemewiseTermsCondition
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> UserRoleId { get; set; }
-        public string Name { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
-        public string Email { get; set; }
-        public string MobileNo { get; set; }
-        public Nullable<int> Designation { get; set; }
-        public Nullable<int> Department { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<int> SchemeName { get; set; }
+        public Nullable<System.DateTime> AllotmentMoneyDueDate { get; set; }
+        public Nullable<System.DateTime> Firstduedateofpaymentofinterest { get; set; }
+        public Nullable<System.DateTime> DateofgivingfirstInstallment { get; set; }
+        public Nullable<System.DateTime> DateofgivingsecondInstallment { get; set; }
+        public Nullable<System.DateTime> DateofgivingthirdInstallent { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModificationDate { get; set; }
     }
 }

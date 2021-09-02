@@ -25,13 +25,9 @@ namespace DataLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AddingNewProductDetail> AddingNewProductDetails { get; set; }
         public virtual DbSet<AdminNotice> AdminNotices { get; set; }
-        public virtual DbSet<AlloteeTimeEextensionFfess> AlloteeTimeEextensionFfesses { get; set; }
-        public virtual DbSet<AllotmentDetail> AllotmentDetails { get; set; }
-        public virtual DbSet<Allottee_Electronicform> Allottee_Electronicform { get; set; }
+        public virtual DbSet<AllocateAllotmentDetail> AllocateAllotmentDetails { get; set; }
         public virtual DbSet<ApplicantApplicationDetail> ApplicantApplicationDetails { get; set; }
-        public virtual DbSet<ApplicantApplicationStatu> ApplicantApplicationStatus { get; set; }
         public virtual DbSet<ApplicantBankDetail> ApplicantBankDetails { get; set; }
         public virtual DbSet<ApplicantDetail> ApplicantDetails { get; set; }
         public virtual DbSet<ApplicantFormStep> ApplicantFormSteps { get; set; }
@@ -42,25 +38,15 @@ namespace DataLayer
         public virtual DbSet<ApplicantTransactionDetail> ApplicantTransactionDetails { get; set; }
         public virtual DbSet<ApplicantUploadDoc> ApplicantUploadDocs { get; set; }
         public virtual DbSet<ApplicantUser> ApplicantUsers { get; set; }
-        public virtual DbSet<ChangeProjectDetail> ChangeProjectDetails { get; set; }
         public virtual DbSet<GidaUser> GidaUsers { get; set; }
         public virtual DbSet<LeaseDeedDetail> LeaseDeedDetails { get; set; }
-        public virtual DbSet<LeaseRentDetail> LeaseRentDetails { get; set; }
         public virtual DbSet<Lookup> Lookups { get; set; }
-        public virtual DbSet<ManagerElectronicForm> ManagerElectronicForms { get; set; }
-        public virtual DbSet<ManufacturingUnitDetail> ManufacturingUnitDetails { get; set; }
         public virtual DbSet<MortgageDetail> MortgageDetails { get; set; }
         public virtual DbSet<PageMaster> PageMasters { get; set; }
         public virtual DbSet<PGTransactionInformation> PGTransactionInformations { get; set; }
-        public virtual DbSet<Plot_Restoration> Plot_Restoration { get; set; }
         public virtual DbSet<PlotMaster> PlotMasters { get; set; }
-        public virtual DbSet<PlotTransferDetail> PlotTransferDetails { get; set; }
-        public virtual DbSet<PossessionDetail> PossessionDetails { get; set; }
         public virtual DbSet<RoleWisePermission> RoleWisePermissions { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<UploadedApplicantDocVerify> UploadedApplicantDocVerifies { get; set; }
-        public virtual DbSet<AlloteeTimeExtensionFeesPayGateway> AlloteeTimeExtensionFeesPayGateways { get; set; }
-        public virtual DbSet<TransfereeUploadDoc> TransfereeUploadDocs { get; set; }
-        public virtual DbSet<TransferrerUploadDoc> TransferrerUploadDocs { get; set; }
+        public virtual DbSet<SchemewiseTermsCondition> SchemewiseTermsConditions { get; set; }
+        public virtual DbSet<LeasdeedNotesheet> LeasdeedNotesheets { get; set; }
     }
 }

@@ -12,16 +12,21 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class AlloteeTimeExtensionFeesPayGateway
+    public partial class LeasdeedNotesheet
     {
         public long Id { get; set; }
+        public string ApplicationId { get; set; }
         public Nullable<int> ApplicantId { get; set; }
-        public Nullable<decimal> TotalTime_Extension_Fees { get; set; }
-        public string Challan_Number { get; set; }
-        public Nullable<System.DateTime> Transaction_Date { get; set; }
+        public Nullable<System.DateTime> Bankguranteedate { get; set; }
+        public string Bankaddress { get; set; }
+        public string Allotmentnumber { get; set; }
+        public byte[] Digsign_Propassist { get; set; }
+        public string Comment_Propassist { get; set; }
+        public byte[] Digsign_Manager { get; set; }
+        public string Comment_Manager { get; set; }
+        public byte[] Digsign_FManager { get; set; }
+        public string Comment_FManager { get; set; }
         public Nullable<int> CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-    
-        public virtual ApplicantApplicationDetail ApplicantApplicationDetail { get; set; }
+        public Nullable<System.DateTime> Createddate { get; set; }
     }
 }

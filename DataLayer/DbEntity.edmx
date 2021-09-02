@@ -5,33 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GidaGKPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AddingNewProductDetails">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="ApplicationFormForAddNewProduct" Type="varchar" MaxLength="500" />
-          <Property Name="DPRForNewProduct" Type="varbinary(max)" />
-          <Property Name="AuthorisedSignByBank" Type="varbinary(max)" />
-          <Property Name="ApplicantIdedentityProof" Type="varbinary(max)" />
-          <Property Name="SignOfCandidate" Type="varbinary(max)" />
-          <Property Name="PhotoOfCandidate" Type="varbinary(max)" />
-          <Property Name="PollutionCreatedByNewProduct" Type="varchar" MaxLength="500" />
-          <Property Name="QualityOfPollutantByNewProduct" Type="varchar" MaxLength="500" />
-          <Property Name="ObnoxiousGasDetails" Type="varchar" MaxLength="500" />
-          <Property Name="DischargeLiquidEffluents" Type="varchar" MaxLength="500" />
-          <Property Name="NOCFromThePollutionControlBoard" Type="varbinary(max)" />
-          <Property Name="RevisedSSIRegistration_IEM" Type="varbinary(max)" />
-          <Property Name="TotalLandCoverageAreaAfterAddingNewProduct" Type="varchar" MaxLength="500" />
-          <Property Name="ExceedDesignatedPlotArea" Type="varchar" MaxLength="500" />
-          <Property Name="ConstitutionOwnershipLicense" Type="varchar" MaxLength="500" />
-          <Property Name="NotarizedAffidavit" Type="varbinary(max)" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="AdminNotice">
           <Key>
             <PropertyRef Name="Id" />
@@ -49,78 +22,22 @@
           <Property Name="CreationDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
-        <EntityType Name="AlloteeTimeEextensionFfess">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PlotId" Type="int" />
-          <Property Name="Number_Year_Time_Extension_Fees" Type="varchar" MaxLength="50" />
-          <Property Name="Rate_Time_Extension_Fees" Type="int" />
-          <Property Name="Current_Premium_Plot_Area" Type="varchar" MaxLength="50" />
-          <Property Name="Total_Time_Extension_Fees" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Bank_Account_Number" Type="varchar" MaxLength="50" />
-          <Property Name="Bank_Name" Type="varchar" MaxLength="500" />
-          <Property Name="Branch_Name" Type="varchar" MaxLength="500" />
-          <Property Name="ApplicantId" Type="int" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="AlloteeTimeExtensionFeesPayGateway">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApplicantId" Type="int" />
-          <Property Name="TotalTime_Extension_Fees" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Challan_Number" Type="varchar" MaxLength="50" />
-          <Property Name="Transaction_Date" Type="datetime" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="AllotmentDetails">
+        <EntityType Name="AllocateAllotmentDetails">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
           <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentNo" Type="varchar" MaxLength="50" />
-          <Property Name="PlotNo" Type="varchar" MaxLength="50" />
-          <Property Name="PaymentStatusByFinance" Type="varchar" MaxLength="50" />
-          <Property Name="PaymentStatusByAssistant" Type="varchar" MaxLength="50" />
-          <Property Name="DateOfInterviewStart" Type="datetime" />
-          <Property Name="DateOfInterviewEnd" Type="datetime" />
+          <Property Name="AllotmentNumber" Type="varchar" MaxLength="50" />
           <Property Name="AllotmentDate" Type="datetime" />
-          <Property Name="DateOfAllotmentLetter" Type="datetime" />
-          <Property Name="DateoOfSigningByCEO" Type="datetime" />
-          <Property Name="DigiSignByCEO" Type="varbinary(max)" />
-          <Property Name="DigiSignByGMFinance" Type="varbinary(max)" />
-          <Property Name="DigiSignByManagerPropertyGeneralAdmin" Type="varbinary(max)" />
-          <Property Name="DigiSignByAGM_OSD_Sincharge" Type="varbinary(max)" />
-          <Property Name="DigiSignByACEO" Type="varbinary(max)" />
-          <Property Name="DigiSignByAssistant" Type="varbinary(max)" />
-          <Property Name="CreatedBy" Type="int" />
+          <Property Name="StartingDateofInterview_L" Type="datetime" />
+          <Property Name="EndDateofInterview_L" Type="datetime" />
+          <Property Name="DateofAllotmentLetter" Type="datetime" />
+          <Property Name="CEO_Sign" Type="varbinary(max)" />
+          <Property Name="CEO_SignFileType" Type="varchar(max)" />
+          <Property Name="CEO_SignFileName" Type="varchar(max)" />
           <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Allottee_Electronicform">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApplicantId" Type="int" />
-          <Property Name="Plot_Id" Type="int" />
-          <Property Name="Allotment_Number" Type="varchar" MaxLength="50" />
-          <Property Name="Allotment_Date" Type="datetime" />
-          <Property Name="Application_Letter_Time_Extension" Type="varbinary(max)" />
-          <Property Name="Affidavit_Self_Attested_Document" Type="varbinary(max)" />
-          <Property Name="Supporting_Proof_Production_Not_Started" Type="varbinary(max)" />
-          <Property Name="Signature_Authorized_Signatory_Verified_Bank" Type="varbinary(max)" />
-          <Property Name="Identity_Proof" Type="varbinary(max)" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModificationDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ApplicantApplicationDetail">
           <Key>
@@ -131,23 +48,6 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="AllotmentNumber" Type="varchar" MaxLength="50" />
           <Property Name="UserId" Type="int" />
           <Property Name="ApprovalStatus" Type="bit" />
-        </EntityType>
-        <EntityType Name="ApplicantApplicationStatus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="AmountDue" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="PaymentStatusByFinance" Type="bit" />
-          <Property Name="PaymentStatusByAssistant" Type="bit" />
-          <Property Name="CommentByAssistant" Type="varchar" MaxLength="500" />
-          <Property Name="InvitationLetterStatus" Type="bit" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ApplicantBankDetails">
           <Key>
@@ -213,7 +113,7 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="ApplicantAddress" Type="varchar" MaxLength="500" />
           <Property Name="PlotDetails" Type="varchar" MaxLength="500" />
           <Property Name="PlotRange" Type="varchar" MaxLength="50" />
-          <Property Name="TotalNoOfPlots" Type="varchar" MaxLength="50" />
+          <Property Name="PlotId" Type="int" />
           <Property Name="InterviewMode" Type="varchar" MaxLength="50" />
           <Property Name="InterviewDateTime" Type="datetime" />
           <Property Name="InterviewLetterStatus" Type="varchar" MaxLength="500" />
@@ -350,10 +250,10 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="ChalanDocumentFileType" Type="varchar" MaxLength="50" />
           <Property Name="TransactionType" Type="varchar" MaxLength="50" />
           <Property Name="AMApprovalStatus" Type="varchar" MaxLength="50" />
-          <Property Name="MApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="CEOApprovalStatus" Type="varchar" MaxLength="50" />
           <Property Name="GMApprovalStatus" Type="varchar" MaxLength="50" />
           <Property Name="AMComment" Type="varchar(max)" />
-          <Property Name="MComment" Type="varchar(max)" />
+          <Property Name="CEOComment" Type="varchar(max)" />
           <Property Name="GMComment" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ApplicantUploadDoc">
@@ -421,9 +321,13 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="AMApprovalStatus" Type="varchar" MaxLength="50" />
           <Property Name="ClerkApprovalStatus" Type="varchar" MaxLength="50" />
           <Property Name="SIApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="CEOApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="GMApprovalStatus" Type="varchar" MaxLength="50" />
           <Property Name="AMComment" Type="varchar(max)" />
           <Property Name="ClerkComment" Type="varchar(max)" />
           <Property Name="SIComment" Type="varchar(max)" />
+          <Property Name="CEOComment" Type="varchar(max)" />
+          <Property Name="GMComment" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ApplicantUser">
           <Key>
@@ -431,6 +335,7 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="CreationDate" Type="datetime" />
           <Property Name="FullName" Type="varchar" MaxLength="500" />
@@ -443,29 +348,8 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="SchemeName" Type="varchar" MaxLength="500" />
           <Property Name="SectorName" Type="varchar" MaxLength="500" />
           <Property Name="AllotmentNumber" Type="varchar" MaxLength="50" />
-          <Property Name="UserType" Type="varchar" MaxLength="50" />
           <Property Name="ResetCode" Type="varchar" MaxLength="100" />
           <Property Name="IsActive" Type="bit" />
-        </EntityType>
-        <EntityType Name="ChangeProjectDetails">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="DPRForNewProject" Type="varbinary(max)" />
-          <Property Name="AreaToBeUsedForProject" Type="varchar" MaxLength="50" />
-          <Property Name="QuantityEffluentDischargedByNewProject" Type="varchar" MaxLength="50" />
-          <Property Name="EffluentDischargedStatusForNewProject" Type="varchar" MaxLength="50" />
-          <Property Name="NOCFromPCB" Type="varbinary(max)" />
-          <Property Name="ProvisionalSSIRegistrationNoOrIEMsubmittedToSIA" Type="varchar" MaxLength="50" />
-          <Property Name="ObnoxiousGasEmissionDetrimentalSurroundings" Type="varchar" MaxLength="50" />
-          <Property Name="DulySignedNotarizedForAcknowledged" Type="varbinary(max)" />
-          <Property Name="UploadedSignPhoto" Type="varbinary(max)" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="GidaUser">
           <Key>
@@ -484,6 +368,27 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LeasdeedNotesheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApplicantId" Type="int" />
+          <Property Name="Bankguranteedate" Type="datetime" />
+          <Property Name="Bankaddress" Type="nvarchar(max)" />
+          <Property Name="Allotmentnumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Digsign_Propassist" Type="varbinary(max)" />
+          <Property Name="Comment_Propassist" Type="nvarchar(max)" />
+          <Property Name="Digsign_Manager" Type="varbinary(max)" />
+          <Property Name="Comment_Manager" Type="nvarchar(max)" />
+          <Property Name="Digsign_FManager" Type="varbinary(max)" />
+          <Property Name="Comment_FManager" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Createddate" Type="datetime" />
         </EntityType>
         <EntityType Name="LeaseDeedDetails">
           <Key>
@@ -512,23 +417,6 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="LeaseRentDetails">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="LeaseRentDate" Type="datetime" />
-          <Property Name="LeaseInterestRate" Type="varchar" MaxLength="50" />
-          <Property Name="AllotmentMoney" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="TotalPremium" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="OthersCharges" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="MaintainanceCharge" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="Lookup">
           <Key>
             <PropertyRef Name="LookupId" />
@@ -539,51 +427,6 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="ParentLookupId" Type="int" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="LookupNameImmutable" Type="varchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="ManagerElectronicForm">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApplicantId" Type="int" />
-          <Property Name="PlotId" Type="int" />
-          <Property Name="Allotment_Number" Type="varchar" MaxLength="50" />
-          <Property Name="Allotment_Date" Type="datetime" />
-          <Property Name="LandTransfer_OrderNo" Type="varchar" MaxLength="50" />
-          <Property Name="Plot_Name" Type="varchar" MaxLength="50" />
-          <Property Name="Sector_Name" Type="varchar" MaxLength="50" />
-          <Property Name="Plot_Area" Type="varchar" MaxLength="50" />
-          <Property Name="Plot_Dormant_NoOfMonth" Type="int" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="ManufacturingUnitDetails">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="LeaseDeedDone" Type="bit" />
-          <Property Name="ApplicationFormForAddNewProduct" Type="varchar" MaxLength="500" />
-          <Property Name="DPRForNewProduct" Type="varbinary(max)" />
-          <Property Name="AuthorisedSignByBank" Type="varbinary(max)" />
-          <Property Name="ApplicantIdedentityProof" Type="varbinary(max)" />
-          <Property Name="SignOfCandidate" Type="varbinary(max)" />
-          <Property Name="PhotoOfCandidate" Type="varbinary(max)" />
-          <Property Name="PollutionCreatedByNewProduct" Type="varchar" MaxLength="500" />
-          <Property Name="QualityOfPollutantByNewProduct" Type="varchar" MaxLength="500" />
-          <Property Name="ObnoxiousGasDetails" Type="varchar" MaxLength="500" />
-          <Property Name="DischargeLiquidEffluents" Type="varchar" MaxLength="500" />
-          <Property Name="NOCFromThePollutionControlBoard" Type="varbinary(max)" />
-          <Property Name="RevisedSSIRegistration_IEM" Type="varbinary(max)" />
-          <Property Name="TotalLandCoverageAreaAfterAddingNewProduct" Type="varchar" MaxLength="500" />
-          <Property Name="ExceedDesignatedPlotArea" Type="varchar" MaxLength="500" />
-          <Property Name="ConstitutionOwnershipLicense" Type="varchar" MaxLength="500" />
-          <Property Name="NotarizedAffidavit" Type="varbinary(max)" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="MortgageDetails">
           <Key>
@@ -597,6 +440,7 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="FathersNameOfApplicant" Type="varchar" MaxLength="500" />
           <Property Name="AddressOfApplicant" Type="varchar" MaxLength="500" />
           <Property Name="SectorName" Type="varchar" MaxLength="50" />
+          <Property Name="PlotId" Type="int" />
           <Property Name="PlotNo" Type="varchar" MaxLength="50" />
           <Property Name="PlotPaymentStatus" Type="bit" />
           <Property Name="NoOfPaidInstallment" Type="varchar" MaxLength="50" />
@@ -644,25 +488,6 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="TransactionId" Type="varchar" MaxLength="50" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="Plot_Restoration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name_Sender_Post" Type="varchar" MaxLength="50" />
-          <Property Name="Addressed_To" Type="varchar(max)" />
-          <Property Name="Subject_Mentioned" Type="varchar" MaxLength="500" />
-          <Property Name="Coupon_Number_Old" Type="varchar" MaxLength="50" />
-          <Property Name="Sender_Address" Type="varchar(max)" />
-          <Property Name="Pincode" Type="varchar" MaxLength="50" />
-          <Property Name="Document_Upload" Type="varbinary(max)" />
-          <Property Name="Processing_Fees" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Amount_Paid" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Transaction_Number" Type="varchar" MaxLength="50" />
-          <Property Name="Applicant_Id" Type="int" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="PlotMaster">
           <Key>
             <PropertyRef Name="PlotId" />
@@ -674,7 +499,7 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="SectorName" Type="int" />
           <Property Name="PlotRange" Type="int" />
           <Property Name="PlotArea" Type="varchar" MaxLength="50" />
-          <Property Name="NoOfPlots" Type="varchar" MaxLength="50" />
+          <Property Name="PlotNumber" Type="varchar" MaxLength="50" />
           <Property Name="PlotRate" Type="varchar" MaxLength="50" />
           <Property Name="PlotSideCorner" Type="bit" />
           <Property Name="PlotSideWideRoad" Type="bit" />
@@ -685,57 +510,6 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="PlotCost" Type="varchar" MaxLength="50" />
           <Property Name="ExtraCharge" Type="varchar" MaxLength="50" />
           <Property Name="GrandTotalCost" Type="varchar" MaxLength="50" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="PlotTransferDetails">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="ApplicantName" Type="varchar" MaxLength="500" />
-          <Property Name="ApplicantFathersName" Type="varchar" MaxLength="500" />
-          <Property Name="ApplicantAddress" Type="varchar" MaxLength="500" />
-          <Property Name="AllotmentNo" Type="varchar" MaxLength="50" />
-          <Property Name="DateOfAllotment" Type="datetime" />
-          <Property Name="PlotFullyPaidOrNot" Type="varchar" MaxLength="500" />
-          <Property Name="MortgageToAnyFinancialInstitute" Type="bit" />
-          <Property Name="ShowGidaNOCToBank" Type="varbinary(max)" />
-          <Property Name="BabkNOCRepaymentOfLoan" Type="varbinary(max)" />
-          <Property Name="TransferrerGotPlotFormTransferByAnotherTransferee" Type="varchar" MaxLength="500" />
-          <Property Name="CompletePaymentOfMaintainanceCharge" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="MaintainanceChargePaidAmount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="CompletePaymentOfLeaseRent" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="LeaseRentPaidAmount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="NoOfPremiumPaidInstallment" Type="varchar" MaxLength="50" />
-          <Property Name="TotalPremiumPaidInstallmentAmount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="NoOfInterestPaidInstallment" Type="varchar" MaxLength="50" />
-          <Property Name="TotalInterestPaidAmount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDeate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="PossessionDetails">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="PlotNo" Type="varchar" MaxLength="50" />
-          <Property Name="SectorLocation" Type="varchar" MaxLength="500" />
-          <Property Name="TransferDateTime" Type="datetime" />
-          <Property Name="LayoutOfPlot" Type="varchar" MaxLength="500" />
-          <Property Name="BuildingDetails" Type="varchar" MaxLength="500" />
-          <Property Name="AreaOfLand" Type="varchar" MaxLength="500" />
-          <Property Name="PossessionHandedOverNameBehalfOfGida" Type="varchar" MaxLength="500" />
-          <Property Name="DigiSignOfAMCivilOrJECivil" Type="varbinary(max)" />
-          <Property Name="WitnessDetailsFromGida" Type="varbinary(max)" />
-          <Property Name="WitnessDetailsFromAllottee" Type="varbinary(max)" />
-          <Property Name="PossessionDate" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
@@ -752,210 +526,20 @@ warning 6002: The table/view 'GidaGkp.dbo.AlloteeTimeExtensionFeesPayGateway' do
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'GidaGkp.dbo.SchemeAssistantNotesheet' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="SchemeAssistantNotesheet">
-          <Property Name="Id" Type="bigint" />
-          <Property Name="PlotId" Type="int" />
-          <Property Name="Allotment_Number" Type="varchar" MaxLength="50" />
-          <Property Name="Allotment_Date" Type="datetime" />
-          <Property Name="Transfer_Order_Applicable" Type="varchar" MaxLength="50" />
-          <Property Name="Transfer_Date_Applicable" Type="datetime" />
-          <Property Name="Allotee_Id" Type="bigint" />
-          <Property Name="Starting_Date_Time_Extension" Type="datetime" />
-          <Property Name="Ending_Date_Time_Extension" Type="datetime" />
-          <Property Name="Total_Years_Applicable" Type="varchar" MaxLength="50" />
-          <Property Name="Total_Time_Extension_Fees" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Bank_Challan_Number" Type="varchar" MaxLength="50" />
-          <Property Name="Transaction_Amount_Date" Type="datetime" />
-          <Property Name="Account_Number" Type="varchar" MaxLength="50" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>-->
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'GidaGkp.dbo.TransfereeUploadDoc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TransfereeUploadDoc">
+        <EntityType Name="SchemewiseTermsCondition">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="ProjectProfileDulySignedByapplicant" Type="varbinary(max)" />
-          <Property Name="ProposedLandUtilizationPlanDulySignedByApplicant" Type="varbinary(max)" />
-          <Property Name="IdentityProof" Type="varbinary(max)" />
-          <Property Name="TransfereeSignVerifiedByBank" Type="varbinary(max)" />
-          <Property Name="CertificateOfIncorporation" Type="varbinary(max)" />
-          <Property Name="MemorandumAndArticlesOfAssociation" Type="varbinary(max)" />
-          <Property Name="ListOfShareHoldersDirectors" Type="varbinary(max)" />
-          <Property Name="BoardResolution" Type="varbinary(max)" />
-          <Property Name="CompanyProfile" Type="varbinary(max)" />
-          <Property Name="NetWorthOrTurnover" Type="varbinary(max)" />
-          <Property Name="SalesCertificate" Type="varbinary(max)" />
-          <Property Name="CertificateIssuedByDirectorateIndustry" Type="varbinary(max)" />
-          <Property Name="CopyOfCancelCheque" Type="varbinary(max)" />
-          <Property Name="CertificateOfReservedCategory" Type="varbinary(max)" />
-          <Property Name="CreatedBy" Type="int" />
+          <Property Name="SchemeName" Type="int" />
+          <Property Name="AllotmentMoneyDueDate" Type="datetime" />
+          <Property Name="Firstduedateofpaymentofinterest" Type="datetime" />
+          <Property Name="DateofgivingfirstInstallment" Type="datetime" />
+          <Property Name="DateofgivingsecondInstallment" Type="datetime" />
+          <Property Name="DateofgivingthirdInstallent" Type="datetime" />
           <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModificationDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TransferrerUploadDoc">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="RequestLetterTransferOfPlot" Type="varbinary(max)" />
-          <Property Name="BuildingPlanDulyApprovedByGida" Type="varbinary(max)" />
-          <Property Name="DocumentsShareholdingDulyCertifiedByCA" Type="varbinary(max)" />
-          <Property Name="MeterSealingCertificate_ProofElectricity" Type="varbinary(max)" />
-          <Property Name="PowerBillLastThreeYears" Type="varbinary(max)" />
-          <Property Name="RawMaterialPurchaseBillLastThreeYears" Type="varbinary(max)" />
-          <Property Name="SalesBillFinishedProductLastThreeYears" Type="varbinary(max)" />
-          <Property Name="GSTFillingReturnLastThreeConsecutiveYears" Type="varbinary(max)" />
-          <Property Name="SupportingDocumentsInCaseOfExemptions" Type="varbinary(max)" />
-          <Property Name="UndertakingOfTransfer" Type="varbinary(max)" />
-          <Property Name="TransferrerSignVerifiedByBank" Type="varbinary(max)" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="UploadedApplicantDocVerify">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ApplicationId" Type="int" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="AllotmentId" Type="int" />
-          <Property Name="DocVerifyByFinance" Type="bit" />
-          <Property Name="CommentByFinance" Type="varchar" MaxLength="500" />
-          <Property Name="DocVerifyByAssistant" Type="bit" />
-          <Property Name="CommentByAssistant" Type="varchar" MaxLength="500" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="CreatedDate" Type="datetime" />
-        </EntityType>
-        <Association Name="FK_AddingNewProductDetails_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="AddingNewProductDetails" Type="Self.AddingNewProductDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="AddingNewProductDetails">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AddingNewProductDetails_GidaUser">
-          <End Role="GidaUser" Type="Self.GidaUser" Multiplicity="0..1" />
-          <End Role="AddingNewProductDetails" Type="Self.AddingNewProductDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GidaUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AddingNewProductDetails">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AlloteeTimeExtensionFeesPayGateway_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="AlloteeTimeExtensionFeesPayGateway" Type="Self.AlloteeTimeExtensionFeesPayGateway" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="AlloteeTimeExtensionFeesPayGateway">
-              <PropertyRef Name="ApplicantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AllotmentDetails_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="AllotmentDetails" Type="Self.AllotmentDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="AllotmentDetails">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Allottee_Electronicform_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="Allottee_Electronicform" Type="Self.Allottee_Electronicform" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="Allottee_Electronicform">
-              <PropertyRef Name="ApplicantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantApplicationStatus_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ApplicantApplicationStatus" Type="Self.ApplicantApplicationStatus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantApplicationStatus">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantBankDetails_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ApplicantBankDetails" Type="Self.ApplicantBankDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantBankDetails">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantDetails_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ApplicantDetails" Type="Self.ApplicantDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantDetails">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantDetails_ApplicantUser">
-          <End Role="ApplicantUser" Type="Self.ApplicantUser" Multiplicity="1" />
-          <End Role="ApplicantDetails" Type="Self.ApplicantDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ApplicantDetails">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
           <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
           <End Role="ApplicantInvitationLetter" Type="Self.ApplicantInvitationLetter" Multiplicity="*" />
@@ -968,87 +552,15 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ApplicantPlotDetails_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ApplicantPlotDetails" Type="Self.ApplicantPlotDetails" Multiplicity="*" />
+        <Association Name="FK_MortgageDetails_PlotMaster">
+          <End Role="PlotMaster" Type="Self.PlotMaster" Multiplicity="0..1" />
+          <End Role="MortgageDetails" Type="Self.MortgageDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
+            <Principal Role="PlotMaster">
+              <PropertyRef Name="PlotId" />
             </Principal>
-            <Dependent Role="ApplicantPlotDetails">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantProjectDetails_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ApplicantProjectDetails" Type="Self.ApplicantProjectDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantProjectDetails">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantTransactionDetail_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ApplicantTransactionDetail" Type="Self.ApplicantTransactionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantTransactionDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantUploadDoc_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ApplicantUploadDoc" Type="Self.ApplicantUploadDoc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantUploadDoc">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LeaseRentDetails_LeaseDeedDetails">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="LeaseRentDetails" Type="Self.LeaseRentDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="LeaseRentDetails">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ManagerElectronicForm_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ManagerElectronicForm" Type="Self.ManagerElectronicForm" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ManagerElectronicForm">
-              <PropertyRef Name="ApplicantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ManufacturingUnitDetails_ApplicantApplicationDetail">
-          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Role="ManufacturingUnitDetails" Type="Self.ManufacturingUnitDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ManufacturingUnitDetails">
-              <PropertyRef Name="ApplicationId" />
+            <Dependent Role="MortgageDetails">
+              <PropertyRef Name="PlotId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1065,13 +577,9 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="GidaGKPModelStoreContainer">
-          <EntitySet Name="AddingNewProductDetails" EntityType="Self.AddingNewProductDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminNotice" EntityType="Self.AdminNotice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AlloteeTimeEextensionFfess" EntityType="Self.AlloteeTimeEextensionFfess" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AllotmentDetails" EntityType="Self.AllotmentDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Allottee_Electronicform" EntityType="Self.Allottee_Electronicform" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AllocateAllotmentDetails" EntityType="Self.AllocateAllotmentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantApplicationDetail" EntityType="Self.ApplicantApplicationDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ApplicantApplicationStatus" EntityType="Self.ApplicantApplicationStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantBankDetails" EntityType="Self.ApplicantBankDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantDetails" EntityType="Self.ApplicantDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantFormStep" EntityType="Self.ApplicantFormStep" Schema="dbo" store:Type="Tables" />
@@ -1082,146 +590,40 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <EntitySet Name="ApplicantTransactionDetail" EntityType="Self.ApplicantTransactionDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantUploadDoc" EntityType="Self.ApplicantUploadDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantUser" EntityType="Self.ApplicantUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChangeProjectDetails" EntityType="Self.ChangeProjectDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GidaUser" EntityType="Self.GidaUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaseDeedDetails" EntityType="Self.LeaseDeedDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LeaseRentDetails" EntityType="Self.LeaseRentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ManagerElectronicForm" EntityType="Self.ManagerElectronicForm" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ManufacturingUnitDetails" EntityType="Self.ManufacturingUnitDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MortgageDetails" EntityType="Self.MortgageDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PageMaster" EntityType="Self.PageMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PGTransactionInformation" EntityType="Self.PGTransactionInformation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Plot_Restoration" EntityType="Self.Plot_Restoration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlotMaster" EntityType="Self.PlotMaster" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PlotTransferDetails" EntityType="Self.PlotTransferDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PossessionDetails" EntityType="Self.PossessionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleWisePermission" EntityType="Self.RoleWisePermission" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UploadedApplicantDocVerify" EntityType="Self.UploadedApplicantDocVerify" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AlloteeTimeExtensionFeesPayGateway" EntityType="Self.AlloteeTimeExtensionFeesPayGateway" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="SchemewiseTermsCondition" EntityType="Self.SchemewiseTermsCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeasdeedNotesheet" EntityType="Self.LeasdeedNotesheet" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [AlloteeTimeExtensionFeesPayGateway].[Id] AS [Id], 
-    [AlloteeTimeExtensionFeesPayGateway].[ApplicantId] AS [ApplicantId], 
-    [AlloteeTimeExtensionFeesPayGateway].[TotalTime_Extension_Fees] AS [TotalTime_Extension_Fees], 
-    [AlloteeTimeExtensionFeesPayGateway].[Challan_Number] AS [Challan_Number], 
-    [AlloteeTimeExtensionFeesPayGateway].[Transaction_Date] AS [Transaction_Date], 
-    [AlloteeTimeExtensionFeesPayGateway].[CreatedBy] AS [CreatedBy], 
-    [AlloteeTimeExtensionFeesPayGateway].[CreatedDate] AS [CreatedDate]
-    FROM [dbo].[AlloteeTimeExtensionFeesPayGateway] AS [AlloteeTimeExtensionFeesPayGateway]</DefiningQuery>
+    [LeasdeedNotesheet].[Id] AS [Id], 
+    [LeasdeedNotesheet].[ApplicationId] AS [ApplicationId], 
+    [LeasdeedNotesheet].[ApplicantId] AS [ApplicantId], 
+    [LeasdeedNotesheet].[Bankguranteedate] AS [Bankguranteedate], 
+    [LeasdeedNotesheet].[Bankaddress] AS [Bankaddress], 
+    [LeasdeedNotesheet].[Allotmentnumber] AS [Allotmentnumber], 
+    [LeasdeedNotesheet].[Digsign_Propassist] AS [Digsign_Propassist], 
+    [LeasdeedNotesheet].[Comment_Propassist] AS [Comment_Propassist], 
+    [LeasdeedNotesheet].[Digsign_Manager] AS [Digsign_Manager], 
+    [LeasdeedNotesheet].[Comment_Manager] AS [Comment_Manager], 
+    [LeasdeedNotesheet].[Digsign_FManager] AS [Digsign_FManager], 
+    [LeasdeedNotesheet].[Comment_FManager] AS [Comment_FManager], 
+    [LeasdeedNotesheet].[CreatedBy] AS [CreatedBy], 
+    [LeasdeedNotesheet].[Createddate] AS [Createddate]
+    FROM [dbo].[LeasdeedNotesheet] AS [LeasdeedNotesheet]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="TransfereeUploadDoc" EntityType="Self.TransfereeUploadDoc" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TransfereeUploadDoc].[Id] AS [Id], 
-    [TransfereeUploadDoc].[UserId] AS [UserId], 
-    [TransfereeUploadDoc].[ApplicationId] AS [ApplicationId], 
-    [TransfereeUploadDoc].[AllotmentId] AS [AllotmentId], 
-    [TransfereeUploadDoc].[ProjectProfileDulySignedByapplicant] AS [ProjectProfileDulySignedByapplicant], 
-    [TransfereeUploadDoc].[ProposedLandUtilizationPlanDulySignedByApplicant] AS [ProposedLandUtilizationPlanDulySignedByApplicant], 
-    [TransfereeUploadDoc].[IdentityProof] AS [IdentityProof], 
-    [TransfereeUploadDoc].[TransfereeSignVerifiedByBank] AS [TransfereeSignVerifiedByBank], 
-    [TransfereeUploadDoc].[CertificateOfIncorporation] AS [CertificateOfIncorporation], 
-    [TransfereeUploadDoc].[MemorandumAndArticlesOfAssociation] AS [MemorandumAndArticlesOfAssociation], 
-    [TransfereeUploadDoc].[ListOfShareHoldersDirectors] AS [ListOfShareHoldersDirectors], 
-    [TransfereeUploadDoc].[BoardResolution] AS [BoardResolution], 
-    [TransfereeUploadDoc].[CompanyProfile] AS [CompanyProfile], 
-    [TransfereeUploadDoc].[NetWorthOrTurnover] AS [NetWorthOrTurnover], 
-    [TransfereeUploadDoc].[SalesCertificate] AS [SalesCertificate], 
-    [TransfereeUploadDoc].[CertificateIssuedByDirectorateIndustry] AS [CertificateIssuedByDirectorateIndustry], 
-    [TransfereeUploadDoc].[CopyOfCancelCheque] AS [CopyOfCancelCheque], 
-    [TransfereeUploadDoc].[CertificateOfReservedCategory] AS [CertificateOfReservedCategory], 
-    [TransfereeUploadDoc].[CreatedBy] AS [CreatedBy], 
-    [TransfereeUploadDoc].[CreatedDate] AS [CreatedDate]
-    FROM [dbo].[TransfereeUploadDoc] AS [TransfereeUploadDoc]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TransferrerUploadDoc" EntityType="Self.TransferrerUploadDoc" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TransferrerUploadDoc].[Id] AS [Id], 
-    [TransferrerUploadDoc].[UserId] AS [UserId], 
-    [TransferrerUploadDoc].[ApplicationId] AS [ApplicationId], 
-    [TransferrerUploadDoc].[AllotmentId] AS [AllotmentId], 
-    [TransferrerUploadDoc].[RequestLetterTransferOfPlot] AS [RequestLetterTransferOfPlot], 
-    [TransferrerUploadDoc].[BuildingPlanDulyApprovedByGida] AS [BuildingPlanDulyApprovedByGida], 
-    [TransferrerUploadDoc].[DocumentsShareholdingDulyCertifiedByCA] AS [DocumentsShareholdingDulyCertifiedByCA], 
-    [TransferrerUploadDoc].[MeterSealingCertificate_ProofElectricity] AS [MeterSealingCertificate_ProofElectricity], 
-    [TransferrerUploadDoc].[PowerBillLastThreeYears] AS [PowerBillLastThreeYears], 
-    [TransferrerUploadDoc].[RawMaterialPurchaseBillLastThreeYears] AS [RawMaterialPurchaseBillLastThreeYears], 
-    [TransferrerUploadDoc].[SalesBillFinishedProductLastThreeYears] AS [SalesBillFinishedProductLastThreeYears], 
-    [TransferrerUploadDoc].[GSTFillingReturnLastThreeConsecutiveYears] AS [GSTFillingReturnLastThreeConsecutiveYears], 
-    [TransferrerUploadDoc].[SupportingDocumentsInCaseOfExemptions] AS [SupportingDocumentsInCaseOfExemptions], 
-    [TransferrerUploadDoc].[UndertakingOfTransfer] AS [UndertakingOfTransfer], 
-    [TransferrerUploadDoc].[TransferrerSignVerifiedByBank] AS [TransferrerSignVerifiedByBank], 
-    [TransferrerUploadDoc].[CreatedBy] AS [CreatedBy], 
-    [TransferrerUploadDoc].[CreatedDate] AS [CreatedDate]
-    FROM [dbo].[TransferrerUploadDoc] AS [TransferrerUploadDoc]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_AddingNewProductDetails_ApplicantApplicationDetail" Association="Self.FK_AddingNewProductDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="AddingNewProductDetails" EntitySet="AddingNewProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AddingNewProductDetails_GidaUser" Association="Self.FK_AddingNewProductDetails_GidaUser">
-            <End Role="GidaUser" EntitySet="GidaUser" />
-            <End Role="AddingNewProductDetails" EntitySet="AddingNewProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AlloteeTimeExtensionFeesPayGateway_ApplicantApplicationDetail" Association="Self.FK_AlloteeTimeExtensionFeesPayGateway_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="AlloteeTimeExtensionFeesPayGateway" EntitySet="AlloteeTimeExtensionFeesPayGateway" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AllotmentDetails_ApplicantApplicationDetail" Association="Self.FK_AllotmentDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="AllotmentDetails" EntitySet="AllotmentDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Allottee_Electronicform_ApplicantApplicationDetail" Association="Self.FK_Allottee_Electronicform_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="Allottee_Electronicform" EntitySet="Allottee_Electronicform" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantApplicationStatus_ApplicantApplicationDetail" Association="Self.FK_ApplicantApplicationStatus_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ApplicantApplicationStatus" EntitySet="ApplicantApplicationStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantBankDetails_ApplicantApplicationDetail" Association="Self.FK_ApplicantBankDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ApplicantBankDetails" EntitySet="ApplicantBankDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantDetails_ApplicantApplicationDetail" Association="Self.FK_ApplicantDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ApplicantDetails" EntitySet="ApplicantDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantDetails_ApplicantUser" Association="Self.FK_ApplicantDetails_ApplicantUser">
-            <End Role="ApplicantUser" EntitySet="ApplicantUser" />
-            <End Role="ApplicantDetails" EntitySet="ApplicantDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="Self.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetter" />
           </AssociationSet>
-          <AssociationSet Name="FK_ApplicantPlotDetails_ApplicantApplicationDetail" Association="Self.FK_ApplicantPlotDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ApplicantPlotDetails" EntitySet="ApplicantPlotDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantProjectDetails_ApplicantApplicationDetail" Association="Self.FK_ApplicantProjectDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ApplicantProjectDetails" EntitySet="ApplicantProjectDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantTransactionDetail_ApplicantApplicationDetail" Association="Self.FK_ApplicantTransactionDetail_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ApplicantTransactionDetail" EntitySet="ApplicantTransactionDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantUploadDoc_ApplicantApplicationDetail" Association="Self.FK_ApplicantUploadDoc_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ApplicantUploadDoc" EntitySet="ApplicantUploadDoc" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LeaseRentDetails_LeaseDeedDetails" Association="Self.FK_LeaseRentDetails_LeaseDeedDetails">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="LeaseRentDetails" EntitySet="LeaseRentDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ManagerElectronicForm_ApplicantApplicationDetail" Association="Self.FK_ManagerElectronicForm_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ManagerElectronicForm" EntitySet="ManagerElectronicForm" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ManufacturingUnitDetails_ApplicantApplicationDetail" Association="Self.FK_ManufacturingUnitDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
-            <End Role="ManufacturingUnitDetails" EntitySet="ManufacturingUnitDetails" />
+          <AssociationSet Name="FK_MortgageDetails_PlotMaster" Association="Self.FK_MortgageDetails_PlotMaster">
+            <End Role="PlotMaster" EntitySet="PlotMaster" />
+            <End Role="MortgageDetails" EntitySet="MortgageDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_RoleMasterUser_PageMaster" Association="Self.FK_RoleMasterUser_PageMaster">
             <End Role="PageMaster" EntitySet="PageMaster" />
@@ -1233,13 +635,9 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
     <edmx:ConceptualModels>
       <Schema Namespace="GidaGKPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="GidaGKPEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AddingNewProductDetails" EntityType="GidaGKPModel.AddingNewProductDetail" />
           <EntitySet Name="AdminNotices" EntityType="GidaGKPModel.AdminNotice" />
-          <EntitySet Name="AlloteeTimeEextensionFfesses" EntityType="GidaGKPModel.AlloteeTimeEextensionFfess" />
-          <EntitySet Name="AllotmentDetails" EntityType="GidaGKPModel.AllotmentDetail" />
-          <EntitySet Name="Allottee_Electronicform" EntityType="GidaGKPModel.Allottee_Electronicform" />
+          <EntitySet Name="AllocateAllotmentDetails" EntityType="GidaGKPModel.AllocateAllotmentDetail" />
           <EntitySet Name="ApplicantApplicationDetails" EntityType="GidaGKPModel.ApplicantApplicationDetail" />
-          <EntitySet Name="ApplicantApplicationStatus" EntityType="GidaGKPModel.ApplicantApplicationStatu" />
           <EntitySet Name="ApplicantBankDetails" EntityType="GidaGKPModel.ApplicantBankDetail" />
           <EntitySet Name="ApplicantDetails" EntityType="GidaGKPModel.ApplicantDetail" />
           <EntitySet Name="ApplicantFormSteps" EntityType="GidaGKPModel.ApplicantFormStep" />
@@ -1250,128 +648,29 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <EntitySet Name="ApplicantTransactionDetails" EntityType="GidaGKPModel.ApplicantTransactionDetail" />
           <EntitySet Name="ApplicantUploadDocs" EntityType="GidaGKPModel.ApplicantUploadDoc" />
           <EntitySet Name="ApplicantUsers" EntityType="GidaGKPModel.ApplicantUser" />
-          <EntitySet Name="ChangeProjectDetails" EntityType="GidaGKPModel.ChangeProjectDetail" />
           <EntitySet Name="GidaUsers" EntityType="GidaGKPModel.GidaUser" />
           <EntitySet Name="LeaseDeedDetails" EntityType="GidaGKPModel.LeaseDeedDetail" />
-          <EntitySet Name="LeaseRentDetails" EntityType="GidaGKPModel.LeaseRentDetail" />
           <EntitySet Name="Lookups" EntityType="GidaGKPModel.Lookup" />
-          <EntitySet Name="ManagerElectronicForms" EntityType="GidaGKPModel.ManagerElectronicForm" />
-          <EntitySet Name="ManufacturingUnitDetails" EntityType="GidaGKPModel.ManufacturingUnitDetail" />
           <EntitySet Name="MortgageDetails" EntityType="GidaGKPModel.MortgageDetail" />
           <EntitySet Name="PageMasters" EntityType="GidaGKPModel.PageMaster" />
           <EntitySet Name="PGTransactionInformations" EntityType="GidaGKPModel.PGTransactionInformation" />
-          <EntitySet Name="Plot_Restoration" EntityType="GidaGKPModel.Plot_Restoration" />
           <EntitySet Name="PlotMasters" EntityType="GidaGKPModel.PlotMaster" />
-          <EntitySet Name="PlotTransferDetails" EntityType="GidaGKPModel.PlotTransferDetail" />
-          <EntitySet Name="PossessionDetails" EntityType="GidaGKPModel.PossessionDetail" />
           <EntitySet Name="RoleWisePermissions" EntityType="GidaGKPModel.RoleWisePermission" />
-          <EntitySet Name="sysdiagrams" EntityType="GidaGKPModel.sysdiagram" />
-          <EntitySet Name="UploadedApplicantDocVerifies" EntityType="GidaGKPModel.UploadedApplicantDocVerify" />
-          <EntitySet Name="AlloteeTimeExtensionFeesPayGateways" EntityType="GidaGKPModel.AlloteeTimeExtensionFeesPayGateway" />
-          <EntitySet Name="TransfereeUploadDocs" EntityType="GidaGKPModel.TransfereeUploadDoc" />
-          <EntitySet Name="TransferrerUploadDocs" EntityType="GidaGKPModel.TransferrerUploadDoc" />
-          <AssociationSet Name="FK_AddingNewProductDetails_ApplicantApplicationDetail" Association="GidaGKPModel.FK_AddingNewProductDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="AddingNewProductDetail" EntitySet="AddingNewProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AddingNewProductDetails_GidaUser" Association="GidaGKPModel.FK_AddingNewProductDetails_GidaUser">
-            <End Role="GidaUser" EntitySet="GidaUsers" />
-            <End Role="AddingNewProductDetail" EntitySet="AddingNewProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AllotmentDetails_ApplicantApplicationDetail" Association="GidaGKPModel.FK_AllotmentDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="AllotmentDetail" EntitySet="AllotmentDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Allottee_Electronicform_ApplicantApplicationDetail" Association="GidaGKPModel.FK_Allottee_Electronicform_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="Allottee_Electronicform" EntitySet="Allottee_Electronicform" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AlloteeTimeExtensionFeesPayGateway_ApplicantApplicationDetail" Association="GidaGKPModel.FK_AlloteeTimeExtensionFeesPayGateway_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="AlloteeTimeExtensionFeesPayGateway" EntitySet="AlloteeTimeExtensionFeesPayGateways" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantApplicationStatus_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantApplicationStatus_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ApplicantApplicationStatu" EntitySet="ApplicantApplicationStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantBankDetails_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantBankDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ApplicantBankDetail" EntitySet="ApplicantBankDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantDetails_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ApplicantDetail" EntitySet="ApplicantDetails" />
-          </AssociationSet>
+          <EntitySet Name="SchemewiseTermsConditions" EntityType="GidaGKPModel.SchemewiseTermsCondition" />
+          <EntitySet Name="LeasdeedNotesheets" EntityType="GidaGKPModel.LeasdeedNotesheet" />
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetters" />
           </AssociationSet>
-          <AssociationSet Name="FK_ApplicantPlotDetails_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantPlotDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ApplicantPlotDetail" EntitySet="ApplicantPlotDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantProjectDetails_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantProjectDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ApplicantProjectDetail" EntitySet="ApplicantProjectDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantTransactionDetail_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantTransactionDetail_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ApplicantTransactionDetail" EntitySet="ApplicantTransactionDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantUploadDoc_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantUploadDoc_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ApplicantUploadDoc" EntitySet="ApplicantUploadDocs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LeaseRentDetails_LeaseDeedDetails" Association="GidaGKPModel.FK_LeaseRentDetails_LeaseDeedDetails">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="LeaseRentDetail" EntitySet="LeaseRentDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ManagerElectronicForm_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ManagerElectronicForm_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ManagerElectronicForm" EntitySet="ManagerElectronicForms" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ManufacturingUnitDetails_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ManufacturingUnitDetails_ApplicantApplicationDetail">
-            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
-            <End Role="ManufacturingUnitDetail" EntitySet="ManufacturingUnitDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicantDetails_ApplicantUser" Association="GidaGKPModel.FK_ApplicantDetails_ApplicantUser">
-            <End Role="ApplicantUser" EntitySet="ApplicantUsers" />
-            <End Role="ApplicantDetail" EntitySet="ApplicantDetails" />
+          <AssociationSet Name="FK_MortgageDetails_PlotMaster" Association="GidaGKPModel.FK_MortgageDetails_PlotMaster">
+            <End Role="PlotMaster" EntitySet="PlotMasters" />
+            <End Role="MortgageDetail" EntitySet="MortgageDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_RoleMasterUser_PageMaster" Association="GidaGKPModel.FK_RoleMasterUser_PageMaster">
             <End Role="PageMaster" EntitySet="PageMasters" />
             <End Role="RoleWisePermission" EntitySet="RoleWisePermissions" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="AddingNewProductDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="ApplicationFormForAddNewProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DPRForNewProduct" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="AuthorisedSignByBank" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ApplicantIdedentityProof" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="SignOfCandidate" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PhotoOfCandidate" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PollutionCreatedByNewProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="QualityOfPollutantByNewProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ObnoxiousGasDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DischargeLiquidEffluents" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NOCFromThePollutionControlBoard" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="RevisedSSIRegistration_IEM" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="TotalLandCoverageAreaAfterAddingNewProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ExceedDesignatedPlotArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ConstitutionOwnershipLicense" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NotarizedAffidavit" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_AddingNewProductDetails_ApplicantApplicationDetail" FromRole="AddingNewProductDetail" ToRole="ApplicantApplicationDetail" />
-          <NavigationProperty Name="GidaUser" Relationship="GidaGKPModel.FK_AddingNewProductDetails_GidaUser" FromRole="AddingNewProductDetail" ToRole="GidaUser" />
-        </EntityType>
         <EntityType Name="AdminNotice">
           <Key>
             <PropertyRef Name="Id" />
@@ -1389,66 +688,22 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
-        <EntityType Name="AlloteeTimeEextensionFfess">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PlotId" Type="Int32" />
-          <Property Name="Number_Year_Time_Extension_Fees" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Rate_Time_Extension_Fees" Type="Int32" />
-          <Property Name="Current_Premium_Plot_Area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Total_Time_Extension_Fees" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Bank_Account_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Bank_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Branch_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ApplicantId" Type="Int32" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="AllotmentDetail">
+        <EntityType Name="AllocateAllotmentDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
           <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PlotNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PaymentStatusByFinance" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PaymentStatusByAssistant" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DateOfInterviewStart" Type="DateTime" Precision="3" />
-          <Property Name="DateOfInterviewEnd" Type="DateTime" Precision="3" />
+          <Property Name="AllotmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AllotmentDate" Type="DateTime" Precision="3" />
-          <Property Name="DateOfAllotmentLetter" Type="DateTime" Precision="3" />
-          <Property Name="DateoOfSigningByCEO" Type="DateTime" Precision="3" />
-          <Property Name="DigiSignByCEO" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="DigiSignByGMFinance" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="DigiSignByManagerPropertyGeneralAdmin" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="DigiSignByAGM_OSD_Sincharge" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="DigiSignByACEO" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="DigiSignByAssistant" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="StartingDateofInterview_L" Type="DateTime" Precision="3" />
+          <Property Name="EndDateofInterview_L" Type="DateTime" Precision="3" />
+          <Property Name="DateofAllotmentLetter" Type="DateTime" Precision="3" />
+          <Property Name="CEO_Sign" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CEO_SignFileType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CEO_SignFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_AllotmentDetails_ApplicantApplicationDetail" FromRole="AllotmentDetail" ToRole="ApplicantApplicationDetail" />
-        </EntityType>
-        <EntityType Name="Allottee_Electronicform">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicantId" Type="Int32" />
-          <Property Name="Plot_Id" Type="Int32" />
-          <Property Name="Allotment_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Allotment_Date" Type="DateTime" Precision="3" />
-          <Property Name="Application_Letter_Time_Extension" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Affidavit_Self_Attested_Document" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Supporting_Proof_Production_Not_Started" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Signature_Authorized_Signatory_Verified_Bank" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Identity_Proof" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_Allottee_Electronicform_ApplicantApplicationDetail" FromRole="Allottee_Electronicform" ToRole="ApplicantApplicationDetail" />
+          <Property Name="ModificationDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ApplicantApplicationDetail">
           <Key>
@@ -1459,39 +714,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="AllotmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="ApprovalStatus" Type="Boolean" />
-          <NavigationProperty Name="AddingNewProductDetails" Relationship="GidaGKPModel.FK_AddingNewProductDetails_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="AddingNewProductDetail" />
-          <NavigationProperty Name="AllotmentDetails" Relationship="GidaGKPModel.FK_AllotmentDetails_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="AllotmentDetail" />
-          <NavigationProperty Name="Allottee_Electronicform" Relationship="GidaGKPModel.FK_Allottee_Electronicform_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="Allottee_Electronicform" />
-          <NavigationProperty Name="AlloteeTimeExtensionFeesPayGateways" Relationship="GidaGKPModel.FK_AlloteeTimeExtensionFeesPayGateway_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="AlloteeTimeExtensionFeesPayGateway" />
-          <NavigationProperty Name="ApplicantApplicationStatus" Relationship="GidaGKPModel.FK_ApplicantApplicationStatus_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantApplicationStatu" />
-          <NavigationProperty Name="ApplicantBankDetails" Relationship="GidaGKPModel.FK_ApplicantBankDetails_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantBankDetail" />
-          <NavigationProperty Name="ApplicantDetails" Relationship="GidaGKPModel.FK_ApplicantDetails_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantDetail" />
           <NavigationProperty Name="ApplicantInvitationLetters" Relationship="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantInvitationLetter" />
-          <NavigationProperty Name="ApplicantPlotDetails" Relationship="GidaGKPModel.FK_ApplicantPlotDetails_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantPlotDetail" />
-          <NavigationProperty Name="ApplicantProjectDetails" Relationship="GidaGKPModel.FK_ApplicantProjectDetails_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantProjectDetail" />
-          <NavigationProperty Name="ApplicantTransactionDetails" Relationship="GidaGKPModel.FK_ApplicantTransactionDetail_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantTransactionDetail" />
-          <NavigationProperty Name="ApplicantUploadDocs" Relationship="GidaGKPModel.FK_ApplicantUploadDoc_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantUploadDoc" />
-          <NavigationProperty Name="LeaseRentDetails" Relationship="GidaGKPModel.FK_LeaseRentDetails_LeaseDeedDetails" FromRole="ApplicantApplicationDetail" ToRole="LeaseRentDetail" />
-          <NavigationProperty Name="ManagerElectronicForms" Relationship="GidaGKPModel.FK_ManagerElectronicForm_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ManagerElectronicForm" />
-          <NavigationProperty Name="ManufacturingUnitDetails" Relationship="GidaGKPModel.FK_ManufacturingUnitDetails_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ManufacturingUnitDetail" />
-        </EntityType>
-        <EntityType Name="ApplicantApplicationStatu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="AmountDue" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="PaymentStatusByFinance" Type="Boolean" />
-          <Property Name="PaymentStatusByAssistant" Type="Boolean" />
-          <Property Name="CommentByAssistant" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="InvitationLetterStatus" Type="Boolean" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantApplicationStatus_ApplicantApplicationDetail" FromRole="ApplicantApplicationStatu" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="ApplicantBankDetail">
           <Key>
@@ -1507,7 +730,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="AccountHolderName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="BankAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantBankDetails_ApplicantApplicationDetail" FromRole="ApplicantBankDetail" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="ApplicantDetail">
           <Key>
@@ -1536,8 +758,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="IdentiyProof" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ResidentialProof" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantDetails_ApplicantApplicationDetail" FromRole="ApplicantDetail" ToRole="ApplicantApplicationDetail" />
-          <NavigationProperty Name="ApplicantUser" Relationship="GidaGKPModel.FK_ApplicantDetails_ApplicantUser" FromRole="ApplicantDetail" ToRole="ApplicantUser" />
         </EntityType>
         <EntityType Name="ApplicantFormStep">
           <Key>
@@ -1560,7 +780,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="ApplicantAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PlotDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PlotRange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TotalNoOfPlots" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlotId" Type="Int32" />
           <Property Name="InterviewMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="InterviewDateTime" Type="DateTime" Precision="3" />
           <Property Name="InterviewLetterStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -1607,7 +827,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="SignatryPermanentPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RelationshipStatus" Type="Int32" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantPlotDetails_ApplicantApplicationDetail" FromRole="ApplicantPlotDetail" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="ApplicantProjectChangeDetail">
           <Key>
@@ -1674,7 +893,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="Skilled" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="UnSkilled" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantProjectDetails_ApplicantApplicationDetail" FromRole="ApplicantProjectDetail" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="ApplicantTransactionDetail">
           <Key>
@@ -1700,12 +918,11 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="ChalanDocumentFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TransactionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CEOApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CEOComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="GMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantTransactionDetail_ApplicantApplicationDetail" FromRole="ApplicantTransactionDetail" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="ApplicantUploadDoc">
           <Key>
@@ -1772,10 +989,13 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="AMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ClerkApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SIApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CEOApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ClerkComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="SIComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ApplicantUploadDoc_ApplicantApplicationDetail" FromRole="ApplicantUploadDoc" ToRole="ApplicantApplicationDetail" />
+          <Property Name="CEOComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ApplicantUser">
           <Key>
@@ -1783,6 +1003,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <Property Name="FullName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -1795,30 +1016,8 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="SchemeName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="SectorName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AllotmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ResetCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="ApplicantDetails" Relationship="GidaGKPModel.FK_ApplicantDetails_ApplicantUser" FromRole="ApplicantUser" ToRole="ApplicantDetail" />
-        </EntityType>
-        <EntityType Name="ChangeProjectDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="DPRForNewProject" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="AreaToBeUsedForProject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="QuantityEffluentDischargedByNewProject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EffluentDischargedStatusForNewProject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NOCFromPCB" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProvisionalSSIRegistrationNoOrIEMsubmittedToSIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ObnoxiousGasEmissionDetrimentalSurroundings" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DulySignedNotarizedForAcknowledged" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="UploadedSignPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="GidaUser">
           <Key>
@@ -1837,7 +1036,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AddingNewProductDetails" Relationship="GidaGKPModel.FK_AddingNewProductDetails_GidaUser" FromRole="GidaUser" ToRole="AddingNewProductDetail" />
         </EntityType>
         <EntityType Name="LeaseDeedDetail">
           <Key>
@@ -1866,24 +1064,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="LeaseRentDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="LeaseRentDate" Type="DateTime" Precision="3" />
-          <Property Name="LeaseInterestRate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AllotmentMoney" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="TotalPremium" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="OthersCharges" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MaintainanceCharge" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_LeaseRentDetails_LeaseDeedDetails" FromRole="LeaseRentDetail" ToRole="ApplicantApplicationDetail" />
-        </EntityType>
         <EntityType Name="Lookup">
           <Key>
             <PropertyRef Name="LookupId" />
@@ -1894,53 +1074,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="ParentLookupId" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="LookupNameImmutable" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="ManagerElectronicForm">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicantId" Type="Int32" />
-          <Property Name="PlotId" Type="Int32" />
-          <Property Name="Allotment_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Allotment_Date" Type="DateTime" Precision="3" />
-          <Property Name="LandTransfer_OrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Plot_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Sector_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Plot_Area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Plot_Dormant_NoOfMonth" Type="Int32" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ManagerElectronicForm_ApplicantApplicationDetail" FromRole="ManagerElectronicForm" ToRole="ApplicantApplicationDetail" />
-        </EntityType>
-        <EntityType Name="ManufacturingUnitDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="LeaseDeedDone" Type="Boolean" />
-          <Property Name="ApplicationFormForAddNewProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DPRForNewProduct" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="AuthorisedSignByBank" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ApplicantIdedentityProof" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="SignOfCandidate" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PhotoOfCandidate" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PollutionCreatedByNewProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="QualityOfPollutantByNewProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ObnoxiousGasDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DischargeLiquidEffluents" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NOCFromThePollutionControlBoard" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="RevisedSSIRegistration_IEM" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="TotalLandCoverageAreaAfterAddingNewProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ExceedDesignatedPlotArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ConstitutionOwnershipLicense" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NotarizedAffidavit" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_ManufacturingUnitDetails_ApplicantApplicationDetail" FromRole="ManufacturingUnitDetail" ToRole="ApplicantApplicationDetail" />
         </EntityType>
         <EntityType Name="MortgageDetail">
           <Key>
@@ -1954,6 +1087,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="FathersNameOfApplicant" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AddressOfApplicant" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="SectorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlotId" Type="Int32" />
           <Property Name="PlotNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PlotPaymentStatus" Type="Boolean" />
           <Property Name="NoOfPaidInstallment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1979,6 +1113,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="DateOnWhichInterestDueSendToGida" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PlotMaster" Relationship="GidaGKPModel.FK_MortgageDetails_PlotMaster" FromRole="MortgageDetail" ToRole="PlotMaster" />
         </EntityType>
         <EntityType Name="PageMaster">
           <Key>
@@ -2002,25 +1137,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="TransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Plot_Restoration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name_Sender_Post" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Addressed_To" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Subject_Mentioned" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Coupon_Number_Old" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Sender_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Document_Upload" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Processing_Fees" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Amount_Paid" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Transaction_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Applicant_Id" Type="Int32" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="PlotMaster">
           <Key>
             <PropertyRef Name="PlotId" />
@@ -2032,7 +1148,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="SectorName" Type="Int32" />
           <Property Name="PlotRange" Type="Int32" />
           <Property Name="PlotArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NoOfPlots" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlotNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PlotRate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PlotSideCorner" Type="Boolean" />
           <Property Name="PlotSideWideRoad" Type="Boolean" />
@@ -2045,57 +1161,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="GrandTotalCost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="PlotTransferDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="ApplicantName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ApplicantFathersName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ApplicantAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="AllotmentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DateOfAllotment" Type="DateTime" Precision="3" />
-          <Property Name="PlotFullyPaidOrNot" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="MortgageToAnyFinancialInstitute" Type="Boolean" />
-          <Property Name="ShowGidaNOCToBank" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="BabkNOCRepaymentOfLoan" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="TransferrerGotPlotFormTransferByAnotherTransferee" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CompletePaymentOfMaintainanceCharge" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MaintainanceChargePaidAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="CompletePaymentOfLeaseRent" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="LeaseRentPaidAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="NoOfPremiumPaidInstallment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TotalPremiumPaidInstallmentAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="NoOfInterestPaidInstallment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TotalInterestPaidAmount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDeate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="PossessionDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="PlotNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SectorLocation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TransferDateTime" Type="DateTime" Precision="3" />
-          <Property Name="LayoutOfPlot" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="BuildingDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="AreaOfLand" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="PossessionHandedOverNameBehalfOfGida" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DigiSignOfAMCivilOrJECivil" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="WitnessDetailsFromGida" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="WitnessDetailsFromAllottee" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PossessionDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MortgageDetails" Relationship="GidaGKPModel.FK_MortgageDetails_PlotMaster" FromRole="PlotMaster" ToRole="MortgageDetail" />
         </EntityType>
         <EntityType Name="RoleWisePermission">
           <Key>
@@ -2111,187 +1177,39 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PageMaster" Relationship="GidaGKPModel.FK_RoleMasterUser_PageMaster" FromRole="RoleWisePermission" ToRole="PageMaster" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="UploadedApplicantDocVerify">
+        <EntityType Name="SchemewiseTermsCondition">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="DocVerifyByFinance" Type="Boolean" />
-          <Property Name="CommentByFinance" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DocVerifyByAssistant" Type="Boolean" />
-          <Property Name="CommentByAssistant" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="SchemeName" Type="Int32" />
+          <Property Name="AllotmentMoneyDueDate" Type="DateTime" Precision="3" />
+          <Property Name="Firstduedateofpaymentofinterest" Type="DateTime" Precision="3" />
+          <Property Name="DateofgivingfirstInstallment" Type="DateTime" Precision="3" />
+          <Property Name="DateofgivingsecondInstallment" Type="DateTime" Precision="3" />
+          <Property Name="DateofgivingthirdInstallent" Type="DateTime" Precision="3" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="AlloteeTimeExtensionFeesPayGateway">
+        <EntityType Name="LeasdeedNotesheet">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ApplicantId" Type="Int32" />
-          <Property Name="TotalTime_Extension_Fees" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Challan_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Transaction_Date" Type="DateTime" Precision="3" />
+          <Property Name="Bankguranteedate" Type="DateTime" Precision="3" />
+          <Property Name="Bankaddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Allotmentnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Digsign_Propassist" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Comment_Propassist" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Digsign_Manager" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Comment_Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Digsign_FManager" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Comment_FManager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_AlloteeTimeExtensionFeesPayGateway_ApplicantApplicationDetail" FromRole="AlloteeTimeExtensionFeesPayGateway" ToRole="ApplicantApplicationDetail" />
+          <Property Name="Createddate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="TransfereeUploadDoc">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="ProjectProfileDulySignedByapplicant" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProposedLandUtilizationPlanDulySignedByApplicant" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="IdentityProof" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="TransfereeSignVerifiedByBank" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CertificateOfIncorporation" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="MemorandumAndArticlesOfAssociation" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ListOfShareHoldersDirectors" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="BoardResolution" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CompanyProfile" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="NetWorthOrTurnover" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="SalesCertificate" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CertificateIssuedByDirectorateIndustry" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CopyOfCancelCheque" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CertificateOfReservedCategory" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="TransferrerUploadDoc">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentId" Type="Int32" />
-          <Property Name="RequestLetterTransferOfPlot" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="BuildingPlanDulyApprovedByGida" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="DocumentsShareholdingDulyCertifiedByCA" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="MeterSealingCertificate_ProofElectricity" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PowerBillLastThreeYears" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="RawMaterialPurchaseBillLastThreeYears" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="SalesBillFinishedProductLastThreeYears" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="GSTFillingReturnLastThreeConsecutiveYears" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="SupportingDocumentsInCaseOfExemptions" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="UndertakingOfTransfer" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="TransferrerSignVerifiedByBank" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <Association Name="FK_AddingNewProductDetails_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.AddingNewProductDetail" Role="AddingNewProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="AddingNewProductDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AddingNewProductDetails_GidaUser">
-          <End Type="GidaGKPModel.GidaUser" Role="GidaUser" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.AddingNewProductDetail" Role="AddingNewProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GidaUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AddingNewProductDetail">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AllotmentDetails_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.AllotmentDetail" Role="AllotmentDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="AllotmentDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Allottee_Electronicform_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.Allottee_Electronicform" Role="Allottee_Electronicform" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="Allottee_Electronicform">
-              <PropertyRef Name="ApplicantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AlloteeTimeExtensionFeesPayGateway_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.AlloteeTimeExtensionFeesPayGateway" Role="AlloteeTimeExtensionFeesPayGateway" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="AlloteeTimeExtensionFeesPayGateway">
-              <PropertyRef Name="ApplicantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantApplicationStatus_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ApplicantApplicationStatu" Role="ApplicantApplicationStatu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantApplicationStatu">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantBankDetails_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ApplicantBankDetail" Role="ApplicantBankDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantBankDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantDetails_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ApplicantDetail" Role="ApplicantDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
           <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
           <End Type="GidaGKPModel.ApplicantInvitationLetter" Role="ApplicantInvitationLetter" Multiplicity="*" />
@@ -2304,99 +1222,15 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ApplicantPlotDetails_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ApplicantPlotDetail" Role="ApplicantPlotDetail" Multiplicity="*" />
+        <Association Name="FK_MortgageDetails_PlotMaster">
+          <End Type="GidaGKPModel.PlotMaster" Role="PlotMaster" Multiplicity="0..1" />
+          <End Type="GidaGKPModel.MortgageDetail" Role="MortgageDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
+            <Principal Role="PlotMaster">
+              <PropertyRef Name="PlotId" />
             </Principal>
-            <Dependent Role="ApplicantPlotDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantProjectDetails_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ApplicantProjectDetail" Role="ApplicantProjectDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantProjectDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantTransactionDetail_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ApplicantTransactionDetail" Role="ApplicantTransactionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantTransactionDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantUploadDoc_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ApplicantUploadDoc" Role="ApplicantUploadDoc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ApplicantUploadDoc">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LeaseRentDetails_LeaseDeedDetails">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.LeaseRentDetail" Role="LeaseRentDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="LeaseRentDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ManagerElectronicForm_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ManagerElectronicForm" Role="ManagerElectronicForm" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ManagerElectronicForm">
-              <PropertyRef Name="ApplicantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ManufacturingUnitDetails_ApplicantApplicationDetail">
-          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
-          <End Type="GidaGKPModel.ManufacturingUnitDetail" Role="ManufacturingUnitDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantApplicationDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="ManufacturingUnitDetail">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicantDetails_ApplicantUser">
-          <End Type="GidaGKPModel.ApplicantUser" Role="ApplicantUser" Multiplicity="1" />
-          <End Type="GidaGKPModel.ApplicantDetail" Role="ApplicantDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicantUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ApplicantDetail">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="MortgageDetail">
+              <PropertyRef Name="PlotId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2418,34 +1252,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GidaGKPModelStoreContainer" CdmEntityContainer="GidaGKPEntities">
-          <EntitySetMapping Name="AddingNewProductDetails">
-            <EntityTypeMapping TypeName="GidaGKPModel.AddingNewProductDetail">
-              <MappingFragment StoreEntitySet="AddingNewProductDetails">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="NotarizedAffidavit" ColumnName="NotarizedAffidavit" />
-                <ScalarProperty Name="ConstitutionOwnershipLicense" ColumnName="ConstitutionOwnershipLicense" />
-                <ScalarProperty Name="ExceedDesignatedPlotArea" ColumnName="ExceedDesignatedPlotArea" />
-                <ScalarProperty Name="TotalLandCoverageAreaAfterAddingNewProduct" ColumnName="TotalLandCoverageAreaAfterAddingNewProduct" />
-                <ScalarProperty Name="RevisedSSIRegistration_IEM" ColumnName="RevisedSSIRegistration_IEM" />
-                <ScalarProperty Name="NOCFromThePollutionControlBoard" ColumnName="NOCFromThePollutionControlBoard" />
-                <ScalarProperty Name="DischargeLiquidEffluents" ColumnName="DischargeLiquidEffluents" />
-                <ScalarProperty Name="ObnoxiousGasDetails" ColumnName="ObnoxiousGasDetails" />
-                <ScalarProperty Name="QualityOfPollutantByNewProduct" ColumnName="QualityOfPollutantByNewProduct" />
-                <ScalarProperty Name="PollutionCreatedByNewProduct" ColumnName="PollutionCreatedByNewProduct" />
-                <ScalarProperty Name="PhotoOfCandidate" ColumnName="PhotoOfCandidate" />
-                <ScalarProperty Name="SignOfCandidate" ColumnName="SignOfCandidate" />
-                <ScalarProperty Name="ApplicantIdedentityProof" ColumnName="ApplicantIdedentityProof" />
-                <ScalarProperty Name="AuthorisedSignByBank" ColumnName="AuthorisedSignByBank" />
-                <ScalarProperty Name="DPRForNewProduct" ColumnName="DPRForNewProduct" />
-                <ScalarProperty Name="ApplicationFormForAddNewProduct" ColumnName="ApplicationFormForAddNewProduct" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AdminNotices">
             <EntityTypeMapping TypeName="GidaGKPModel.AdminNotice">
               <MappingFragment StoreEntitySet="AdminNotice">
@@ -2464,64 +1270,20 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AlloteeTimeEextensionFfesses">
-            <EntityTypeMapping TypeName="GidaGKPModel.AlloteeTimeEextensionFfess">
-              <MappingFragment StoreEntitySet="AlloteeTimeEextensionFfess">
+          <EntitySetMapping Name="AllocateAllotmentDetails">
+            <EntityTypeMapping TypeName="GidaGKPModel.AllocateAllotmentDetail">
+              <MappingFragment StoreEntitySet="AllocateAllotmentDetails">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
-                <ScalarProperty Name="Branch_Name" ColumnName="Branch_Name" />
-                <ScalarProperty Name="Bank_Name" ColumnName="Bank_Name" />
-                <ScalarProperty Name="Bank_Account_Number" ColumnName="Bank_Account_Number" />
-                <ScalarProperty Name="Total_Time_Extension_Fees" ColumnName="Total_Time_Extension_Fees" />
-                <ScalarProperty Name="Current_Premium_Plot_Area" ColumnName="Current_Premium_Plot_Area" />
-                <ScalarProperty Name="Rate_Time_Extension_Fees" ColumnName="Rate_Time_Extension_Fees" />
-                <ScalarProperty Name="Number_Year_Time_Extension_Fees" ColumnName="Number_Year_Time_Extension_Fees" />
-                <ScalarProperty Name="PlotId" ColumnName="PlotId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AllotmentDetails">
-            <EntityTypeMapping TypeName="GidaGKPModel.AllotmentDetail">
-              <MappingFragment StoreEntitySet="AllotmentDetails">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DigiSignByAssistant" ColumnName="DigiSignByAssistant" />
-                <ScalarProperty Name="DigiSignByACEO" ColumnName="DigiSignByACEO" />
-                <ScalarProperty Name="DigiSignByAGM_OSD_Sincharge" ColumnName="DigiSignByAGM_OSD_Sincharge" />
-                <ScalarProperty Name="DigiSignByManagerPropertyGeneralAdmin" ColumnName="DigiSignByManagerPropertyGeneralAdmin" />
-                <ScalarProperty Name="DigiSignByGMFinance" ColumnName="DigiSignByGMFinance" />
-                <ScalarProperty Name="DigiSignByCEO" ColumnName="DigiSignByCEO" />
-                <ScalarProperty Name="DateoOfSigningByCEO" ColumnName="DateoOfSigningByCEO" />
-                <ScalarProperty Name="DateOfAllotmentLetter" ColumnName="DateOfAllotmentLetter" />
+                <ScalarProperty Name="CEO_SignFileName" ColumnName="CEO_SignFileName" />
+                <ScalarProperty Name="CEO_SignFileType" ColumnName="CEO_SignFileType" />
+                <ScalarProperty Name="CEO_Sign" ColumnName="CEO_Sign" />
+                <ScalarProperty Name="DateofAllotmentLetter" ColumnName="DateofAllotmentLetter" />
+                <ScalarProperty Name="EndDateofInterview_L" ColumnName="EndDateofInterview_L" />
+                <ScalarProperty Name="StartingDateofInterview_L" ColumnName="StartingDateofInterview_L" />
                 <ScalarProperty Name="AllotmentDate" ColumnName="AllotmentDate" />
-                <ScalarProperty Name="DateOfInterviewEnd" ColumnName="DateOfInterviewEnd" />
-                <ScalarProperty Name="DateOfInterviewStart" ColumnName="DateOfInterviewStart" />
-                <ScalarProperty Name="PaymentStatusByAssistant" ColumnName="PaymentStatusByAssistant" />
-                <ScalarProperty Name="PaymentStatusByFinance" ColumnName="PaymentStatusByFinance" />
-                <ScalarProperty Name="PlotNo" ColumnName="PlotNo" />
-                <ScalarProperty Name="AllotmentNo" ColumnName="AllotmentNo" />
+                <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Allottee_Electronicform">
-            <EntityTypeMapping TypeName="GidaGKPModel.Allottee_Electronicform">
-              <MappingFragment StoreEntitySet="Allottee_Electronicform">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Identity_Proof" ColumnName="Identity_Proof" />
-                <ScalarProperty Name="Signature_Authorized_Signatory_Verified_Bank" ColumnName="Signature_Authorized_Signatory_Verified_Bank" />
-                <ScalarProperty Name="Supporting_Proof_Production_Not_Started" ColumnName="Supporting_Proof_Production_Not_Started" />
-                <ScalarProperty Name="Affidavit_Self_Attested_Document" ColumnName="Affidavit_Self_Attested_Document" />
-                <ScalarProperty Name="Application_Letter_Time_Extension" ColumnName="Application_Letter_Time_Extension" />
-                <ScalarProperty Name="Allotment_Date" ColumnName="Allotment_Date" />
-                <ScalarProperty Name="Allotment_Number" ColumnName="Allotment_Number" />
-                <ScalarProperty Name="Plot_Id" ColumnName="Plot_Id" />
-                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2534,24 +1296,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
                 <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
                 <ScalarProperty Name="ApplicationNumber" ColumnName="ApplicationNumber" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ApplicantApplicationStatus">
-            <EntityTypeMapping TypeName="GidaGKPModel.ApplicantApplicationStatu">
-              <MappingFragment StoreEntitySet="ApplicantApplicationStatus">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="InvitationLetterStatus" ColumnName="InvitationLetterStatus" />
-                <ScalarProperty Name="CommentByAssistant" ColumnName="CommentByAssistant" />
-                <ScalarProperty Name="PaymentStatusByAssistant" ColumnName="PaymentStatusByAssistant" />
-                <ScalarProperty Name="PaymentStatusByFinance" ColumnName="PaymentStatusByFinance" />
-                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
-                <ScalarProperty Name="AmountDue" ColumnName="AmountDue" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2626,7 +1370,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
                 <ScalarProperty Name="InterviewLetterStatus" ColumnName="InterviewLetterStatus" />
                 <ScalarProperty Name="InterviewDateTime" ColumnName="InterviewDateTime" />
                 <ScalarProperty Name="InterviewMode" ColumnName="InterviewMode" />
-                <ScalarProperty Name="TotalNoOfPlots" ColumnName="TotalNoOfPlots" />
+                <ScalarProperty Name="PlotId" ColumnName="PlotId" />
                 <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
                 <ScalarProperty Name="PlotDetails" ColumnName="PlotDetails" />
                 <ScalarProperty Name="ApplicantAddress" ColumnName="ApplicantAddress" />
@@ -2743,10 +1487,10 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantTransactionDetail">
               <MappingFragment StoreEntitySet="ApplicantTransactionDetail">
                 <ScalarProperty Name="GMComment" ColumnName="GMComment" />
-                <ScalarProperty Name="MComment" ColumnName="MComment" />
+                <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
                 <ScalarProperty Name="AMComment" ColumnName="AMComment" />
                 <ScalarProperty Name="GMApprovalStatus" ColumnName="GMApprovalStatus" />
-                <ScalarProperty Name="MApprovalStatus" ColumnName="MApprovalStatus" />
+                <ScalarProperty Name="CEOApprovalStatus" ColumnName="CEOApprovalStatus" />
                 <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
                 <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
                 <ScalarProperty Name="ChalanDocumentFileType" ColumnName="ChalanDocumentFileType" />
@@ -2773,9 +1517,13 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
           <EntitySetMapping Name="ApplicantUploadDocs">
             <EntityTypeMapping TypeName="GidaGKPModel.ApplicantUploadDoc">
               <MappingFragment StoreEntitySet="ApplicantUploadDoc">
+                <ScalarProperty Name="GMComment" ColumnName="GMComment" />
+                <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
                 <ScalarProperty Name="SIComment" ColumnName="SIComment" />
                 <ScalarProperty Name="ClerkComment" ColumnName="ClerkComment" />
                 <ScalarProperty Name="AMComment" ColumnName="AMComment" />
+                <ScalarProperty Name="GMApprovalStatus" ColumnName="GMApprovalStatus" />
+                <ScalarProperty Name="CEOApprovalStatus" ColumnName="CEOApprovalStatus" />
                 <ScalarProperty Name="SIApprovalStatus" ColumnName="SIApprovalStatus" />
                 <ScalarProperty Name="ClerkApprovalStatus" ColumnName="ClerkApprovalStatus" />
                 <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
@@ -2845,7 +1593,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
               <MappingFragment StoreEntitySet="ApplicantUser">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
                 <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
                 <ScalarProperty Name="SectorName" ColumnName="SectorName" />
                 <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
@@ -2858,28 +1605,8 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ChangeProjectDetails">
-            <EntityTypeMapping TypeName="GidaGKPModel.ChangeProjectDetail">
-              <MappingFragment StoreEntitySet="ChangeProjectDetails">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UploadedSignPhoto" ColumnName="UploadedSignPhoto" />
-                <ScalarProperty Name="DulySignedNotarizedForAcknowledged" ColumnName="DulySignedNotarizedForAcknowledged" />
-                <ScalarProperty Name="ObnoxiousGasEmissionDetrimentalSurroundings" ColumnName="ObnoxiousGasEmissionDetrimentalSurroundings" />
-                <ScalarProperty Name="ProvisionalSSIRegistrationNoOrIEMsubmittedToSIA" ColumnName="ProvisionalSSIRegistrationNoOrIEMsubmittedToSIA" />
-                <ScalarProperty Name="NOCFromPCB" ColumnName="NOCFromPCB" />
-                <ScalarProperty Name="EffluentDischargedStatusForNewProject" ColumnName="EffluentDischargedStatusForNewProject" />
-                <ScalarProperty Name="QuantityEffluentDischargedByNewProject" ColumnName="QuantityEffluentDischargedByNewProject" />
-                <ScalarProperty Name="AreaToBeUsedForProject" ColumnName="AreaToBeUsedForProject" />
-                <ScalarProperty Name="DPRForNewProject" ColumnName="DPRForNewProject" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2931,24 +1658,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LeaseRentDetails">
-            <EntityTypeMapping TypeName="GidaGKPModel.LeaseRentDetail">
-              <MappingFragment StoreEntitySet="LeaseRentDetails">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="MaintainanceCharge" ColumnName="MaintainanceCharge" />
-                <ScalarProperty Name="OthersCharges" ColumnName="OthersCharges" />
-                <ScalarProperty Name="TotalPremium" ColumnName="TotalPremium" />
-                <ScalarProperty Name="AllotmentMoney" ColumnName="AllotmentMoney" />
-                <ScalarProperty Name="LeaseInterestRate" ColumnName="LeaseInterestRate" />
-                <ScalarProperty Name="LeaseRentDate" ColumnName="LeaseRentDate" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Lookups">
             <EntityTypeMapping TypeName="GidaGKPModel.Lookup">
               <MappingFragment StoreEntitySet="Lookup">
@@ -2958,53 +1667,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
                 <ScalarProperty Name="LookupName" ColumnName="LookupName" />
                 <ScalarProperty Name="LookupType" ColumnName="LookupType" />
                 <ScalarProperty Name="LookupId" ColumnName="LookupId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ManagerElectronicForms">
-            <EntityTypeMapping TypeName="GidaGKPModel.ManagerElectronicForm">
-              <MappingFragment StoreEntitySet="ManagerElectronicForm">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Plot_Dormant_NoOfMonth" ColumnName="Plot_Dormant_NoOfMonth" />
-                <ScalarProperty Name="Plot_Area" ColumnName="Plot_Area" />
-                <ScalarProperty Name="Sector_Name" ColumnName="Sector_Name" />
-                <ScalarProperty Name="Plot_Name" ColumnName="Plot_Name" />
-                <ScalarProperty Name="LandTransfer_OrderNo" ColumnName="LandTransfer_OrderNo" />
-                <ScalarProperty Name="Allotment_Date" ColumnName="Allotment_Date" />
-                <ScalarProperty Name="Allotment_Number" ColumnName="Allotment_Number" />
-                <ScalarProperty Name="PlotId" ColumnName="PlotId" />
-                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ManufacturingUnitDetails">
-            <EntityTypeMapping TypeName="GidaGKPModel.ManufacturingUnitDetail">
-              <MappingFragment StoreEntitySet="ManufacturingUnitDetails">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="NotarizedAffidavit" ColumnName="NotarizedAffidavit" />
-                <ScalarProperty Name="ConstitutionOwnershipLicense" ColumnName="ConstitutionOwnershipLicense" />
-                <ScalarProperty Name="ExceedDesignatedPlotArea" ColumnName="ExceedDesignatedPlotArea" />
-                <ScalarProperty Name="TotalLandCoverageAreaAfterAddingNewProduct" ColumnName="TotalLandCoverageAreaAfterAddingNewProduct" />
-                <ScalarProperty Name="RevisedSSIRegistration_IEM" ColumnName="RevisedSSIRegistration_IEM" />
-                <ScalarProperty Name="NOCFromThePollutionControlBoard" ColumnName="NOCFromThePollutionControlBoard" />
-                <ScalarProperty Name="DischargeLiquidEffluents" ColumnName="DischargeLiquidEffluents" />
-                <ScalarProperty Name="ObnoxiousGasDetails" ColumnName="ObnoxiousGasDetails" />
-                <ScalarProperty Name="QualityOfPollutantByNewProduct" ColumnName="QualityOfPollutantByNewProduct" />
-                <ScalarProperty Name="PollutionCreatedByNewProduct" ColumnName="PollutionCreatedByNewProduct" />
-                <ScalarProperty Name="PhotoOfCandidate" ColumnName="PhotoOfCandidate" />
-                <ScalarProperty Name="SignOfCandidate" ColumnName="SignOfCandidate" />
-                <ScalarProperty Name="ApplicantIdedentityProof" ColumnName="ApplicantIdedentityProof" />
-                <ScalarProperty Name="AuthorisedSignByBank" ColumnName="AuthorisedSignByBank" />
-                <ScalarProperty Name="DPRForNewProduct" ColumnName="DPRForNewProduct" />
-                <ScalarProperty Name="ApplicationFormForAddNewProduct" ColumnName="ApplicationFormForAddNewProduct" />
-                <ScalarProperty Name="LeaseDeedDone" ColumnName="LeaseDeedDone" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3036,6 +1698,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
                 <ScalarProperty Name="NoOfPaidInstallment" ColumnName="NoOfPaidInstallment" />
                 <ScalarProperty Name="PlotPaymentStatus" ColumnName="PlotPaymentStatus" />
                 <ScalarProperty Name="PlotNo" ColumnName="PlotNo" />
+                <ScalarProperty Name="PlotId" ColumnName="PlotId" />
                 <ScalarProperty Name="SectorName" ColumnName="SectorName" />
                 <ScalarProperty Name="AddressOfApplicant" ColumnName="AddressOfApplicant" />
                 <ScalarProperty Name="FathersNameOfApplicant" ColumnName="FathersNameOfApplicant" />
@@ -3070,26 +1733,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Plot_Restoration">
-            <EntityTypeMapping TypeName="GidaGKPModel.Plot_Restoration">
-              <MappingFragment StoreEntitySet="Plot_Restoration">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Applicant_Id" ColumnName="Applicant_Id" />
-                <ScalarProperty Name="Transaction_Number" ColumnName="Transaction_Number" />
-                <ScalarProperty Name="Amount_Paid" ColumnName="Amount_Paid" />
-                <ScalarProperty Name="Processing_Fees" ColumnName="Processing_Fees" />
-                <ScalarProperty Name="Document_Upload" ColumnName="Document_Upload" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="Sender_Address" ColumnName="Sender_Address" />
-                <ScalarProperty Name="Coupon_Number_Old" ColumnName="Coupon_Number_Old" />
-                <ScalarProperty Name="Subject_Mentioned" ColumnName="Subject_Mentioned" />
-                <ScalarProperty Name="Addressed_To" ColumnName="Addressed_To" />
-                <ScalarProperty Name="Name_Sender_Post" ColumnName="Name_Sender_Post" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PlotMasters">
             <EntityTypeMapping TypeName="GidaGKPModel.PlotMaster">
               <MappingFragment StoreEntitySet="PlotMaster">
@@ -3105,7 +1748,7 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
                 <ScalarProperty Name="PlotSideWideRoad" ColumnName="PlotSideWideRoad" />
                 <ScalarProperty Name="PlotSideCorner" ColumnName="PlotSideCorner" />
                 <ScalarProperty Name="PlotRate" ColumnName="PlotRate" />
-                <ScalarProperty Name="NoOfPlots" ColumnName="NoOfPlots" />
+                <ScalarProperty Name="PlotNumber" ColumnName="PlotNumber" />
                 <ScalarProperty Name="PlotArea" ColumnName="PlotArea" />
                 <ScalarProperty Name="PlotRange" ColumnName="PlotRange" />
                 <ScalarProperty Name="SectorName" ColumnName="SectorName" />
@@ -3113,59 +1756,6 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
                 <ScalarProperty Name="SchemeType" ColumnName="SchemeType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PlotId" ColumnName="PlotId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PlotTransferDetails">
-            <EntityTypeMapping TypeName="GidaGKPModel.PlotTransferDetail">
-              <MappingFragment StoreEntitySet="PlotTransferDetails">
-                <ScalarProperty Name="CreatedDeate" ColumnName="CreatedDeate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="TotalInterestPaidAmount" ColumnName="TotalInterestPaidAmount" />
-                <ScalarProperty Name="NoOfInterestPaidInstallment" ColumnName="NoOfInterestPaidInstallment" />
-                <ScalarProperty Name="TotalPremiumPaidInstallmentAmount" ColumnName="TotalPremiumPaidInstallmentAmount" />
-                <ScalarProperty Name="NoOfPremiumPaidInstallment" ColumnName="NoOfPremiumPaidInstallment" />
-                <ScalarProperty Name="LeaseRentPaidAmount" ColumnName="LeaseRentPaidAmount" />
-                <ScalarProperty Name="CompletePaymentOfLeaseRent" ColumnName="CompletePaymentOfLeaseRent" />
-                <ScalarProperty Name="MaintainanceChargePaidAmount" ColumnName="MaintainanceChargePaidAmount" />
-                <ScalarProperty Name="CompletePaymentOfMaintainanceCharge" ColumnName="CompletePaymentOfMaintainanceCharge" />
-                <ScalarProperty Name="TransferrerGotPlotFormTransferByAnotherTransferee" ColumnName="TransferrerGotPlotFormTransferByAnotherTransferee" />
-                <ScalarProperty Name="BabkNOCRepaymentOfLoan" ColumnName="BabkNOCRepaymentOfLoan" />
-                <ScalarProperty Name="ShowGidaNOCToBank" ColumnName="ShowGidaNOCToBank" />
-                <ScalarProperty Name="MortgageToAnyFinancialInstitute" ColumnName="MortgageToAnyFinancialInstitute" />
-                <ScalarProperty Name="PlotFullyPaidOrNot" ColumnName="PlotFullyPaidOrNot" />
-                <ScalarProperty Name="DateOfAllotment" ColumnName="DateOfAllotment" />
-                <ScalarProperty Name="AllotmentNo" ColumnName="AllotmentNo" />
-                <ScalarProperty Name="ApplicantAddress" ColumnName="ApplicantAddress" />
-                <ScalarProperty Name="ApplicantFathersName" ColumnName="ApplicantFathersName" />
-                <ScalarProperty Name="ApplicantName" ColumnName="ApplicantName" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PossessionDetails">
-            <EntityTypeMapping TypeName="GidaGKPModel.PossessionDetail">
-              <MappingFragment StoreEntitySet="PossessionDetails">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="PossessionDate" ColumnName="PossessionDate" />
-                <ScalarProperty Name="WitnessDetailsFromAllottee" ColumnName="WitnessDetailsFromAllottee" />
-                <ScalarProperty Name="WitnessDetailsFromGida" ColumnName="WitnessDetailsFromGida" />
-                <ScalarProperty Name="DigiSignOfAMCivilOrJECivil" ColumnName="DigiSignOfAMCivilOrJECivil" />
-                <ScalarProperty Name="PossessionHandedOverNameBehalfOfGida" ColumnName="PossessionHandedOverNameBehalfOfGida" />
-                <ScalarProperty Name="AreaOfLand" ColumnName="AreaOfLand" />
-                <ScalarProperty Name="BuildingDetails" ColumnName="BuildingDetails" />
-                <ScalarProperty Name="LayoutOfPlot" ColumnName="LayoutOfPlot" />
-                <ScalarProperty Name="TransferDateTime" ColumnName="TransferDateTime" />
-                <ScalarProperty Name="SectorLocation" ColumnName="SectorLocation" />
-                <ScalarProperty Name="PlotNo" ColumnName="PlotNo" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3183,91 +1773,37 @@ warning 6002: The table/view 'GidaGkp.dbo.TransferrerUploadDoc' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="GidaGKPModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UploadedApplicantDocVerifies">
-            <EntityTypeMapping TypeName="GidaGKPModel.UploadedApplicantDocVerify">
-              <MappingFragment StoreEntitySet="UploadedApplicantDocVerify">
+          <EntitySetMapping Name="SchemewiseTermsConditions">
+            <EntityTypeMapping TypeName="GidaGKPModel.SchemewiseTermsCondition">
+              <MappingFragment StoreEntitySet="SchemewiseTermsCondition">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CommentByAssistant" ColumnName="CommentByAssistant" />
-                <ScalarProperty Name="DocVerifyByAssistant" ColumnName="DocVerifyByAssistant" />
-                <ScalarProperty Name="CommentByFinance" ColumnName="CommentByFinance" />
-                <ScalarProperty Name="DocVerifyByFinance" ColumnName="DocVerifyByFinance" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="DateofgivingthirdInstallent" ColumnName="DateofgivingthirdInstallent" />
+                <ScalarProperty Name="DateofgivingsecondInstallment" ColumnName="DateofgivingsecondInstallment" />
+                <ScalarProperty Name="DateofgivingfirstInstallment" ColumnName="DateofgivingfirstInstallment" />
+                <ScalarProperty Name="Firstduedateofpaymentofinterest" ColumnName="Firstduedateofpaymentofinterest" />
+                <ScalarProperty Name="AllotmentMoneyDueDate" ColumnName="AllotmentMoneyDueDate" />
+                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AlloteeTimeExtensionFeesPayGateways">
-            <EntityTypeMapping TypeName="GidaGKPModel.AlloteeTimeExtensionFeesPayGateway">
-              <MappingFragment StoreEntitySet="AlloteeTimeExtensionFeesPayGateway">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <EntitySetMapping Name="LeasdeedNotesheets">
+            <EntityTypeMapping TypeName="GidaGKPModel.LeasdeedNotesheet">
+              <MappingFragment StoreEntitySet="LeasdeedNotesheet">
+                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
-                <ScalarProperty Name="Challan_Number" ColumnName="Challan_Number" />
-                <ScalarProperty Name="TotalTime_Extension_Fees" ColumnName="TotalTime_Extension_Fees" />
+                <ScalarProperty Name="Comment_FManager" ColumnName="Comment_FManager" />
+                <ScalarProperty Name="Digsign_FManager" ColumnName="Digsign_FManager" />
+                <ScalarProperty Name="Comment_Manager" ColumnName="Comment_Manager" />
+                <ScalarProperty Name="Digsign_Manager" ColumnName="Digsign_Manager" />
+                <ScalarProperty Name="Comment_Propassist" ColumnName="Comment_Propassist" />
+                <ScalarProperty Name="Digsign_Propassist" ColumnName="Digsign_Propassist" />
+                <ScalarProperty Name="Allotmentnumber" ColumnName="Allotmentnumber" />
+                <ScalarProperty Name="Bankaddress" ColumnName="Bankaddress" />
+                <ScalarProperty Name="Bankguranteedate" ColumnName="Bankguranteedate" />
                 <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransfereeUploadDocs">
-            <EntityTypeMapping TypeName="GidaGKPModel.TransfereeUploadDoc">
-              <MappingFragment StoreEntitySet="TransfereeUploadDoc">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CertificateOfReservedCategory" ColumnName="CertificateOfReservedCategory" />
-                <ScalarProperty Name="CopyOfCancelCheque" ColumnName="CopyOfCancelCheque" />
-                <ScalarProperty Name="CertificateIssuedByDirectorateIndustry" ColumnName="CertificateIssuedByDirectorateIndustry" />
-                <ScalarProperty Name="SalesCertificate" ColumnName="SalesCertificate" />
-                <ScalarProperty Name="NetWorthOrTurnover" ColumnName="NetWorthOrTurnover" />
-                <ScalarProperty Name="CompanyProfile" ColumnName="CompanyProfile" />
-                <ScalarProperty Name="BoardResolution" ColumnName="BoardResolution" />
-                <ScalarProperty Name="ListOfShareHoldersDirectors" ColumnName="ListOfShareHoldersDirectors" />
-                <ScalarProperty Name="MemorandumAndArticlesOfAssociation" ColumnName="MemorandumAndArticlesOfAssociation" />
-                <ScalarProperty Name="CertificateOfIncorporation" ColumnName="CertificateOfIncorporation" />
-                <ScalarProperty Name="TransfereeSignVerifiedByBank" ColumnName="TransfereeSignVerifiedByBank" />
-                <ScalarProperty Name="IdentityProof" ColumnName="IdentityProof" />
-                <ScalarProperty Name="ProposedLandUtilizationPlanDulySignedByApplicant" ColumnName="ProposedLandUtilizationPlanDulySignedByApplicant" />
-                <ScalarProperty Name="ProjectProfileDulySignedByapplicant" ColumnName="ProjectProfileDulySignedByapplicant" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransferrerUploadDocs">
-            <EntityTypeMapping TypeName="GidaGKPModel.TransferrerUploadDoc">
-              <MappingFragment StoreEntitySet="TransferrerUploadDoc">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="TransferrerSignVerifiedByBank" ColumnName="TransferrerSignVerifiedByBank" />
-                <ScalarProperty Name="UndertakingOfTransfer" ColumnName="UndertakingOfTransfer" />
-                <ScalarProperty Name="SupportingDocumentsInCaseOfExemptions" ColumnName="SupportingDocumentsInCaseOfExemptions" />
-                <ScalarProperty Name="GSTFillingReturnLastThreeConsecutiveYears" ColumnName="GSTFillingReturnLastThreeConsecutiveYears" />
-                <ScalarProperty Name="SalesBillFinishedProductLastThreeYears" ColumnName="SalesBillFinishedProductLastThreeYears" />
-                <ScalarProperty Name="RawMaterialPurchaseBillLastThreeYears" ColumnName="RawMaterialPurchaseBillLastThreeYears" />
-                <ScalarProperty Name="PowerBillLastThreeYears" ColumnName="PowerBillLastThreeYears" />
-                <ScalarProperty Name="MeterSealingCertificate_ProofElectricity" ColumnName="MeterSealingCertificate_ProofElectricity" />
-                <ScalarProperty Name="DocumentsShareholdingDulyCertifiedByCA" ColumnName="DocumentsShareholdingDulyCertifiedByCA" />
-                <ScalarProperty Name="BuildingPlanDulyApprovedByGida" ColumnName="BuildingPlanDulyApprovedByGida" />
-                <ScalarProperty Name="RequestLetterTransferOfPlot" ColumnName="RequestLetterTransferOfPlot" />
-                <ScalarProperty Name="AllotmentId" ColumnName="AllotmentId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

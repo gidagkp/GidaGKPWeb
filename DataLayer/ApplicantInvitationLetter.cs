@@ -22,7 +22,7 @@ namespace DataLayer
         public string ApplicantAddress { get; set; }
         public string PlotDetails { get; set; }
         public string PlotRange { get; set; }
-        public string TotalNoOfPlots { get; set; }
+        public Nullable<int> PlotId { get; set; }
         public string InterviewMode { get; set; }
         public Nullable<System.DateTime> InterviewDateTime { get; set; }
         public string InterviewLetterStatus { get; set; }
