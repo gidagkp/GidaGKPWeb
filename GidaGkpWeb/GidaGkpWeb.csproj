@@ -279,7 +279,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BAL\Login\LeasedDeedDutyWorkDetails.cs" />
-    <Compile Include="BAL\Login\LeasedeedNotesheetDetails.cs" />
     <Compile Include="BAL\Login\LoginDetails.cs" />
     <Compile Include="BAL\Masters\AdminDetails.cs" />
     <Compile Include="BAL\Masters\InvitationDetails.cs" />
@@ -323,7 +322,6 @@
     <Compile Include="Infrastructure\Utility\VerificationCodeGeneration.cs" />
     <Compile Include="Models\GidaUserPermissionModel.cs" />
     <Compile Include="Models\InvitationModel.cs" />
-    <Compile Include="Models\LeasedeedNotesheetModel.cs" />
     <Compile Include="Models\LeaseDutyWorkModel.cs" />
     <Compile Include="Models\LookupModel.cs" />
     <Compile Include="Models\PlotMasterModel.cs" />
@@ -693,9 +691,6 @@
     <Content Include="Views\Applicant\ProjectChangeRequest.cshtml" />
     <Content Include="Views\Applicant\ProjectPaymentDetail.cshtml" />
     <Content Include="Views\Admin\SchemeWiseInvitationList.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Admin\LeaseddeedNotesheet.cshtml" />
-=======
     <Content Include="Views\Report\SelectedInterviewCandidate.cshtml" />
     <Content Include="Views\Report\RejectedInterviewCandidate.cshtml" />
     <Content Include="Views\Admin\IndustrialDashboard.cshtml" />
@@ -703,7 +698,6 @@
     <Content Include="Views\Admin\AllocateAllotmentLetter.cshtml" />
     <Content Include="Views\Admin\AllotmentMoneyWithInstallment.cshtml" />
     <Content Include="Views\Home\StithiPatrak.cshtml" />
->>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">

@@ -4,34 +4,6 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-<<<<<<< HEAD
-      <Diagram DiagramId="01be503351024b0fb87558687a275238" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="GidaGKPModel.AdminNotice" Width="1.5" PointX="5.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.AllocateAllotmentDetail" Width="1.5" PointX="7.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantApplicationDetail" Width="1.5" PointX="5.75" PointY="2.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantBankDetail" Width="1.5" PointX="9.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantDetail" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantFormStep" Width="1.5" PointX="11.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantInvitationLetter" Width="1.5" PointX="8" PointY="1.125" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantPlotDetail" Width="1.5" PointX="9.75" PointY="11.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantProjectChangeDetail" Width="1.5" PointX="11.75" PointY="10.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantProjectDetail" Width="1.5" PointX="5.75" PointY="12.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantTransactionDetail" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantUploadDoc" Width="1.5" PointX="0.75" PointY="13.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.ApplicantUser" Width="1.5" PointX="2.75" PointY="13.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.GidaUser" Width="1.5" PointX="13.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.LeaseDeedDetail" Width="1.5" PointX="13.75" PointY="12.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.Lookup" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.MortgageDetail" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="GidaGKPModel.PageMaster" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="GidaGKPModel.PGTransactionInformation" Width="1.5" PointX="14.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.PlotMaster" Width="1.5" PointX="0.75" PointY="6.5" />
-        <EntityTypeShape EntityType="GidaGKPModel.RoleWisePermission" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="GidaGKPModel.SchemewiseTermsCondition" Width="1.5" PointX="15.75" PointY="6.75" />
-        <EntityTypeShape EntityType="GidaGKPModel.LeasdeedNotesheet" Width="1.5" PointX="15.75" PointY="10.75" />
-        <AssociationConnector Association="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail" />
-        <AssociationConnector Association="GidaGKPModel.FK_MortgageDetails_PlotMaster" />
-=======
       <Diagram DiagramId="f9938a10b1f24dbca1af7474536b4559" Name="Diagram1">
         <EntityTypeShape EntityType="GidaGKPModel.AdminNotice" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="GidaGKPModel.AllocateAllotmentDetail" Width="1.5" PointX="5.75" PointY="5.75" />
@@ -55,7 +27,6 @@
         <EntityTypeShape EntityType="GidaGKPModel.RoleWisePermission" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="GidaGKPModel.SchemewiseTermsCondition" Width="1.5" PointX="13.75" PointY="12.75" />
         <AssociationConnector Association="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail" />
->>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
         <AssociationConnector Association="GidaGKPModel.FK_RoleMasterUser_PageMaster" />
       </Diagram>
     </edmx:Diagrams>

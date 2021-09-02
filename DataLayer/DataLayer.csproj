@@ -176,24 +176,12 @@
     <Compile Include="GidaUser.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="LeasdeedNotesheet.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-<<<<<<< HEAD
     <Compile Include="LeaseDeedDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Lookup.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="MortgageDetail.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
-=======
-    <Compile Include="Lookup.cs">
-      <DependentUpon>DbEntity.tt</DependentUpon>
-    </Compile>
->>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
     <Compile Include="PageMaster.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>

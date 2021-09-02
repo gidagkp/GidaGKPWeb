@@ -14,12 +14,6 @@ namespace DataLayer
     
     public partial class PlotMaster
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PlotMaster()
-        {
-            this.MortgageDetails = new HashSet<MortgageDetail>();
-        }
-    
         public int PlotId { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> SchemeType { get; set; }
@@ -40,8 +34,5 @@ namespace DataLayer
         public string GrandTotalCost { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MortgageDetail> MortgageDetails { get; set; }
     }
 }
