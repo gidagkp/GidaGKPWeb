@@ -89,6 +89,8 @@ namespace GidaGkpWeb.BAL
                         from plotDetail in plotDetail2.DefaultIfEmpty()
                         join sectorLookup1 in _db.Lookups on plotDetail.SectorName equals sectorLookup1.LookupId into sectorLookup2
                         from sectorLookup in sectorLookup2.DefaultIfEmpty()
+                        join plotrangeLookup1 in _db.Lookups on plotDetail.PlotRange equals plotrangeLookup1.LookupId into plotrangeLookup2
+                        from plotrangeLookup in plotrangeLookup2.DefaultIfEmpty()
                         join doc1 in _db.ApplicantUploadDocs on user.Id equals doc1.UserId into doc2
                         from doc in doc2.DefaultIfEmpty()
                         join transaction1 in _db.ApplicantTransactionDetails on application.ApplicationId equals transaction1.ApplicationId into transaction2
@@ -161,7 +163,7 @@ namespace GidaGkpWeb.BAL
                             InterviewLetterStatus = invitationLetter != null && invitationLetter.InterviewLetterStatus == null ? "Invitation Generated" : invitationLetter != null ? invitationLetter.InterviewLetterStatus : "",
                             UserId = user.Id,
                             PlotId = plotMaster != null ? plotMaster.PlotId : 0,
-                            PlotRange = invitationLetter != null ? invitationLetter.PlotRange : "",
+                            PlotRange = plotrangeLookup != null ? plotrangeLookup.LookupName : "",
                             PMPlotArea = plotMaster != null ? plotMaster.PlotArea : "",
                             PlotNumber = plotMaster != null ? plotMaster.PlotNumber : "",
                             PlotRate = plotMaster != null ? plotMaster.PlotRate : "",
@@ -278,10 +280,9 @@ namespace GidaGkpWeb.BAL
                             PlotCost = x.PlotCost,
                             ExtraCharge = x.ExtraCharge,
                             GrandTotalCost = x.GrandTotalCost,
-                            //TenPer_AllotmentMoney = x.TenPer_AllotmentMoney,
-                            //NintyPer_AllotmentMoney = x.NintyPer_AllotmentMoney,
-                            //AllotementMoneyTobePaid = x.AllotementMoneyTobePaid,
-
+                            TenPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 10) / 100).ToString() : "",
+                            NintyPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 90) / 100).ToString() : "",
+                            AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 90) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
