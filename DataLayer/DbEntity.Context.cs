@@ -41,12 +41,18 @@ namespace DataLayer
         public virtual DbSet<GidaUser> GidaUsers { get; set; }
         public virtual DbSet<LeaseDeedDetail> LeaseDeedDetails { get; set; }
         public virtual DbSet<Lookup> Lookups { get; set; }
+<<<<<<< HEAD
         public virtual DbSet<MortgageDetail> MortgageDetails { get; set; }
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
         public virtual DbSet<PageMaster> PageMasters { get; set; }
         public virtual DbSet<PGTransactionInformation> PGTransactionInformations { get; set; }
         public virtual DbSet<PlotMaster> PlotMasters { get; set; }
         public virtual DbSet<RoleWisePermission> RoleWisePermissions { get; set; }
         public virtual DbSet<SchemewiseTermsCondition> SchemewiseTermsConditions { get; set; }
+<<<<<<< HEAD
         public virtual DbSet<LeasdeedNotesheet> LeasdeedNotesheets { get; set; }
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
     }
 }

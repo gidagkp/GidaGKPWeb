@@ -70,6 +70,32 @@ $(document).ready(function () {
         //FillSector(valueSelected);
     });
 
+    //function FillSector(SchemeNameId) {
+    //    let dropdown = $('#SectorName');
+    //    dropdown.empty();
+    //    dropdown.append('<option value="">Select</option>');
+    //    dropdown.prop('selectedIndex', 0);
+
+    //    $.ajax({
+    //        contentType: 'application/json; charset=utf-8',
+    //        dataType: 'json',
+    //        type: 'POST',
+    //        data: '{lookupTypeId: "' + SchemeNameId + '",lookupType: "SectorName" }',
+    //        url: '/Masters/GetLookupDetail',
+    //        success: function (data) {
+    //            $.each(data, function (key, entry) {
+    //                dropdown.append($('<option></option>').attr('value', entry.LookupId).text(entry.LookupName));
+    //            });
+    //        },
+    //        failure: function (response) {
+    //            console.log(response);
+    //        },
+    //        error: function (response) {
+    //            console.log(response.responseText);
+    //        }
+    //    });
+    //}
+
     $('#btnSearchTransactionCompleted').click(function () {
         var selectedSchemeName = $('#SchemeName').val();
         $.ajax({
@@ -256,6 +282,157 @@ $(document).ready(function () {
             utility.alert.setAlert(utility.alert.alertType.error, 'comment is mendatory to reject the document.');
         }
     })
+
+    $('#btnAdminGMApprove').click(function () {
+        var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#GMComment').val();
+        if (comment != null && comment != "" && comment != undefined && comment.trim() != "") {
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: '{applicationId: "' + applicationId + '",schemeName: "' + schemeName + '",status:"Approved",comment: "' + comment + '" }',
+                url: '/Admin/AdminApproveRejectApplication',
+                success: function (data) {
+                    utility.alert.setAlert(utility.alert.alertType.success, 'application submitted successfully.');
+                    location.reload();
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+        else {
+            utility.alert.setAlert(utility.alert.alertType.error, 'comment is mendatory to approve the approve/not approve.');
+        }
+    })
+
+    $('#btnAdminGMReject').click(function () {
+        var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#GMComment').val();
+        if (comment != null && comment != "" && comment != undefined && comment.trim() != "") {
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: '{applicationId: "' + applicationId + '",schemeName: "' + schemeName + '",status:"Not Approved",comment: "' + comment + '" }',
+                url: '/Admin/AdminApproveRejectApplication',
+                success: function (data) {
+                    utility.alert.setAlert(utility.alert.alertType.success, 'application submitted successfully.');
+                    location.reload();
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+        else {
+            utility.alert.setAlert(utility.alert.alertType.error, 'comment is mendatory to approve the approve/not approve.');
+        }
+    })
+
+    $('#btnAdminCEOApprove').click(function () {
+        var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#ceoComment').val();
+        if (comment != null && comment != "" && comment != undefined && comment.trim() != "") {
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: '{applicationId: "' + applicationId + '",schemeName: "' + schemeName + '",status:"Approved",comment: "' + comment + '" }',
+                url: '/Admin/AdminApproveRejectApplication',
+                success: function (data) {
+                    utility.alert.setAlert(utility.alert.alertType.success, 'application submitted successfully.');
+                    location.reload();
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+        else {
+            utility.alert.setAlert(utility.alert.alertType.error, 'comment is mendatory to approve the approve/not approve.');
+        }
+    })
+
+    $('#btnAdminCEOReject').click(function () {
+        var applicationId = $('#hdnApplicationId').val(), schemeName = $('#hdnSchemeNameId').val(), comment = $('#ceoComment').val();
+        if (comment != null && comment != "" && comment != undefined && comment.trim() != "") {
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: '{applicationId: "' + applicationId + '",schemeName: "' + schemeName + '",status:"Not Approved",comment: "' + comment + '" }',
+                url: '/Admin/AdminApproveRejectApplication',
+                success: function (data) {
+                    utility.alert.setAlert(utility.alert.alertType.success, 'application submitted successfully.');
+                    location.reload();
+                },
+                failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+        else {
+            utility.alert.setAlert(utility.alert.alertType.error, 'comment is mendatory to approve the approve/not approve.');
+        }
+    })
+
+    $('#btnSearchApprovedList').click(function () {
+        /*var sectorName = $('#SectorName').val();*/
+        var schemeName = $('#SchemeName').val();
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: '{schemeName: "' + schemeName + '"}',
+            url: '/Admin/GetApprovedApplicantDetail',
+            success: function (data) {
+                var rowHtml = "";
+                var index = 1;
+                $('#tbodyData tr').remove();
+                $.each(data, function (key, entry) {
+                    rowHtml += '<tr>' +
+                        '<td class="text-center">' + index + '</td>' +
+                        '<td class="text-center">' + entry.ApplicationNumber + '</td>' +
+                        '<td class="text-center">' + entry.FullName + '</td>' +
+                        '<td class="text-center">' + entry.ContactNo + '</td>' +
+                        '<td class="text-center">' + entry.PlotArea + '</td>' +
+                        '<td class="text-center">' + entry.InterviewLetterStatus + '</td>';
+
+                    if (entry.InterviewLetterStatus != null && entry.InterviewLetterStatus != "" && entry.InterviewLetterStatus != undefined) {
+                        rowHtml += '<td class="text-center" id="actionColumn"><a target="_blank" style="opacity: 0.5;pointer-events: none;" href="#"><strong>Application Status</strong></a></td>';
+                    }
+                    else {
+                        rowHtml += '<td class="text-center" id="actionColumn"><a target="_blank" href="/Admin/Invitation?applicationId=' + entry.ApplicationId + '&schemeName=' + schemeName + '"><strong>Send Invitation</strong></a></td>';
+                    }
+                    rowHtml += '</tr>';
+                    index++;
+                });
+                if (data.length == 0) {
+                    rowHtml += '<tr>' +
+                        '<td colspan="20">No Record Found.</td>' +
+                        '</tr>';
+                }
+                $('#tbodyData').append(rowHtml);
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    });
 });
 
 

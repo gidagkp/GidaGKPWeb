@@ -45,6 +45,7 @@ $(document).ready(function () {
                 $('#SectorName').val(data.SectorName);
                 $('#PlotRange').val(data.PlotRange);
                 $('#ApplicationNo').val(data.ApplicationNumber);
+                $('#plotArea').val(data.PlotArea);
 
             },
             failure: function (response) {

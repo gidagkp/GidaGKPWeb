@@ -70,7 +70,7 @@
             </div>*@
         <div class="col-sm-12 col-xs-12">
 
-            <div class="table-responsive" style="padding:10px 0 80px 0;">
+            <div class="table-responsive" style="padding:10px 0 0px 0;">
                 <table class="table table_css_main_cl table-bordered">
                     <tr>
                         <th class="text-center">S.No.</th>
@@ -97,15 +97,6 @@
                                 <span style="color:green">Assistant Manager - @UserDataModel.AMPaymentStatus</span>
                             }
                             <br />
-                            @if (UserDataModel.MPaymentStatus != null && UserDataModel.MPaymentStatus.Contains("Not Approved"))
-                            {
-                                <span style="color:red">Manager - @UserDataModel.MPaymentStatus</span>
-                            }
-                            else if (UserDataModel.MPaymentStatus != null && UserDataModel.MPaymentStatus.Contains("Approved"))
-                            {
-                                <span style="color:green">Manager - @UserDataModel.MPaymentStatus</span>
-                            }
-                            <br />
                             @if (UserDataModel.GMPaymentStatus != null && UserDataModel.GMPaymentStatus.Contains("Not Approved"))
                             {
                                 <span style="color:red">General Manager - @UserDataModel.GMPaymentStatus   </span>
@@ -114,6 +105,16 @@
                             {
                                 <span style="color:green">General Manager - @UserDataModel.GMPaymentStatus</span>
                             }
+                            <br />
+                            @if (UserDataModel.CEOPaymentStatus != null && UserDataModel.CEOPaymentStatus.Contains("Not Approved"))
+                            {
+                                <span style="color:red">CEO - @UserDataModel.CEOPaymentStatus</span>
+                            }
+                            else if (UserDataModel.CEOPaymentStatus != null && UserDataModel.CEOPaymentStatus.Contains("Approved"))
+                            {
+                                <span style="color:green">CEO - @UserDataModel.CEOPaymentStatus</span>
+                            }
+
                         </td>
                         <td class="text-right">
                             @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Finance Approval")
@@ -122,28 +123,6 @@
                                 if (UserData.Department == "Finance & Accounts" && UserData.Designation == "Assistant Manager")
                                 {
                                     if (string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
-                                    {
-                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
-                                    }
-                                }
-                                else if (UserData.Department == "Finance & Accounts" && UserData.Designation == "Manager")
-                                {
-                                    if (!string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && string.IsNullOrEmpty(UserDataModel.MPaymentStatus))
-                                    {
-                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
-                                    }
-                                }
-                                else if (UserData.Department == "Finance & Accounts" && UserData.Designation == "General Manager")
-                                {
-                                    if (!string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && !string.IsNullOrEmpty(UserDataModel.MPaymentStatus) && string.IsNullOrEmpty(UserDataModel.GMPaymentStatus))
                                     {
                                         <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
                                     }
@@ -185,6 +164,24 @@
                             {
                                 <span style="color:green">Section Incharge - @UserDataModel.SIDocumentStatus</span>
                             }
+                            <br />
+                            @if (UserDataModel.GMDocumentStatus != null && UserDataModel.GMDocumentStatus.Contains("Not Approved"))
+                            {
+                                <span style="color:red">General Manager - @UserDataModel.GMDocumentStatus   </span>
+                            }
+                            else if (UserDataModel.GMDocumentStatus != null && UserDataModel.GMDocumentStatus.Contains("Approved"))
+                            {
+                                <span style="color:green">General Manager - @UserDataModel.GMDocumentStatus</span>
+                            }
+                            <br />
+                            @if (UserDataModel.CEODocumentStatus != null && UserDataModel.CEODocumentStatus.Contains("Not Approved"))
+                            {
+                                <span style="color:red">CEO - @UserDataModel.CEODocumentStatus</span>
+                            }
+                            else if (UserDataModel.CEODocumentStatus != null && UserDataModel.CEODocumentStatus.Contains("Approved"))
+                            {
+                                <span style="color:green">CEO - @UserDataModel.CEODocumentStatus</span>
+                            }
                         </td>
                         <td class="text-right">
                             @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Document Approval")
@@ -192,7 +189,7 @@
                             {
                                 if (UserData.Department == "Property" && UserData.Designation == "Clerk")
                                 {
-                                    if (string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.GMPaymentStatus))
+                                    if (string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
                                     {
                                         <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
                                     }
@@ -203,7 +200,7 @@
                                 }
                                 else if (UserData.Department == "Property" && UserData.Designation == "Assistant Manager")
                                 {
-                                    if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.GMPaymentStatus))
+                                    if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
                                     {
                                         <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
                                     }
@@ -214,13 +211,35 @@
                                 }
                                 else if (UserData.Department == "Property" && UserData.Designation == "Section Incharge")
                                 {
-                                    if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.GMPaymentStatus))
+                                    if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
                                     {
                                         <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
                                     }
                                     else
                                     {
                                         <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                                    }
+                                }
+                                else if (UserData.Department == "Administration" && UserData.Designation == "General Manager")
+                                {
+                                    if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && string.IsNullOrEmpty(UserDataModel.GMPaymentStatus))
+                                    {
+                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
+                                    }
+                                }
+                                else if (UserData.Department == "Administration" && UserData.Designation == "CEO")
+                                {
+                                    if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && !string.IsNullOrEmpty(UserDataModel.GMPaymentStatus) && string.IsNullOrEmpty(UserDataModel.CEOPaymentStatus))
+                                    {
+                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
                                     }
                                 }
                             }
@@ -230,7 +249,51 @@
             </div>
         </div>
     </div>
-
+    @if (UserData.Department == "Administration" && UserData.Designation == "General Manager")
+    {
+        if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !UserDataModel.SIDocumentStatus.Contains("Not Approved")
+            && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && !UserDataModel.AMPaymentStatus.Contains("Not Approved")
+            && string.IsNullOrEmpty(UserDataModel.GMPaymentStatus)
+            && string.IsNullOrEmpty(UserDataModel.GMDocumentStatus))
+        {
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <label for="usertype" class="text-uppercase">
+                        Write Comments
+                        <span class="required-field"></span>
+                    </label>
+                    <textarea name="GMComment" id="GMComment" class="form-control"></textarea>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <a style="background-color: green; color: white; float: right; padding: 10px 10px;" class="btn btn-success" id="btnAdminGMApprove"><strong>Approved</strong></a>
+                    <a style="background-color: orangered; color: white; float: right; padding: 10px 10px;" class="btn btn-success" id="btnAdminGMReject"><strong>Not Approved</strong></a>
+                </div>
+            </div>
+        }
+    }
+    else if (UserData.Department == "Administration" && UserData.Designation == "CEO")
+    {
+        if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !UserDataModel.SIDocumentStatus.Contains("Not Approved")
+            && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && !UserDataModel.AMPaymentStatus.Contains("Not Approved")
+            && !string.IsNullOrEmpty(UserDataModel.GMPaymentStatus) && !UserDataModel.GMPaymentStatus.Contains("Not Approved")
+            && !string.IsNullOrEmpty(UserDataModel.GMDocumentStatus) && !UserDataModel.GMDocumentStatus.Contains("Not Approved")
+            && string.IsNullOrEmpty(UserDataModel.CEOPaymentStatus))
+        {
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <label for="usertype" class="text-uppercase">
+                        Write Comments
+                        <span class="required-field"></span>
+                    </label>
+                    <textarea name="ceoComment" id="ceoComment" class="form-control"></textarea>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <a style="background-color: green; color: white; float: right; padding: 10px 10px;" class="btn btn-success" id="btnAdminCEOApprove"><strong>Approved</strong></a>
+                    <a style="background-color: orangered; color: white; float: right; padding: 10px 10px;" class="btn btn-success" id="btnAdminCEOReject"><strong>Not Approved</strong></a>
+                </div>
+            </div>
+        }
+    }
 </div>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">

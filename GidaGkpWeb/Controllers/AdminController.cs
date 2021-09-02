@@ -25,10 +25,34 @@ using System.Threading.Tasks;
 using GidaGkpWeb.Infrastructure;
 using System.Configuration;
 using GidaGkpWeb.BAL.Masters;
-
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 
 namespace GidaGkpWeb.Controllers
 {
+    public enum DocumentName
+    {
+        ApplicantEduTechQualification,
+        ScanPAN,
+        ScanID,
+        ApplicantPhoto,
+        ApplicantSignature,
+        BalanceSheet,
+        BankVerifiedSignature,
+        DocProofForIndustrialEstablishedOutsideGida,
+        ExperienceProof,
+        FinDetailsEstablishedIndustries,
+        ITReturn,
+        Memorendum,
+        OtherDocForProposedIndustry,
+        PreEstablishedIndustriesDoc,
+        ProjectReport,
+        ProposedPlanLandUses,
+        ScanAddressProof,
+        ScanCastCert
+    }
+
     [AdminSessionTimeout]
     public class AdminController : CommonController
     {
@@ -607,10 +631,15 @@ namespace GidaGkpWeb.Controllers
             AdminDetails _details = new AdminDetails();
             return Json(_details.ApproveRejectDocument(applicationId, status, comment), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult AdminApproveRejectApplication(int applicationId, int schemeName, string status, string comment)
+        {
+            AdminDetails _details = new AdminDetails();
+            return Json(_details.ApproveRejectApplication(applicationId, status, comment), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CandidateListForInterview()
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview();
+            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == null || x.InterviewLetterStatus == "").ToList();
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -619,7 +648,7 @@ namespace GidaGkpWeb.Controllers
         {
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantSubmittedForInterview().Where(x => x.UserId == userid).FirstOrDefault();
-            _details.ApplicationInvitationLetterStatusChnage(userid, "InvitationSentForInterview");
+            _details.ApplicationInvitationLetterStatusChnage(userid, "InvitationSentForInterview", null);
             this.SendMailToApplicantInterview(data.FullName, data.Email, data.InterviewDateTime);
             SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
             return RedirectToAction("CandidateListForInterview");
@@ -650,11 +679,11 @@ namespace GidaGkpWeb.Controllers
         }
 
         [HttpPost]
-        public JsonResult SendMailtoApplicantForInterviewResult(int userId, string status)
+        public JsonResult SendMailtoApplicantForInterviewResult(int userId, string status, int plotId)
         {
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantSubmittedForInterview().Where(x => x.UserId == userId).FirstOrDefault();
-            _details.ApplicationInvitationLetterStatusChnage(userId, status);
+            _details.ApplicationInvitationLetterStatusChnage(userId, status, plotId);
             this.SendMailToApplicantInterviewResult(data.FullName, data.Email, status);
             SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
             //return RedirectToAction("CandidateListForAllotment");
@@ -684,8 +713,9 @@ namespace GidaGkpWeb.Controllers
             ViewData["UserDetail"] = data;
             return View();
         }
-        public ActionResult AllotmentStatus()
+        public ActionResult AllotmentStatus(int applicationId)
         {
+            ViewData["ApplicationId"] = applicationId;
             return View();
         }
         public ActionResult PrintAllotmentLetter()
@@ -702,8 +732,11 @@ namespace GidaGkpWeb.Controllers
             Session.Clear();
             return RedirectToAction("AdminLogin", "Login");
         }
-        public ActionResult Invitation()
+        public ActionResult Invitation(int applicationId, int schemeName)
         {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(schemeName).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["UserDetail"] = data;
             return View();
         }
         [HttpPost]
@@ -722,16 +755,17 @@ namespace GidaGkpWeb.Controllers
             return Json(usrs, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult SaveNewInvitation(string Id, string Applicant, string Address, string SectorName, string ApplicationNo, string PlotRange, string TotalNoOfPlots, string InterviewDateTime, string InterviewMode)
+        public ActionResult SaveNewInvitation(string Id, string applicationId, string Applicant, string Address, string SectorName, string ApplicationNo, string PlotRange, string InterviewDateTime, string InterviewMode)
         {
             ApplicantInvitationLetter invt = new ApplicantInvitationLetter();
             invt.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
             invt.UserId = Convert.ToInt32(Applicant);
+            invt.ApplicationId = Convert.ToInt32(applicationId);
             invt.ApplicationNo = ApplicationNo;
             invt.ApplicantAddress = Address;
             invt.SectorName = SectorName;
             invt.PlotRange = PlotRange;
-            invt.TotalNoOfPlots = TotalNoOfPlots;
+            //invt.PlotId = Convert.ToInt32(PlotId);
             invt.InterviewDateTime = Convert.ToDateTime(InterviewDateTime);
             invt.InterviewMode = InterviewMode;
 
@@ -750,7 +784,7 @@ namespace GidaGkpWeb.Controllers
             }
             else
                 SetAlertMessage("User creation failed", "Save User");
-            return RedirectToAction("Invitation");
+            return RedirectToAction("CandidateListForInterview");
 
 
         }
@@ -904,27 +938,117 @@ namespace GidaGkpWeb.Controllers
             return Json(usrs, JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult AllocateAllotmentLetter(int applicationId)
+        {
+            ViewData["ApplicationId"] = applicationId;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SaveAllocateAllotmentLetter(HttpPostedFileBase Document, string applicationId, string AllotmentNumber,
+            string Allotmentdate, string InterviewStartDate, string InterviewEndDate, string AllotmentLetterDate)
+        {
+            AllocateAllotmentDetail allotementDetail = new AllocateAllotmentDetail();
+            if (Document != null && Document.ContentLength > 0)
+            {
+                allotementDetail.CEO_Sign = new byte[Document.ContentLength];
+                Document.InputStream.Read(allotementDetail.CEO_Sign, 0, Document.ContentLength);
+                allotementDetail.CEO_SignFileName = Document.FileName;
+                allotementDetail.CEO_SignFileType = Document.ContentType;
+            }
+            allotementDetail.ApplicationId = Convert.ToInt32(applicationId);
+            allotementDetail.AllotmentNumber = AllotmentNumber;
+            if (Allotmentdate != "")
+                allotementDetail.AllotmentDate = Convert.ToDateTime(Allotmentdate);
+            if (InterviewStartDate != "")
+                allotementDetail.StartingDateofInterview_L = Convert.ToDateTime(InterviewStartDate);
+            if (InterviewEndDate != "")
+                allotementDetail.EndDateofInterview_L = Convert.ToDateTime(InterviewEndDate);
+            if (AllotmentLetterDate != "")
+                allotementDetail.DateofAllotmentLetter = Convert.ToDateTime(AllotmentLetterDate);
+
+            AdminDetails _details = new AdminDetails();
+            var result = _details.SaveAllocateAllotmentLetter(allotementDetail);
+            if (result == Enums.CrudStatus.Saved)
+                SetAlertMessage("Allotment Letter has been Saved", "Allotment Letter Save");
+            else
+                SetAlertMessage("Allotment Letter Saving failed", "Allotment Letter Save");
+            return RedirectToAction("AllotmentStatus", new { applicationId = applicationId });
+
+        }
+        public ActionResult SchemeTermsAndCondition()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SaveSchemeWiseTermAndCondition(string Id, string SchemeName, string InterestDueDate, string AllotementDueDate, string FirstInstallmentDueDate, string SecondInstallmentDueDate, string ThirdInstallmentDueDate)
+        {
+            SchemewiseTermsCondition termnCondition = new SchemewiseTermsCondition();
+            termnCondition.SchemeName = Convert.ToInt32(SchemeName);
+            if (InterestDueDate != "")
+                termnCondition.Firstduedateofpaymentofinterest = Convert.ToDateTime(InterestDueDate);
+            if (AllotementDueDate != "")
+                termnCondition.AllotmentMoneyDueDate = Convert.ToDateTime(AllotementDueDate);
+            if (FirstInstallmentDueDate != "")
+                termnCondition.DateofgivingfirstInstallment = Convert.ToDateTime(FirstInstallmentDueDate);
+            if (SecondInstallmentDueDate != "")
+                termnCondition.DateofgivingsecondInstallment = Convert.ToDateTime(SecondInstallmentDueDate);
+            if (ThirdInstallmentDueDate != "")
+                termnCondition.DateofgivingthirdInstallent = Convert.ToDateTime(ThirdInstallmentDueDate);
+            if (!string.IsNullOrEmpty(Id))
+                termnCondition.Id = Convert.ToInt32(Id);
+
+            AdminDetails _details = new AdminDetails();
+            var result = _details.SaveTermAndCondition(termnCondition);
+            if (result == Enums.CrudStatus.Saved)
+                SetAlertMessage("Term and Condition has been Saved", "Term and Condition Save");
+            else
+                SetAlertMessage("Term and Condition Saving failed", "Term and Condition Save");
+            return RedirectToAction("SchemeTermsAndCondition");
+
+        }
+
+        [HttpPost]
+        public JsonResult GetPlotNumber()
+        {
+            AdminDetails _details = new AdminDetails();
+            return Json(_details.GetPlotNumber(), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult AllotmentMoneyWithInstallment(int applicationId)
+        {
+            ViewData["ApplicationId"] = applicationId;
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["UserDetail"] = data;
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetApprovedApplicantDetail(int schemeName)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(schemeName).Where(x => !string.IsNullOrEmpty(x.CEOPaymentStatus)
+                                            && !string.IsNullOrEmpty(x.CEODocumentStatus)
+                                            && !x.CEOPaymentStatus.Contains("Not Approved")
+                                            && !x.CEODocumentStatus.Contains("Not Approved")).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult ExportSchemeWiseInvitationList(string GridHtml)
+        {
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "SchemeWiseInvitationList.pdf");
+            }
+        }
     }
 
-    public enum DocumentName
-    {
-        ApplicantEduTechQualification,
-        ScanPAN,
-        ScanID,
-        ApplicantPhoto,
-        ApplicantSignature,
-        BalanceSheet,
-        BankVerifiedSignature,
-        DocProofForIndustrialEstablishedOutsideGida,
-        ExperienceProof,
-        FinDetailsEstablishedIndustries,
-        ITReturn,
-        Memorendum,
-        OtherDocForProposedIndustry,
-        PreEstablishedIndustriesDoc,
-        ProjectReport,
-        ProposedPlanLandUses,
-        ScanAddressProof,
-        ScanCastCert
-    }
 }

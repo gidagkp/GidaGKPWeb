@@ -87,13 +87,19 @@ namespace GidaGkpWeb.BAL
                         from bankDetail in bankDetail2.DefaultIfEmpty()
                         join plotDetail1 in _db.ApplicantPlotDetails on user.Id equals plotDetail1.UserId into plotDetail2
                         from plotDetail in plotDetail2.DefaultIfEmpty()
+                        join sectorLookup1 in _db.Lookups on plotDetail.SectorName equals sectorLookup1.LookupId into sectorLookup2
+                        from sectorLookup in sectorLookup2.DefaultIfEmpty()
                         join doc1 in _db.ApplicantUploadDocs on user.Id equals doc1.UserId into doc2
                         from doc in doc2.DefaultIfEmpty()
                         join transaction1 in _db.ApplicantTransactionDetails on application.ApplicationId equals transaction1.ApplicationId into transaction2
                         from transaction in transaction2.DefaultIfEmpty()
                         join ProjectDetail1 in _db.ApplicantProjectDetails on application.ApplicationId equals ProjectDetail1.ApplicationId into projectDetail2
                         from ProjectDetail in projectDetail2.DefaultIfEmpty()
-                        where user.UserType != "Test" && plotDetail.SchemeName == schemeName
+                        join invitationLetter1 in _db.ApplicantInvitationLetters on application.ApplicationId equals invitationLetter1.ApplicationId into invitationLetter2
+                        from invitationLetter in invitationLetter2.DefaultIfEmpty()
+                        join plotMaster1 in _db.PlotMasters on invitationLetter.PlotId equals plotMaster1.PlotId into plotMaster2
+                        from plotMaster in plotMaster2.DefaultIfEmpty()
+                        where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
                             ApplicationNumber = doc != null ? application.ApplicationNumber : "",
@@ -115,6 +121,7 @@ namespace GidaGkpWeb.BAL
                             SchemeName = user.SchemeName,
                             SchemeType = user.SchemeType,
                             SectorName = user.SectorName,
+                            PlotSectorName = plotDetail != null ? sectorLookup.LookupName : "",
                             UserType = user.UserType,
                             DOB = user.DOB,
                             UserName = user.UserName,
@@ -131,18 +138,43 @@ namespace GidaGkpWeb.BAL
                             GST = plotDetail != null ? plotDetail.GST.ToString() : "",
                             EarnestMoney = plotDetail != null ? plotDetail.EarnestMoney.ToString() : "",
                             SchemeNameId = plotDetail != null ? plotDetail.SchemeName.ToString() : "",
+
                             AMPaymentStatus = transaction != null ? transaction.AMApprovalStatus : "",
-                            MPaymentStatus = transaction != null ? transaction.MApprovalStatus : "",
+                            CEOPaymentStatus = transaction != null ? transaction.CEOApprovalStatus : "",
                             GMPaymentStatus = transaction != null ? transaction.GMApprovalStatus : "",
+
+                            AMPaymentComment = transaction != null ? transaction.AMComment : "",
+                            CEOPaymentComment = transaction != null ? transaction.CEOComment : "",
+                            GMPaymentComment = transaction != null ? transaction.GMComment : "",
+
                             AMDocumentStatus = doc != null ? doc.AMApprovalStatus : "",
                             ClerkDocumentStatus = doc != null ? doc.ClerkApprovalStatus : "",
                             SIDocumentStatus = doc != null ? doc.SIApprovalStatus : "",
-                            AMPaymentComment = transaction != null ? transaction.AMComment : "",
-                            MPaymentComment = transaction != null ? transaction.MComment : "",
-                            GMPaymentComment = transaction != null ? transaction.GMComment : "",
+                            GMDocumentStatus = doc != null ? doc.GMApprovalStatus : "",
+                            CEODocumentStatus = doc != null ? doc.CEOApprovalStatus : "",
+
                             AMDocumentComment = doc != null ? doc.AMComment : "",
                             ClerkDocumentComment = doc != null ? doc.ClerkComment : "",
                             SIDocumentComment = doc != null ? doc.SIComment : "",
+                            GMDocumentComment = doc != null ? doc.GMComment : "",
+                            CEODocumentComment = doc != null ? doc.CEOComment : "",
+                            InterviewLetterStatus = invitationLetter != null && invitationLetter.InterviewLetterStatus == null ? "Invitation Generated" : invitationLetter != null ? invitationLetter.InterviewLetterStatus : "",
+                            UserId = user.Id,
+                            PlotId = plotMaster != null ? plotMaster.PlotId : 0,
+                            PlotRange = invitationLetter != null ? invitationLetter.PlotRange : "",
+                            PMPlotArea = plotMaster != null ? plotMaster.PlotArea : "",
+                            PlotNumber = plotMaster != null ? plotMaster.PlotNumber : "",
+                            PlotRate = plotMaster != null ? plotMaster.PlotRate : "",
+                            PlotSideCorner = plotMaster != null ? plotMaster.PlotSideCorner : false,
+                            PlotSideParkFacing = plotMaster != null ? plotMaster.PlotSideParkFacing : false,
+                            PlotSideWideRoad = plotMaster != null ? plotMaster.PlotSideWideRoad : false,
+                            PlotSidePercentage = plotMaster != null ? plotMaster.PercentageRate : "",
+                            PlotCost = plotMaster != null ? plotMaster.PlotCost : "",
+                            ExtraCharge = plotMaster != null ? plotMaster.ExtraCharge : "",
+                            GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
+                            //TenPer_AllotmentMoney = plotMaster != null ? ((Convert.ToInt32(plotMaster.PlotCost) * 10) / 100).ToString() : "",
+                            //NintyPer_AllotmentMoney = plotMaster != null ? ((Convert.ToInt32(plotMaster.PlotCost) * 90) / 100).ToString() : "",
+                            //AllotementMoneyTobePaid = plotDetail != null && plotMaster != null ? (((Convert.ToInt32(plotMaster.PlotCost) * 90) / 100) - plotDetail.EarnestMoney).ToString() : "",
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -205,6 +237,7 @@ namespace GidaGkpWeb.BAL
                             SchemeName = x.SchemeName,
                             SchemeType = x.SchemeType,
                             SectorName = x.SectorName,
+                            PlotSectorName = x.PlotSectorName,
                             UserType = x.UserType,
                             DOB = x.DOB != null ? x.DOB.Value.ToString("dd/MM/yyyy") : string.Empty,
                             UserName = x.UserName,
@@ -221,12 +254,34 @@ namespace GidaGkpWeb.BAL
                             FormFee = x.ApplicationFee,
                             GSTAmount = x.GST,
                             SchemeNameId = x.SchemeNameId,
+
                             AMPaymentStatus = !string.IsNullOrEmpty(x.AMPaymentComment) ? x.AMPaymentStatus + "(Comment : " + x.AMPaymentComment + ")" : x.AMPaymentStatus,
-                            MPaymentStatus = !string.IsNullOrEmpty(x.MPaymentComment) ? x.MPaymentStatus + "(Comment : " + x.MPaymentComment + ")" : x.MPaymentStatus,
+                            CEOPaymentStatus = !string.IsNullOrEmpty(x.CEOPaymentComment) ? x.CEOPaymentStatus + "(Comment : " + x.CEOPaymentComment + ")" : x.CEOPaymentStatus,
                             GMPaymentStatus = !string.IsNullOrEmpty(x.GMPaymentComment) ? x.GMPaymentStatus + "(Comment : " + x.GMPaymentComment + ")" : x.GMPaymentStatus,
+
                             AMDocumentStatus = !string.IsNullOrEmpty(x.AMDocumentComment) ? x.AMDocumentStatus + "(Comment : " + x.AMDocumentComment + ")" : x.AMDocumentStatus,
                             ClerkDocumentStatus = !string.IsNullOrEmpty(x.ClerkDocumentComment) ? x.ClerkDocumentStatus + "(Comment : " + x.ClerkDocumentComment + ")" : x.ClerkDocumentStatus,
                             SIDocumentStatus = !string.IsNullOrEmpty(x.SIDocumentComment) ? x.SIDocumentStatus + "(Comment : " + x.SIDocumentComment + ")" : x.SIDocumentStatus,
+                            CEODocumentStatus = !string.IsNullOrEmpty(x.CEODocumentComment) ? x.CEODocumentStatus + "(Comment : " + x.CEODocumentComment + ")" : x.CEODocumentStatus,
+                            GMDocumentStatus = !string.IsNullOrEmpty(x.GMDocumentComment) ? x.GMDocumentStatus + "(Comment : " + x.GMDocumentComment + ")" : x.GMDocumentStatus,
+                            InterviewLetterStatus = !string.IsNullOrEmpty(x.InterviewLetterStatus) ? x.InterviewLetterStatus : "",
+                            UserId = x.UserId,
+                            PlotId = x.PlotId,
+                            PlotRange = x.PlotRange,
+                            PMPlotArea = x.PMPlotArea,
+                            PlotNumber = x.PlotNumber,
+                            PlotRate = x.PlotRate,
+                            PlotSideCorner = x.PlotSideCorner,
+                            PlotSideParkFacing = x.PlotSideParkFacing,
+                            PlotSideWideRoad = x.PlotSideWideRoad,
+                            PlotSidePercentage = x.PlotSidePercentage,
+                            PlotCost = x.PlotCost,
+                            ExtraCharge = x.ExtraCharge,
+                            GrandTotalCost = x.GrandTotalCost,
+                            //TenPer_AllotmentMoney = x.TenPer_AllotmentMoney,
+                            //NintyPer_AllotmentMoney = x.NintyPer_AllotmentMoney,
+                            //AllotementMoneyTobePaid = x.AllotementMoneyTobePaid,
+
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
@@ -825,8 +880,8 @@ namespace GidaGkpWeb.BAL
                         }
                         else if (UserData.Designation == "Manager")
                         {
-                            transactionDetail.MApprovalStatus = status;
-                            transactionDetail.MComment = comment;
+                            transactionDetail.CEOApprovalStatus = status;
+                            transactionDetail.CEOComment = comment;
                         }
                         else if (UserData.Designation == "General Manager")
                         {
@@ -900,6 +955,66 @@ namespace GidaGkpWeb.BAL
             }
         }
 
+        public Enums.CrudStatus ApproveRejectApplication(int applicationId, string status, string comment = "")
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                if (applicationId > 0)
+                {
+                    var documentDetail = _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+                    if (documentDetail != null)
+                    {
+                        if (UserData.Designation == "General Manager")
+                        {
+                            documentDetail.GMApprovalStatus = status;
+                            documentDetail.GMComment = comment;
+                        }
+                        else if (UserData.Designation == "CEO")
+                        {
+                            documentDetail.CEOApprovalStatus = status;
+                            documentDetail.CEOComment = comment;
+                        }
+                        _db.Entry(documentDetail).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+
+                        var paymentDetail = _db.ApplicantTransactionDetails.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+                        if (paymentDetail != null)
+                        {
+                            if (UserData.Designation == "General Manager")
+                            {
+                                paymentDetail.GMApprovalStatus = status;
+                                paymentDetail.GMComment = comment;
+                            }
+                            else if (UserData.Designation == "CEO")
+                            {
+                                paymentDetail.CEOApprovalStatus = status;
+                                paymentDetail.CEOComment = comment;
+                            }
+                            _db.Entry(documentDetail).State = EntityState.Modified;
+                            _effectRow = _db.SaveChanges();
+
+                        }
+
+                        return Enums.CrudStatus.Updated;
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
+
         public List<PlotMasterModel> GetPlotMasterDetail(int SchemeType, int SchemeName, int SectorId)
         {
             try
@@ -913,7 +1028,7 @@ namespace GidaGkpWeb.BAL
                             CreatedDate = plot.CreatedDate,
                             ExtraCharge = plot.ExtraCharge,
                             GrandTotalCost = plot.GrandTotalCost,
-                            NoOfPlots = plot.NoOfPlots,
+                            PlotNumber = plot.PlotNumber,
                             PercentageRate = plot.PercentageRate,
                             PlotArea = plot.PlotArea,
                             PlotCategory = plot.PlotCategory,
@@ -970,15 +1085,18 @@ namespace GidaGkpWeb.BAL
             {
                 _db = new GidaGKPEntities();
                 return (from user in _db.ApplicantUsers
-                        join appLetter in _db.ApplicantInvitationLetters on user.Id equals appLetter.UserId
+                        join plotDetail in _db.ApplicantPlotDetails on user.Id equals plotDetail.UserId
                         join applicant1 in _db.ApplicantDetails on user.Id equals applicant1.UserId into applicant2
                         from applicant in applicant2.DefaultIfEmpty()
                         join application1 in _db.ApplicantApplicationDetails on user.Id equals application1.UserId into application2
                         from application in application2.DefaultIfEmpty()
+                        join appLetter in _db.ApplicantInvitationLetters on application.ApplicationId equals appLetter.ApplicationId
+                        join plotmaster1 in _db.PlotMasters on appLetter.PlotId equals plotmaster1.PlotId into plotmaster2
+                        from plotmaster in plotmaster2.DefaultIfEmpty()
                         where user.UserType != "Test"
                         select new
                         {
-                            PlotNumber = appLetter.TotalNoOfPlots,
+                            PlotNumber = plotmaster.PlotNumber,
                             ApplicationNumber = application != null ? application.ApplicationNumber : "",
                             ApplicationId = application != null ? application.ApplicationId : 0,
                             AadharNumber = user.AadharNumber,
@@ -990,9 +1108,9 @@ namespace GidaGkpWeb.BAL
                             PAddress = applicant != null ? applicant.PAddress : "",
                             FullName = applicant != null ? applicant.FullApplicantName : "",
                             Id = user.Id,
-                            SchemeName = user.SchemeName,
-                            SchemeType = user.SchemeType,
-                            SectorName = user.SectorName,
+                            SchemeName = plotDetail.SchemeName,
+                            SchemeType = plotDetail.SchemeType,
+                            SectorName = plotDetail.SectorName,
                             UserType = user.UserType,
                             DOB = user.DOB,
                             UserName = user.UserName,
@@ -1016,9 +1134,9 @@ namespace GidaGkpWeb.BAL
                             PAddress = x.PAddress,
                             FullName = x.FullName,
                             Id = x.Id,
-                            SchemeName = x.SchemeName,
-                            SchemeType = x.SchemeType,
-                            SectorName = x.SectorName,
+                            SchemeName = x.SchemeName.ToString(),
+                            SchemeType = x.SchemeType.ToString(),
+                            SectorName = x.SectorName.ToString(),
                             UserType = x.UserType,
                             DOB = x.DOB != null ? x.DOB.Value.ToString("dd/MM/yyyy") : string.Empty,
                             InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : string.Empty,
@@ -1042,7 +1160,7 @@ namespace GidaGkpWeb.BAL
             }
         }
 
-        public Enums.CrudStatus ApplicationInvitationLetterStatusChnage(int userid, string status, string comment = "")
+        public Enums.CrudStatus ApplicationInvitationLetterStatusChnage(int userid, string status, int? plotId)
         {
             try
             {
@@ -1054,22 +1172,7 @@ namespace GidaGkpWeb.BAL
                     if (inviationDetail != null)
                     {
                         inviationDetail.InterviewLetterStatus = status;
-                        //if (UserData.Designation == "Assistant Manager")
-                        //{
-                        //    transactionDetail.AMApprovalStatus = status;
-                        //    transactionDetail.AMComment = comment;
-                        //}
-                        //else if (UserData.Designation == "Manager")
-                        //{
-                        //    transactionDetail.MApprovalStatus = status;
-                        //    transactionDetail.MComment = comment;
-                        //}
-                        //else if (UserData.Designation == "General Manager")
-                        //{
-                        //    transactionDetail.GMApprovalStatus = status;
-                        //    transactionDetail.GMComment = comment;
-                        //}
-
+                        inviationDetail.PlotId = plotId;
                         _db.Entry(inviationDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                         return Enums.CrudStatus.Updated;
@@ -1087,6 +1190,121 @@ namespace GidaGkpWeb.BAL
                     }
                 }
                 return Enums.CrudStatus.InternalError;
+            }
+        }
+
+        public Enums.CrudStatus SaveTermAndCondition(SchemewiseTermsCondition termnCondition)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                if (termnCondition.Id > 0)
+                {
+                    var termnCOnditionDb = _db.SchemewiseTermsConditions.Where(x => x.Id == termnCondition.Id).FirstOrDefault();
+                    if (termnCOnditionDb != null)
+                    {
+                        termnCondition.Firstduedateofpaymentofinterest = termnCondition.Firstduedateofpaymentofinterest;
+                        termnCondition.AllotmentMoneyDueDate = termnCondition.AllotmentMoneyDueDate;
+                        termnCondition.DateofgivingfirstInstallment = termnCondition.DateofgivingfirstInstallment;
+                        termnCondition.DateofgivingsecondInstallment = termnCondition.DateofgivingsecondInstallment;
+                        termnCondition.DateofgivingthirdInstallent = termnCondition.DateofgivingthirdInstallent;
+                        _db.Entry(termnCOnditionDb).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(termnCondition).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
+
+        public Enums.CrudStatus SaveAllocateAllotmentLetter(AllocateAllotmentDetail allotmentDetail)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                if (allotmentDetail.Id > 0)
+                {
+                    var allocatationLetterDb = _db.AllocateAllotmentDetails.Where(x => x.Id == allotmentDetail.Id).FirstOrDefault();
+                    if (allocatationLetterDb != null)
+                    {
+                        if (allotmentDetail.CEO_Sign != null)
+                        {
+                            allocatationLetterDb.CEO_Sign = allotmentDetail.CEO_Sign;
+                            allocatationLetterDb.CEO_SignFileType = allotmentDetail.CEO_SignFileType;
+                            allocatationLetterDb.CEO_SignFileName = allotmentDetail.CEO_SignFileName;
+                        }
+                        allotmentDetail.ApplicationId = allotmentDetail.ApplicationId;
+                        allotmentDetail.AllotmentNumber = allotmentDetail.AllotmentNumber;
+                        allotmentDetail.AllotmentDate = allotmentDetail.AllotmentDate;
+                        allotmentDetail.StartingDateofInterview_L = allotmentDetail.StartingDateofInterview_L;
+                        allotmentDetail.EndDateofInterview_L = allotmentDetail.EndDateofInterview_L;
+                        allotmentDetail.DateofAllotmentLetter = allotmentDetail.DateofAllotmentLetter;
+                        _db.Entry(allocatationLetterDb).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(allotmentDetail).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
+
+        public List<PlotMasterModel> GetPlotNumber()
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return (from plotmaster in _db.PlotMasters
+                        where !(_db.ApplicantInvitationLetters.Select(x => x.PlotId).Contains(plotmaster.PlotId))
+                        select new PlotMasterModel
+                        {
+                            PlotId = plotmaster.PlotId,
+                            PlotNumber = plotmaster.PlotNumber
+                        }).ToList();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return new List<PlotMasterModel>();
             }
         }
     }

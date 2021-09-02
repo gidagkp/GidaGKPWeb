@@ -29,6 +29,7 @@ namespace GidaGkpWeb.Models
         public string SchemeType { get; set; }
         public string SchemeName { get; set; }
         public string SectorName { get; set; }
+        public string PlotSectorName { get; set; }
         public string AllotmentNumber { get; set; }
         public string UserType { get; set; }
         public string ResetCode { get; set; }
@@ -50,22 +51,42 @@ namespace GidaGkpWeb.Models
         public string GSTAmount { get; set; }
         public string EarnestMoney { get; set; }
         public string SchemeNameId { get; set; }
+
         public string AMPaymentStatus { get; set; }
-        public string MPaymentStatus { get; set; }
+        public string CEOPaymentStatus { get; set; }
         public string GMPaymentStatus { get; set; }
+        public string AMPaymentComment { get; set; }
+        public string CEOPaymentComment { get; set; }
+        public string GMPaymentComment { get; set; }
+
         public string AMDocumentStatus { get; set; }
         public string ClerkDocumentStatus { get; set; }
         public string SIDocumentStatus { get; set; }
-
-        public string AMPaymentComment { get; set; }
-        public string MPaymentComment { get; set; }
-        public string GMPaymentComment { get; set; }
-        public string AMDocumentComment { get; set; }
+        public string CEODocumentStatus { get; set; }
+        public string GMDocumentStatus { get; set; }
+        public string AMDocumentComment { get; set; }        
         public string ClerkDocumentComment { get; set; }
         public string SIDocumentComment { get; set; }
+        public string CEODocumentComment { get; set; }
+        public string GMDocumentComment { get; set; }
+
         public string InterviewDateTime { get; set; }
         public string PlotNumber { get; set; }
         public string InterviewLetterStatus { get; set; }
+        public int PlotId { get; set; }
+        public string PlotRange { get; set; }
+        public string PMPlotArea { get; set; }
+        public string PlotRate { get; set; }
+        public bool? PlotSideCorner { get; set; }
+        public bool? PlotSideParkFacing { get; set; }
+        public bool? PlotSideWideRoad { get; set; }
+        public string PlotSidePercentage { get; set; }
+        public string PlotCost { get; set; }
+        public string ExtraCharge { get; set; }
+        public string GrandTotalCost { get; set; }
+        public string TenPer_AllotmentMoney { get; set; }
+        public string NintyPer_AllotmentMoney { get; set; }
+        public string AllotementMoneyTobePaid { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 

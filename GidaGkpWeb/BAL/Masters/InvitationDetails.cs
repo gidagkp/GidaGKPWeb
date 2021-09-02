@@ -32,7 +32,8 @@ namespace GidaGkpWeb.BAL.Masters
                             Address = ApplicantDet.PAddress,
                             SectorName = SectorNameLookup.LookupName,
                             ApplicationNumber = AppApplication.ApplicationNumber,
-                            PlotRange = PlotNameLookup.LookupName
+                            PlotRange = PlotNameLookup.LookupName,
+                            PlotArea = ApplicantPlotDet.PlotArea
                         }).FirstOrDefault();
             }
             catch (DbEntityValidationException e)
@@ -90,11 +91,11 @@ namespace GidaGkpWeb.BAL.Masters
                     {
                         applicantinvitationletter.UserId = Invitation.UserId;
                         applicantinvitationletter.ApplicationNo = Invitation.ApplicationNo;
-
+                        applicantinvitationletter.ApplicationId = Invitation.ApplicationId;
                         //applicantinvitationletter.Sector = Invitation.Sector;
                         applicantinvitationletter.ApplicantAddress = Invitation.ApplicantAddress;
                         applicantinvitationletter.PlotRange = Invitation.PlotRange;
-                        applicantinvitationletter.TotalNoOfPlots = Invitation.TotalNoOfPlots;
+                        applicantinvitationletter.PlotId = Invitation.PlotId;
                         applicantinvitationletter.InterviewMode = Invitation.InterviewMode;
                         applicantinvitationletter.InterviewDateTime = Invitation.InterviewDateTime;
                         _db.Entry(applicantinvitationletter).State = EntityState.Modified;

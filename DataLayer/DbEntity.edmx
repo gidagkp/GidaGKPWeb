@@ -428,6 +428,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="IsActive" Type="bit" />
           <Property Name="LookupNameImmutable" Type="varchar" MaxLength="500" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="MortgageDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -467,6 +468,8 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
         <EntityType Name="PageMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -552,6 +555,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <Association Name="FK_MortgageDetails_PlotMaster">
           <End Role="PlotMaster" Type="Self.PlotMaster" Multiplicity="0..1" />
           <End Role="MortgageDetails" Type="Self.MortgageDetails" Multiplicity="*" />
@@ -564,6 +568,8 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
         <Association Name="FK_RoleMasterUser_PageMaster">
           <End Role="PageMaster" Type="Self.PageMaster" Multiplicity="0..1" />
           <End Role="RoleWisePermission" Type="Self.RoleWisePermission" Multiplicity="*" />
@@ -593,12 +599,16 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySet Name="GidaUser" EntityType="Self.GidaUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaseDeedDetails" EntityType="Self.LeaseDeedDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
+<<<<<<< HEAD
           <EntitySet Name="MortgageDetails" EntityType="Self.MortgageDetails" Schema="dbo" store:Type="Tables" />
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
           <EntitySet Name="PageMaster" EntityType="Self.PageMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PGTransactionInformation" EntityType="Self.PGTransactionInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlotMaster" EntityType="Self.PlotMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleWisePermission" EntityType="Self.RoleWisePermission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SchemewiseTermsCondition" EntityType="Self.SchemewiseTermsCondition" Schema="dbo" store:Type="Tables" />
+<<<<<<< HEAD
           <EntitySet Name="LeasdeedNotesheet" EntityType="Self.LeasdeedNotesheet" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [LeasdeedNotesheet].[Id] AS [Id], 
@@ -617,14 +627,19 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
     [LeasdeedNotesheet].[Createddate] AS [Createddate]
     FROM [dbo].[LeasdeedNotesheet] AS [LeasdeedNotesheet]</DefiningQuery>
           </EntitySet>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="Self.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetter" />
           </AssociationSet>
+<<<<<<< HEAD
           <AssociationSet Name="FK_MortgageDetails_PlotMaster" Association="Self.FK_MortgageDetails_PlotMaster">
             <End Role="PlotMaster" EntitySet="PlotMaster" />
             <End Role="MortgageDetails" EntitySet="MortgageDetails" />
           </AssociationSet>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
           <AssociationSet Name="FK_RoleMasterUser_PageMaster" Association="Self.FK_RoleMasterUser_PageMaster">
             <End Role="PageMaster" EntitySet="PageMaster" />
             <End Role="RoleWisePermission" EntitySet="RoleWisePermission" />
@@ -651,21 +666,30 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySet Name="GidaUsers" EntityType="GidaGKPModel.GidaUser" />
           <EntitySet Name="LeaseDeedDetails" EntityType="GidaGKPModel.LeaseDeedDetail" />
           <EntitySet Name="Lookups" EntityType="GidaGKPModel.Lookup" />
+<<<<<<< HEAD
           <EntitySet Name="MortgageDetails" EntityType="GidaGKPModel.MortgageDetail" />
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
           <EntitySet Name="PageMasters" EntityType="GidaGKPModel.PageMaster" />
           <EntitySet Name="PGTransactionInformations" EntityType="GidaGKPModel.PGTransactionInformation" />
           <EntitySet Name="PlotMasters" EntityType="GidaGKPModel.PlotMaster" />
           <EntitySet Name="RoleWisePermissions" EntityType="GidaGKPModel.RoleWisePermission" />
           <EntitySet Name="SchemewiseTermsConditions" EntityType="GidaGKPModel.SchemewiseTermsCondition" />
+<<<<<<< HEAD
           <EntitySet Name="LeasdeedNotesheets" EntityType="GidaGKPModel.LeasdeedNotesheet" />
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetters" />
           </AssociationSet>
+<<<<<<< HEAD
           <AssociationSet Name="FK_MortgageDetails_PlotMaster" Association="GidaGKPModel.FK_MortgageDetails_PlotMaster">
             <End Role="PlotMaster" EntitySet="PlotMasters" />
             <End Role="MortgageDetail" EntitySet="MortgageDetails" />
           </AssociationSet>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
           <AssociationSet Name="FK_RoleMasterUser_PageMaster" Association="GidaGKPModel.FK_RoleMasterUser_PageMaster">
             <End Role="PageMaster" EntitySet="PageMasters" />
             <End Role="RoleWisePermission" EntitySet="RoleWisePermissions" />
@@ -1075,6 +1099,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="LookupNameImmutable" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="MortgageDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -1115,6 +1140,8 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PlotMaster" Relationship="GidaGKPModel.FK_MortgageDetails_PlotMaster" FromRole="MortgageDetail" ToRole="PlotMaster" />
         </EntityType>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
         <EntityType Name="PageMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -1161,7 +1188,10 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="GrandTotalCost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+<<<<<<< HEAD
           <NavigationProperty Name="MortgageDetails" Relationship="GidaGKPModel.FK_MortgageDetails_PlotMaster" FromRole="PlotMaster" ToRole="MortgageDetail" />
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
         </EntityType>
         <EntityType Name="RoleWisePermission">
           <Key>
@@ -1191,6 +1221,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModificationDate" Type="DateTime" Precision="3" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="LeasdeedNotesheet">
           <Key>
             <PropertyRef Name="Id" />
@@ -1210,6 +1241,8 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="Createddate" Type="DateTime" Precision="3" />
         </EntityType>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
         <Association Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
           <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
           <End Type="GidaGKPModel.ApplicantInvitationLetter" Role="ApplicantInvitationLetter" Multiplicity="*" />
@@ -1222,6 +1255,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <Association Name="FK_MortgageDetails_PlotMaster">
           <End Type="GidaGKPModel.PlotMaster" Role="PlotMaster" Multiplicity="0..1" />
           <End Type="GidaGKPModel.MortgageDetail" Role="MortgageDetail" Multiplicity="*" />
@@ -1234,6 +1268,8 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
         <Association Name="FK_RoleMasterUser_PageMaster">
           <End Type="GidaGKPModel.PageMaster" Role="PageMaster" Multiplicity="0..1" />
           <End Type="GidaGKPModel.RoleWisePermission" Role="RoleWisePermission" Multiplicity="*" />
@@ -1670,6 +1706,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+<<<<<<< HEAD
           <EntitySetMapping Name="MortgageDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.MortgageDetail">
               <MappingFragment StoreEntitySet="MortgageDetails">
@@ -1710,6 +1747,8 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
           <EntitySetMapping Name="PageMasters">
             <EntityTypeMapping TypeName="GidaGKPModel.PageMaster">
               <MappingFragment StoreEntitySet="PageMaster">
@@ -1784,6 +1823,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
                 <ScalarProperty Name="Firstduedateofpaymentofinterest" ColumnName="Firstduedateofpaymentofinterest" />
                 <ScalarProperty Name="AllotmentMoneyDueDate" ColumnName="AllotmentMoneyDueDate" />
                 <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
+<<<<<<< HEAD
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1804,6 +1844,8 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
                 <ScalarProperty Name="Bankguranteedate" ColumnName="Bankguranteedate" />
                 <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+=======
+>>>>>>> 201e0431310663a3f60b3136013818da9f17bb30
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

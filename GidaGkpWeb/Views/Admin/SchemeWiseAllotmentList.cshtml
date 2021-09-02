@@ -59,13 +59,6 @@
                         </tr>
                     </thead>
                     <tbody id="tbodyData">
-                        @*<tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center"><a href="#" data-toggle="modal" data-target="#myModal">948584 </a></td>
-                                <td>Vijay Kumar</td>
-                                <td class="text-center">K13 </td>
-                                <td class="text-center"> <a href="/Admin/AllotmentStatus">Allotment Status</a></td>
-                            </tr>*@
                         @foreach (var data in UserDataModel)
                         {
                             <tr>
@@ -73,7 +66,7 @@
                                 <td class="text-center">@data.FullName</td>
                                 <td class="text-center">@data.ApplicationNumber</td>
                                 <td class="text-center">@data.PlotNumber</td>
-                                <td class="text-center"> <a href="/Admin/AllotmentStatus">Allotment Status</a></td>
+                                <td class="text-center"> <a href="/Admin/AllotmentStatus?applicationId=@data.ApplicationId">Allotment Status</a></td>
                             </tr>
                             index++;
                         }

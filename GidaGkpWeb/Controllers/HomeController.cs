@@ -26,6 +26,11 @@ namespace GidaGkpWeb.Controllers
             return View();
         }
 
+        public ActionResult StithiPatrak()
+        {
+            return View();
+        }
+
         public ActionResult EmployeeList()
         {
             return View();

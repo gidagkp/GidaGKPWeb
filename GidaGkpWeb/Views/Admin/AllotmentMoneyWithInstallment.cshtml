@@ -1,0 +1,125 @@
+﻿@using DataLayer;
+@using GidaGkpWeb.Models;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ApplicationId = Convert.ToInt32(ViewData["ApplicationId"]);
+    var UserDataModel = ViewData["UserDetail"] as ApplicationUserModel;
+}
+
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/ApplicantAllotmentDetail.js"></script>
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <h3 style="font-size:18px;">Allotment Money with Installment</h3>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4 col-xs-12">
+                <label>Application Number</label>
+                <input type="number" class="form-control" placeholder="@UserDataModel.ApplicationNumber" readonly>
+            </div>
+            <div class="form-group col-sm-4 col-xs-12">
+                <label>Applicant Name</label>
+                <input type="text" class="form-control" placeholder="@UserDataModel.FullName" readonly>
+            </div>
+            <div class="form-group col-sm-3 col-xs-12">
+                <label>Mobile Number</label>
+                <input type="text" class="form-control" placeholder="@UserDataModel.ContactNo" readonly>
+            </div>
+            @*<div class="form-group col-sm-3 col-xs-12">
+                    <label for="usertype">Plot Range as per the Advertisement<span class="required-field"></span></label>
+                    <select name="PlotRangeA" id="PlotRangeA" class="form-control"></select>
+                </div>*@
+            <div class="col-sm-12 col-xs-12">
+                <div class="table-responsive" style="padding:10px 0 20px 0;">
+                    <table class="table plot_master_tb  table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Plot Number</th>
+                                <th>Plot Area</th>
+                                <th>Plot Range</th>
+                                <th>Plot Rate for Range (₹)</th>
+                                <th>Plot Side</th>
+                                <th> % Rate for Plot Side</th>
+                                <th> Plot Cost</th>
+                                <th> Extra Charge</th>
+                                <th> 10 % of Total Premium as Allotment Money</th>
+                                <th> 90 % of Total Premium </th>
+                                <th> Deposited Earnest Money </th>
+                                <th> Allotment Money to be paid  </th>
+                                @*<th class="text-center">Action</th>deposited as Earnest Monet *@
+                            </tr>
+                        </thead>
+                        <tbody id="tableBodyPlot">
+                            <tr>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotNumber" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PMPlotArea" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotRange" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotRate" readonly></td>
+                                <td>
+                                    @if (@UserDataModel.PlotSideCorner == true)
+                                    {
+                                        <span>Corner Plot</span><br />
+                                    }
+                                    @if (@UserDataModel.PlotSideWideRoad == true)
+                                    {
+                                        <span>Wide Roadt</span><br />
+                                    }
+                                    @if (@UserDataModel.PlotSideParkFacing == true)
+                                    {
+                                        <span>Park Facing</span><br />
+                                    }
+                                </td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotSidePercentage" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.PlotCost" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.ExtraCharge" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.TenPer_AllotmentMoney" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.NintyPer_AllotmentMoney" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.EarnestMoney" readonly></td>
+                                <td><input type="text" class="form-control" placeholder="@UserDataModel.AllotementMoneyTobePaid" readonly></td>
+                                @*<td class="text-center">
+                                        <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                    </td>*@
+                            </tr>
+                            @*<tr>
+                                <td><input type="text" class="form-control" placeholder="Enter Plot No"></td>
+                                <td><input type="number" class="form-control" placeholder="Enter Plot Area" id="plotArea"></td>
+                                <td>
+                                    <select name="PlotRange" id="PlotRange" class="form-control"></select>
+                                </td>
+                                <td><input type="text" class="form-control"></td>
+                                <td style="width: 120px;">
+                                    <input type="checkbox" style="width: 22px;" />Corner Plot<br />
+                                    <input type="checkbox" style="width: 22px;" />Wide Road<br />
+                                    <input type="checkbox" style="width: 22px;" />Park Facing
+                                </td>
+
+                                <td><input type="number" class="form-control" placeholder="Enter Percentage Rate" id="PercentageRate"></td>
+                                <td>
+                                    <select name="PlotCategory" id="PlotCategory" class="form-control"></select>
+                                </td>
+                                <td><input type="number" class="form-control" placeholder="Total Plot Cost" disabled></td>
+                                <td><input type="number" class="form-control" placeholder="Enter Extra Charge" id="ExtraCharge"></td>
+                                <td><input type="number" class="form-control" placeholder="Grand Total Cost of Plot" disabled></td>*@
+                            @*<td class="text-center">
+                                    <a href="#"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                                </td>*@
+                            @*</tr>*@
+                            @*</tbody>*@
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12" style="padding:5px 15px 40px 15px;">
+                <button type="button" class="submit_plot_master" value="button" id="btnSavePlotMaster">Submit</button>
+                <button type="button" class="cancel_plot_master" value="button">Cancel</button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

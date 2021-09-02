@@ -2,14 +2,14 @@
 @using GidaGkpWeb.Models;
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var ApplicantInvitationModel = ViewData["InvitationDetail"] as List<InvitationModel>;
-    int index = 1;
+    //var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
+    //int index = 1;
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
-<script src="~/Scripts/App/Masters/SchemeWiseApplicationList.js"></script>
+<script src="~/Scripts/App/Masters/ApplicantAllotmentReport.js"></script>
 <script src="~/Scripts/App/Masters/navigation.js"></script>
 <style>
-    button.submit_Invitation_master353 {
+    button.submit_plot_master353 {
         background: #ff2e2e;
         color: #fff;
         border: 0px;
@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 30px;">
-            <h3 style="font-size:18px;">Approved Applicant List for Interview/Lottery Invitation </h3>
+            <h3 style="font-size:18px;">Selected Candidate Report</h3>
             <hr />
         </div>
 
@@ -35,35 +35,36 @@
             <select name="SchemeName" id="SchemeName" class="form-control"></select>
         </div>
         @*<div class="form-group col-sm-4 col-xs-12">
-            <label for="usertype">Sector Name<span class="required-field"></span></label>
-            <select name="SectorName" id="SectorName" class="form-control"></select>
-        </div>*@
+                <label for="usertype">Sector Name<span class="required-field"></span></label>
+                <select name="SectorName" id="SectorName" class="form-control"></select>
+            </div>*@
 
         <div class="form-group col-sm-1 col-xs-12">
-            <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearchApprovedList">Search</button>
+            <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearch">Search</button>
         </div>
+
         <div class="form-group col-sm-2 col-xs-12">
-            @using (Html.BeginForm("ExportSchemeWiseInvitationList", "Admin", FormMethod.Post))
+            @using (Html.BeginForm("ExportSelectedApplicant", "Report", FormMethod.Post))
             {
                 <input type="hidden" name="GridHtml" />
                 <input type="submit" id="btnSubmit" class="submit_plot_master" value="Download PDF" style=" float: right; position: relative; margin-top: 23px;" />
             }
         </div>
+
+
+
         <div class="col-sm-12 col-xs-12" id="divExport">
             <div class="col-sm-12 col-xs-12 text-left hidden" id="divReportTitle" style="padding-bottom: 30px;">
-                <h3 style="font-size:18px;">Scheme Wise Invitation List</h3>
+                <h3 style="font-size:18px;">Selected Candidate Report</h3>
             </div>
             <div class="table-responsive" style="padding:10px 0 40px 0;">
                 <table class="table table_css_main_cl table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">S.No.</th>
-                            <th class="text-center">Application Number</th>
                             <th class="text-center">Name of Candidate</th>
-                            <th class="text-center">Mobile No </th>
-                            <th class="text-center">Plot Area </th>
-                            <th class="text-center">Invitation Status</th>
-                            <th class="text-center" id="actionColumn">Action</th>
+                            <th class="text-center">Application Number</th>
+                            <th class="text-center">Plot No </th>
                         </tr>
                     </thead>
                     <tbody id="tbodyData">
@@ -81,10 +82,8 @@
     $(function () {
         $("#btnSubmit").click(function () {
             $('#divReportTitle').removeClass('hidden');
-            $('[id*=actionColumn]').addClass('hidden')
             $("input[name='GridHtml']").val($("#divExport").html());
             $('#divReportTitle').addClass('hidden');
-            $('[id*=actionColumn]').removeClass('hidden')
         });
     });
 </script>

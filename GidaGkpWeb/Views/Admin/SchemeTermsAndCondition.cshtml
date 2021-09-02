@@ -1,0 +1,60 @@
+﻿@using DataLayer;
+@using GidaGkpWeb.Models;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
+}
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<style>
+    button.submit_plot_master353 {
+        background: #ff2e2e;
+        color: #fff;
+        border: 0px;
+        padding: 3px 10px;
+        font-size: 12px;
+        text-align: center;
+    }
+</style>
+<div class="container">
+    <form action="~/Admin/SaveSchemeWiseTermAndCondition" method="post">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 30px;">
+                <h3 style="font-size:18px;">Scheme Wise Terms and Condtition </h3>
+                <hr />
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="usertype">Scheme Type<span class="required-field"></span></label>
+                <select name="SchemeType" id="SchemeType" class="form-control"></select>
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="usertype">Scheme Name<span class="required-field"></span></label>
+                <select name="SchemeName" id="SchemeName" class="form-control"></select>
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">First due date of payment of interest on outstanding premium</label>
+                <input type="date" class="form-control" name="InterestDueDate" placeholder="12/06/2021">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Due Date for the payment for Allotment Money </label>
+                <input type="date" class="form-control" name="AllotementDueDate" placeholder="12/06/2021">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class=""> Date for giving first instalment of balance premium </label>
+                <input type="date" class="form-control" name="FirstInstallmentDueDate" placeholder="12/06/2021">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class=""> Date for giving second instalment of balance premium </label>
+                <input type="date" class="form-control" name="SecondInstallmentDueDate" placeholder="12/09/2021 ">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class=""> Date for giving third instalment of balance premium </label>
+                <input type="date" class="form-control" name="ThirdInstallmentDueDate" placeholder="12/09/2021 ">
+            </div>
+            <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
+                <button type="submit" class="submit_plot_master" value="button">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
