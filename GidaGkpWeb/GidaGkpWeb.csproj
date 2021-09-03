@@ -279,6 +279,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BAL\Login\LeasedDeedDutyWorkDetails.cs" />
+    <Compile Include="BAL\Login\LeasedeedNotesheetDetails.cs" />
     <Compile Include="BAL\Login\LoginDetails.cs" />
     <Compile Include="BAL\Masters\AdminDetails.cs" />
     <Compile Include="BAL\Masters\InvitationDetails.cs" />
@@ -322,6 +323,7 @@
     <Compile Include="Infrastructure\Utility\VerificationCodeGeneration.cs" />
     <Compile Include="Models\GidaUserPermissionModel.cs" />
     <Compile Include="Models\InvitationModel.cs" />
+    <Compile Include="Models\LeasedeedNotesheetModel.cs" />
     <Compile Include="Models\LeaseDutyWorkModel.cs" />
     <Compile Include="Models\LookupModel.cs" />
     <Compile Include="Models\PlotMasterModel.cs" />
@@ -698,6 +700,7 @@
     <Content Include="Views\Admin\AllocateAllotmentLetter.cshtml" />
     <Content Include="Views\Admin\AllotmentMoneyWithInstallment.cshtml" />
     <Content Include="Views\Home\StithiPatrak.cshtml" />
+    <Content Include="Views\Admin\LeaseddeedNotesheet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">

@@ -1038,6 +1038,18 @@ namespace GidaGkpWeb.Controllers
                 return File(stream.ToArray(), "application/pdf", "SchemeWiseInvitationList.pdf");
             }
         }
+        public ActionResult LeaseddeedNotesheet()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetSelectedLeaseddeedAppDetail(int ApplicationId)
+        {
+            LeasedeedNotesheetDetails _details = new LeasedeedNotesheetDetails();
+            var usrs = _details.GetLeesdeedApplicantDetails(ApplicationId);
+            return Json(usrs, JsonRequestBehavior.AllowGet);
+        }
+
     }
 
 }
