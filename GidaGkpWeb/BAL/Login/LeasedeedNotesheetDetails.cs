@@ -22,28 +22,40 @@ namespace GidaGkpWeb.BAL.Login
                         join SectorNameLookup in _db.Lookups on ApplicantPlotDet.SectorName equals SectorNameLookup.LookupId
                         join ApplicantDet in _db.ApplicantDetails on ApplicantPlotDet.ApplicationId equals ApplicantDet.ApplicationId
                         join LeaseDeedDetailDet in _db.LeaseDeedDetails on ApplicantPlotDet.ApplicationId equals LeaseDeedDetailDet.ApplicationId
-                        join ApplicantInvDetailsDet in _db.ApplicantInvitationLetters on ApplicantPlotDet .ApplicationId equals ApplicantInvDetailsDet.ApplicationId 
-
-
+                        join ApplicantInvDetailsDet in _db.ApplicantInvitationLetters on ApplicantPlotDet.ApplicationId equals ApplicantInvDetailsDet.ApplicationId
                         where ApplicantPlotDet.ApplicationId == ApplicationId
-                        select new LeasedeedNotesheetModel
+                        select new
                         {
-                            //Id = ApplicantDet.Id,
                             ApplicantName = ApplicantDet.FullApplicantName,
-                            PlotNo= Convert.ToString(ApplicantInvDetailsDet.PlotId),
+                            PlotNo = ApplicantInvDetailsDet.PlotId,
                             ApplicantAddress = ApplicantDet.PAddress,
                             SectorName = SectorNameLookup.LookupName,
                             PlotArea = ApplicantPlotDet.PlotArea,
-                            EarnestMoneyPaid = Convert.ToString(LeaseDeedDetailDet.EarnestMoneyPaid),
-                            EarnestMoneyChallanNumber = Convert.ToString(LeaseDeedDetailDet.EarnestMoneyChallanNo),
-                            AllotmentMoneyPaid= Convert.ToString(LeaseDeedDetailDet.AllotmentMoneyPaid),
-                            VerifyTotalPremium="3000000",
-                            StampValue=Convert.ToString (LeaseDeedDetailDet.RequiredStampValue),
-                            BankgChallanNumber=LeaseDeedDetailDet .BankGauranteeChallanNo ,
-                            EntityName=LeaseDeedDetailDet.EntityNameBehalfOfApplicant,
-                            SvalueBankGchallanNumber= Convert.ToString(LeaseDeedDetailDet.StampValueForBankGaurantee),
-
-
+                            EarnestMoneyPaid = LeaseDeedDetailDet.EarnestMoneyPaid,
+                            EarnestMoneyChallanNumber = LeaseDeedDetailDet.EarnestMoneyChallanNo,
+                            AllotmentMoneyPaid = LeaseDeedDetailDet.AllotmentMoneyPaid,
+                            VerifyTotalPremium = "3000000",
+                            StampValue = LeaseDeedDetailDet.RequiredStampValue,
+                            BankgChallanNumber = LeaseDeedDetailDet.BankGauranteeChallanNo,
+                            EntityName = LeaseDeedDetailDet.EntityNameBehalfOfApplicant,
+                            SvalueBankGchallanNumber = LeaseDeedDetailDet.StampValueForBankGaurantee,
+                        }).ToList()
+                        .Select(x => new LeasedeedNotesheetModel()
+                        {
+                            ApplicantName = x.ApplicantName,
+                            PlotNo = Convert.ToString(x.PlotNo),
+                            ApplicantAddress = x.ApplicantAddress,
+                            SectorName = x.SectorName,
+                            PlotArea = x.PlotArea,
+                            EarnestMoneyPaid = Convert.ToString(x.EarnestMoneyPaid),
+                            EarnestMoneyChallanNumber = Convert.ToString(x.EarnestMoneyChallanNumber),
+                            AllotmentMoneyPaid = Convert.ToString(x.AllotmentMoneyPaid),
+                            VerifyTotalPremium = x.VerifyTotalPremium,
+                            StampValue = Convert.ToString(x.StampValue),
+                            BankgChallanNumber = x.BankgChallanNumber,
+                            EntityName = x.EntityName,
+                            SvalueBankGchallanNumber = Convert.ToString(x.SvalueBankGchallanNumber),
+                            //Id = ApplicantDet.Id,
 
                         }).FirstOrDefault();
 
