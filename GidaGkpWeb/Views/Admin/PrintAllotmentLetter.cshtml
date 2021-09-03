@@ -188,6 +188,39 @@
                                     }
                                 }
                             }
+                            @for (int i = index; i < 4; i++)
+                            {
+                                if (i == 1)
+                                {
+                                    <tr>
+                                        <td><strong>2 </strong></td>
+                                        <td><strong>4001-20000</strong></td>
+                                        <td><strong>5600</strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                    </tr>
+                                }
+                                else if (i == 2)
+                                {
+                                    <tr>
+                                        <td><strong>3 </strong></td>
+                                        <td><strong>20001-80000 </strong></td>
+                                        <td><strong>5200</strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                    </tr>
+                                }
+                                else if (i == 3)
+                                {
+                                    <tr>
+                                        <td><strong>4 </strong></td>
+                                        <td><strong>80001-above</strong></td>
+                                        <td><strong>4800</strong></td>
+                                        <td><strong></strong></td>
+                                        <td><strong></strong></td>
+                                    </tr>
+                                }
+                            }
                             <tr>
                                 <td colspan="3"><strong>योग</strong></td>
                                 <td><strong>@ApplicantData.PlotArea</strong></td>
