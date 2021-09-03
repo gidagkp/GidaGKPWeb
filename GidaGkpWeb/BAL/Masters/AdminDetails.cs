@@ -89,6 +89,8 @@ namespace GidaGkpWeb.BAL
                         from plotDetail in plotDetail2.DefaultIfEmpty()
                         join sectorLookup1 in _db.Lookups on plotDetail.SectorName equals sectorLookup1.LookupId into sectorLookup2
                         from sectorLookup in sectorLookup2.DefaultIfEmpty()
+                        join schemeLookup1 in _db.Lookups on plotDetail.SchemeName equals schemeLookup1.LookupId into schemeLookup2
+                        from schemeLookup in schemeLookup2.DefaultIfEmpty()
                         join plotrangeLookup1 in _db.Lookups on plotDetail.PlotRange equals plotrangeLookup1.LookupId into plotrangeLookup2
                         from plotrangeLookup in plotrangeLookup2.DefaultIfEmpty()
                         join doc1 in _db.ApplicantUploadDocs on user.Id equals doc1.UserId into doc2
@@ -101,6 +103,8 @@ namespace GidaGkpWeb.BAL
                         from invitationLetter in invitationLetter2.DefaultIfEmpty()
                         join plotMaster1 in _db.PlotMasters on invitationLetter.PlotId equals plotMaster1.PlotId into plotMaster2
                         from plotMaster in plotMaster2.DefaultIfEmpty()
+                        join allocateAllotment1 in _db.AllocateAllotmentDetails on invitationLetter.ApplicationId equals allocateAllotment1.ApplicationId into allocateAllotment2
+                        from allocateAllotment in allocateAllotment2.DefaultIfEmpty()
                         where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
@@ -124,6 +128,7 @@ namespace GidaGkpWeb.BAL
                             SchemeType = user.SchemeType,
                             SectorName = user.SectorName,
                             PlotSectorName = plotDetail != null ? sectorLookup.LookupName : "",
+                            PlotSchemeName = plotDetail != null ? schemeLookup.LookupName : "",
                             UserType = user.UserType,
                             DOB = user.DOB,
                             UserName = user.UserName,
@@ -174,9 +179,8 @@ namespace GidaGkpWeb.BAL
                             PlotCost = plotMaster != null ? plotMaster.PlotCost : "",
                             ExtraCharge = plotMaster != null ? plotMaster.ExtraCharge : "",
                             GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
-                            //TenPer_AllotmentMoney = plotMaster != null ? ((Convert.ToInt32(plotMaster.PlotCost) * 10) / 100).ToString() : "",
-                            //NintyPer_AllotmentMoney = plotMaster != null ? ((Convert.ToInt32(plotMaster.PlotCost) * 90) / 100).ToString() : "",
-                            //AllotementMoneyTobePaid = plotDetail != null && plotMaster != null ? (((Convert.ToInt32(plotMaster.PlotCost) * 90) / 100) - plotDetail.EarnestMoney).ToString() : "",
+                            AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
+                            InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -239,6 +243,7 @@ namespace GidaGkpWeb.BAL
                             SchemeName = x.SchemeName,
                             SchemeType = x.SchemeType,
                             SectorName = x.SectorName,
+                            PlotSchemeName = x.PlotSchemeName,
                             PlotSectorName = x.PlotSectorName,
                             UserType = x.UserType,
                             DOB = x.DOB != null ? x.DOB.Value.ToString("dd/MM/yyyy") : string.Empty,
@@ -283,6 +288,8 @@ namespace GidaGkpWeb.BAL
                             TenPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 10) / 100).ToString() : "",
                             NintyPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 90) / 100).ToString() : "",
                             AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 90) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
+                            AllotmentNumber = x.AllotmentNumber,
+                            InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,

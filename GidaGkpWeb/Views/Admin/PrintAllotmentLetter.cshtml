@@ -3,6 +3,7 @@
 
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ApplicantData = ViewData["ApplicantData"] as ApplicationUserModel;
 }
 
 <div class="container aknowgmnt" id="">
@@ -20,48 +21,44 @@
                         Website: www.gidagkp.org    Email:  ceogida-up@up.gov.in
                     </h4><br />
                     <h4 class="panel-title text-center main_cla_profile">आवंटन पत्र / Allotment Letter</h4><br />
-                    <h4 class="panel-title text-center main_cla_profile">योजना का नाम / Name of Scheme: </h4>
+                    <h4 class="panel-title text-center main_cla_profile">योजना का नाम / Name of Scheme: @ApplicantData.PlotSchemeName</h4>
                     @*<div class="" style="position: relative;top: -183px;left: 827px;">
-                <p style=" padding-bottom: 0px; margin-bottom: 0px;">Application Number :@pData.ApplicationNumber</p>
-                <p>
-                    Date :@pData.PaymentDate.Value.ToString("dd/MM/yyyy")
-                </p>
-            </div>*@
+                            <p style=" padding-bottom: 0px; margin-bottom: 0px;">Application Number :@pData.ApplicationNumber</p>
+                            <p>
+                                Date :@pData.PaymentDate.Value.ToString("dd/MM/yyyy")
+                            </p>
+                        </div>*@
                 </div>
                 <div class="panel-body">
                     <div class="profile__header" style="text-align:right">
-                        <h4>दिनांक / Date : </h4>
+                        <h4>दिनांक / Date : @DateTime.Now.ToString("dd/MM/yyyy")</h4>
                     </div>
                     <div class="profile__header">
-                        <h4>आवंटन पत्र संख्या: </h4>
+                        <h4>आवंटन पत्र संख्या: @ApplicantData.AllotmentNumber</h4>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="profile__header">
                         <h4>
-                            MEDALLION AUTO SALES PVT LTD<br />
-                            Throo Shri DHIRENDRA MOHAN DAS<br />
-                            S/o HARI MOHAN DAS
+                            @ApplicantData.UnitName
                         </h4>
                         <h4>
-                            R/o 371B, Anand Bhawan, AD Tower,<br />
-                            Bank Road, Gorakhpur
+                            @ApplicantData.FullName<br />@ApplicantData.CAddress
                         </h4>
                     </div>
                 </div>
                 <div class="panel-heading">
-                    <h4 class="panel-title"> विषय:     के लिए भूमि का आवंटन</h4><br />
-                    <h4 class="panel-title"> Sub: Allotment of Land for  </h4><br />
+                    <h4 class="panel-title"> विषय: @ApplicantData.PlotSchemeName-@ApplicantData.PlotSectorName के लिए भूमि का आवंटन</h4><br />
+                    <h4 class="panel-title"> Sub: Allotment of Land for @ApplicantData.PlotSchemeName-@ApplicantData.PlotSectorName </h4><br />
                 </div>
                 <div class="panel-body">
                     <div class="profile__header">
                         <p>
-                            प्रिय महोदय/महोदया,<br>आपको सहर्ष सूचित किया जाता है कि औद्योगिक योजना-2021 के अन्तर्गत भूखण्ड आवंटन हेतु आपके आन-लाईन आवेदन पत्र दिनांक 15.02.2021 के क्रम में दिनांक 22.06.2021 को गीडा कार्यालय में सम्पन्न लाटरी/साक्षात्कार के आधार पर आपके पक्ष में भूखण्ड संख्या सी-22, सेक्टर-26 में उत्पाद Auto mobile service center  करने वाली इकाई के स्थापनार्थ निम्नांकित विवरण एवं शर्तो पर आवंटित किया जाता है। आवंटित भूखण्ड का क्षेत्रफल 3996.35 वर्ग मीटर (विवरण संलग्न साईट प्लान के अनुसार) है।
+                            प्रिय महोदय/महोदया,<br>आपको सहर्ष सूचित किया जाता है कि @ApplicantData.PlotSchemeName के अन्तर्गत भूखण्ड आवंटन हेतु आपके आन-लाईन आवेदन पत्र दिनांक 15.02.2021 के क्रम में दिनांक 22.06.2021 को गीडा कार्यालय में सम्पन्न लाटरी/साक्षात्कार के आधार पर आपके पक्ष में भूखण्ड संख्या सी-22, सेक्टर-26 में उत्पाद Auto mobile service center  करने वाली इकाई के स्थापनार्थ निम्नांकित विवरण एवं शर्तो पर आवंटित किया जाता है। आवंटित भूखण्ड का क्षेत्रफल 3996.35 वर्ग मीटर (विवरण संलग्न साईट प्लान के अनुसार) है।
                         </p>
                         <p>
                             Dear Sir/Madam,<br />
-                            In reference to your online application for allotment of Industrial Plot Scheme-2021, we are happy to inform you that Plot No C-22 in Sector-26 is being hereby allotted to you on the basis of Lottery/Interview held on 15-02-2021, for manufacturing of Auto mobile service center on the terms & conditions mentioned as below. The area of the allotted plot is 3996.35 Sqm. (Details as per site plan annexed)
-
+                            In reference to your online application for allotment of @ApplicantData.PlotSchemeName, we are happy to inform you that Plot No @ApplicantData.PlotNumber in @ApplicantData.PlotSectorName is being hereby allotted to you on the basis of Lottery/Interview held on @ApplicantData.InterviewDateTime, for manufacturing of Auto mobile service center on the terms & conditions mentioned as below. The area of the allotted plot is @ApplicantData.PlotArea Sqm. (Details as per site plan annexed)
                         </p>
                     </div>
                 </div>
@@ -82,73 +79,73 @@
                             </tr>
                             <tr>
                                 <td><strong>1 </strong></td>
-                                @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                <td><strong>0 - 4000 </strong></td>
+                                <td><strong>6000</strong></td>
+                                <td><strong>@ApplicantData.PlotArea</strong></td>
+                                <td><strong></strong></td>
                             </tr>
                             <tr>
                                 <td><strong>2 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                             <tr>
                                 <td><strong>3 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                             <tr>
                                 <td><strong>4 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                             <tr>
                                 <td><strong>5 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                             <tr>
                                 <td><strong>6 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                             <tr>
                                 <td><strong>7 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                             <tr>
                                 <td><strong>8 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                             <tr>
                                 <td><strong>9 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                             <tr>
                                 <td><strong>10 </strong></td>
                                 @*<td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>
-            <td><strong>@pData.PlotArea</strong></td>*@
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>
+                                    <td><strong>@pData.PlotArea</strong></td>*@
                             </tr>
                         </tbody>
                     </table>
@@ -371,30 +368,30 @@
                     <h4 class="panel-title" style="text-align:right">अधिकृत हस्ताक्षरकर्ता</h4>
                 </div>
                 @*<div class="panel-body">
-                    <div class="profile__comments">
-                        <div class="profile-comments__item">
-                            <div class="profile-comments__body">
-                                <div class="profile-comments__content">
-                                    उपरोक्त आवेदन पत्र में दी गई सूचनाएं मेरी जानकारी और विश्वास में सही हैं गीडा औद्योगिक सेक्टरो में भूखंड आवंटन तथा पट्टे पर भूमि देने के लिए इस आवेदन पत्र में वांछित सभी सामान्य शर्तें मेरे द्वारा ध्यान पूर्वक पढ़ वह समझ ली गई हैं एवं वह मुझे पूर्ण रूप से स्वीकार हैं | प्राधिकरण द्वारा समय-समय पर भविष्य में सामान्य शर्तो में किया गया कोई भी या सभी परिवर्तन बिना शर्त / आपत्ति मुझे स्वीकार होगा |<br>
-                                    दिनांक:-			<br>
-                                    स्थान :-
+                        <div class="profile__comments">
+                            <div class="profile-comments__item">
+                                <div class="profile-comments__body">
+                                    <div class="profile-comments__content">
+                                        उपरोक्त आवेदन पत्र में दी गई सूचनाएं मेरी जानकारी और विश्वास में सही हैं गीडा औद्योगिक सेक्टरो में भूखंड आवंटन तथा पट्टे पर भूमि देने के लिए इस आवेदन पत्र में वांछित सभी सामान्य शर्तें मेरे द्वारा ध्यान पूर्वक पढ़ वह समझ ली गई हैं एवं वह मुझे पूर्ण रूप से स्वीकार हैं | प्राधिकरण द्वारा समय-समय पर भविष्य में सामान्य शर्तो में किया गया कोई भी या सभी परिवर्तन बिना शर्त / आपत्ति मुझे स्वीकार होगा |<br>
+                                        दिनांक:-			<br>
+                                        स्थान :-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-                </div>*@
+                        </div>
+                    </div>*@
 
                 <div class="panel-body">
 
                     @*<p class="simple-reg-terms col-sm-12 col-xs-12">
-                <label>
-                    <span class="checkbox">
-                        <input title="Please tick" name="accept_terms" type="checkbox" class="required" />
-                        I accept the terms &amp; conditions
-                    </span>
-                </label>
-            </p>*@
+                            <label>
+                                <span class="checkbox">
+                                    <input title="Please tick" name="accept_terms" type="checkbox" class="required" />
+                                    I accept the terms &amp; conditions
+                                </span>
+                            </label>
+                        </p>*@
                     <div class="col-sm-6 col-xs-6">
                         <input type="submit" name="next" id="btnPrint" class="btn btn-primary" value="Print Receipt" />
                         <input type="submit" name="next" style="display:none" id="btnPrintDocument" class="btn btn-primary" value="Print Receipt" onclick="window.print();" />

@@ -718,8 +718,11 @@ namespace GidaGkpWeb.Controllers
             ViewData["ApplicationId"] = applicationId;
             return View();
         }
-        public ActionResult PrintAllotmentLetter()
+        public ActionResult PrintAllotmentLetter(int applicationId)
         {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["ApplicantData"] = data;
             return View();
         }
         public ActionResult IndustrialDashboard()
