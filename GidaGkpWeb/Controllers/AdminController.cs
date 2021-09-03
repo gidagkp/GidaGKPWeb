@@ -737,6 +737,7 @@ namespace GidaGkpWeb.Controllers
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantUserDetail(schemeName).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
             ViewData["UserDetail"] = data;
+            
             return View();
         }
         [HttpPost]
@@ -1040,6 +1041,7 @@ namespace GidaGkpWeb.Controllers
         }
         public ActionResult LeaseddeedNotesheet()
         {
+
             return View();
         }
         [HttpPost]

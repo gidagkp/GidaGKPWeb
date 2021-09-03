@@ -2,7 +2,8 @@
 
 
 $(document).ready(function () {
-    FillSelectedInvitation();
+    var ApplicationId = 55;
+    FillSelectedInvitation(ApplicationId);
     function FillSelectedInvitation(ApplicationId) {
         var ApplicationId = 55;
         $.ajax({
