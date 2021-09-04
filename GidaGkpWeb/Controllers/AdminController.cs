@@ -729,6 +729,14 @@ namespace GidaGkpWeb.Controllers
         {
             return View();
         }
+        public ActionResult AllotteeListForLeasedeed()
+        {
+            return View();
+        }
+        public ActionResult LeasedeedStatus()
+        {
+            return View();
+        }
         public ActionResult Logout()
         {
             Session.Abandon();

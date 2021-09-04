@@ -701,6 +701,8 @@
     <Content Include="Views\Admin\AllotmentMoneyWithInstallment.cshtml" />
     <Content Include="Views\Home\StithiPatrak.cshtml" />
     <Content Include="Views\Admin\LeaseddeedNotesheet.cshtml" />
+    <Content Include="Views\Admin\AllotteeListForLeasedeed.cshtml" />
+    <Content Include="Views\Admin\LeasedeedStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">

@@ -1,0 +1,194 @@
+﻿@using DataLayer;
+@using GidaGkpWeb.Models;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var applicationId = Convert.ToInt32(ViewData["ApplicationId"]);
+}
+<link rel="stylesheet" href="~/styles/table_form.css">
+<script src="~/Scripts/App/Masters/SchemeWiseApplicationList.js"></script>
+<script src="~/Scripts/App/Masters/navigation.js"></script>
+<style>
+    button.submit_plot_master353 {
+        background: #ff2e2e;
+        color: #fff;
+        border: 0px;
+        padding: 3px 10px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    #DocModal {
+        width: 100%;
+        left: -185px;
+    }
+
+        #DocModal .modal-content {
+            width: 160%;
+        }
+
+    #basicModal {
+        width: 100%;
+        left: -185px;
+    }
+
+        #basicModal .modal-content {
+            width: 160%;
+        }
+</style>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 text-left" style="padding-bottom: 30px;">
+            <h3 style="font-size:18px;">Process of Leasedeed Notesheet </h3>
+            <hr />
+        </div>
+
+        <div class="form-group col-sm-4 col-xs-12">
+            <label>Application Number</label>
+            <input type="number" class="form-control" placeholder=" 9834987">
+        </div>
+        <div class="form-group col-sm-4 col-xs-12">
+            <label>Allotment Number</label>
+            <input type="number" class="form-control" placeholder=" 9889798">
+        </div>
+        <div class="form-group col-sm-3 col-xs-12">
+            <label>Mobile Number</label>
+            <input type="Mobile" class="form-control" placeholder=" +91 0000 000 000">
+        </div>
+
+        @*<div class="form-group col-sm-1 col-xs-12">
+                <button type="button" class="submit_plot_master" value="button" style="padding:7px 15px; margin-top: 23px;">Search</button>
+            </div>*@
+
+
+
+        <div class="col-sm-12 col-xs-12">
+
+            <div class="table-responsive" style="padding:10px 0 80px 0;">
+                <table class="table table_css_main_cl table-bordered">
+
+                    <tr>
+                        <th class="text-center">S.No.</th>
+                        <th class="text-center">Items</th>
+                        <th class="text-center">Current Status</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>Allotment Details & Verify </td>
+                        <td class="text-center">1</td>
+                        <td class="text-right"> <button type="button" class="submit_plot_master353" data-toggle="modal" data-target="#basicModal" value="button">Check Details </button></td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>Request send to applicant for stamp money </td>
+                        <td class="text-center"></td>
+                        <td class="text-right"> <button type="button" class="submit_plot_master353" value="button">Request Send </button></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>Called for physical verification </td>
+                        <td class="text-center"></td>
+                        <td class="text-right"> <button type="button" class="submit_plot_master353" value="button">Call Applicant </button></td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-center">4</td>
+                        <td> Make Leasedeed Notesheet with digi signature</td>
+                        <td class="text-center"></td>
+                        <td class="text-right"> <button type="button" class="submit_plot_master353" style="background:rgb(16, 49, 156);" value="button">Create Notesheet </button></td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td class="text-center">5</td>
+                        <td>Notesheet Send to </td>
+                        <td class="text-center"></td>
+                        <td class="text-right">
+                            <div class="col-sm-8 col-xs-12">
+                                <select style="border: 1px solid rgb(207 207 207); padding: 3px;">
+                                    <option>Property Manager</option>
+                                    <option>Manager Finance</option>
+                                    <option>Admin</option>
+                                    <option>GM</option>
+                                    <option>CEO</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 col-xs-12" style="padding:0;">
+                                <button type="button" class="submit_plot_master353" style="background:rgb(2, 2, 2);" value="button">Share Application</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">6</td>
+                        <td>Leasedeed Notesheet Uploaded  on registry department</td>
+                        <td class="text-center"></td>
+                        <td class="text-right"> <button type="button" class="submit_plot_master353" style="background:rgb(82, 28, 230);" value="button">Upload Online </button></td>
+
+                    <tr>
+                        <td class="text-center">7</td>
+                        <td>Leasedeed Notesheet Status </td>
+                        <td class="text-center"></td>
+                        <td class="text-center" style="color:rgb(245, 132, 27);"> Pending</td>
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Allotment Money Verify</h4>
+            </div>
+            <div class="modal-body pull-left" style="width:100%;">
+                <div class="col-sm-12 col-xs-12">
+
+                    <div class="table-responsive" style="padding:10px 0 80px 0;">
+                        <table class="table table_css_main_cl table-bordered">
+
+                            <tr>
+                                <th class="text-center">S.No.</th>
+                                <th class="text-center">Application Number</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Father Name</th>
+                                <th class="text-center">Allotment number</th>
+                                <th class="text-center">Allotment Money Amount (₹)</th>
+                                <th class="text-center">Allotment Money Status</th>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center">13455676</td>
+                                <td class="text-center">Vijay Kumar</td>
+                                <td class="text-center">Kishan Vihari</td>
+                                <td class="text-center">1546</td>
+                                <td class="text-center">50, 000</td>
+                                <td class="text-center" style="color:rgb(25, 155, 57);">Accepted</td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
