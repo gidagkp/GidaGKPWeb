@@ -947,6 +947,9 @@ namespace GidaGkpWeb.Controllers
         public ActionResult AllocateAllotmentLetter(int applicationId)
         {
             ViewData["ApplicationId"] = applicationId;
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["UserDetail"] = data;
             return View();
         }
         [HttpPost]

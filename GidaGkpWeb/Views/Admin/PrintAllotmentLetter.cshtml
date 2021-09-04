@@ -22,7 +22,7 @@
                         Website: www.gidagkp.org    Email:  ceogida-up@up.gov.in
                     </h4><br />
                     <h4 class="panel-title text-center main_cla_profile">आवंटन पत्र / Allotment Letter</h4><br />
-                    <h4 class="panel-title text-center main_cla_profile">योजना का नाम / Name of Scheme: @ApplicantData.PlotSchemeName</h4><br/>
+                    <h4 class="panel-title text-center main_cla_profile">योजना का नाम / Name of Scheme: @ApplicantData.PlotSchemeName</h4><br />
                     @*<div class="" style="position: relative;top: -183px;left: 827px;">
                             <p style=" padding-bottom: 0px; margin-bottom: 0px;">Application Number :@pData.ApplicationNumber</p>
                             <p>
@@ -42,8 +42,8 @@
                         </div>
                     </div>
                     @*<div class="profile__header">
-                        <h4>आवंटन पत्र संख्या: @ApplicantData.AllotmentNumber</h4>
-                    </div>*@
+                            <h4>आवंटन पत्र संख्या: @ApplicantData.AllotmentNumber</h4>
+                        </div>*@
                 </div>
                 <div class="panel-body">
                     <div class="profile__header">
@@ -63,11 +63,11 @@
                     <div class="profile__header">
                         <p>
                             प्रिय महोदय/महोदया,<br>आपको सहर्ष सूचित किया जाता है कि<strong> @ApplicantData.PlotSchemeName</strong> के अन्तर्गत भूखण्ड आवंटन हेतु आपके आन-लाईन आवेदन पत्र दिनांक <strong>@ApplicantData.TransactionDate</strong> के क्रम में दिनांक<strong> @ApplicantData.InterviewDateTime</strong> को गीडा कार्यालय में सम्पन्न लाटरी/साक्षात्कार के आधार पर आपके पक्ष में भूखण्ड संख्या <strong>@ApplicantData.PlotNumber, @ApplicantData.SectorName</strong> में उत्पाद <strong>@ApplicantData.UnitName</strong>  करने वाली इकाई के स्थापनार्थ निम्नांकित विवरण एवं शर्तो पर आवंटित किया जाता है। आवंटित भूखण्ड का क्षेत्रफल <strong>@ApplicantData.PlotArea</strong> वर्ग मीटर (विवरण संलग्न साईट प्लान के अनुसार) है।
-</p>
+                        </p>
                         <p>
                             Dear Sir/Madam,<br />
                             In reference to your online application for allotment of<strong> @ApplicantData.PlotSchemeName</strong>, we are happy to inform you that Plot No <strong>@ApplicantData.PlotNumber</strong> in <strong>@ApplicantData.PlotSectorName</strong> is being hereby allotted to you on the basis of Lottery/Interview held on<strong> @ApplicantData.InterviewDateTime</strong>, for manufacturing of <strong>@ApplicantData.UnitName</strong> on the terms & conditions mentioned as below. The area of the allotted plot is <strong>@ApplicantData.PlotArea</strong> Sqm. (Details as per site plan annexed)
-</p>
+                        </p>
                     </div>
                 </div>
                 <hr />
@@ -89,12 +89,14 @@
                                 var plotArea = Convert.ToDecimal(ApplicantData.PlotArea);
                                 int index = 0;
                                 decimal displayPlotArea;
+                                decimal displayCalculation;
                                 while (plotArea > 0)
                                 {
                                     if (index == 0)
                                     {
                                         if (plotArea >= 4000)
                                         {
+                                            displayCalculation = 4000 * 6000;
                                             calculation += 4000 * 6000;
                                             plotArea -= 4000;
                                             <tr>
@@ -102,11 +104,12 @@
                                                 <td><strong>0-4000 </strong></td>
                                                 <td><strong>6000</strong></td>
                                                 <td><strong>4000</strong></td>
-                                                <td><strong>@calculation</strong></td>
+                                                <td><strong>@displayCalculation</strong></td>
                                             </tr>
                                         }
                                         else
                                         {
+                                            displayCalculation = plotArea * 6000;
                                             calculation += plotArea * 6000;
                                             displayPlotArea = plotArea;
                                             plotArea -= plotArea;
@@ -115,7 +118,7 @@
                                                 <td><strong>0-4000 </strong></td>
                                                 <td><strong>6000</strong></td>
                                                 <td><strong>@displayPlotArea</strong></td>
-                                                <td><strong>@calculation</strong></td>
+                                                <td><strong>@displayCalculation</strong></td>
                                             </tr>
                                         }
                                         index++;
@@ -124,6 +127,7 @@
                                     {
                                         if (plotArea >= 16000)
                                         {
+                                            displayCalculation = 16000 * 5600;
                                             calculation += 16000 * 5600;
                                             plotArea -= 16000;
                                             <tr>
@@ -131,11 +135,12 @@
                                                 <td><strong>4001-20000</strong></td>
                                                 <td><strong>5600</strong></td>
                                                 <td><strong>16000</strong></td>
-                                                <td><strong>@calculation</strong></td>
+                                                <td><strong>@displayCalculation</strong></td>
                                             </tr>
                                         }
                                         else
                                         {
+                                            displayCalculation = plotArea * 5600;
                                             calculation += plotArea * 5600;
                                             displayPlotArea = plotArea;
                                             plotArea -= plotArea;
@@ -144,7 +149,7 @@
                                                 <td><strong>4001-20000</strong></td>
                                                 <td><strong>5600</strong></td>
                                                 <td><strong>@displayPlotArea</strong></td>
-                                                <td><strong>@calculation</strong></td>
+                                                <td><strong>@displayCalculation</strong></td>
                                             </tr>
                                         }
 
@@ -154,6 +159,7 @@
                                     {
                                         if (plotArea >= 60000)
                                         {
+                                            displayCalculation = 60000 * 5200;
                                             calculation += 60000 * 5200;
                                             plotArea -= 60000;
                                             <tr>
@@ -161,11 +167,12 @@
                                                 <td><strong>20001-80000 </strong></td>
                                                 <td><strong>5200</strong></td>
                                                 <td><strong>60000</strong></td>
-                                                <td><strong>@calculation</strong></td>
+                                                <td><strong>@displayCalculation</strong></td>
                                             </tr>
                                         }
                                         else
                                         {
+                                            displayCalculation = plotArea * 5200;
                                             calculation += plotArea * 5200;
                                             displayPlotArea = plotArea;
                                             plotArea -= plotArea;
@@ -174,13 +181,14 @@
                                                 <td><strong>20001-80000 </strong></td>
                                                 <td><strong>5200</strong></td>
                                                 <td><strong>@displayPlotArea</strong></td>
-                                                <td><strong>@calculation</strong></td>
+                                                <td><strong>@displayCalculation</strong></td>
                                             </tr>
                                         }
                                         index++;
                                     }
                                     else if (plotArea >= 0 && index == 3)
                                     {
+                                        displayCalculation = plotArea * 4800;
                                         calculation += plotArea * 4800;
                                         displayPlotArea = plotArea;
                                         plotArea -= plotArea;
@@ -190,7 +198,7 @@
                                             <td><strong>80001-above</strong></td>
                                             <td><strong>4800</strong></td>
                                             <td><strong>@displayPlotArea</strong></td>
-                                            <td><strong>@calculation</strong></td>
+                                            <td><strong>@displayCalculation</strong></td>
                                         </tr>
                                     }
                                 }
@@ -229,7 +237,7 @@
                                 }
                             }
                             <tr>
-                                <td colspan="3" style="text-align:right"><strong>योग</strong></td>
+                                <td colspan="3" style="text-align: right; padding-right: 6%;"><strong>योग</strong></td>
                                 <td><strong>@ApplicantData.PlotArea</strong></td>
                                 <td><strong>@calculation</strong></td>
                             </tr>
@@ -278,7 +286,7 @@
 
                             <tr>
                                 <td><strong> </strong></td>
-                                <td colspan="3" style="text-align:right"><strong>महायोग(योग 5+6)</strong></td>
+                                <td colspan="3" style="text-align: right; padding-right: 6%;"><strong>महायोग(योग 5+6)</strong></td>
                                 <td>
                                     @{
                                         decimal grandTotal = calculation;
@@ -620,3 +628,9 @@
         $('[href="/Admin/PrintAllotmentLetter"]').parent().addClass('active')
     });
 </script>
+
+<style>
+    .profile-comments__content p {
+        padding: 0 10px;
+    }
+</style>
