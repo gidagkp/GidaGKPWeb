@@ -22,7 +22,7 @@
                         Website: www.gidagkp.org    Email:  ceogida-up@up.gov.in
                     </h4><br />
                     <h4 class="panel-title text-center main_cla_profile">आवंटन पत्र / Allotment Letter</h4><br />
-                    <h4 class="panel-title text-center main_cla_profile">योजना का नाम / Name of Scheme: @ApplicantData.PlotSchemeName</h4>
+                    <h4 class="panel-title text-center main_cla_profile">योजना का नाम / Name of Scheme: @ApplicantData.PlotSchemeName</h4><br/>
                     @*<div class="" style="position: relative;top: -183px;left: 827px;">
                             <p style=" padding-bottom: 0px; margin-bottom: 0px;">Application Number :@pData.ApplicationNumber</p>
                             <p>
@@ -31,12 +31,19 @@
                         </div>*@
                 </div>
                 <div class="panel-body">
-                    <div class="profile__header" style="text-align:right">
-                        <h4>दिनांक / Date : @DateTime.Now.ToString("dd/MM/yyyy")</h4>
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6" style="text-align:left">
+                                <h4 class="panel-title main_cla_profile">आवंटन पत्र संख्या: @ApplicantData.AllotmentNumber</h4>
+                            </div>
+                            <div class="col-xs-12 col-sm-6" style="text-align:right">
+                                <h4>दिनांक / Date : @DateTime.Now.ToString("dd/MM/yyyy")</h4>
+                            </div>
+                        </div>
                     </div>
-                    <div class="profile__header">
+                    @*<div class="profile__header">
                         <h4>आवंटन पत्र संख्या: @ApplicantData.AllotmentNumber</h4>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="panel-body">
                     <div class="profile__header">
