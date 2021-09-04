@@ -703,6 +703,7 @@
     <Content Include="Views\Admin\LeaseddeedNotesheet.cshtml" />
     <Content Include="Views\Admin\AllotteeListForLeasedeed.cshtml" />
     <Content Include="Views\Admin\LeasedeedStatus.cshtml" />
+    <Content Include="Views\Admin\DataForAllotmentNotesheet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
