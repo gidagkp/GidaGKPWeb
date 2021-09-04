@@ -49,24 +49,24 @@
                     </div>
                 </div>
                 <div class="panel-heading">
-                    <h4 class="panel-title"> विषय: @ApplicantData.PlotSchemeName-@ApplicantData.PlotSectorName के लिए भूमि का आवंटन</h4><br />
-                    <h4 class="panel-title"> Sub: Allotment of Land for @ApplicantData.PlotSchemeName-@ApplicantData.PlotSectorName </h4><br />
+                    <h4 class="panel-title"> <strong>विषय:</strong> @ApplicantData.PlotSchemeName-@ApplicantData.PlotSectorName के लिए भूमि का आवंटन</h4><br />
+                    <h4 class="panel-title"> <strong>Subject:</strong> Allotment of Land for @ApplicantData.PlotSchemeName-@ApplicantData.PlotSectorName </h4><br />
                 </div>
                 <div class="panel-body">
                     <div class="profile__header">
                         <p>
-                            प्रिय महोदय/महोदया,<br>आपको सहर्ष सूचित किया जाता है कि @ApplicantData.PlotSchemeName के अन्तर्गत भूखण्ड आवंटन हेतु आपके आन-लाईन आवेदन पत्र दिनांक 15.02.2021 के क्रम में दिनांक 22.06.2021 को गीडा कार्यालय में सम्पन्न लाटरी/साक्षात्कार के आधार पर आपके पक्ष में भूखण्ड संख्या सी-22, सेक्टर-26 में उत्पाद Auto mobile service center  करने वाली इकाई के स्थापनार्थ निम्नांकित विवरण एवं शर्तो पर आवंटित किया जाता है। आवंटित भूखण्ड का क्षेत्रफल 3996.35 वर्ग मीटर (विवरण संलग्न साईट प्लान के अनुसार) है।
-                        </p>
+                            प्रिय महोदय/महोदया,<br>आपको सहर्ष सूचित किया जाता है कि<strong> @ApplicantData.PlotSchemeName</strong> के अन्तर्गत भूखण्ड आवंटन हेतु आपके आन-लाईन आवेदन पत्र दिनांक <strong>@ApplicantData.TransactionDate</strong> के क्रम में दिनांक<strong> @ApplicantData.InterviewDateTime</strong> को गीडा कार्यालय में सम्पन्न लाटरी/साक्षात्कार के आधार पर आपके पक्ष में भूखण्ड संख्या <strong>@ApplicantData.PlotNumber, @ApplicantData.SectorName</strong> में उत्पाद <strong>@ApplicantData.UnitName</strong>  करने वाली इकाई के स्थापनार्थ निम्नांकित विवरण एवं शर्तो पर आवंटित किया जाता है। आवंटित भूखण्ड का क्षेत्रफल <strong>@ApplicantData.PlotArea</strong> वर्ग मीटर (विवरण संलग्न साईट प्लान के अनुसार) है।
+</p>
                         <p>
                             Dear Sir/Madam,<br />
-                            In reference to your online application for allotment of @ApplicantData.PlotSchemeName, we are happy to inform you that Plot No @ApplicantData.PlotNumber in @ApplicantData.PlotSectorName is being hereby allotted to you on the basis of Lottery/Interview held on @ApplicantData.InterviewDateTime, for manufacturing of Auto mobile service center on the terms & conditions mentioned as below. The area of the allotted plot is @ApplicantData.PlotArea Sqm. (Details as per site plan annexed)
-                        </p>
+                            In reference to your online application for allotment of<strong> @ApplicantData.PlotSchemeName</strong>, we are happy to inform you that Plot No <strong>@ApplicantData.PlotNumber</strong> in <strong>@ApplicantData.PlotSectorName</strong> is being hereby allotted to you on the basis of Lottery/Interview held on<strong> @ApplicantData.InterviewDateTime</strong>, for manufacturing of <strong>@ApplicantData.UnitName</strong> on the terms & conditions mentioned as below. The area of the allotted plot is <strong>@ApplicantData.PlotArea</strong> Sqm. (Details as per site plan annexed)
+</p>
                     </div>
                 </div>
                 <hr />
 
                 <div class="panel-heading">
-                    <h4 class="panel-title text-center">आवंटित भूखण्ड संख्या:      का प्रोविजनल प्रीमियम की गणना निम्नवत् हैः-</h4>
+                    <h4 class="panel-title text-center">आवंटित भूखण्ड संख्या: <strong>@ApplicantData.PlotNumber</strong> का प्रोविजनल प्रीमियम की गणना निम्नवत् हैः-</h4>
                 </div>
                 <div class="panel-body">
                     <table class="table profile__table table-bordered">
@@ -222,7 +222,7 @@
                                 }
                             }
                             <tr>
-                                <td colspan="3"><strong>योग</strong></td>
+                                <td colspan="3" style="text-align:right"><strong>योग</strong></td>
                                 <td><strong>@ApplicantData.PlotArea</strong></td>
                                 <td><strong>@calculation</strong></td>
                             </tr>
@@ -271,7 +271,7 @@
 
                             <tr>
                                 <td><strong> </strong></td>
-                                <td colspan="3"><strong>महायोग(योग 5+6)</strong></td>
+                                <td colspan="3" style="text-align:right"><strong>महायोग(योग 5+6)</strong></td>
                                 <td>
                                     @{
                                         decimal grandTotal = calculation;
@@ -324,7 +324,7 @@
                 </div>
                 <hr>
                 <div class="panel-heading" style="text-align:center">
-                    <h4 class="panel-title">Term and Conditions / नियम एवं शर्ते</h4>
+                    <h4 class="panel-title"><strong>Term and Conditions / नियम एवं शर्ते</strong></h4>
                 </div>
                 <div class="panel-body">
                     <div class="profile__comments">
@@ -332,8 +332,8 @@
                             <div class="profile-comments__body">
                                 <div class="profile-comments__content">
                                     <p style="text-align:justify">
-                                        1. The area of the plot is 3996.35 square meter. The precise measurement and the area of the plot is as per the site plan attached herewith.<br />
-                                        भूखण्ड का क्षेत्रफल 3996.35 वर्ग मीटर है। भूखण्ड की सही नाप और उसकी भूमि का क्षेत्रफल संलग्न स्थल मानचित्र के अनुसार है।
+                                        1. The area of the plot is <strong> @ApplicantData.PlotArea </strong>square meter. The precise measurement and the area of the plot is as per the site plan attached herewith.<br />
+                                        भूखण्ड का क्षेत्रफल <strong>@ApplicantData.PlotArea</strong> वर्ग मीटर है। भूखण्ड की सही नाप और उसकी भूमि का क्षेत्रफल संलग्न स्थल मानचित्र के अनुसार है।
                                     </p>
                                     <p style="text-align:justify">
                                         2. The date of issuance this letter will be treated as the date of allotment of the above plot in your favour.<br />
@@ -344,10 +344,10 @@
                                         ऊपर प्रस्तर 2 के परिभाषित तिथि से भूखण्ड के अवशेष प्रीमियम पर नीचे प्रस्तर 5 के अनुसार ब्याज हर छमाही पहली जनवरी और पहली जुलाई को देय होगा। ऐसा पहला भुगतान 01-07-2021 को देय होगा।
                                     </p>
                                     <p style="text-align:justify">
-                                        4. You shall have to deposit at this office an amount of Rs. 2357810.00 (Earnest Money of Rs. 40000.00 has been adjusted) towards Alltoment Money in respect of the above plot latest by (date) 19-09-2021. This amount (together with Earnest money) is approximately Rs. 2397810.00 equal to 10% of the total premium of the plot as per the Slab Rates decided by GIDA, given at page No. 2 of this Allotment Letter and Locational Charges per sqm. as given in the table on page No. 2 of this Allotment Letter for first five acres and is subject to adjustment according to actual measurement of the plot.
+                                        4. You shall have to deposit at this office an amount of Rs. <strong>@remainingAmount</strong> (Earnest Money of Rs. <strong>@ApplicantData.EarnestMoney</strong> has been adjusted) towards Alltoment Money in respect of the above plot latest by (date) 19-09-2021. This amount (together with Earnest money) is approximately Rs. <strong>@ApplicantData.TenPer_AllotmentMoney</strong> equal to 10% of the total premium of the plot as per the Slab Rates decided by GIDA, given at page No. 2 of this Allotment Letter and Locational Charges per sqm. as given in the table on page No. 2 of this Allotment Letter for first five acres and is subject to adjustment according to actual measurement of the plot.
                                         If the above amount falls short of the amount equal to 10% of the total premium according to actual measurement, the balance will be deposited by you within seven days of the receipt of the demand from us. If the payments are not made as stipulated above this allotment will stand automatically cancelled and the whole amount of Earnest Money deposited by you will stand forfeited to this Authority, even if the area of the plot either exceeds or is less than the area applied for to the extent of 20% or less of the area applied for. However, if the area of the land allotted either exceeds the area applied for or falls short of the area applied for by an area more than 20% of it, the Earnest Money will not be forfeited if this allotment is not accepted, provided an intimation is sent to us in this respect by the date stipulated above.<br />
                                         <strong>NOTE :</strong> The premium mentioned herein is provisional and is liable to be enhanced in accordance with the provisions of Lease Deed.<br />
-                                        आपको इस कार्यालय में दिनांक 19-09-2021 तक उपर्युक्त भूखण्ड की आवंटन धनराशि रु. 2357810.00 (धरोहर धनराशि रु. 40000.00 का समायोजन करने के पशचात) जमा करनी होगी। यह धनराशि (धरोहर धनराशि समेत) रु. 2397810.00 जो आवंटन पत्र के पृष्ठ संख्या-2 पर गीडा द्वारा निर्धारित स्लैब सारणी के अनुसार भूखण्ड के कुल प्रीमियम के 10 प्रतिशत के बराबर है एवं तदर्थ भूमि प्रीमियम का लगभग 10 प्रतिशत लोकेशनल चार्ज लागू होगा जो आवंटन पात्र के पृष्ठ संख्या-2 पर उल्लिखित स्लैब सारणी के अनुसार भूखण्ड के वास्तविक नाम के आधार पर संशोधित किया जाएगा।
+                                        आपको इस कार्यालय में दिनांक 19-09-2021 तक उपर्युक्त भूखण्ड की आवंटन धनराशि रु. <strong>@remainingAmount</strong> (धरोहर धनराशि रु. <strong>@ApplicantData.EarnestMoney</strong> का समायोजन करने के पशचात) जमा करनी होगी। यह धनराशि (धरोहर धनराशि समेत) रु. <strong>@ApplicantData.TenPer_AllotmentMoney</strong> जो आवंटन पत्र के पृष्ठ संख्या-2 पर गीडा द्वारा निर्धारित स्लैब सारणी के अनुसार भूखण्ड के कुल प्रीमियम के 10 प्रतिशत के बराबर है एवं तदर्थ भूमि प्रीमियम का लगभग 10 प्रतिशत लोकेशनल चार्ज लागू होगा जो आवंटन पात्र के पृष्ठ संख्या-2 पर उल्लिखित स्लैब सारणी के अनुसार भूखण्ड के वास्तविक नाम के आधार पर संशोधित किया जाएगा।
                                         यदि उपर्युक्त धनराशि वास्तविक नाप के आधार पर उपर्युक्त दरों पर गणना किए गए कुल तदर्थ भूमि प्रीमियम के 10% से कम होगी तो आपको ऐसी धनराशि का भुगतान गीडा से मांग प्राप्त होने से सात दिन के भीतर करना होगा। यदि उपर्युक्त विधि से भुगतान नहीं होगा तो यह आवंटन स्वतः निरस्त हो जायेगा और आपके द्वारा जमा की गई पूरी धरोहर प्राधिकरण के पक्ष में जब्त हो जाएगी, चाहे आवंटित भूमि का क्षेत्रफल आवेदित क्षेत्रफल से 20% तक कम या अधिक हो। हाँ यदि आवेदित क्षेत्रफल और आवंटित क्षेत्र का 20% से अधिक अन्तर है तो इस आवंटन के अस्वीकार कर दिए जाने की दशा में धरोहर धनराशि जब्त नहीं होगी बशर्ते असहमति की सूचना प्राधिकरण को प्रस्तर 4 में उल्लिखित आरक्षण धनराशि जमा करने की अन्तिम तिथि तक दे दी जाए।<br />
                                         <strong>नोट: </strong> ऊपर वर्णित भूमि प्रीमियम केवल तदर्थ है जिससे पट्टा विलेख के प्राविधानों के अनुसार वृद्धि हो सकती है।
                                     </p>
@@ -390,7 +390,7 @@
                                         आवंटन की तिथि से समर्पण की तिथि तक उपयोग शुल्क/लीज़ रेंट।
                                     </p>
                                     <p style="text-align:justify">
-                                        <strong>c)</strong>The balance amount, if any, out of the deposits made by you till the date of surrender after deducting the amounts to be forfeited as above, will be refundable<b />
+                                        <strong>c)</strong>The balance amount, if any, out of the deposits made by you till the date of surrender after deducting the amounts to be forfeited as above, will be refundable<br />
                                         उपर्युक्त ढंग से जब्त होने वाली धनराशियाँ काट कर आप द्वारा जमा धनराशियों में से जो भी शेष बचेगा वह आप को लौटाया जा सकेगा।
                                     </p>
                                     <p style="text-align:justify">
