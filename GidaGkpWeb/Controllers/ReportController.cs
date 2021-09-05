@@ -21,10 +21,10 @@ namespace GidaGkpWeb.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult GetSelectedApplicant(string schemeName)
+        public JsonResult GetSelectedApplicant(int schemeName)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "Selected" && x.SchemeName == schemeName).ToList();
+            var data = _details.GetApplicantSubmittedForInterview(schemeName).Where(x => x.InterviewLetterStatus == "Selected").ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -61,10 +61,10 @@ namespace GidaGkpWeb.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetRejectedApplicant(string schemeName)
+        public JsonResult GetRejectedApplicant(int schemeName)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "Rejected" && x.SchemeName == schemeName).ToList();
+            var data = _details.GetApplicantSubmittedForInterview(schemeName).Where(x => x.InterviewLetterStatus == "Rejected" ).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
     }

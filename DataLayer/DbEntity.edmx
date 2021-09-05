@@ -28,7 +28,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ApplicationId" Type="int" />
-          <Property Name="AllotmentNumber" Type="varchar" MaxLength="50" />
+          <Property Name="AllotmentNumber" Type="varchar" MaxLength="500" />
           <Property Name="AllotmentDate" Type="datetime" />
           <Property Name="StartingDateofInterview_L" Type="datetime" />
           <Property Name="EndDateofInterview_L" Type="datetime" />
@@ -38,6 +38,36 @@
           <Property Name="CEO_SignFileName" Type="varchar(max)" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModificationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AllotmentTransactionDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ApplicationId" Type="int" />
+          <Property Name="order_id" Type="bigint" />
+          <Property Name="tracking_id" Type="bigint" />
+          <Property Name="bank_ref_no" Type="varchar" MaxLength="50" />
+          <Property Name="order_status" Type="varchar" MaxLength="50" />
+          <Property Name="payment_mode" Type="varchar" MaxLength="50" />
+          <Property Name="card_name" Type="varchar" MaxLength="50" />
+          <Property Name="status_message" Type="varchar" MaxLength="500" />
+          <Property Name="amount" Type="varchar" MaxLength="50" />
+          <Property Name="billing_name" Type="varchar" MaxLength="500" />
+          <Property Name="billing_address" Type="varchar(max)" />
+          <Property Name="trans_date" Type="datetime" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="ChalanDocument" Type="varbinary(max)" />
+          <Property Name="ChalanDocumentFileName" Type="varchar" MaxLength="500" />
+          <Property Name="ChalanDocumentFileType" Type="varchar" MaxLength="50" />
+          <Property Name="TransactionType" Type="varchar" MaxLength="50" />
+          <Property Name="AMApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="CEOApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="GMApprovalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="AMComment" Type="varchar(max)" />
+          <Property Name="CEOComment" Type="varchar(max)" />
+          <Property Name="GMComment" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ApplicantApplicationDetail">
           <Key>
@@ -585,6 +615,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
         <EntityContainer Name="GidaGKPModelStoreContainer">
           <EntitySet Name="AdminNotice" EntityType="Self.AdminNotice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AllocateAllotmentDetails" EntityType="Self.AllocateAllotmentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AllotmentTransactionDetail" EntityType="Self.AllotmentTransactionDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantApplicationDetail" EntityType="Self.ApplicantApplicationDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantBankDetails" EntityType="Self.ApplicantBankDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantDetails" EntityType="Self.ApplicantDetails" Schema="dbo" store:Type="Tables" />
@@ -649,6 +680,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
         <EntityContainer Name="GidaGKPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminNotices" EntityType="GidaGKPModel.AdminNotice" />
           <EntitySet Name="AllocateAllotmentDetails" EntityType="GidaGKPModel.AllocateAllotmentDetail" />
+          <EntitySet Name="AllotmentTransactionDetails" EntityType="GidaGKPModel.AllotmentTransactionDetail" />
           <EntitySet Name="ApplicantApplicationDetails" EntityType="GidaGKPModel.ApplicantApplicationDetail" />
           <EntitySet Name="ApplicantBankDetails" EntityType="GidaGKPModel.ApplicantBankDetail" />
           <EntitySet Name="ApplicantDetails" EntityType="GidaGKPModel.ApplicantDetail" />
@@ -706,7 +738,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ApplicationId" Type="Int32" />
-          <Property Name="AllotmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AllotmentNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AllotmentDate" Type="DateTime" Precision="3" />
           <Property Name="StartingDateofInterview_L" Type="DateTime" Precision="3" />
           <Property Name="EndDateofInterview_L" Type="DateTime" Precision="3" />
@@ -716,6 +748,36 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="CEO_SignFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModificationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AllotmentTransactionDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ApplicationId" Type="Int32" />
+          <Property Name="order_id" Type="Int64" />
+          <Property Name="tracking_id" Type="Int64" />
+          <Property Name="bank_ref_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="order_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="payment_mode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="card_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status_message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="billing_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="billing_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="trans_date" Type="DateTime" Precision="3" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="ChalanDocument" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ChalanDocumentFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ChalanDocumentFileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CEOApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GMApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CEOComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ApplicantApplicationDetail">
           <Key>
@@ -1302,6 +1364,37 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
                 <ScalarProperty Name="AllotmentDate" ColumnName="AllotmentDate" />
                 <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllotmentTransactionDetails">
+            <EntityTypeMapping TypeName="GidaGKPModel.AllotmentTransactionDetail">
+              <MappingFragment StoreEntitySet="AllotmentTransactionDetail">
+                <ScalarProperty Name="GMComment" ColumnName="GMComment" />
+                <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
+                <ScalarProperty Name="AMComment" ColumnName="AMComment" />
+                <ScalarProperty Name="GMApprovalStatus" ColumnName="GMApprovalStatus" />
+                <ScalarProperty Name="CEOApprovalStatus" ColumnName="CEOApprovalStatus" />
+                <ScalarProperty Name="AMApprovalStatus" ColumnName="AMApprovalStatus" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="ChalanDocumentFileType" ColumnName="ChalanDocumentFileType" />
+                <ScalarProperty Name="ChalanDocumentFileName" ColumnName="ChalanDocumentFileName" />
+                <ScalarProperty Name="ChalanDocument" ColumnName="ChalanDocument" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="trans_date" ColumnName="trans_date" />
+                <ScalarProperty Name="billing_address" ColumnName="billing_address" />
+                <ScalarProperty Name="billing_name" ColumnName="billing_name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="status_message" ColumnName="status_message" />
+                <ScalarProperty Name="card_name" ColumnName="card_name" />
+                <ScalarProperty Name="payment_mode" ColumnName="payment_mode" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="bank_ref_no" ColumnName="bank_ref_no" />
+                <ScalarProperty Name="tracking_id" ColumnName="tracking_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

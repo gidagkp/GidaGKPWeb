@@ -88,6 +88,7 @@ namespace GidaGkpWeb.Models
         public string TenPer_AllotmentMoney { get; set; }
         public string NintyPer_AllotmentMoney { get; set; }
         public string AllotementMoneyTobePaid { get; set; }
+        public string AllotmentTransactionAmount { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 

@@ -433,6 +433,82 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#btnSearchAlloteeListLeaseDeed').click(function () {
+        var selectedSchemeName = $('#SchemeName').val();
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: '{schemeName: "' + selectedSchemeName + '" }',
+            url: '/Admin/GetAllotteeListForLeasedeed',
+            success: function (data) {
+                var rowHtml = "";
+                var index = 1;
+                $('#tbodyData tr').remove();
+                $.each(data, function (key, entry) {
+                    rowHtml += '<tr>' +
+                        '<td class="text-center">' + index + '</td>' +
+                        '<td class="text-center">' + entry.FullName + '</td>' +
+                        '<td class="text-center">' + entry.ApplicationNumber + '</td>' +
+                        '<td class="text-center">' + entry.AllotmentNumber + '</td>' +
+                        '<td class="text-center"><a target="_blank" href="/Admin/LeasedeedStatus?applicationId=' + entry.ApplicationId + '"><strong>Leasedeed Status</strong></a></td>';
+                    rowHtml += '</tr>';
+                    index++;
+                });
+                if (data.length == 0) {
+                    rowHtml += '<tr>' +
+                        '<td colspan="5">No Record Found.</td>' +
+                        '</tr>';
+                }
+                $('#tbodyData').append(rowHtml);
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    });
+
+    $('#btnSchemeWiseAllotmentList').click(function () {
+        var selectedSchemeName = $('#SchemeName').val();
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: '{schemeName: "' + selectedSchemeName + '" }',
+            url: '/Admin/GetSchemeWiseAllotmentList',
+            success: function (data) {
+                var rowHtml = "";
+                var index = 1;
+                $('#tbodyData tr').remove();
+                $.each(data, function (key, entry) {
+                    rowHtml += '<tr>' +
+                        '<td class="text-center">' + index + '</td>' +
+                        '<td class="text-center">' + entry.FullName + '</td>' +
+                        '<td class="text-center">' + entry.ApplicationNumber + '</td>' +
+                        '<td class="text-center">' + entry.PlotNumber + '</td>' +
+                        '<td class="text-center"><a target="_blank" href="/Admin/AllotmentStatus?applicationId=' + entry.ApplicationId + '"><strong>Allotment Status</strong></a></td>';
+                    rowHtml += '</tr>';
+                    index++;
+                });
+                if (data.length == 0) {
+                    rowHtml += '<tr>' +
+                        '<td colspan="5">No Record Found.</td>' +
+                        '</tr>';
+                }
+                $('#tbodyData').append(rowHtml);
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    });
 });
 
 

@@ -105,6 +105,8 @@ namespace GidaGkpWeb.BAL
                         from plotMaster in plotMaster2.DefaultIfEmpty()
                         join allocateAllotment1 in _db.AllocateAllotmentDetails on invitationLetter.ApplicationId equals allocateAllotment1.ApplicationId into allocateAllotment2
                         from allocateAllotment in allocateAllotment2.DefaultIfEmpty()
+                        join allotmentTransaction1 in _db.AllotmentTransactionDetails on invitationLetter.ApplicationId equals allotmentTransaction1.ApplicationId into allotmentTransaction2
+                        from allotmentTransaction in allotmentTransaction2.DefaultIfEmpty()
                         where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
@@ -181,6 +183,7 @@ namespace GidaGkpWeb.BAL
                             GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
                             AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
                             InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
+                            AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -290,6 +293,7 @@ namespace GidaGkpWeb.BAL
                             AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 90) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
                             AllotmentNumber = x.AllotmentNumber,
                             InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
+                            AllotmentTransactionAmount = x.AllotmentTransactionAmount,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
@@ -1087,7 +1091,7 @@ namespace GidaGkpWeb.BAL
             }
         }
 
-        public List<ApplicationUserModel> GetApplicantSubmittedForInterview()
+        public List<ApplicationUserModel> GetApplicantSubmittedForInterview(int? schemeName)
         {
             try
             {
@@ -1101,7 +1105,7 @@ namespace GidaGkpWeb.BAL
                         join appLetter in _db.ApplicantInvitationLetters on application.ApplicationId equals appLetter.ApplicationId
                         join plotmaster1 in _db.PlotMasters on appLetter.PlotId equals plotmaster1.PlotId into plotmaster2
                         from plotmaster in plotmaster2.DefaultIfEmpty()
-                        where user.UserType != "Test"
+                        where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
                             PlotNumber = plotmaster.PlotNumber,

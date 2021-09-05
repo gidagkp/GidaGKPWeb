@@ -2,11 +2,9 @@
 @using GidaGkpWeb.Models;
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var UserDataModel = ViewData["UserDetail"] as List<ApplicationUserModel>;
-    int index = 1;
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
-<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/SchemeWiseApplicationList.js"></script>
 <script src="~/Scripts/App/Masters/navigation.js"></script>
 <style>
     button.submit_plot_master353 {
@@ -34,13 +32,13 @@
             <label for="usertype">Scheme Name<span class="required-field"></span></label>
             <select name="SchemeName" id="SchemeName" class="form-control"></select>
         </div>
-        <div class="form-group col-sm-4 col-xs-12">
+        @*<div class="form-group col-sm-4 col-xs-12">
             <label for="usertype">Sector Name<span class="required-field"></span></label>
             <select name="SectorName" id="SectorName" class="form-control"></select>
-        </div>
+        </div>*@
 
         <div class="form-group col-sm-1 col-xs-12">
-            <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearchTransactionCompleted">Search</button>
+            <button type="button" class="submit_plot_master" value="button" style=" margin-top: 23px;" id="btnSearchAlloteeListLeaseDeed">Search</button>
         </div>
 
 
@@ -59,7 +57,7 @@
                         </tr>
                     </thead>
                     <tbody id="tbodyData">
-                        @foreach (var data in UserDataModel)
+                        @*@foreach (var data in UserDataModel)
                         {
                             <tr>
                                 <td class="text-center">@index</td>
@@ -69,7 +67,7 @@
                                 <td class="text-center"> <a href="/Admin/LeasedeedStatus?applicationId=@data.ApplicationId">Leasedeed Status</a></td>
                             </tr>
                             index++;
-                        }
+                        }*@
                     </tbody>
                 </table>
             </div>

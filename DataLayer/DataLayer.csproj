@@ -125,6 +125,9 @@
     <Compile Include="AllocateAllotmentDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="AllotmentTransactionDetail.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="ApplicantApplicationDetail.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>

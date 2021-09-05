@@ -639,7 +639,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult CandidateListForInterview()
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == null || x.InterviewLetterStatus == "").ToList();
+            var data = _details.GetApplicantSubmittedForInterview(null).Where(x => x.InterviewLetterStatus == null || x.InterviewLetterStatus == "").ToList();
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -647,7 +647,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult SendMailtoApplicantForInterview(int userid)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.UserId == userid).FirstOrDefault();
+            var data = _details.GetApplicantSubmittedForInterview(null).Where(x => x.UserId == userid).FirstOrDefault();
             _details.ApplicationInvitationLetterStatusChnage(userid, "InvitationSentForInterview", null);
             this.SendMailToApplicantInterview(data.FullName, data.Email, data.InterviewDateTime);
             SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
@@ -673,7 +673,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult CandidateListForAllotment()
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "InvitationSentForInterview").ToList();
+            var data = _details.GetApplicantSubmittedForInterview(null).Where(x => x.InterviewLetterStatus == "InvitationSentForInterview").ToList();
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -682,7 +682,7 @@ namespace GidaGkpWeb.Controllers
         public JsonResult SendMailtoApplicantForInterviewResult(int userId, string status, int plotId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.UserId == userId).FirstOrDefault();
+            var data = _details.GetApplicantSubmittedForInterview(null).Where(x => x.UserId == userId).FirstOrDefault();
             _details.ApplicationInvitationLetterStatusChnage(userId, status, plotId);
             this.SendMailToApplicantInterviewResult(data.FullName, data.Email, status);
             SetAlertMessage("Email Send", "Email Send for Interview Invitation send.");
@@ -708,10 +708,14 @@ namespace GidaGkpWeb.Controllers
         }
         public ActionResult SchemeWiseAllotmentList()
         {
-            AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantSubmittedForInterview().Where(x => x.InterviewLetterStatus == "Selected").ToList();
-            ViewData["UserDetail"] = data;
             return View();
+        }
+        [HttpPost]
+        public JsonResult GetSchemeWiseAllotmentList(int schemeName)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantSubmittedForInterview(schemeName).Where(x => x.InterviewLetterStatus == "Selected").ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         public ActionResult AllotmentStatus(int applicationId)
         {
@@ -729,30 +733,12 @@ namespace GidaGkpWeb.Controllers
         {
             return View();
         }
-        public ActionResult LeasedeedStatus()
-        {
-            return View();
-        }
-        public ActionResult AllotteeListForLeasedeed()
-        {
-            return View();
-        }
-        public ActionResult DataForAllotmentNotesheet()
-        {
-            return View();
-        }
-        public ActionResult Logout()
-        {
-            Session.Abandon();
-            Session.Clear();
-            return RedirectToAction("AdminLogin", "Login");
-        }
         public ActionResult Invitation(int applicationId, int schemeName)
         {
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantUserDetail(schemeName).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
             ViewData["UserDetail"] = data;
-            
+
             return View();
         }
         [HttpPost]
@@ -1070,6 +1056,31 @@ namespace GidaGkpWeb.Controllers
             return Json(usrs, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult LeasedeedStatus()
+        {
+            return View();
+        }
+        public ActionResult AllotteeListForLeasedeed()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetAllotteeListForLeasedeed(int schemeName)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(schemeName).Where(x => !string.IsNullOrEmpty(x.AllotmentNumber) && string.IsNullOrEmpty(x.AllotmentTransactionAmount)).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DataForAllotmentNotesheet()
+        {
+            return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+            return RedirectToAction("AdminLogin", "Login");
+        }
     }
 
 }
