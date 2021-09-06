@@ -1056,8 +1056,11 @@ namespace GidaGkpWeb.Controllers
             return Json(usrs, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult LeasedeedStatus()
+        public ActionResult LeasedeedStatus(int applicationId)
         {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["UserDetail"] = data;
             return View();
         }
         public ActionResult AllotteeListForLeasedeed()
@@ -1074,6 +1077,31 @@ namespace GidaGkpWeb.Controllers
         public ActionResult DataForAllotmentNotesheet()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult SendAllotmentEmailToApplicant(int applicationId)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            this.SendMailToApplicantAllotmentMoney(data.FullName, data.Email, data.AllotementMoneyTobePaid, data.AllotmentDate);
+            SetAlertMessage("Email Send", "Pay Allotement Money Reminder send.");
+            return RedirectToAction("AllotmentMoneyWithInstallment", new { applicationId = applicationId });
+        }
+        private async Task SendMailToApplicantAllotmentMoney(string fullName, string email, string allotmentMoney, DateTime? AllotmentDate)
+        {
+            await Task.Run(() =>
+            {
+                //Send Email
+                Message msg = new Message()
+                {
+                    MessageTo = email,
+                    MessageNameTo = fullName,
+                    Subject = "Pay Allotement Money Reminder",
+                    Body = EmailHelper.GetAllotmentMoneySendEmail(fullName, allotmentMoney, AllotmentDate)
+                };
+                ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
+                sendMessageStrategy.SendMessages();
+            });
         }
         public ActionResult Logout()
         {

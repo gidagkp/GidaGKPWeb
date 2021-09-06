@@ -113,12 +113,13 @@
                     </table>
                 </div>
             </div>
-            <div class="col-sm-12 col-xs-12" style="padding:5px 15px 40px 15px;">
-                <button type="button" class="submit_plot_master" value="button" id="btnSavePlotMaster">Submit</button>
-                <button type="button" class="cancel_plot_master" value="button">Cancel</button>
-
-            </div>
-
+            <form action="~/Admin/SendAllotmentEmailToApplicant" method="post">
+                <div class="col-sm-12 col-xs-12" style="padding:5px 15px 40px 15px;">
+                    <input type="hidden" value="@UserDataModel.ApplicationId" name="applicationId" />
+                    <button type="submit" class="submit_plot_master" value="button" id="btnSendEmail">Send Payment Reminder </button>
+                    @*<button type="button" class="cancel_plot_master" value="button">Cancel</button>*@
+                </div>
+            </form>
         </div>
 
     </div>

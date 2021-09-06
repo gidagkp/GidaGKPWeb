@@ -32,6 +32,7 @@ namespace GidaGkpWeb.Models
         public string PlotSchemeName { get; set; }
         public string PlotSectorName { get; set; }
         public string AllotmentNumber { get; set; }
+        public DateTime? AllotmentDate { get; set; }
         public string UserType { get; set; }
         public string ResetCode { get; set; }
         public bool? IsActive { get; set; }

@@ -182,6 +182,7 @@ namespace GidaGkpWeb.BAL
                             ExtraCharge = plotMaster != null ? plotMaster.ExtraCharge : "",
                             GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
                             AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
+                            AllotmentDate = allocateAllotment != null ? allocateAllotment.AllotmentDate : null,
                             InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
                             AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
@@ -290,8 +291,9 @@ namespace GidaGkpWeb.BAL
                             GrandTotalCost = x.GrandTotalCost,
                             TenPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 10) / 100).ToString() : "",
                             NintyPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 90) / 100).ToString() : "",
-                            AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 90) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
+                            AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 10) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
                             AllotmentNumber = x.AllotmentNumber,
+                            AllotmentDate = x.AllotmentDate,
                             InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
                             AllotmentTransactionAmount = x.AllotmentTransactionAmount,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
