@@ -1083,21 +1083,24 @@ namespace GidaGkpWeb.Controllers
         {
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
-            this.SendMailToApplicantAllotmentMoney(data.FullName, data.Email, data.AllotementMoneyTobePaid, data.AllotmentDate);
+            string baseUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+            var encryptedApplicationId = CryptoEngine.Encrypt(data.ApplicationId.ToString());
+            this.SendMailToApplicantAllotmentMoney(data.FullName, data.Email, data.AllotementMoneyTobePaid, data.AllotmentDate, encryptedApplicationId, baseUrl);
             SetAlertMessage("Email Send", "Pay Allotement Money Reminder send.");
             return RedirectToAction("AllotmentMoneyWithInstallment", new { applicationId = applicationId });
         }
-        private async Task SendMailToApplicantAllotmentMoney(string fullName, string email, string allotmentMoney, DateTime? AllotmentDate)
+        private async Task SendMailToApplicantAllotmentMoney(string fullName, string email, string allotmentMoney, DateTime? AllotmentDate, string ApplicationId, string baseUrl)
         {
             await Task.Run(() =>
             {
                 //Send Email
+                string payAllotementURL = "Applicant/PayAllotementMoney?Id=" + ApplicationId;
                 Message msg = new Message()
                 {
                     MessageTo = email,
                     MessageNameTo = fullName,
                     Subject = "Pay Allotement Money Reminder",
-                    Body = EmailHelper.GetAllotmentMoneySendEmail(fullName, allotmentMoney, AllotmentDate)
+                    Body = EmailHelper.GetAllotmentMoneySendEmail(fullName, allotmentMoney, AllotmentDate, baseUrl + payAllotementURL)
                 };
                 ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
                 sendMessageStrategy.SendMessages();

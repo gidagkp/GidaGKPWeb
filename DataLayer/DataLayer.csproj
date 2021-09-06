@@ -194,6 +194,9 @@
     <Compile Include="PageMaster.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="PGAllotementTransactionInformation.cs">
+      <DependentUpon>DbEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="PGTransactionInformation.cs">
       <DependentUpon>DbEntity.tt</DependentUpon>
     </Compile>

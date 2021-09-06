@@ -1392,18 +1392,6 @@ namespace GidaGkpWeb.BAL
             {
                 _db = new GidaGKPEntities();
                 int _effectRow = 0;
-
-                //var extingPGInfo = _db.PGTransactionInformations.Where(x => x.ApplicationId == applicationId && x.UserId == userId).FirstOrDefault();
-                //if (extingPGInfo != null)  // update detail
-                //{
-                //    extingPGInfo.OrderId = OrderId;
-                //    extingPGInfo.TransactionId = TransactionId;
-                //    _db.Entry(extingPGInfo).State = EntityState.Modified;
-                //    _effectRow = _db.SaveChanges();
-                //}
-
-                //else
-                //{
                 PGTransactionInformation _newRecord = new PGTransactionInformation()
                 {
                     UserId = userId,
@@ -1522,6 +1510,98 @@ namespace GidaGkpWeb.BAL
                 return Enums.CrudStatus.InternalError;
             }
 
+        }
+
+        public AllotmentTransactionDetail CheckAllotementtransactionId(long transactionId)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return _db.AllotmentTransactionDetails.Where(x => x.tracking_id == transactionId).FirstOrDefault(); ;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return null;
+            }
+        }
+
+        public AllotmentTransactionDetail CheckAllotementorderId(long orderId)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return _db.AllotmentTransactionDetails.Where(x => x.order_id == orderId).FirstOrDefault();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return null;
+            }
+        }
+
+        public PGAllotementTransactionInformation GetAllotementPGTransactionInformation(string OrderId, string TransactionId)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return _db.PGAllotementTransactionInformations.Where(x => x.OrderId == OrderId).FirstOrDefault(); ;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return null;
+            }
+        }
+        public Enums.CrudStatus SaveAllotementPGTransactionInformation(int userId, int applicationId, string OrderId, string TransactionId)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                PGAllotementTransactionInformation _newRecord = new PGAllotementTransactionInformation()
+                {
+                    UserId = userId,
+                    ApplicationId = applicationId,
+                    OrderId = OrderId,
+                    TransactionId = TransactionId,
+                    CreatedDate = DateTime.Now
+                };
+                _db.Entry(_newRecord).State = EntityState.Added;
+                _effectRow = _db.SaveChanges();
+                //}
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
         }
     }
 }

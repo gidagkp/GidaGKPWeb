@@ -44,6 +44,7 @@ namespace DataLayer
         public virtual DbSet<Lookup> Lookups { get; set; }
         public virtual DbSet<MortgageDetail> MortgageDetails { get; set; }
         public virtual DbSet<PageMaster> PageMasters { get; set; }
+        public virtual DbSet<PGAllotementTransactionInformation> PGAllotementTransactionInformations { get; set; }
         public virtual DbSet<PGTransactionInformation> PGTransactionInformations { get; set; }
         public virtual DbSet<PlotMaster> PlotMasters { get; set; }
         public virtual DbSet<RoleWisePermission> RoleWisePermissions { get; set; }

@@ -39,5 +39,6 @@ namespace DataLayer
         public string AMComment { get; set; }
         public string CEOComment { get; set; }
         public string GMComment { get; set; }
+        public string PaymentType { get; set; }
     }
 }

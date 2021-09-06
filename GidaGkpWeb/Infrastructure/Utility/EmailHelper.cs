@@ -58,11 +58,12 @@ namespace GidaGkpWeb.Infrastructure.Utility
             return body;
         }
 
-        public static string GetAllotmentMoneySendEmail(string fullName, string allotmentMoney, DateTime? AllotmentDate)
+        public static string GetAllotmentMoneySendEmail(string fullName, string allotmentMoney, DateTime? AllotmentDate, string link)
         {
             string body = string.Format("Hi {0}<br/><br/>", fullName);
             body += "Please Pay you allotement money Rs. " + allotmentMoney + " on or before " + AllotmentDate.Value.AddDays(7).ToShortDateString();
             body += "<br/><br/>";
+            body += link;
             body += "Thank You,<br/>";
             body += "GIDA Gorakhpur Customer Support";
             return body;

@@ -873,5 +873,146 @@ namespace GidaGkpWeb.Controllers
         }
         #endregion
 
+        public ActionResult PayAllotementMoney(string Id)
+        {
+            var applicationId = Convert.ToInt32(CryptoEngine.Decrypt(Id));
+            AdminDetails _admindetails = new AdminDetails();
+            var data = _admindetails.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+
+            ApplicantDetails _details = new ApplicantDetails();
+            string transactionId = VerificationCodeGeneration.GetUniqueNumber(), orderId = VerificationCodeGeneration.GetUniqueNumber();
+            while (_details.CheckAllotementtransactionId(Convert.ToInt64(transactionId)) != null)
+            {
+                transactionId = VerificationCodeGeneration.GetUniqueNumber();
+            }
+            while (_details.CheckAllotementorderId(Convert.ToInt64(orderId)) != null)
+            {
+                orderId = VerificationCodeGeneration.GetUniqueNumber();
+            }
+            if (data.UserId > 0 && data.ApplicationId > 0)
+            {
+                var _effectRow = _details.SaveAllotementPGTransactionInformation(data.UserId, data.ApplicationId, orderId, transactionId);
+                if (_effectRow <= 0)
+                {
+                    SetAlertMessage("Session Timeout", "Error");
+                    return View();
+                }
+            }
+            else
+            {
+                SetAlertMessage("Session Timeout", "Error");
+                return RedirectToAction("ApplicantLogin", "Login");
+            }
+
+            string baseURL = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+            string amountToBePaid = data.AllotementMoneyTobePaid.ToString();
+            string ccaRequest = "tid=" + transactionId + "&merchant_id=" + strMerchantId + "&order_id=" + orderId + "&amount=" + amountToBePaid + "&currency=INR&redirect_url=" + baseURL + "Applicant/PaymentResponseAllotment&cancel_url=" + baseURL + "Applicant/PaymentResponseAllotment&language=EN&billing_name=" + data.FullName + "&billing_address=" + data.CAddress + "&billing_city=&billing_state=&billing_zip=&billing_country=&billing_tel=&billing_email=&delivery_name=" + data.FullName + "&delivery_address=" + data.CAddress + "&delivery_city=&delivery_state=&delivery_zip=&delivery_country=&delivery_tel=&merchant_param1=" + data.UserId + "&merchant_param2=" + data.ApplicationId + "&merchant_param3=" + data.UserName + "&merchant_param4=" + data.UserType + "&merchant_param5=" + orderId + "&";
+            Session["strEncRequest"] = ccaCrypto.Encrypt(ccaRequest, workingKey);
+            Session["strAccessCode"] = strAccessCode;
+            ViewData["UserData"] = data;
+            return View();
+        }
+        public ActionResult PaymentResponseAllotment()
+        {
+            ApplicantDetails _details = new ApplicantDetails();
+            CCACrypto ccaCrypto = new CCACrypto();
+            string encResponse = ccaCrypto.Decrypt(Request.Form["encResp"], workingKey);
+            NameValueCollection Params = new NameValueCollection();
+            string[] segments = encResponse.Split('&');
+            foreach (string seg in segments)
+            {
+                string[] parts = seg.Split('=');
+                if (parts.Length > 0)
+                {
+                    string Key = parts[0].Trim();
+                    string Value = parts[1].Trim();
+                    Params.Add(Key, Value);
+                }
+            }
+
+            var UserId = Convert.ToInt32(Params["merchant_param1"]);
+            var ApplicationId = Convert.ToInt32(Params["merchant_param2"]);
+            var Username = Convert.ToString(Params["merchant_param3"]);
+            LoginDetails _logindetails = new LoginDetails();
+            string _response = string.Empty;
+            Enums.LoginMessage message = _logindetails.GetLoginByUsrrname(UserData.Username);
+            _response = LoginResponse(message);
+            if (message != Enums.LoginMessage.Authenticated)
+            {
+                SetAlertMessage("Session Timeout", "Error");
+                return RedirectToAction("ApplicantLogin", "Login");
+            }
+
+            setUserClaim();
+
+            var pdinfo = _details.GetPGTransactionInformation(Convert.ToString(Params["merchant_param5"]), Convert.ToString(Params["tracking_id"]));
+
+            if (pdinfo != null)
+            {
+                if (Convert.ToInt64(pdinfo.OrderId) != Convert.ToInt64(Params["order_id"]))
+                {
+                    SetAlertMessage("Payment Not Done", "Error");
+                    return RedirectToAction("PaymentRequest");
+                }
+
+            }
+            else
+            {
+                SetAlertMessage("Payment Not Done", "Error");
+                return RedirectToAction("PaymentRequest");
+            }
+
+            if (Params["order_status"] == "Success")
+            {
+                var payData = _details.GetApplicationTransactionInformation(UserData.UserId, UserData.ApplicationId);
+                if (payData == null)
+                {
+                    ApplicantTransactionDetail detail = new ApplicantTransactionDetail()
+                    {
+                        UserId = Convert.ToInt32(Params["merchant_param1"]),
+                        amount = Params["amount"],
+                        bank_ref_no = Params["bank_ref_no"],
+                        billing_address = Params["billing_address"],
+                        billing_name = Params["billing_name"],
+                        card_name = Params["card_name"],
+                        created_date = DateTime.Now,
+                        order_id = Convert.ToInt64(Params["order_id"]),
+                        order_status = Params["order_status"],
+                        payment_mode = Params["payment_mode"],
+                        status_message = Params["status_message"],
+                        tracking_id = Convert.ToInt64(Params["tracking_id"]),
+                        ApplicationId = Convert.ToInt32(Params["merchant_param2"]),
+                        trans_date = DateTime.Now,
+                        TransactionType = "Online"
+                    };
+                    var rowEffected = _details.SaveApplicantTransactionDeatil(detail);
+                    if (rowEffected > 0)
+                    {
+                        SetAlertMessage("Payment done successfully", "Payment Status");
+                    }
+                    else
+                    {
+                        SetAlertMessage("Some Error occured in the System but payment done successfully, Please contact system administrator", "Payment Status");
+                    }
+
+                    return RedirectToAction("PaymentResponseSuccess");
+                }
+                else
+                {
+                    SetAlertMessage("Payment already made for current Application", "Payment Error");
+                    return RedirectToAction("PaymentRequest");
+                }
+            }
+            else if (Params["order_status"] == "Aborted")
+            {
+                SetAlertMessage("Payment Aborted", "Error");
+                return RedirectToAction("PaymentRequest");
+            }
+            else
+            {
+                SetAlertMessage("Payment Failed", "Error");
+                return RedirectToAction("PaymentRequest");
+            }
+        }
     }
 }

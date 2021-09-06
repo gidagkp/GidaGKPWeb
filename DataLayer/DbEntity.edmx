@@ -68,6 +68,7 @@
           <Property Name="AMComment" Type="varchar(max)" />
           <Property Name="CEOComment" Type="varchar(max)" />
           <Property Name="GMComment" Type="varchar(max)" />
+          <Property Name="PaymentType" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ApplicantApplicationDetail">
           <Key>
@@ -513,6 +514,17 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="PGAllotementTransactionInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ApplicationId" Type="int" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" />
+          <Property Name="TransactionId" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="PGTransactionInformation">
           <Key>
             <PropertyRef Name="Id" />
@@ -632,6 +644,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MortgageDetails" EntityType="Self.MortgageDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PageMaster" EntityType="Self.PageMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PGAllotementTransactionInformation" EntityType="Self.PGAllotementTransactionInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PGTransactionInformation" EntityType="Self.PGTransactionInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlotMaster" EntityType="Self.PlotMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleWisePermission" EntityType="Self.RoleWisePermission" Schema="dbo" store:Type="Tables" />
@@ -697,6 +710,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySet Name="Lookups" EntityType="GidaGKPModel.Lookup" />
           <EntitySet Name="MortgageDetails" EntityType="GidaGKPModel.MortgageDetail" />
           <EntitySet Name="PageMasters" EntityType="GidaGKPModel.PageMaster" />
+          <EntitySet Name="PGAllotementTransactionInformations" EntityType="GidaGKPModel.PGAllotementTransactionInformation" />
           <EntitySet Name="PGTransactionInformations" EntityType="GidaGKPModel.PGTransactionInformation" />
           <EntitySet Name="PlotMasters" EntityType="GidaGKPModel.PlotMaster" />
           <EntitySet Name="RoleWisePermissions" EntityType="GidaGKPModel.RoleWisePermission" />
@@ -778,6 +792,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="AMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CEOComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="GMComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ApplicantApplicationDetail">
           <Key>
@@ -1200,6 +1215,17 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="RoleWisePermissions" Relationship="GidaGKPModel.FK_RoleMasterUser_PageMaster" FromRole="PageMaster" ToRole="RoleWisePermission" />
         </EntityType>
+        <EntityType Name="PGAllotementTransactionInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ApplicationId" Type="Int32" />
+          <Property Name="OrderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="PGTransactionInformation">
           <Key>
             <PropertyRef Name="Id" />
@@ -1371,6 +1397,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySetMapping Name="AllotmentTransactionDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.AllotmentTransactionDetail">
               <MappingFragment StoreEntitySet="AllotmentTransactionDetail">
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
                 <ScalarProperty Name="GMComment" ColumnName="GMComment" />
                 <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
                 <ScalarProperty Name="AMComment" ColumnName="AMComment" />
@@ -1828,6 +1855,18 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="PageName" ColumnName="PageName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PGAllotementTransactionInformations">
+            <EntityTypeMapping TypeName="GidaGKPModel.PGAllotementTransactionInformation">
+              <MappingFragment StoreEntitySet="PGAllotementTransactionInformation">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

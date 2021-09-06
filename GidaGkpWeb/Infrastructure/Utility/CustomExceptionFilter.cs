@@ -8,14 +8,24 @@ namespace GidaGkpWeb.Infrastructure.Utility
 {
     public class SessionTimeoutAttribute : ActionFilterAttribute
     {
+        List<string> ByPassActions = new List<string>()
+        {
+            "PaymentResponse",
+            "PayAllotementMoney",
+            "PaymentResponseAllotment"
+        };
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             HttpContext ctx = HttpContext.Current;
-            if (HttpContext.Current.Session["userid"] == null && filterContext.ActionDescriptor.ActionName != "PaymentResponse")
+            if (!ByPassActions.Contains(filterContext.ActionDescriptor.ActionName))
             {
-                filterContext.Result = new RedirectResult("~/Login/ApplicantLogin");
-                return;
+                if (HttpContext.Current.Session["userid"] == null)
+                {
+                    filterContext.Result = new RedirectResult("~/Login/ApplicantLogin");
+                    return;
+                }
             }
+            
             base.OnActionExecuting(filterContext);
         }
     }

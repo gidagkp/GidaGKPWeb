@@ -704,6 +704,7 @@
     <Content Include="Views\Admin\AllotteeListForLeasedeed.cshtml" />
     <Content Include="Views\Admin\LeasedeedStatus.cshtml" />
     <Content Include="Views\Admin\DataForAllotmentNotesheet.cshtml" />
+    <Content Include="Views\Applicant\PayAllotementMoney.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
