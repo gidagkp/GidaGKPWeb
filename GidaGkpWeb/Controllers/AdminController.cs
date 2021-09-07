@@ -1106,6 +1106,10 @@ namespace GidaGkpWeb.Controllers
                 sendMessageStrategy.SendMessages();
             });
         }
+        public ActionResult PrintAllotmentNotesheet()
+        {
+            return View();
+        }
         public ActionResult Logout()
         {
             Session.Abandon();
