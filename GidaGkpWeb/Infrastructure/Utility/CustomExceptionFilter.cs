@@ -12,7 +12,9 @@ namespace GidaGkpWeb.Infrastructure.Utility
         {
             "PaymentResponse",
             "PayAllotementMoney",
-            "PaymentResponseAllotment"
+            "PaymentResponseAllotment",
+            "AllotementPaymentResponseSuccess",
+            "AllotementPaymentReciept"
         };
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {

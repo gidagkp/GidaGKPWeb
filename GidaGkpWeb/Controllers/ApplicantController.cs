@@ -935,39 +935,38 @@ namespace GidaGkpWeb.Controllers
             var Username = Convert.ToString(Params["merchant_param3"]);
             LoginDetails _logindetails = new LoginDetails();
             string _response = string.Empty;
-            Enums.LoginMessage message = _logindetails.GetLoginByUsrrname(UserData.Username);
-            _response = LoginResponse(message);
-            if (message != Enums.LoginMessage.Authenticated)
-            {
-                SetAlertMessage("Session Timeout", "Error");
-                return RedirectToAction("ApplicantLogin", "Login");
-            }
+            //Enums.LoginMessage message = _logindetails.GetLoginByUsrrname(UserData.Username);
+            //_response = LoginResponse(message);
+            //if (message != Enums.LoginMessage.Authenticated)
+            //{
+            //    SetAlertMessage("Session Timeout", "Error");
+            //    return RedirectToAction("ApplicantLogin", "Login");
+            //}
+            //setUserClaim();
 
-            setUserClaim();
-
-            var pdinfo = _details.GetPGTransactionInformation(Convert.ToString(Params["merchant_param5"]), Convert.ToString(Params["tracking_id"]));
+            var pdinfo = _details.GetAllotementPGTransactionInformation(Convert.ToString(Params["merchant_param5"]), Convert.ToString(Params["tracking_id"]));
 
             if (pdinfo != null)
             {
                 if (Convert.ToInt64(pdinfo.OrderId) != Convert.ToInt64(Params["order_id"]))
                 {
                     SetAlertMessage("Payment Not Done", "Error");
-                    return RedirectToAction("PaymentRequest");
+                    return RedirectToAction("PayAllotementMoney");
                 }
 
             }
             else
             {
                 SetAlertMessage("Payment Not Done", "Error");
-                return RedirectToAction("PaymentRequest");
+                return RedirectToAction("PayAllotementMoney");
             }
 
             if (Params["order_status"] == "Success")
             {
-                var payData = _details.GetApplicationTransactionInformation(UserData.UserId, UserData.ApplicationId);
+                var payData = _details.GetAllotementApplicationTransactionInformation(UserData.UserId, UserData.ApplicationId);
                 if (payData == null)
                 {
-                    ApplicantTransactionDetail detail = new ApplicantTransactionDetail()
+                    AllotmentTransactionDetail detail = new AllotmentTransactionDetail()
                     {
                         UserId = Convert.ToInt32(Params["merchant_param1"]),
                         amount = Params["amount"],
@@ -985,7 +984,7 @@ namespace GidaGkpWeb.Controllers
                         trans_date = DateTime.Now,
                         TransactionType = "Online"
                     };
-                    var rowEffected = _details.SaveApplicantTransactionDeatil(detail);
+                    var rowEffected = _details.SaveAllotementApplicantTransactionDeatil(detail);
                     if (rowEffected > 0)
                     {
                         SetAlertMessage("Payment done successfully", "Payment Status");
@@ -995,24 +994,37 @@ namespace GidaGkpWeb.Controllers
                         SetAlertMessage("Some Error occured in the System but payment done successfully, Please contact system administrator", "Payment Status");
                     }
 
-                    return RedirectToAction("PaymentResponseSuccess");
+                    return RedirectToAction("AllotementPaymentResponseSuccess", new { ApplicationId = ApplicationId });
                 }
                 else
                 {
                     SetAlertMessage("Payment already made for current Application", "Payment Error");
-                    return RedirectToAction("PaymentRequest");
+                    return RedirectToAction("PayAllotementMoney");
                 }
             }
             else if (Params["order_status"] == "Aborted")
             {
                 SetAlertMessage("Payment Aborted", "Error");
-                return RedirectToAction("PaymentRequest");
+                return RedirectToAction("PayAllotementMoney");
             }
             else
             {
                 SetAlertMessage("Payment Failed", "Error");
-                return RedirectToAction("PaymentRequest");
+                return RedirectToAction("PayAllotementMoney");
             }
+        }
+        public ActionResult AllotementPaymentResponseSuccess(int ApplicationId)
+        {
+            ApplicantDetails _details = new ApplicantDetails();
+            ViewData["ApplicationId"] = ApplicationId;
+            return View();
+        }
+        public ActionResult AllotementPaymentReciept(int? applicationId = null)
+        {
+            ApplicantDetails _details = new ApplicantDetails();
+            var data = _details.GetUserAllotmentDetail(applicationId);
+            ViewData["UserData"] = data;
+            return View();
         }
     }
 }

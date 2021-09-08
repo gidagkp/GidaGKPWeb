@@ -160,7 +160,7 @@ namespace GidaGkpWeb.BAL
                     _db.SaveChanges();
                     return "Error";
                 }
-                
+
             }
 
             return _effectRow > 0 ? app.ApplicationNumber : "Error";
@@ -1602,6 +1602,87 @@ namespace GidaGkpWeb.BAL
                 }
                 return Enums.CrudStatus.InternalError;
             }
+        }
+        public AllotmentTransactionDetail GetAllotementApplicationTransactionInformation(int userid, int applicationId)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return _db.AllotmentTransactionDetails.Where(x => x.UserId == userid && x.ApplicationId == applicationId).FirstOrDefault(); ;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return null;
+            }
+        }
+        public int SaveAllotementApplicantTransactionDeatil(AllotmentTransactionDetail detail)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                _db.Entry(detail).State = EntityState.Added;
+                return _db.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return 0;
+            }
+        }
+
+        public ApplicationDetailModel GetUserAllotmentDetail(int? appID)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return (from application in _db.ApplicantApplicationDetails
+                        join applicantDetail in _db.ApplicantDetails on application.ApplicationId equals applicantDetail.ApplicationId
+                        join plotDetail in _db.ApplicantPlotDetails on application.ApplicationId equals plotDetail.ApplicationId
+                        join transaction1 in _db.AllotmentTransactionDetails on applicantDetail.ApplicationId equals transaction1.ApplicationId into transaction2
+                        from transaction in transaction2.DefaultIfEmpty()
+                        where application.ApplicationId == appID
+                        select new ApplicationDetailModel
+                        {
+                            ApplicationNumber = application.ApplicationNumber,
+                            FullApplicantName = applicantDetail.FullApplicantName,
+                            Emaild = applicantDetail.EmailId,
+                            CAddress = applicantDetail.CAddress,
+                            Mobile = applicantDetail.Mobile,
+                            TotalAmount = plotDetail.TotalAmount,
+                            AllotementMoney = transaction != null ? transaction.amount : null,
+                            NetAmount = plotDetail.NetAmount,
+                            ApplicationFee = plotDetail.ApplicationFee,
+                            EarnestMoneyDeposit = plotDetail.EarnestMoney,
+                            GST = plotDetail.GST,
+                            PaymentDate = transaction != null ? transaction.trans_date : DateTime.Now,
+                            PaymentReferenceNumber = transaction != null ? transaction.bank_ref_no : string.Empty
+                        }).FirstOrDefault();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return null;
+            }
+
         }
     }
 }

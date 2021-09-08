@@ -112,6 +112,7 @@ namespace GidaGkpWeb.Models
         public string SchemeName { get; set; }
         public string SectorName { get; set; }
         public string PlotArea { get; set; }
+        public string AllotementMoney { get; set; }
     }
     public class AcknowledgementDetailModel : ApplicationDetailModel
     {
