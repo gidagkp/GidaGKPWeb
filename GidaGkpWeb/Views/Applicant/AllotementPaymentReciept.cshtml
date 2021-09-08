@@ -107,7 +107,7 @@
                         </div>
                         <div class="row">
                             <div class="receipt-header receipt-header-mid">
-                                <center><h2>Receipt</h2></center>
+                                <center><h3>Payment Receipt</h3></center>
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     <div class="receipt-header">
                                         <h5><b>Application Number :</b> @applicationData.ApplicationNumber</h5>
@@ -130,7 +130,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    @*<tr>
                                         <td class="col-md-9">Application Fee</td>
                                         <td class="col-md-3"><i class="fa fa-inr"></i> @applicationData.ApplicationFee</td>
                                     </tr>
@@ -141,12 +141,12 @@
                                     <tr>
                                         <td class="col-md-9">Earnest Money Deposit (EMD)</td>
                                         <td class="col-md-3"><i class="fa fa-inr"></i> @applicationData.EarnestMoneyDeposit</td>
-                                    </tr>
+                                    </tr>*@
                                     <tr>
-                                        <td class="col-md-9">Allotement Money Paid</td>
+                                        <td class="col-md-9">Allotement Money to be Paid</td>
                                         <td class="col-md-3"><i class="fa fa-inr"></i> @applicationData.AllotementMoney</td>
                                     </tr>
-                                    <tr>
+                                    @*<tr>
                                         <td class="text-right">
                                             <p>
                                                 <strong>Total Amount (Fee + GST): </strong>
@@ -155,7 +155,7 @@
                                                 <strong>Late Fees: </strong>
                                             </p>
                                             <p>
-                                                <strong>Payable Amount (Total Amnt + EMD): </strong>
+                                                <strong>Payable Amount: </strong>
                                             </p>
                                         </td>
                                         <td>
@@ -166,14 +166,14 @@
                                                 <strong><i class="fa fa-inr"></i> 0.00</strong>
                                             </p>
                                             <p>
-                                                <strong><i class="fa fa-inr"></i> @applicationData.NetAmount</strong>
+                                                <strong><i class="fa fa-inr"></i> @applicationData.AllotementMoney</strong>
                                             </p>
                                         </td>
-                                    </tr>
+                                    </tr>*@
                                     <tr>
 
-                                        <td class="text-right"><h2><strong>Total: </strong></h2></td>
-                                        <td class="text-left text-danger"><h2><strong><i class="fa fa-inr"></i> @applicationData.NetAmount</strong></h2></td>
+                                        <td class="text-right"><h5><strong>Total Paid Amount: </strong></h5></td>
+                                        <td class="text-left text-danger"><h5><strong><i class="fa fa-inr"></i> @applicationData.AllotementMoney</strong></h5></td>
                                     </tr>
                                 </tbody>
                             </table>
