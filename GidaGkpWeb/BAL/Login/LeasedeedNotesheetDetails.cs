@@ -72,5 +72,69 @@ namespace GidaGkpWeb.BAL.Login
                 return null;
             }
         }
+
+        public Enums.CrudStatus SaveLeasedeedNotesheet(LeasdeedNotesheet LNotesheet)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                if (LNotesheet.Id > 0)
+                {
+                    var adminNotesheet = _db.LeasdeedNotesheets.Where(x => x.Id == LNotesheet.Id).FirstOrDefault();
+                    if (adminNotesheet != null)
+                    {
+                        adminNotesheet.ApplicationId = LNotesheet.ApplicationId;
+                        adminNotesheet.ApplicantId = LNotesheet.ApplicantId;
+                        adminNotesheet.Bankguranteedate = LNotesheet.Bankguranteedate;
+                        adminNotesheet.Bankaddress = LNotesheet.Bankaddress;
+                        adminNotesheet.Allotmentnumber = LNotesheet.Allotmentnumber;
+                        if (LNotesheet.Digsign_Propassist != null)
+                        {
+                            adminNotesheet.Digsign_Propassist = LNotesheet.Digsign_Propassist;
+                            adminNotesheet.Doctype_Propassist = LNotesheet.Doctype_Propassist;
+                            adminNotesheet.Docname_Propassist = LNotesheet.Docname_Propassist;
+                        }
+                        if (LNotesheet.Digsign_Manager != null)
+                        {
+                            adminNotesheet.Digsign_Manager = LNotesheet.Digsign_Manager;
+                            adminNotesheet.Doctype_Digsignmanager = LNotesheet.Doctype_Digsignmanager;
+                            adminNotesheet.Docname_Digsignmanager = LNotesheet.Docname_Digsignmanager;
+                        }
+                        if (LNotesheet.Digsign_FManager != null)
+                        {
+                            adminNotesheet.Digsign_FManager = LNotesheet.Digsign_FManager;
+                            adminNotesheet.Doctype_FManager = LNotesheet.Doctype_FManager;
+                            adminNotesheet.Docname_FManager = LNotesheet.Docname_FManager;
+                        }
+                        adminNotesheet.Comment_Propassist = LNotesheet.Comment_Propassist;
+                        adminNotesheet.Comment_Manager = LNotesheet.Comment_Manager;
+                        adminNotesheet.Comment_Propassist = LNotesheet.Comment_FManager;
+
+
+                        _db.Entry(adminNotesheet).State = EntityState.Modified;
+                        _effectRow = _db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    _db.Entry(LNotesheet).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
+            }
+        }
     }
 }
