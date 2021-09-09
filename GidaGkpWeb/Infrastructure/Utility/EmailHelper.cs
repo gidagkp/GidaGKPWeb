@@ -64,6 +64,7 @@ namespace GidaGkpWeb.Infrastructure.Utility
             body += "Please Pay you allotement money Rs. " + allotmentMoney + " on or before " + AllotmentDate.Value.AddDays(7).ToShortDateString();
             body += "<br/><br/>";
             body += link;
+            body += "<br/>";
             body += "Thank You,<br/>";
             body += "GIDA Gorakhpur Customer Support";
             return body;
