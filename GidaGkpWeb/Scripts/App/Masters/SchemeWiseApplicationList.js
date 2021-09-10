@@ -406,14 +406,21 @@ $(document).ready(function () {
                         '<td class="text-center">' + entry.ApplicationNumber + '</td>' +
                         '<td class="text-center">' + entry.FullName + '</td>' +
                         '<td class="text-center">' + entry.ContactNo + '</td>' +
-                        '<td class="text-center">' + entry.PlotArea + '</td>' +
-                        '<td class="text-center">' + entry.InterviewLetterStatus + '</td>';
-
-                    if (entry.InterviewLetterStatus != null && entry.InterviewLetterStatus != "" && entry.InterviewLetterStatus != undefined) {
-                        rowHtml += '<td class="text-center" id="actionColumn"><a target="_blank" style="opacity: 0.5;pointer-events: none;" href="#"><strong>Application Status</strong></a></td>';
+                        '<td class="text-center">' + entry.PlotArea + '</td>';
+                    if (entry.InterviewLetterStatus == 'InvitationSentForInterview')
+                        rowHtml += '<td class="text-center" style="color:#ea9a06">Invitation Sent</td>';
+                    else if (entry.InterviewLetterStatus == 'Selected')
+                        rowHtml += '<td class="text-center" style="color:#08bf0b">Selected in Interview</td>';
+                    else
+                        rowHtml += '<td class="text-center">' + entry.InterviewLetterStatus + '/td>';
+                    if (entry.InterviewLetterStatus != null && entry.InterviewLetterStatus != "" && entry.InterviewLetterStatus != undefined && entry.InterviewLetterStatus == 'Selected') {
+                        rowHtml += '<td class="text-center" id="actionColumn"></td>';
+                    }
+                    else if (entry.InterviewLetterStatus != null && entry.InterviewLetterStatus != "" && entry.InterviewLetterStatus != undefined && entry.InterviewLetterStatus != 'Selected') {
+                        rowHtml += '<td class="text-center" id="actionColumn"><a target="_blank" href="/Admin/Invitation?applicationId=' + entry.ApplicationId + '&schemeName=' + schemeName + '"><strong style="color:#08bf0b">Update Invitation</strong></a></td>';
                     }
                     else {
-                        rowHtml += '<td class="text-center" id="actionColumn"><a target="_blank" href="/Admin/Invitation?applicationId=' + entry.ApplicationId + '&schemeName=' + schemeName + '"><strong>Send Invitation</strong></a></td>';
+                        rowHtml += '<td class="text-center" id="actionColumn"><a target="_blank" href="/Admin/Invitation?applicationId=' + entry.ApplicationId + '&schemeName=' + schemeName + '"><strong  style="color:#ea9a06">Send Invitation</strong></a></td>';
                     }
                     rowHtml += '</tr>';
                     index++;

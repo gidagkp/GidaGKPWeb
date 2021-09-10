@@ -67,14 +67,14 @@
             <div class="col-sm-12 col-xs-12">
                 <div class="form-group col-sm-6 col-xs-12">
                     <label for="user" class=""> Date and Time of Interview   </label>
-                    <input type="datetime-local" name="InterviewDateTime" id="InterviewDateTime" class="form-control">
+                    <input type="datetime-local" name="InterviewDateTime" id="InterviewDateTime" class="form-control" value="@UserDataModel.InterviewDateTime">
                 </div>
                 <div class="form-group col-sm-6 col-xs-12">
                     <label for="user" class=""> Interview Mode   </label>
                     <select id="ddlinterview" name="InterviewMode">
                         <option>Select Mode</option>
-                        <option>Interview</option>
-                        <option>Lottery</option>
+                        <option selected="@UserDataModel.InterviewMode=='Interview'">Interview</option>
+                        <option selected="@UserDataModel.InterviewMode=='Lottery'">Lottery</option>
                     </select>
                 </div>
             </div>

@@ -73,6 +73,7 @@ namespace GidaGkpWeb.Models
         public string GMDocumentComment { get; set; }
 
         public string InterviewDateTime { get; set; }
+        public string InterviewMode { get; set; }
         public string PlotNumber { get; set; }
         public string InterviewLetterStatus { get; set; }
         public int PlotId { get; set; }

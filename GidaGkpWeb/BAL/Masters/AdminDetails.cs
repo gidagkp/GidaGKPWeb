@@ -184,6 +184,7 @@ namespace GidaGkpWeb.BAL
                             AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
                             AllotmentDate = allocateAllotment != null ? allocateAllotment.AllotmentDate : null,
                             InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
+                            InterviewMode = invitationLetter != null ? invitationLetter.InterviewMode : null,
                             AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
@@ -295,6 +296,7 @@ namespace GidaGkpWeb.BAL
                             AllotmentNumber = x.AllotmentNumber,
                             AllotmentDate = x.AllotmentDate,
                             InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
+                            InterviewMode = x.InterviewMode,
                             AllotmentTransactionAmount = x.AllotmentTransactionAmount,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
