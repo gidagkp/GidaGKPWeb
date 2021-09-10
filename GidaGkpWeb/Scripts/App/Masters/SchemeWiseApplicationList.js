@@ -412,7 +412,8 @@ $(document).ready(function () {
                     else if (entry.InterviewLetterStatus == 'Selected')
                         rowHtml += '<td class="text-center" style="color:#08bf0b">Selected in Interview</td>';
                     else
-                        rowHtml += '<td class="text-center">' + entry.InterviewLetterStatus + '/td>';
+                        rowHtml += '<td class="text-center">' + entry.InterviewLetterStatus + '</td>';
+
                     if (entry.InterviewLetterStatus != null && entry.InterviewLetterStatus != "" && entry.InterviewLetterStatus != undefined && entry.InterviewLetterStatus == 'Selected') {
                         rowHtml += '<td class="text-center" id="actionColumn"></td>';
                     }

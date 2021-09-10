@@ -167,7 +167,7 @@ namespace GidaGkpWeb.BAL
                             SIDocumentComment = doc != null ? doc.SIComment : "",
                             GMDocumentComment = doc != null ? doc.GMComment : "",
                             CEODocumentComment = doc != null ? doc.CEOComment : "",
-                            InterviewLetterStatus = invitationLetter != null && invitationLetter.InterviewLetterStatus == null ? "Invitation Generated" : invitationLetter != null ? invitationLetter.InterviewLetterStatus : "",
+                            InterviewLetterStatus = invitationLetter != null && invitationLetter.InterviewLetterStatus == null || invitationLetter.InterviewLetterStatus == "" ? "Invitation Generated" : invitationLetter != null ? invitationLetter.InterviewLetterStatus : "",
                             UserId = user.Id,
                             PlotId = plotMaster != null ? plotMaster.PlotId : 0,
                             PlotRange = plotrangeLookup != null ? plotrangeLookup.LookupName : "",

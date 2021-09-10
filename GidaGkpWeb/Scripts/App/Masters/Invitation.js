@@ -33,6 +33,33 @@ $(document).ready(function () {
         FillSelectedInvitation(valueSelected);
     });
 
+    FillSendInvitationDetail();
+    function FillSendInvitationDetail() {
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            data: '{applicationId: "' + parseInt($('#applicationId').val()) + '",schemeName: "' + parseInt($('#SchemeName').val()) + '"}',
+            url: '/Admin/GetApplicantInvitation',
+            success: function (data) {
+                $('#Applicant').val(data.UserId);
+                $('#fullname').val(data.FullName);
+                $('#Address').val(data.PAddress);
+                $('#SectorName').val(data.PlotSectorName);
+                $('#ApplicationNo').val(data.ApplicationNumber);
+                $('#plotArea').val(data.PlotArea);
+                $('#InterviewDateTime').val(data.InterviewDateTime);
+                $('#ddlinterview').val(data.InterviewMode);
+            },
+            failure: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    }
+
     function FillSelectedInvitation(UserId) {
         $.ajax({
             contentType: 'application/json; charset=utf-8',

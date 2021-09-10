@@ -735,12 +735,20 @@ namespace GidaGkpWeb.Controllers
         }
         public ActionResult Invitation(int applicationId, int schemeName)
         {
-            AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(schemeName).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
-            ViewData["UserDetail"] = data;
-
+            ViewData["applicationId"] = applicationId;
+            ViewData["schemeName"] = schemeName;
             return View();
         }
+
+        [HttpPost]
+        public JsonResult GetApplicantInvitation(int applicationId, int schemeName)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(schemeName).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
         [HttpPost]
         public JsonResult GetInvitationList()
         {
