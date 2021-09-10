@@ -1117,22 +1117,50 @@ namespace GidaGkpWeb.Controllers
             return RedirectToAction("AdminLogin", "Login");
         }
         [HttpPost]
-        public ActionResult SaveLeaseddeedNotesheet(string Id, HttpPostedFileBase Sfile, string BankGDate, string ApplicationId, string BankAddress, string Comments)
+        public ActionResult SaveLeaseddeedNotesheet(string Id, HttpPostedFileBase Sfile, HttpPostedFileBase Mfile, HttpPostedFileBase AMfile, string BankGDate, string ApplicationId, string BankAddress, string Comments)
         {
             LeasdeedNotesheet Lnotesheet = new LeasdeedNotesheet();
             Lnotesheet.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
-            if (Sfile != null && Sfile.ContentLength > 0)
-            {
-                Lnotesheet.Digsign_Propassist = new byte[Sfile.ContentLength];
-                Sfile.InputStream.Read(Lnotesheet.Digsign_Propassist, 0, Sfile.ContentLength);
-                Lnotesheet.Docname_Propassist = Sfile.FileName;
-                Lnotesheet.Doctype_Propassist = Sfile.ContentType;
+            if (UserData.Designation == "Assistant Manager")
+                {
+                if (Sfile != null && Sfile.ContentLength > 0)
+                {
+                    Lnotesheet.Digsign_Propassist = new byte[Sfile.ContentLength];
+                    Sfile.InputStream.Read(Lnotesheet.Digsign_Propassist, 0, Sfile.ContentLength);
+                    Lnotesheet.Docname_Propassist = Sfile.FileName;
+                    Lnotesheet.Doctype_Propassist = Sfile.ContentType;
+                }
+                Lnotesheet.Comment_Propassist = Comments;
             }
+            if (UserData.Designation == "General Manager")
+            {
+                if (Mfile != null && Mfile.ContentLength > 0)
+                {
+                    Lnotesheet.Digsign_Manager  = new byte[Sfile.ContentLength];
+                    Sfile.InputStream.Read(Lnotesheet.Digsign_Manager, 0, Sfile.ContentLength);
+                    Lnotesheet.Docname_Digsignmanager = Mfile.FileName;
+                    Lnotesheet.Doctype_Digsignmanager  = Mfile.ContentType;
+                }
+                Lnotesheet.Comment_Manager = Comments;
+            }
+            if (UserData.Designation == "Manager")
+            {
+                if (AMfile != null && AMfile.ContentLength > 0)
+                {
+                    Lnotesheet.Digsign_FManager  = new byte[Sfile.ContentLength];
+                    Sfile.InputStream.Read(Lnotesheet.Digsign_FManager, 0, Sfile.ContentLength);
+                    Lnotesheet.Docname_FManager  = AMfile.FileName;
+                    Lnotesheet.Doctype_FManager = AMfile.ContentType;
+                }
+                Lnotesheet.Doctype_FManager  = Comments;
+            }
+
+
             Lnotesheet.ApplicationId = ApplicationId;
             Lnotesheet.Bankaddress = BankAddress;
             Lnotesheet.ApplicantId = 55;
             Lnotesheet.Allotmentnumber = "10";
-            Lnotesheet.Comment_Propassist = Comments;
+            
 
 
             if (BankGDate != "")

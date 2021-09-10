@@ -117,13 +117,32 @@
             </div>
 
             <div class="form-group col-sm-6 col-xs-12">
-                <label for="user" class="">Digital Signature of the Manager Property/ General/ Admin </label>
-                <input type="file" class="form-control" placeholder="">
+                <label for="file" class="sr-only">Digital Signature of the Manager Property/ General/ Admin<span class="required-field"></span> (Attach maximum 3 MB file size in .jpg/.jpeg/.png/.doc/.pdf) </label>
+                <div class="input-group">
+                    <input type="text" name="DSignatureManagerProp" id="DSignatureManagerProp" class="form-control" placeholder="No file selected" readonly>
+                    <span class="input-group-btn">
+                        <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                            <input type="file" name="Mfile" id="Mfile" onchange="this.form.DSignatureManagerProp.value = this.files.length ? this.files[0].name : ''" />
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                        </div>
+                    </span>
+                </div>
+               
             </div>
 
             <div class="form-group col-sm-6 col-xs-12">
-                <label for="user" class="">Digital Signature of the Assistant Manager Finance </label>
-                <input type="file" class="form-control" placeholder="">
+                @*<label for="user" class="">Digital Signature of the Assistant Manager Finance </label>
+        <input type="file" class="form-control" placeholder="">*@
+                <label for="file" class="sr-only">Digital Signature of the Assistant Manager Finance<span class="required-field"></span> (Attach maximum 3 MB file size in .jpg/.jpeg/.png/.doc/.pdf) </label>
+                <div class="input-group">
+                    <input type="text" name="DSignatureFManagerProp" id="DSignatureFManagerProp" class="form-control" placeholder="No file selected" readonly>
+                    <span class="input-group-btn">
+                        <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                            <input type="file" name="AMfile" id="AMfile" onchange="this.form.DSignatureFManagerProp.value = this.files.length ? this.files[0].name : ''" />
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                        </div>
+                    </span>
+                </div>
             </div>
 
 
