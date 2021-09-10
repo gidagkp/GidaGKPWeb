@@ -400,8 +400,6 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LeasdeedNotesheet">
           <Key>
             <PropertyRef Name="Id" />
@@ -640,6 +638,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySet Name="ApplicantUploadDoc" EntityType="Self.ApplicantUploadDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantUser" EntityType="Self.ApplicantUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GidaUser" EntityType="Self.GidaUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeasdeedNotesheet" EntityType="Self.LeasdeedNotesheet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaseDeedDetails" EntityType="Self.LeaseDeedDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MortgageDetails" EntityType="Self.MortgageDetails" Schema="dbo" store:Type="Tables" />
@@ -649,30 +648,6 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySet Name="PlotMaster" EntityType="Self.PlotMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleWisePermission" EntityType="Self.RoleWisePermission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SchemewiseTermsCondition" EntityType="Self.SchemewiseTermsCondition" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LeasdeedNotesheet" EntityType="Self.LeasdeedNotesheet" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [LeasdeedNotesheet].[Id] AS [Id], 
-    [LeasdeedNotesheet].[ApplicationId] AS [ApplicationId], 
-    [LeasdeedNotesheet].[ApplicantId] AS [ApplicantId], 
-    [LeasdeedNotesheet].[Bankguranteedate] AS [Bankguranteedate], 
-    [LeasdeedNotesheet].[Bankaddress] AS [Bankaddress], 
-    [LeasdeedNotesheet].[Allotmentnumber] AS [Allotmentnumber], 
-    [LeasdeedNotesheet].[Digsign_Propassist] AS [Digsign_Propassist], 
-    [LeasdeedNotesheet].[Docname_Propassist] AS [Docname_Propassist], 
-    [LeasdeedNotesheet].[Doctype_Propassist] AS [Doctype_Propassist], 
-    [LeasdeedNotesheet].[Comment_Propassist] AS [Comment_Propassist], 
-    [LeasdeedNotesheet].[Digsign_Manager] AS [Digsign_Manager], 
-    [LeasdeedNotesheet].[Docname_Digsignmanager] AS [Docname_Digsignmanager], 
-    [LeasdeedNotesheet].[Doctype_Digsignmanager] AS [Doctype_Digsignmanager], 
-    [LeasdeedNotesheet].[Comment_Manager] AS [Comment_Manager], 
-    [LeasdeedNotesheet].[Digsign_FManager] AS [Digsign_FManager], 
-    [LeasdeedNotesheet].[Docname_FManager] AS [Docname_FManager], 
-    [LeasdeedNotesheet].[Doctype_FManager] AS [Doctype_FManager], 
-    [LeasdeedNotesheet].[Comment_FManager] AS [Comment_FManager], 
-    [LeasdeedNotesheet].[CreatedBy] AS [CreatedBy], 
-    [LeasdeedNotesheet].[Createddate] AS [Createddate]
-    FROM [dbo].[LeasdeedNotesheet] AS [LeasdeedNotesheet]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="Self.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetter" />
@@ -706,6 +681,7 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySet Name="ApplicantUploadDocs" EntityType="GidaGKPModel.ApplicantUploadDoc" />
           <EntitySet Name="ApplicantUsers" EntityType="GidaGKPModel.ApplicantUser" />
           <EntitySet Name="GidaUsers" EntityType="GidaGKPModel.GidaUser" />
+          <EntitySet Name="LeasdeedNotesheets" EntityType="GidaGKPModel.LeasdeedNotesheet" />
           <EntitySet Name="LeaseDeedDetails" EntityType="GidaGKPModel.LeaseDeedDetail" />
           <EntitySet Name="Lookups" EntityType="GidaGKPModel.Lookup" />
           <EntitySet Name="MortgageDetails" EntityType="GidaGKPModel.MortgageDetail" />
@@ -715,7 +691,6 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <EntitySet Name="PlotMasters" EntityType="GidaGKPModel.PlotMaster" />
           <EntitySet Name="RoleWisePermissions" EntityType="GidaGKPModel.RoleWisePermission" />
           <EntitySet Name="SchemewiseTermsConditions" EntityType="GidaGKPModel.SchemewiseTermsCondition" />
-          <EntitySet Name="LeasdeedNotesheets" EntityType="GidaGKPModel.LeasdeedNotesheet" />
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetters" />
@@ -1126,6 +1101,31 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="LeasdeedNotesheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicantId" Type="Int32" />
+          <Property Name="Bankguranteedate" Type="DateTime" Precision="3" />
+          <Property Name="Bankaddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Allotmentnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Digsign_Propassist" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Docname_Propassist" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Doctype_Propassist" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment_Propassist" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Digsign_Manager" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Docname_Digsignmanager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Doctype_Digsignmanager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment_Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Digsign_FManager" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Docname_FManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Doctype_FManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment_FManager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="Createddate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="LeaseDeedDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -1290,31 +1290,6 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
           <Property Name="DateofgivingthirdInstallent" Type="DateTime" Precision="3" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModificationDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="LeasdeedNotesheet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicationId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ApplicantId" Type="Int32" />
-          <Property Name="Bankguranteedate" Type="DateTime" Precision="3" />
-          <Property Name="Bankaddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Allotmentnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Digsign_Propassist" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Docname_Propassist" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Doctype_Propassist" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Comment_Propassist" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Digsign_Manager" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Docname_Digsignmanager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Doctype_Digsignmanager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Comment_Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Digsign_FManager" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Docname_FManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Doctype_FManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Comment_FManager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="Createddate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
           <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
@@ -1768,6 +1743,32 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LeasdeedNotesheets">
+            <EntityTypeMapping TypeName="GidaGKPModel.LeasdeedNotesheet">
+              <MappingFragment StoreEntitySet="LeasdeedNotesheet">
+                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Comment_FManager" ColumnName="Comment_FManager" />
+                <ScalarProperty Name="Doctype_FManager" ColumnName="Doctype_FManager" />
+                <ScalarProperty Name="Docname_FManager" ColumnName="Docname_FManager" />
+                <ScalarProperty Name="Digsign_FManager" ColumnName="Digsign_FManager" />
+                <ScalarProperty Name="Comment_Manager" ColumnName="Comment_Manager" />
+                <ScalarProperty Name="Doctype_Digsignmanager" ColumnName="Doctype_Digsignmanager" />
+                <ScalarProperty Name="Docname_Digsignmanager" ColumnName="Docname_Digsignmanager" />
+                <ScalarProperty Name="Digsign_Manager" ColumnName="Digsign_Manager" />
+                <ScalarProperty Name="Comment_Propassist" ColumnName="Comment_Propassist" />
+                <ScalarProperty Name="Doctype_Propassist" ColumnName="Doctype_Propassist" />
+                <ScalarProperty Name="Docname_Propassist" ColumnName="Docname_Propassist" />
+                <ScalarProperty Name="Digsign_Propassist" ColumnName="Digsign_Propassist" />
+                <ScalarProperty Name="Allotmentnumber" ColumnName="Allotmentnumber" />
+                <ScalarProperty Name="Bankaddress" ColumnName="Bankaddress" />
+                <ScalarProperty Name="Bankguranteedate" ColumnName="Bankguranteedate" />
+                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LeaseDeedDetails">
             <EntityTypeMapping TypeName="GidaGKPModel.LeaseDeedDetail">
               <MappingFragment StoreEntitySet="LeaseDeedDetails">
@@ -1934,32 +1935,6 @@ warning 6002: The table/view 'Gida_Staging.dbo.LeasdeedNotesheet' does not have 
                 <ScalarProperty Name="Firstduedateofpaymentofinterest" ColumnName="Firstduedateofpaymentofinterest" />
                 <ScalarProperty Name="AllotmentMoneyDueDate" ColumnName="AllotmentMoneyDueDate" />
                 <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LeasdeedNotesheets">
-            <EntityTypeMapping TypeName="GidaGKPModel.LeasdeedNotesheet">
-              <MappingFragment StoreEntitySet="LeasdeedNotesheet">
-                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Comment_FManager" ColumnName="Comment_FManager" />
-                <ScalarProperty Name="Doctype_FManager" ColumnName="Doctype_FManager" />
-                <ScalarProperty Name="Docname_FManager" ColumnName="Docname_FManager" />
-                <ScalarProperty Name="Digsign_FManager" ColumnName="Digsign_FManager" />
-                <ScalarProperty Name="Comment_Manager" ColumnName="Comment_Manager" />
-                <ScalarProperty Name="Doctype_Digsignmanager" ColumnName="Doctype_Digsignmanager" />
-                <ScalarProperty Name="Docname_Digsignmanager" ColumnName="Docname_Digsignmanager" />
-                <ScalarProperty Name="Digsign_Manager" ColumnName="Digsign_Manager" />
-                <ScalarProperty Name="Comment_Propassist" ColumnName="Comment_Propassist" />
-                <ScalarProperty Name="Doctype_Propassist" ColumnName="Doctype_Propassist" />
-                <ScalarProperty Name="Docname_Propassist" ColumnName="Docname_Propassist" />
-                <ScalarProperty Name="Digsign_Propassist" ColumnName="Digsign_Propassist" />
-                <ScalarProperty Name="Allotmentnumber" ColumnName="Allotmentnumber" />
-                <ScalarProperty Name="Bankaddress" ColumnName="Bankaddress" />
-                <ScalarProperty Name="Bankguranteedate" ColumnName="Bankguranteedate" />
-                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

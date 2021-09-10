@@ -99,11 +99,11 @@
                             <br />
                             @if (UserDataModel.GMPaymentStatus != null && UserDataModel.GMPaymentStatus.Contains("Not Approved"))
                             {
-                                <span style="color:red">General Manager - @UserDataModel.GMPaymentStatus   </span>
+                                <span style="color:red">ACEO - @UserDataModel.GMPaymentStatus   </span>
                             }
                             else if (UserDataModel.GMPaymentStatus != null && UserDataModel.GMPaymentStatus.Contains("Approved"))
                             {
-                                <span style="color:green">General Manager - @UserDataModel.GMPaymentStatus</span>
+                                <span style="color:green">ACEO - @UserDataModel.GMPaymentStatus</span>
                             }
                             <br />
                             @if (UserDataModel.CEOPaymentStatus != null && UserDataModel.CEOPaymentStatus.Contains("Not Approved"))
@@ -134,122 +134,127 @@
                             }
                         </td>
                     </tr>
-                    <tr>
-                        <td class="text-center">3</td>
-                        <td>View Uploaded Documents Status & Verify </td>
-                        <td>
-                            @if (UserDataModel.ClerkDocumentStatus != null && UserDataModel.ClerkDocumentStatus.Contains("Not Approved"))
-                            {
-                                <span style="color:red">Clerk - @UserDataModel.ClerkDocumentStatus</span>
-                            }
-                            else if (UserDataModel.ClerkDocumentStatus != null && UserDataModel.ClerkDocumentStatus.Contains("Approved"))
-                            {
-                                <span style="color:green">Clerk - @UserDataModel.ClerkDocumentStatus</span>
-                            }
-                            <br />
-                            @if (UserDataModel.AMDocumentStatus != null && UserDataModel.AMDocumentStatus.Contains("Not Approved"))
-                            {
-                                <span style="color:red">Assistant Manager - @UserDataModel.AMDocumentStatus</span>
-                            }
-                            else if (UserDataModel.AMDocumentStatus != null && UserDataModel.AMDocumentStatus.Contains("Approved"))
-                            {
-                                <span style="color:green">Assistant Manager - @UserDataModel.AMDocumentStatus</span>
-                            }
-                            <br />
-                            @if (UserDataModel.SIDocumentStatus != null && UserDataModel.SIDocumentStatus.Contains("Not Approved"))
-                            {
-                                <span style="color:red">Section Incharge - @UserDataModel.SIDocumentStatus</span>
-                            }
-                            else if (UserDataModel.SIDocumentStatus != null && UserDataModel.SIDocumentStatus.Contains("Approved"))
-                            {
-                                <span style="color:green">Section Incharge - @UserDataModel.SIDocumentStatus</span>
-                            }
-                            <br />
-                            @if (UserDataModel.GMDocumentStatus != null && UserDataModel.GMDocumentStatus.Contains("Not Approved"))
-                            {
-                                <span style="color:red">General Manager - @UserDataModel.GMDocumentStatus   </span>
-                            }
-                            else if (UserDataModel.GMDocumentStatus != null && UserDataModel.GMDocumentStatus.Contains("Approved"))
-                            {
-                                <span style="color:green">General Manager - @UserDataModel.GMDocumentStatus</span>
-                            }
-                            <br />
-                            @if (UserDataModel.CEODocumentStatus != null && UserDataModel.CEODocumentStatus.Contains("Not Approved"))
-                            {
-                                <span style="color:red">CEO - @UserDataModel.CEODocumentStatus</span>
-                            }
-                            else if (UserDataModel.CEODocumentStatus != null && UserDataModel.CEODocumentStatus.Contains("Approved"))
-                            {
-                                <span style="color:green">CEO - @UserDataModel.CEODocumentStatus</span>
-                            }
-                        </td>
-                        <td class="text-right">
-                            @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Document Approval")
-                               && hasPermission(PermissionName.AllAccess))
-                            {
-                                if (UserData.Department == "Property" && UserData.Designation == "Clerk")
+
+                    @if (UserData.Department != "Finance & Accounts")
+                    {
+                        <tr>
+                            <td class="text-center">3</td>
+                            <td>View Uploaded Documents Status & Verify </td>
+                            <td>
+                                @if (UserDataModel.ClerkDocumentStatus != null && UserDataModel.ClerkDocumentStatus.Contains("Not Approved"))
                                 {
-                                    if (string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
+                                    <span style="color:red">Clerk - @UserDataModel.ClerkDocumentStatus</span>
+                                }
+                                else if (UserDataModel.ClerkDocumentStatus != null && UserDataModel.ClerkDocumentStatus.Contains("Approved"))
+                                {
+                                    <span style="color:green">Clerk - @UserDataModel.ClerkDocumentStatus</span>
+                                }
+                                <br />
+                                @if (UserDataModel.AMDocumentStatus != null && UserDataModel.AMDocumentStatus.Contains("Not Approved"))
+                                {
+                                    <span style="color:red">Manager - @UserDataModel.AMDocumentStatus</span>
+                                }
+                                else if (UserDataModel.AMDocumentStatus != null && UserDataModel.AMDocumentStatus.Contains("Approved"))
+                                {
+                                    <span style="color:green">Manager - @UserDataModel.AMDocumentStatus</span>
+                                }
+                                <br />
+                                @if (UserDataModel.SIDocumentStatus != null && UserDataModel.SIDocumentStatus.Contains("Not Approved"))
+                                {
+                                    <span style="color:red">Section Incharge - @UserDataModel.SIDocumentStatus</span>
+                                }
+                                else if (UserDataModel.SIDocumentStatus != null && UserDataModel.SIDocumentStatus.Contains("Approved"))
+                                {
+                                    <span style="color:green">Section Incharge - @UserDataModel.SIDocumentStatus</span>
+                                }
+                                <br />
+                                @if (UserDataModel.GMDocumentStatus != null && UserDataModel.GMDocumentStatus.Contains("Not Approved"))
+                                {
+                                    <span style="color:red">ACEO - @UserDataModel.GMDocumentStatus   </span>
+                                }
+                                else if (UserDataModel.GMDocumentStatus != null && UserDataModel.GMDocumentStatus.Contains("Approved"))
+                                {
+                                    <span style="color:green">ACEO - @UserDataModel.GMDocumentStatus</span>
+                                }
+                                <br />
+                                @if (UserDataModel.CEODocumentStatus != null && UserDataModel.CEODocumentStatus.Contains("Not Approved"))
+                                {
+                                    <span style="color:red">CEO - @UserDataModel.CEODocumentStatus</span>
+                                }
+                                else if (UserDataModel.CEODocumentStatus != null && UserDataModel.CEODocumentStatus.Contains("Approved"))
+                                {
+                                    <span style="color:green">CEO - @UserDataModel.CEODocumentStatus</span>
+                                }
+                            </td>
+                            <td class="text-right">
+                                @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Document Approval")
+                                   && hasPermission(PermissionName.AllAccess))
+                                {
+                                    if (UserData.Department == "Property" && UserData.Designation == "Clerk")
                                     {
-                                        <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                                        if (string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
+                                        {
+                                            <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                                        }
                                     }
-                                    else
+                                    else if (UserData.Department == "Property" && UserData.Designation == "Manager")
                                     {
-                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                                        if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
+                                        {
+                                            <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                                        }
+                                    }
+                                    else if (UserData.Department == "Property" && UserData.Designation == "Section Incharge")
+                                    {
+                                        if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
+                                        {
+                                            <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
+                                        }
+                                    }
+                                    else if (UserData.Department == "Administration" && UserData.Designation == "ACEO")
+                                    {
+                                        if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && string.IsNullOrEmpty(UserDataModel.GMPaymentStatus))
+                                        {
+                                            <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
+                                        }
+                                    }
+                                    else if (UserData.Department == "Administration" && UserData.Designation == "CEO")
+                                    {
+                                        if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && !string.IsNullOrEmpty(UserDataModel.GMPaymentStatus) && string.IsNullOrEmpty(UserDataModel.CEOPaymentStatus))
+                                        {
+                                            <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
+                                        }
                                     }
                                 }
-                                else if (UserData.Department == "Property" && UserData.Designation == "Assistant Manager")
-                                {
-                                    if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
-                                    {
-                                        <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
-                                    }
-                                }
-                                else if (UserData.Department == "Property" && UserData.Designation == "Section Incharge")
-                                {
-                                    if (!string.IsNullOrEmpty(UserDataModel.ClerkDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMDocumentStatus) && string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
-                                    {
-                                        <button type="button" data-toggle="modal" data-target="#DocModal" class="submit_plot_master353" value="button">Check Documents </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Check Documents </button>
-                                    }
-                                }
-                                else if (UserData.Department == "Administration" && UserData.Designation == "General Manager")
-                                {
-                                    if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && string.IsNullOrEmpty(UserDataModel.GMPaymentStatus))
-                                    {
-                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
-                                    }
-                                }
-                                else if (UserData.Department == "Administration" && UserData.Designation == "CEO")
-                                {
-                                    if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && !string.IsNullOrEmpty(UserDataModel.GMPaymentStatus) && string.IsNullOrEmpty(UserDataModel.CEOPaymentStatus))
-                                    {
-                                        <button type="button" data-toggle="modal" data-target="#basicModal" class="submit_plot_master353" value="button">Financial Details </button>
-                                    }
-                                    else
-                                    {
-                                        <button type="button" class="submit_plot_master353" value="button" disabled="disabled" style="opacity: 0.5;">Financial Details </button>
-                                    }
-                                }
-                            }
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    }
+
                 </table>
             </div>
         </div>
     </div>
-    @if (UserData.Department == "Administration" && UserData.Designation == "General Manager")
+    @if (UserData.Department == "Administration" && UserData.Designation == "ACEO")
     {
         if (!string.IsNullOrEmpty(UserDataModel.SIDocumentStatus) && !UserDataModel.SIDocumentStatus.Contains("Not Approved")
             && !string.IsNullOrEmpty(UserDataModel.AMPaymentStatus) && !UserDataModel.AMPaymentStatus.Contains("Not Approved")
@@ -491,6 +496,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ProjectReport"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.ProjectReportFileName))
@@ -508,7 +517,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ProposedPlanLandUses"><strong>View/Download</strong></a>
                                     }
-
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.ProposedPlanLandUsesFileName))
@@ -525,6 +537,10 @@
                                     {
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=Memorendum"><strong>View/Download</strong></a>
+                                    }
+                                    else
+                                    {
+                                        <span>No File</span>
                                     }
                                 </td>
                                 <td class="text-center">
@@ -543,6 +559,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ScanPAN"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.ScanPANFileName))
@@ -560,6 +580,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ScanAddressProof"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.ScanAddressProofFileName))
@@ -576,6 +600,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=BalanceSheet"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.BalanceSheetFileName))
@@ -591,6 +619,10 @@
                                     {
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ITReturn"><strong>View/Download</strong></a>
+                                    }
+                                    else
+                                    {
+                                        <span>No File</span>
                                     }
                                 </td>
                                 <td class="text-center">
@@ -609,11 +641,19 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ExperienceProof"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.ExperienceProofFileName))
                                     {
                                         <a><input type="checkbox" /></a>
+                                    }
+                                    else
+                                    {
+                                        <span>No File</span>
                                     }
                                 </td>
                             <tr>
@@ -624,6 +664,10 @@
                                     {
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ApplicantEduTechQualification"><strong>View/Download</strong></a>
+                                    }
+                                    else
+                                    {
+                                        <span>No File</span>
                                     }
                                 </td>
                                 <td class="text-center">
@@ -641,6 +685,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=PreEstablishedIndustriesDoc"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.PreEstablishedIndustriesDocFileName))
@@ -656,6 +704,10 @@
                                     {
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=FinDetailsEstablishedIndustries"><strong>View/Download</strong></a>
+                                    }
+                                    else
+                                    {
+                                        <span>No File</span>
                                     }
                                 </td>
                                 <td class="text-center">
@@ -674,6 +726,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=OtherDocForProposedIndustry"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.OtherDocForProposedIndustryFileName))
@@ -690,6 +746,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ScanCastCert"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.ScanCastCertFileName))
@@ -705,6 +765,10 @@
                                     {
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ScanID"><strong>View/Download</strong></a>
+                                    }
+                                    else
+                                    {
+                                        <span>No File</span>
                                     }
                                 </td>
                                 <td class="text-center">
@@ -725,6 +789,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=DocProofForIndustrialEstablishedOutsideGida"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.DocProofForIndustrialEstablishedOutsideGidaFileName))
@@ -740,6 +808,10 @@
                                     {
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=BankVerifiedSignature"><strong>View/Download</strong></a>
+                                    }
+                                    else
+                                    {
+                                        <span>No File</span>
                                     }
                                 </td>
                                 <td class="text-center">
@@ -757,6 +829,10 @@
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ApplicantPhoto"><strong>View/Download</strong></a>
                                     }
+                                    else
+                                    {
+                                        <span>No File</span>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     @if (!string.IsNullOrEmpty(UserDataModel.ApplicantDocument.ApplicantPhotoFileName))
@@ -772,6 +848,10 @@
                                     {
                                         <a style="background-color: green; color: white;" class="btn btn-success" target="_blank"
                                            href="/Admin/DownloadApplicantDocument?applicationId=@UserDataModel.ApplicationId&documentName=ApplicantSignature"><strong>View/Download</strong></a>
+                                    }
+                                    else
+                                    {
+                                        <span>No File</span>
                                     }
                                 </td>
                                 <td class="text-center">

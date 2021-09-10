@@ -897,7 +897,7 @@ namespace GidaGkpWeb.BAL
                             transactionDetail.CEOApprovalStatus = status;
                             transactionDetail.CEOComment = comment;
                         }
-                        else if (UserData.Designation == "General Manager")
+                        else if (UserData.Designation == "ACEO")
                         {
                             transactionDetail.GMApprovalStatus = status;
                             transactionDetail.GMComment = comment;
@@ -933,7 +933,7 @@ namespace GidaGkpWeb.BAL
                     var documentDetail = _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (documentDetail != null)
                     {
-                        if (UserData.Designation == "Assistant Manager")
+                        if (UserData.Designation == "Manager")
                         {
                             documentDetail.AMApprovalStatus = status;
                             documentDetail.AMComment = comment;
@@ -980,7 +980,7 @@ namespace GidaGkpWeb.BAL
                     var documentDetail = _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (documentDetail != null)
                     {
-                        if (UserData.Designation == "General Manager")
+                        if (UserData.Designation == "ACEO")
                         {
                             documentDetail.GMApprovalStatus = status;
                             documentDetail.GMComment = comment;
@@ -996,7 +996,7 @@ namespace GidaGkpWeb.BAL
                         var paymentDetail = _db.ApplicantTransactionDetails.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                         if (paymentDetail != null)
                         {
-                            if (UserData.Designation == "General Manager")
+                            if (UserData.Designation == "ACEO")
                             {
                                 paymentDetail.GMApprovalStatus = status;
                                 paymentDetail.GMComment = comment;

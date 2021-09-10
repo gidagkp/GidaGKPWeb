@@ -40,6 +40,7 @@ namespace DataLayer
         public virtual DbSet<ApplicantUploadDoc> ApplicantUploadDocs { get; set; }
         public virtual DbSet<ApplicantUser> ApplicantUsers { get; set; }
         public virtual DbSet<GidaUser> GidaUsers { get; set; }
+        public virtual DbSet<LeasdeedNotesheet> LeasdeedNotesheets { get; set; }
         public virtual DbSet<LeaseDeedDetail> LeaseDeedDetails { get; set; }
         public virtual DbSet<Lookup> Lookups { get; set; }
         public virtual DbSet<MortgageDetail> MortgageDetails { get; set; }
@@ -49,6 +50,5 @@ namespace DataLayer
         public virtual DbSet<PlotMaster> PlotMasters { get; set; }
         public virtual DbSet<RoleWisePermission> RoleWisePermissions { get; set; }
         public virtual DbSet<SchemewiseTermsCondition> SchemewiseTermsConditions { get; set; }
-        public virtual DbSet<LeasdeedNotesheet> LeasdeedNotesheets { get; set; }
     }
 }
