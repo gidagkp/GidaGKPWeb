@@ -1116,6 +1116,47 @@ namespace GidaGkpWeb.Controllers
             Session.Clear();
             return RedirectToAction("AdminLogin", "Login");
         }
+        [HttpPost]
+        public ActionResult SaveLeaseddeedNotesheet(string Id, HttpPostedFileBase Sfile, string BankGDate, string ApplicationId, string BankAddress, string Comments)
+        {
+            LeasdeedNotesheet Lnotesheet = new LeasdeedNotesheet();
+            Lnotesheet.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
+            if (Sfile != null && Sfile.ContentLength > 0)
+            {
+                Lnotesheet.Digsign_Propassist = new byte[Sfile.ContentLength];
+                Sfile.InputStream.Read(Lnotesheet.Digsign_Propassist, 0, Sfile.ContentLength);
+                Lnotesheet.Docname_Propassist = Sfile.FileName;
+                Lnotesheet.Doctype_Propassist = Sfile.ContentType;
+            }
+            Lnotesheet.ApplicationId = ApplicationId;
+            Lnotesheet.Bankaddress = BankAddress;
+            Lnotesheet.ApplicantId = 55;
+            Lnotesheet.Allotmentnumber = "10";
+            Lnotesheet.Comment_Propassist = Comments;
+
+
+            if (BankGDate != "")
+            {
+                Lnotesheet.Bankguranteedate = Convert.ToDateTime(BankGDate);
+
+            }
+            
+                Lnotesheet.CreatedBy = UserData.UserId;
+                Lnotesheet.Createddate = DateTime.Now;
+           
+            
+              
+
+            LeasedeedNotesheetDetails _details = new LeasedeedNotesheetDetails();
+            var result = _details.SaveLeasedeedNotesheet(Lnotesheet);
+            if (result == Enums.CrudStatus.Saved)
+                SetAlertMessage("Leaseddeed Notesheet has been Saved", "Leaseddeed Notesheet Save");
+            else
+                SetAlertMessage("Leaseddeed Notesheet Saving failed", "Leaseddeed Notesheet Save");
+
+            return RedirectToAction("LeaseddeedNotesheet");
+
+        }
     }
 
 }
