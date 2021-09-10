@@ -845,22 +845,26 @@ namespace GidaGkpWeb.BAL
                     var schemeType = plotMaster[0].SchemeType;
                     var schemeName = plotMaster[0].SchemeName;
                     var sectorName = plotMaster[0].SectorName;
-                    var dataOfPlots = _db.PlotMasters.Where(x => x.SchemeType == schemeType && x.SchemeName == schemeName && x.SectorName == sectorName).ToList();
-                    dataOfPlots.ForEach(x =>
+                    List<PlotMaster> plotAssociatedInDb = (from plot in _db.PlotMasters
+                                                           where plot.SchemeType == schemeType
+                                                           && plot.SchemeName == schemeName
+                                                           && plot.SectorName == sectorName
+                                                           select plot).ToList();
+                    List<PlotMaster> insertingPlots = plotMaster.Where(x => !plotAssociatedInDb.Any(y => y.PlotNumber == x.PlotNumber)).ToList();
+                    insertingPlots.ForEach(plotData =>
+                    {
+                        plotData.CreatedBy = UserData.UserId;
+                        plotData.CreatedDate = DateTime.Now;
+                        _db.Entry(plotData).State = EntityState.Added;
+                    });
+                    //deleting plot which are removed from UI
+                    List<PlotMaster> deletingplots = plotAssociatedInDb.Where(x => !plotMaster.Any(y => y.PlotNumber == x.PlotNumber)).ToList();
+                    deletingplots.ForEach(x =>
                     {
                         _db.Entry(x).State = EntityState.Deleted;
                     });
-                    _db.SaveChanges();
-                }
-
-                plotMaster.ForEach(plotData =>
-                {
-                    plotData.CreatedBy = UserData.UserId;
-                    plotData.CreatedDate = DateTime.Now;
-                    _db.Entry(plotData).State = EntityState.Added;
                     _effectRow = _db.SaveChanges();
-                });
-
+                }
                 return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
             }
             catch (DbEntityValidationException e)
