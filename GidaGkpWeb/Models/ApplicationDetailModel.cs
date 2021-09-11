@@ -66,7 +66,7 @@ namespace GidaGkpWeb.Models
         public string SIDocumentStatus { get; set; }
         public string CEODocumentStatus { get; set; }
         public string GMDocumentStatus { get; set; }
-        public string AMDocumentComment { get; set; }        
+        public string AMDocumentComment { get; set; }
         public string ClerkDocumentComment { get; set; }
         public string SIDocumentComment { get; set; }
         public string CEODocumentComment { get; set; }
@@ -91,6 +91,13 @@ namespace GidaGkpWeb.Models
         public string NintyPer_AllotmentMoney { get; set; }
         public string AllotementMoneyTobePaid { get; set; }
         public string AllotmentTransactionAmount { get; set; }
+        public string ACEOComment { get; set; }
+        public string AssistantComment { get; set; }
+        public string CEOComment { get; set; }
+        public string GMFinanceComment { get; set; }
+        public string ManagerPropertyComment { get; set; }
+        public string SectionInchargeComment { get; set; }
+        public string DateoOfSigningByCEO { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 

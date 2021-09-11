@@ -27,6 +27,7 @@ namespace DataLayer
     
         public virtual DbSet<AdminNotice> AdminNotices { get; set; }
         public virtual DbSet<AllocateAllotmentDetail> AllocateAllotmentDetails { get; set; }
+        public virtual DbSet<AllotementNotesheetDetail> AllotementNotesheetDetails { get; set; }
         public virtual DbSet<AllotmentTransactionDetail> AllotmentTransactionDetails { get; set; }
         public virtual DbSet<ApplicantApplicationDetail> ApplicantApplicationDetails { get; set; }
         public virtual DbSet<ApplicantBankDetail> ApplicantBankDetails { get; set; }

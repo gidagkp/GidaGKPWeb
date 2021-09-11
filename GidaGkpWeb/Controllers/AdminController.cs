@@ -719,7 +719,9 @@ namespace GidaGkpWeb.Controllers
         }
         public ActionResult AllotmentStatus(int applicationId)
         {
-            ViewData["ApplicationId"] = applicationId;
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["ApplicantData"] = data;
             return View();
         }
         public ActionResult PrintAllotmentLetter(int applicationId)
@@ -1082,10 +1084,7 @@ namespace GidaGkpWeb.Controllers
             var data = _details.GetApplicantUserDetail(schemeName).Where(x => !string.IsNullOrEmpty(x.AllotmentNumber) && string.IsNullOrEmpty(x.AllotmentTransactionAmount)).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult DataForAllotmentNotesheet()
-        {
-            return View();
-        }
+
         [HttpPost]
         public ActionResult SendAllotmentEmailToApplicant(int applicationId)
         {
@@ -1183,6 +1182,21 @@ namespace GidaGkpWeb.Controllers
             return RedirectToAction("LeaseddeedNotesheet");
 
         }
+
+        public ActionResult DataForAllotmentNotesheet(int applicationId)
+        {
+            //Clerk Property
+            //  Manager Property
+            //  AGM / OSD / SI Property
+            //      GM Finance
+            //      ACEO
+            //  CEO 
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["ApplicantData"] = data;
+            return View();
+        }
+
         public ActionResult PrintAllotmentNotesheet(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
@@ -1190,13 +1204,104 @@ namespace GidaGkpWeb.Controllers
             ViewData["ApplicantData"] = data;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult SaveAllotmentNotesheet(int ApplicationId, string UserComment, string CEOSigningDate,
+            HttpPostedFileBase CEOSignInFile,
+            HttpPostedFileBase AssistantFile,
+            HttpPostedFileBase ManagepropertyFile,
+            HttpPostedFileBase SIFile,
+            HttpPostedFileBase GMFinanceFile,
+            HttpPostedFileBase ACEOFile
+            )
+        {
+            AllotementNotesheetDetail notesheet = new AllotementNotesheetDetail();
+            notesheet.ApplicationId = ApplicationId;
+            if (UserData.Department == "Property" && UserData.Designation == "Clerk")
+            {
+                notesheet.AssistantComment = UserComment;
+            }
+            else if (UserData.Department == "Property" && UserData.Designation == "Manager")
+            {
+                notesheet.ManagerPropertyComment = UserComment;
+            }
+            else if (UserData.Department == "Property" && UserData.Designation == "Section Incharge")
+            {
+                notesheet.SectionInchargeComment = UserComment;
+            }
+            else if (UserData.Department == "Finance & Accounts" && UserData.Designation == "General Manager")
+            {
+                notesheet.GMFinanceComment = UserComment;
+            }
+            else if (UserData.Department == "Administration" && UserData.Designation == "ACEO")
+            {
+                notesheet.ACEOComment = UserComment;
+            }
+            else if (UserData.Department == "Administration" && UserData.Designation == "CEO")
+            {
+                notesheet.CEOComment = UserComment;
+                if (CEOSigningDate != "")
+                    notesheet.DateoOfSigningByCEO = Convert.ToDateTime(CEOSigningDate);
+            }
+
+            if (CEOSignInFile != null && CEOSignInFile.ContentLength > 0)
+            {
+                notesheet.DigiSignByCEO = new byte[CEOSignInFile.ContentLength];
+                CEOSignInFile.InputStream.Read(notesheet.DigiSignByCEO, 0, CEOSignInFile.ContentLength);
+                notesheet.DigiSignByCEOFileName = CEOSignInFile.FileName;
+                notesheet.DigiSignByCEOFileType = CEOSignInFile.ContentType;
+            }
+            if (AssistantFile != null && AssistantFile.ContentLength > 0)
+            {
+                notesheet.DigiSignByAssistant = new byte[AssistantFile.ContentLength];
+                AssistantFile.InputStream.Read(notesheet.DigiSignByAssistant, 0, AssistantFile.ContentLength);
+                notesheet.DigiSignByCEOFileName = AssistantFile.FileName;
+                notesheet.DigiSignByCEOFileType = AssistantFile.ContentType;
+            }
+            if (ManagepropertyFile != null && ManagepropertyFile.ContentLength > 0)
+            {
+                notesheet.DigiSignByManagerProperty = new byte[ManagepropertyFile.ContentLength];
+                ManagepropertyFile.InputStream.Read(notesheet.DigiSignByManagerProperty, 0, ManagepropertyFile.ContentLength);
+                notesheet.DigiSignByCEOFileName = ManagepropertyFile.FileName;
+                notesheet.DigiSignByCEOFileType = ManagepropertyFile.ContentType;
+            }
+            if (SIFile != null && SIFile.ContentLength > 0)
+            {
+                notesheet.DigiSignBySectionIncharge = new byte[SIFile.ContentLength];
+                SIFile.InputStream.Read(notesheet.DigiSignBySectionIncharge, 0, SIFile.ContentLength);
+                notesheet.DigiSignByCEOFileName = SIFile.FileName;
+                notesheet.DigiSignByCEOFileType = SIFile.ContentType;
+            }
+            if (GMFinanceFile != null && GMFinanceFile.ContentLength > 0)
+            {
+                notesheet.DigiSignByGMFinance = new byte[GMFinanceFile.ContentLength];
+                GMFinanceFile.InputStream.Read(notesheet.DigiSignByGMFinance, 0, GMFinanceFile.ContentLength);
+                notesheet.DigiSignByCEOFileName = GMFinanceFile.FileName;
+                notesheet.DigiSignByCEOFileType = GMFinanceFile.ContentType;
+            }
+            if (ACEOFile != null && ACEOFile.ContentLength > 0)
+            {
+                notesheet.DigiSignByACEO = new byte[ACEOFile.ContentLength];
+                ACEOFile.InputStream.Read(notesheet.DigiSignByACEO, 0, ACEOFile.ContentLength);
+                notesheet.DigiSignByCEOFileName = ACEOFile.FileName;
+                notesheet.DigiSignByCEOFileType = ACEOFile.ContentType;
+            }
+
+            AdminDetails _details = new AdminDetails();
+            var result = _details.SaveAllotementNotesheet(notesheet);
+            if (result == Enums.CrudStatus.Saved)
+                SetAlertMessage("Allotement Notesheet has been Saved", "Allotement Notesheet");
+            else
+                SetAlertMessage("Allotement Notesheet save failed", "Allotement Notesheet");
+            return RedirectToAction("PrintAllotmentNotesheet");
+        }
         public ActionResult Logout()
         {
             Session.Abandon();
             Session.Clear();
             return RedirectToAction("AdminLogin", "Login");
         }
-        
+
     }
 
 }

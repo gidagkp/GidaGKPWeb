@@ -39,6 +39,40 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModificationDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="AllotementNotesheetDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" />
+          <Property Name="DigiSignByAssistant" Type="varbinary(max)" />
+          <Property Name="DigiSignByAssistantFileName" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignByAssistantFileType" Type="varchar" MaxLength="500" />
+          <Property Name="AssistantComment" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignByManagerProperty" Type="varbinary(max)" />
+          <Property Name="DigiSignByManagerPropertyFileName" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignByManagerPropertyFileType" Type="varchar" MaxLength="500" />
+          <Property Name="ManagerPropertyComment" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignBySectionIncharge" Type="varbinary(max)" />
+          <Property Name="DigiSignBySectionInchargeFileName" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignBySectionInchargeFileType" Type="varchar" MaxLength="500" />
+          <Property Name="SectionInchargeComment" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignByGMFinance" Type="varbinary(max)" />
+          <Property Name="DigiSignByGMFinanceFileName" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignByGMFinanceFileType" Type="varchar" MaxLength="500" />
+          <Property Name="GMFinanceComment" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignByACEO" Type="varbinary(max)" />
+          <Property Name="DigiSignByACEOFileName" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignByACEOFileType" Type="varchar" MaxLength="500" />
+          <Property Name="ACEOComment" Type="varchar" MaxLength="500" />
+          <Property Name="DateoOfSigningByCEO" Type="datetime" />
+          <Property Name="DigiSignByCEO" Type="varbinary(max)" />
+          <Property Name="DigiSignByCEOFileName" Type="varchar" MaxLength="500" />
+          <Property Name="DigiSignByCEOFileType" Type="varchar" MaxLength="500" />
+          <Property Name="CEOComment" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="AllotmentTransactionDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -586,6 +620,18 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModificationDate" Type="datetime" />
         </EntityType>
+        <Association Name="FK_AllotementNotesheetDetail_ApplicantApplicationDetail">
+          <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
+          <End Role="AllotementNotesheetDetail" Type="Self.AllotementNotesheetDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicantApplicationDetail">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="AllotementNotesheetDetail">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
           <End Role="ApplicantApplicationDetail" Type="Self.ApplicantApplicationDetail" Multiplicity="0..1" />
           <End Role="ApplicantInvitationLetter" Type="Self.ApplicantInvitationLetter" Multiplicity="*" />
@@ -625,6 +671,7 @@
         <EntityContainer Name="GidaGKPModelStoreContainer">
           <EntitySet Name="AdminNotice" EntityType="Self.AdminNotice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AllocateAllotmentDetails" EntityType="Self.AllocateAllotmentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AllotementNotesheetDetail" EntityType="Self.AllotementNotesheetDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AllotmentTransactionDetail" EntityType="Self.AllotmentTransactionDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantApplicationDetail" EntityType="Self.ApplicantApplicationDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicantBankDetails" EntityType="Self.ApplicantBankDetails" Schema="dbo" store:Type="Tables" />
@@ -648,6 +695,10 @@
           <EntitySet Name="PlotMaster" EntityType="Self.PlotMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleWisePermission" EntityType="Self.RoleWisePermission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SchemewiseTermsCondition" EntityType="Self.SchemewiseTermsCondition" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AllotementNotesheetDetail_ApplicantApplicationDetail" Association="Self.FK_AllotementNotesheetDetail_ApplicantApplicationDetail">
+            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
+            <End Role="AllotementNotesheetDetail" EntitySet="AllotementNotesheetDetail" />
+          </AssociationSet>
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="Self.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetail" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetter" />
@@ -668,6 +719,7 @@
         <EntityContainer Name="GidaGKPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminNotices" EntityType="GidaGKPModel.AdminNotice" />
           <EntitySet Name="AllocateAllotmentDetails" EntityType="GidaGKPModel.AllocateAllotmentDetail" />
+          <EntitySet Name="AllotementNotesheetDetails" EntityType="GidaGKPModel.AllotementNotesheetDetail" />
           <EntitySet Name="AllotmentTransactionDetails" EntityType="GidaGKPModel.AllotmentTransactionDetail" />
           <EntitySet Name="ApplicantApplicationDetails" EntityType="GidaGKPModel.ApplicantApplicationDetail" />
           <EntitySet Name="ApplicantBankDetails" EntityType="GidaGKPModel.ApplicantBankDetail" />
@@ -691,6 +743,10 @@
           <EntitySet Name="PlotMasters" EntityType="GidaGKPModel.PlotMaster" />
           <EntitySet Name="RoleWisePermissions" EntityType="GidaGKPModel.RoleWisePermission" />
           <EntitySet Name="SchemewiseTermsConditions" EntityType="GidaGKPModel.SchemewiseTermsCondition" />
+          <AssociationSet Name="FK_AllotementNotesheetDetail_ApplicantApplicationDetail" Association="GidaGKPModel.FK_AllotementNotesheetDetail_ApplicantApplicationDetail">
+            <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
+            <End Role="AllotementNotesheetDetail" EntitySet="AllotementNotesheetDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail" Association="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
             <End Role="ApplicantApplicationDetail" EntitySet="ApplicantApplicationDetails" />
             <End Role="ApplicantInvitationLetter" EntitySet="ApplicantInvitationLetters" />
@@ -738,6 +794,41 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModificationDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="AllotementNotesheetDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int32" />
+          <Property Name="DigiSignByAssistant" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DigiSignByAssistantFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignByAssistantFileType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AssistantComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignByManagerProperty" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DigiSignByManagerPropertyFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignByManagerPropertyFileType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerPropertyComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignBySectionIncharge" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DigiSignBySectionInchargeFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignBySectionInchargeFileType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SectionInchargeComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignByGMFinance" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DigiSignByGMFinanceFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignByGMFinanceFileType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="GMFinanceComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignByACEO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DigiSignByACEOFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignByACEOFileType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ACEOComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DateoOfSigningByCEO" Type="DateTime" Precision="3" />
+          <Property Name="DigiSignByCEO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DigiSignByCEOFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DigiSignByCEOFileType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CEOComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ApplicantApplicationDetail" Relationship="GidaGKPModel.FK_AllotementNotesheetDetail_ApplicantApplicationDetail" FromRole="AllotementNotesheetDetail" ToRole="ApplicantApplicationDetail" />
+        </EntityType>
         <EntityType Name="AllotmentTransactionDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -778,6 +869,7 @@
           <Property Name="AllotmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="ApprovalStatus" Type="Boolean" />
+          <NavigationProperty Name="AllotementNotesheetDetails" Relationship="GidaGKPModel.FK_AllotementNotesheetDetail_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="AllotementNotesheetDetail" />
           <NavigationProperty Name="ApplicantInvitationLetters" Relationship="GidaGKPModel.FK_ApplicantInvitationLetter_ApplicantApplicationDetail" FromRole="ApplicantApplicationDetail" ToRole="ApplicantInvitationLetter" />
         </EntityType>
         <EntityType Name="ApplicantBankDetail">
@@ -1291,6 +1383,18 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModificationDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <Association Name="FK_AllotementNotesheetDetail_ApplicantApplicationDetail">
+          <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
+          <End Type="GidaGKPModel.AllotementNotesheetDetail" Role="AllotementNotesheetDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicantApplicationDetail">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="AllotementNotesheetDetail">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ApplicantInvitationLetter_ApplicantApplicationDetail">
           <End Type="GidaGKPModel.ApplicantApplicationDetail" Role="ApplicantApplicationDetail" Multiplicity="0..1" />
           <End Type="GidaGKPModel.ApplicantInvitationLetter" Role="ApplicantInvitationLetter" Multiplicity="*" />
@@ -1364,6 +1468,41 @@
                 <ScalarProperty Name="StartingDateofInterview_L" ColumnName="StartingDateofInterview_L" />
                 <ScalarProperty Name="AllotmentDate" ColumnName="AllotmentDate" />
                 <ScalarProperty Name="AllotmentNumber" ColumnName="AllotmentNumber" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllotementNotesheetDetails">
+            <EntityTypeMapping TypeName="GidaGKPModel.AllotementNotesheetDetail">
+              <MappingFragment StoreEntitySet="AllotementNotesheetDetail">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CEOComment" ColumnName="CEOComment" />
+                <ScalarProperty Name="DigiSignByCEOFileType" ColumnName="DigiSignByCEOFileType" />
+                <ScalarProperty Name="DigiSignByCEOFileName" ColumnName="DigiSignByCEOFileName" />
+                <ScalarProperty Name="DigiSignByCEO" ColumnName="DigiSignByCEO" />
+                <ScalarProperty Name="DateoOfSigningByCEO" ColumnName="DateoOfSigningByCEO" />
+                <ScalarProperty Name="ACEOComment" ColumnName="ACEOComment" />
+                <ScalarProperty Name="DigiSignByACEOFileType" ColumnName="DigiSignByACEOFileType" />
+                <ScalarProperty Name="DigiSignByACEOFileName" ColumnName="DigiSignByACEOFileName" />
+                <ScalarProperty Name="DigiSignByACEO" ColumnName="DigiSignByACEO" />
+                <ScalarProperty Name="GMFinanceComment" ColumnName="GMFinanceComment" />
+                <ScalarProperty Name="DigiSignByGMFinanceFileType" ColumnName="DigiSignByGMFinanceFileType" />
+                <ScalarProperty Name="DigiSignByGMFinanceFileName" ColumnName="DigiSignByGMFinanceFileName" />
+                <ScalarProperty Name="DigiSignByGMFinance" ColumnName="DigiSignByGMFinance" />
+                <ScalarProperty Name="SectionInchargeComment" ColumnName="SectionInchargeComment" />
+                <ScalarProperty Name="DigiSignBySectionInchargeFileType" ColumnName="DigiSignBySectionInchargeFileType" />
+                <ScalarProperty Name="DigiSignBySectionInchargeFileName" ColumnName="DigiSignBySectionInchargeFileName" />
+                <ScalarProperty Name="DigiSignBySectionIncharge" ColumnName="DigiSignBySectionIncharge" />
+                <ScalarProperty Name="ManagerPropertyComment" ColumnName="ManagerPropertyComment" />
+                <ScalarProperty Name="DigiSignByManagerPropertyFileType" ColumnName="DigiSignByManagerPropertyFileType" />
+                <ScalarProperty Name="DigiSignByManagerPropertyFileName" ColumnName="DigiSignByManagerPropertyFileName" />
+                <ScalarProperty Name="DigiSignByManagerProperty" ColumnName="DigiSignByManagerProperty" />
+                <ScalarProperty Name="AssistantComment" ColumnName="AssistantComment" />
+                <ScalarProperty Name="DigiSignByAssistantFileType" ColumnName="DigiSignByAssistantFileType" />
+                <ScalarProperty Name="DigiSignByAssistantFileName" ColumnName="DigiSignByAssistantFileName" />
+                <ScalarProperty Name="DigiSignByAssistant" ColumnName="DigiSignByAssistant" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

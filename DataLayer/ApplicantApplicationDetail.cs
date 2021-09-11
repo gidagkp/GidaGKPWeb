@@ -17,6 +17,7 @@ namespace DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ApplicantApplicationDetail()
         {
+            this.AllotementNotesheetDetails = new HashSet<AllotementNotesheetDetail>();
             this.ApplicantInvitationLetters = new HashSet<ApplicantInvitationLetter>();
         }
     
@@ -26,6 +27,8 @@ namespace DataLayer
         public Nullable<int> UserId { get; set; }
         public Nullable<bool> ApprovalStatus { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AllotementNotesheetDetail> AllotementNotesheetDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApplicantInvitationLetter> ApplicantInvitationLetters { get; set; }
     }

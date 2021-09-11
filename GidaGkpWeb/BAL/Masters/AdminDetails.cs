@@ -107,6 +107,8 @@ namespace GidaGkpWeb.BAL
                         from allocateAllotment in allocateAllotment2.DefaultIfEmpty()
                         join allotmentTransaction1 in _db.AllotmentTransactionDetails on invitationLetter.ApplicationId equals allotmentTransaction1.ApplicationId into allotmentTransaction2
                         from allotmentTransaction in allotmentTransaction2.DefaultIfEmpty()
+                        join allotementNotesheetDetail1 in _db.AllotementNotesheetDetails on invitationLetter.ApplicationId equals allotementNotesheetDetail1.ApplicationId into allotementNotesheetDetail2
+                        from allotementNotesheetDetail in allotementNotesheetDetail2.DefaultIfEmpty()
                         where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
@@ -186,6 +188,13 @@ namespace GidaGkpWeb.BAL
                             InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
                             InterviewMode = invitationLetter != null ? invitationLetter.InterviewMode : null,
                             AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
+                            ACEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ACEOComment : "",
+                            AssistantComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.AssistantComment : "",
+                            CEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.CEOComment : "",
+                            GMFinanceComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.GMFinanceComment : "",
+                            ManagerPropertyComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ManagerPropertyComment : "",
+                            SectionInchargeComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.SectionInchargeComment : "",
+                            DateoOfSigningByCEO = allotementNotesheetDetail != null ? allotementNotesheetDetail.DateoOfSigningByCEO : null,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -298,6 +307,13 @@ namespace GidaGkpWeb.BAL
                             InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
                             InterviewMode = x.InterviewMode,
                             AllotmentTransactionAmount = x.AllotmentTransactionAmount,
+                            ACEOComment = x.ACEOComment ,
+                            AssistantComment = x.AssistantComment ,
+                            CEOComment = x.CEOComment,
+                            GMFinanceComment = x.GMFinanceComment ,
+                            ManagerPropertyComment = x.ManagerPropertyComment ,
+                            SectionInchargeComment = x.SectionInchargeComment ,
+                            DateoOfSigningByCEO = x.DateoOfSigningByCEO != null ? x.DateoOfSigningByCEO.Value.ToString("dd/MM/yyyy") : "",
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
@@ -1325,6 +1341,80 @@ namespace GidaGkpWeb.BAL
                     }
                 }
                 return new List<PlotMasterModel>();
+            }
+        }
+
+        public Enums.CrudStatus SaveAllotementNotesheet(AllotementNotesheetDetail notesheet)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                int _effectRow = 0;
+                var allotementNotesheet = _db.AllotementNotesheetDetails.Where(x => x.ApplicationId == notesheet.ApplicationId).FirstOrDefault();
+                if (allotementNotesheet != null)
+                {
+                    if (notesheet.DigiSignByCEO != null)
+                    {
+                        allotementNotesheet.DigiSignByCEO = notesheet.DigiSignByCEO;
+                        allotementNotesheet.DigiSignByCEOFileType = notesheet.DigiSignByCEOFileType;
+                        allotementNotesheet.DigiSignByCEOFileName = notesheet.DigiSignByCEOFileName;
+                    }
+                    if (notesheet.DigiSignByAssistant != null)
+                    {
+                        allotementNotesheet.DigiSignByAssistant = notesheet.DigiSignByAssistant;
+                        allotementNotesheet.DigiSignByAssistantFileName = notesheet.DigiSignByAssistantFileName;
+                        allotementNotesheet.DigiSignByAssistantFileType = notesheet.DigiSignByAssistantFileType;
+                    }
+                    if (notesheet.DigiSignByManagerProperty != null)
+                    {
+                        allotementNotesheet.DigiSignByManagerProperty = notesheet.DigiSignByManagerProperty;
+                        allotementNotesheet.DigiSignByManagerPropertyFileName = notesheet.DigiSignByManagerPropertyFileName;
+                        allotementNotesheet.DigiSignByManagerPropertyFileType = notesheet.DigiSignByManagerPropertyFileType;
+                    }
+                    if (notesheet.DigiSignBySectionIncharge != null)
+                    {
+                        allotementNotesheet.DigiSignBySectionIncharge = notesheet.DigiSignBySectionIncharge;
+                        allotementNotesheet.DigiSignBySectionInchargeFileName = notesheet.DigiSignBySectionInchargeFileName;
+                        allotementNotesheet.DigiSignBySectionInchargeFileType = notesheet.DigiSignBySectionInchargeFileType;
+                    }
+                    if (notesheet.DigiSignByGMFinance != null)
+                    {
+                        allotementNotesheet.DigiSignByGMFinance = notesheet.DigiSignByGMFinance;
+                        allotementNotesheet.DigiSignByGMFinanceFileName = notesheet.DigiSignByGMFinanceFileName;
+                        allotementNotesheet.DigiSignByGMFinanceFileType = notesheet.DigiSignByGMFinanceFileType;
+                    }
+                    if (notesheet.DigiSignByACEO != null)
+                    {
+                        allotementNotesheet.DigiSignByACEO = notesheet.DigiSignByACEO;
+                        allotementNotesheet.DigiSignByACEOFileName = notesheet.DigiSignByACEOFileName;
+                        allotementNotesheet.DigiSignByACEOFileType = notesheet.DigiSignByACEOFileType;
+                    }
+                    if (UserData.Department == "Administration" && UserData.Designation == "CEO")
+                    {
+                        if (notesheet.DateoOfSigningByCEO != null)
+                            notesheet.DateoOfSigningByCEO = notesheet.DateoOfSigningByCEO;
+                    }
+                    _db.Entry(allotementNotesheet).State = EntityState.Modified;
+                    _effectRow = _db.SaveChanges();
+                }
+                else
+                {
+                    _db.Entry(notesheet).State = EntityState.Added;
+                    _effectRow = _db.SaveChanges();
+                }
+
+                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return Enums.CrudStatus.InternalError;
             }
         }
     }

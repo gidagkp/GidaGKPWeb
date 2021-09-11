@@ -1,77 +1,175 @@
 ﻿@using DataLayer;
+@using GidaGkpWeb.Global;
 @using GidaGkpWeb.Models;
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ApplicantData = ViewData["ApplicantData"] as ApplicationUserModel;
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
 <script src="~/Scripts/App/Masters/navigation.js"></script>
 <div class="container">
+    <form action="~/Admin/SaveAllotmentNotesheet" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="ApplicationId" value="@ApplicantData.ApplicationId" />
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <h3 style="font-size:18px;">Inserting data for Allotment Notesheet   </h3>
+                <hr />
+            </div>
+            <div class="form-group col-sm-4 col-xs-12">
+                <label>Application Number</label>
+                <input type="number" class="form-control" value="@ApplicantData.ApplicationNumber" readonly>
+            </div>
+            <div class="form-group col-sm-4 col-xs-12">
+                <label>Applicant Name</label>
+                <input type="text" class="form-control" value="@ApplicantData.FullName" readonly>
+            </div>
+            <div class="form-group col-sm-4 col-xs-12">
+                <label>Mobile Number</label>
+                <input type="text" class="form-control" value="@ApplicantData.ContactNo" readonly>
+            </div>
+            <div class="form-group col-sm-3 col-xs-12">
+                <label for="user" class="">Date of lottery/Interview</label>
+                <input type="text" class="form-control" readonly value="@ApplicantData.InterviewDateTime">
+            </div>
 
-    <div class="row">
-        <div class="col-sm-12 col-xs-12">
-            <h3 style="font-size:18px;">Inserting data for Allotment Notesheet   </h3>
-            <hr />
-        </div>
-        <div class="form-group col-sm-4 col-xs-12">
-            <label>Application Number</label>
-            <input type="number" class="form-control" placeholder="" readonly>
-        </div>
-        <div class="form-group col-sm-4 col-xs-12">
-            <label>Applicant Name</label>
-            <input type="text" class="form-control" placeholder="" readonly>
-        </div>
-        <div class="form-group col-sm-4 col-xs-12">
-            <label>Mobile Number</label>
-            <input type="Mobile" class="form-control" placeholder="" readonly>
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class="">Date of lottery</label>
-            <input type="date" class="form-control" placeholder="12/07/2021">
-
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class="">Date for conducting interview </label>
-            <input type="date" class="form-control" placeholder="12/06/2021">
-        </div>
-
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class=""> Date for signing the note sheet by the CEO </label>
-            <input type="date" class="form-control" placeholder="12/06/2021">
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class=""> Digital Signature of the Assistant </label>
-            <input type="file" class="form-control" placeholder="">
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class=""> Digital Signature of Manager Property/General/Admin </label>
-            <input type="file" class="form-control" placeholder="">
-        </div>
-
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class=""> Digital Signature of AGM Property/ OSD/ Section-In Charge </label>
-            <input type="file" class="form-control" placeholder="">
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class="">Digital Signature of GM Finance </label>
-            <input type="file" class="form-control" placeholder="">
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class="">Digital Signature of ACEO</label>
-            <input type="file" class="form-control" placeholder="">
-        </div>
-        <div class="form-group col-sm-6 col-xs-12">
-            <label for="user" class="">Digital Signature of CEO </label>
-            <input type="file" class="form-control" placeholder="">
-        </div>
+            <div class="col-sm-12 col-xs-12">
+                <label for="usertype" class="text-uppercase">
+                    Write Comments
+                    <span class="required-field"></span>
+                </label>
+                <textarea name="UserComment" id="UserComment" class="form-control"></textarea>
+            </div>
 
 
 
-        <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
-            <button type="button" class="submit_plot_master" value="button">Submit</button>
-            <button type="button" class="cancel_plot_master" value="button">Cancel</button>
+            @if (UserData.Department == "Administration" && UserData.Designation == "CEO")
+            {
+                if (!string.IsNullOrEmpty(ApplicantData.AssistantComment)
+                    && !string.IsNullOrEmpty(ApplicantData.ManagerPropertyComment)
+                    && !string.IsNullOrEmpty(ApplicantData.SectionInchargeComment)
+                    && !string.IsNullOrEmpty(ApplicantData.GMFinanceComment)
+                    && !string.IsNullOrEmpty(ApplicantData.ACEOComment))
+                {
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="user" class=""> Date for signing the note sheet by the CEO </label>
+                        <input type="date" name="CEOSigningDate" class="form-control" placeholder="12/06/2021">
+                    </div>
 
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="file" class="sr-only">Digital Signature of CEO<span class="required-field"></span> </label>
+                        <div class="input-group">
+                            <input type="text" name="CEOSignInfilename" id="Documentfilename" class="form-control" placeholder="No file selected" readonly>
+                            <span class="input-group-btn">
+                                <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                    <input type="file" name="CEOSignInFile" id="CEOSignInFile" onchange="this.form.CEOSignInfilename.value = this.files.length ? this.files[0].name : ''" />
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                }
+
+            }
+            else if (UserData.Department == "Property" && UserData.Designation == "Clerk")
+            {
+                <div class="form-group col-sm-6 col-xs-12">
+                    <label for="file" class="sr-only">Digital Signature of the Assistant<span class="required-field"></span> </label>
+                    <div class="input-group">
+                        <input type="text" name="AssistantSignInfilename" id="Documentfilename" class="form-control" placeholder="No file selected" readonly>
+                        <span class="input-group-btn">
+                            <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                <input type="file" name="AssistantFile" id="AssistantFile" onchange="this.form.AssistantSignInfilename.value = this.files.length ? this.files[0].name : ''" />
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            }
+            else if (UserData.Department == "Property" && UserData.Designation == "Manager")
+            {
+                if (!string.IsNullOrEmpty(ApplicantData.AssistantComment))
+                {
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="file" class="sr-only">Digital Signature of Manager Property/General/Admin <span class="required-field"></span> </label>
+                        <div class="input-group">
+                            <input type="text" name="ManagepropertySignInfilename" id="Documentfilename" class="form-control" placeholder="No file selected" readonly>
+                            <span class="input-group-btn">
+                                <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                    <input type="file" name="ManagepropertyFile" id="ManagepropertyFile" onchange="this.form.ManagepropertySignInfilename.value = this.files.length ? this.files[0].name : ''" />
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+            else if (UserData.Department == "Property" && UserData.Designation == "Section Incharge")
+            {
+                if (!string.IsNullOrEmpty(ApplicantData.AssistantComment)
+                    && !string.IsNullOrEmpty(ApplicantData.ManagerPropertyComment))
+                {
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="file" class="sr-only">Digital Signature of AGM Property/ OSD/ Section-In Charge  <span class="required-field"></span> </label>
+                        <div class="input-group">
+                            <input type="text" name="SISignInfilename" id="Documentfilename" class="form-control" placeholder="No file selected" readonly>
+                            <span class="input-group-btn">
+                                <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                    <input type="file" name="SIFile" id="SIFile" onchange="this.form.SISignInfilename.value = this.files.length ? this.files[0].name : ''" />
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                }
+
+            }
+            else if (UserData.Department == "Finance & Accounts" && UserData.Designation == "General Manager")
+            {
+                if (!string.IsNullOrEmpty(ApplicantData.AssistantComment)
+                  && !string.IsNullOrEmpty(ApplicantData.ManagerPropertyComment)
+                  && !string.IsNullOrEmpty(ApplicantData.SectionInchargeComment))
+                {
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="file" class="sr-only">Digital Signature of GM Finance  <span class="required-field"></span> </label>
+                        <div class="input-group">
+                            <input type="text" name="GMFinanceSignInfilename" id="Documentfilename" class="form-control" placeholder="No file selected" readonly>
+                            <span class="input-group-btn">
+                                <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                    <input type="file" name="GMFinanceFile" id="GMFinanceFile" onchange="this.form.GMFinanceSignInfilename.value = this.files.length ? this.files[0].name : ''" />
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+
+            else if (UserData.Department == "Administration" && UserData.Designation == "ACEO")
+            {
+                if (!string.IsNullOrEmpty(ApplicantData.AssistantComment)
+                  && !string.IsNullOrEmpty(ApplicantData.ManagerPropertyComment)
+                  && !string.IsNullOrEmpty(ApplicantData.SectionInchargeComment)
+                  && !string.IsNullOrEmpty(ApplicantData.GMFinanceComment))
+                {
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="file" class="sr-only">Digital Signature of ACEO<span class="required-field"></span> </label>
+                        <div class="input-group">
+                            <input type="text" name="ACEOSignInfilename" id="Documentfilename" class="form-control" placeholder="No file selected" readonly>
+                            <span class="input-group-btn">
+                                <div class="btn btn-default upload_btn_cl custom-file-uploader">
+                                    <input type="file" name="ACEOFile" id="ACEOFile" onchange="this.form.ACEOSignInfilename.value = this.files.length ? this.files[0].name : ''" />
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> &nbsp; Select file
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+
+            <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
+                <button type="submit" class="submit_plot_master" value="button">Submit</button>
+                @*<button type="button" class="cancel_plot_master" value="button">Cancel</button>*@
+            </div>
         </div>
-
-    </div>
-
+    </form>
 </div>
