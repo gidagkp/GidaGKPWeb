@@ -1185,12 +1185,6 @@ namespace GidaGkpWeb.Controllers
 
         public ActionResult DataForAllotmentNotesheet(int applicationId)
         {
-            //Clerk Property
-            //  Manager Property
-            //  AGM / OSD / SI Property
-            //      GM Finance
-            //      ACEO
-            //  CEO 
             AdminDetails _details = new AdminDetails();
             var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
@@ -1255,36 +1249,36 @@ namespace GidaGkpWeb.Controllers
             {
                 notesheet.DigiSignByAssistant = new byte[AssistantFile.ContentLength];
                 AssistantFile.InputStream.Read(notesheet.DigiSignByAssistant, 0, AssistantFile.ContentLength);
-                notesheet.DigiSignByCEOFileName = AssistantFile.FileName;
-                notesheet.DigiSignByCEOFileType = AssistantFile.ContentType;
+                notesheet.DigiSignByAssistantFileName = AssistantFile.FileName;
+                notesheet.DigiSignByAssistantFileType = AssistantFile.ContentType;
             }
             if (ManagepropertyFile != null && ManagepropertyFile.ContentLength > 0)
             {
                 notesheet.DigiSignByManagerProperty = new byte[ManagepropertyFile.ContentLength];
                 ManagepropertyFile.InputStream.Read(notesheet.DigiSignByManagerProperty, 0, ManagepropertyFile.ContentLength);
-                notesheet.DigiSignByCEOFileName = ManagepropertyFile.FileName;
-                notesheet.DigiSignByCEOFileType = ManagepropertyFile.ContentType;
+                notesheet.DigiSignByManagerPropertyFileName = ManagepropertyFile.FileName;
+                notesheet.DigiSignByManagerPropertyFileType = ManagepropertyFile.ContentType;
             }
             if (SIFile != null && SIFile.ContentLength > 0)
             {
                 notesheet.DigiSignBySectionIncharge = new byte[SIFile.ContentLength];
                 SIFile.InputStream.Read(notesheet.DigiSignBySectionIncharge, 0, SIFile.ContentLength);
-                notesheet.DigiSignByCEOFileName = SIFile.FileName;
-                notesheet.DigiSignByCEOFileType = SIFile.ContentType;
+                notesheet.DigiSignBySectionInchargeFileName = SIFile.FileName;
+                notesheet.DigiSignBySectionInchargeFileType = SIFile.ContentType;
             }
             if (GMFinanceFile != null && GMFinanceFile.ContentLength > 0)
             {
                 notesheet.DigiSignByGMFinance = new byte[GMFinanceFile.ContentLength];
                 GMFinanceFile.InputStream.Read(notesheet.DigiSignByGMFinance, 0, GMFinanceFile.ContentLength);
-                notesheet.DigiSignByCEOFileName = GMFinanceFile.FileName;
-                notesheet.DigiSignByCEOFileType = GMFinanceFile.ContentType;
+                notesheet.DigiSignByGMFinanceFileName = GMFinanceFile.FileName;
+                notesheet.DigiSignByGMFinanceFileType = GMFinanceFile.ContentType;
             }
             if (ACEOFile != null && ACEOFile.ContentLength > 0)
             {
                 notesheet.DigiSignByACEO = new byte[ACEOFile.ContentLength];
                 ACEOFile.InputStream.Read(notesheet.DigiSignByACEO, 0, ACEOFile.ContentLength);
-                notesheet.DigiSignByCEOFileName = ACEOFile.FileName;
-                notesheet.DigiSignByCEOFileType = ACEOFile.ContentType;
+                notesheet.DigiSignByACEOFileName = ACEOFile.FileName;
+                notesheet.DigiSignByACEOFileType = ACEOFile.ContentType;
             }
 
             AdminDetails _details = new AdminDetails();
@@ -1293,7 +1287,7 @@ namespace GidaGkpWeb.Controllers
                 SetAlertMessage("Allotement Notesheet has been Saved", "Allotement Notesheet");
             else
                 SetAlertMessage("Allotement Notesheet save failed", "Allotement Notesheet");
-            return RedirectToAction("PrintAllotmentNotesheet");
+            return RedirectToAction("DataForAllotmentNotesheet", new { applicationId = ApplicationId });
         }
         public ActionResult Logout()
         {

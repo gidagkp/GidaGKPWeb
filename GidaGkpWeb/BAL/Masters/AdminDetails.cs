@@ -1608,13 +1608,40 @@ namespace GidaGkpWeb.BAL
                     if (UserData.Department == "Administration" && UserData.Designation == "CEO")
                     {
                         if (notesheet.DateoOfSigningByCEO != null)
-                            notesheet.DateoOfSigningByCEO = notesheet.DateoOfSigningByCEO;
+                            allotementNotesheet.DateoOfSigningByCEO = notesheet.DateoOfSigningByCEO;
                     }
+                    if (!string.IsNullOrEmpty(notesheet.AssistantComment))
+                    {
+                        allotementNotesheet.AssistantComment = notesheet.AssistantComment;
+                    }
+                    else if (!string.IsNullOrEmpty(notesheet.ManagerPropertyComment))
+                    {
+                        allotementNotesheet.ManagerPropertyComment = notesheet.ManagerPropertyComment;
+                    }
+                    else if (!string.IsNullOrEmpty(notesheet.SectionInchargeComment))
+                    {
+                        allotementNotesheet.SectionInchargeComment = notesheet.SectionInchargeComment;
+                    }
+                    else if (!string.IsNullOrEmpty(notesheet.GMFinanceComment))
+                    {
+                        allotementNotesheet.GMFinanceComment = notesheet.GMFinanceComment;
+                    }
+                    else if (!string.IsNullOrEmpty(notesheet.ACEOComment))
+                    {
+                        allotementNotesheet.ACEOComment = notesheet.ACEOComment;
+                    }
+                    else if (!string.IsNullOrEmpty(notesheet.CEOComment))
+                    {
+                        allotementNotesheet.CEOComment = notesheet.CEOComment;
+                    }
+
                     _db.Entry(allotementNotesheet).State = EntityState.Modified;
                     _effectRow = _db.SaveChanges();
                 }
                 else
                 {
+                    notesheet.CreatedBy = UserData.UserId;
+                    notesheet.CreatedDate = DateTime.Now;
                     _db.Entry(notesheet).State = EntityState.Added;
                     _effectRow = _db.SaveChanges();
                 }
