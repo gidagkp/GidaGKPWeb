@@ -720,14 +720,14 @@ namespace GidaGkpWeb.Controllers
         public ActionResult AllotmentStatus(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
             return View();
         }
         public ActionResult PrintAllotmentLetter(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
             return View();
         }
@@ -944,7 +944,7 @@ namespace GidaGkpWeb.Controllers
         {
             ViewData["ApplicationId"] = applicationId;
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -1023,7 +1023,7 @@ namespace GidaGkpWeb.Controllers
         {
             ViewData["ApplicationId"] = applicationId;
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -1069,7 +1069,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult LeasedeedStatus(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -1089,7 +1089,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult SendAllotmentEmailToApplicant(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             string baseUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
             var encryptedApplicationId = CryptoEngine.Encrypt(data.ApplicationId.ToString());
             this.SendMailToApplicantAllotmentMoney(data.FullName, data.Email, data.AllotementMoneyTobePaid, data.AllotmentDate, encryptedApplicationId, baseUrl);
@@ -1192,7 +1192,7 @@ namespace GidaGkpWeb.Controllers
             //      ACEO
             //  CEO 
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
             return View();
         }
@@ -1200,7 +1200,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult PrintAllotmentNotesheet(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
             return View();
         }

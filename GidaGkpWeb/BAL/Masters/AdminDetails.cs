@@ -103,12 +103,12 @@ namespace GidaGkpWeb.BAL
                         from invitationLetter in invitationLetter2.DefaultIfEmpty()
                         join plotMaster1 in _db.PlotMasters on invitationLetter.PlotId equals plotMaster1.PlotId into plotMaster2
                         from plotMaster in plotMaster2.DefaultIfEmpty()
-                        join allocateAllotment1 in _db.AllocateAllotmentDetails on invitationLetter.ApplicationId equals allocateAllotment1.ApplicationId into allocateAllotment2
-                        from allocateAllotment in allocateAllotment2.DefaultIfEmpty()
-                        join allotmentTransaction1 in _db.AllotmentTransactionDetails on invitationLetter.ApplicationId equals allotmentTransaction1.ApplicationId into allotmentTransaction2
-                        from allotmentTransaction in allotmentTransaction2.DefaultIfEmpty()
-                        join allotementNotesheetDetail1 in _db.AllotementNotesheetDetails on invitationLetter.ApplicationId equals allotementNotesheetDetail1.ApplicationId into allotementNotesheetDetail2
-                        from allotementNotesheetDetail in allotementNotesheetDetail2.DefaultIfEmpty()
+                            //join allocateAllotment1 in _db.AllocateAllotmentDetails on invitationLetter.ApplicationId equals allocateAllotment1.ApplicationId into allocateAllotment2
+                            //from allocateAllotment in allocateAllotment2.DefaultIfEmpty()
+                            //join allotmentTransaction1 in _db.AllotmentTransactionDetails on invitationLetter.ApplicationId equals allotmentTransaction1.ApplicationId into allotmentTransaction2
+                            //from allotmentTransaction in allotmentTransaction2.DefaultIfEmpty()
+                            //join allotementNotesheetDetail1 in _db.AllotementNotesheetDetails on invitationLetter.ApplicationId equals allotementNotesheetDetail1.ApplicationId into allotementNotesheetDetail2
+                            //from allotementNotesheetDetail in allotementNotesheetDetail2.DefaultIfEmpty()
                         where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
@@ -183,18 +183,18 @@ namespace GidaGkpWeb.BAL
                             PlotCost = plotMaster != null ? plotMaster.PlotCost : "",
                             ExtraCharge = plotMaster != null ? plotMaster.ExtraCharge : "",
                             GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
-                            AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
-                            AllotmentDate = allocateAllotment != null ? allocateAllotment.AllotmentDate : null,
-                            InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
-                            InterviewMode = invitationLetter != null ? invitationLetter.InterviewMode : null,
-                            AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
-                            ACEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ACEOComment : "",
-                            AssistantComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.AssistantComment : "",
-                            CEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.CEOComment : "",
-                            GMFinanceComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.GMFinanceComment : "",
-                            ManagerPropertyComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ManagerPropertyComment : "",
-                            SectionInchargeComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.SectionInchargeComment : "",
-                            DateoOfSigningByCEO = allotementNotesheetDetail != null ? allotementNotesheetDetail.DateoOfSigningByCEO : null,
+                            //AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
+                            //AllotmentDate = allocateAllotment != null ? allocateAllotment.AllotmentDate : null,
+                            //InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
+                            //InterviewMode = invitationLetter != null ? invitationLetter.InterviewMode : null,
+                            //AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
+                            //ACEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ACEOComment : "",
+                            //AssistantComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.AssistantComment : "",
+                            //CEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.CEOComment : "",
+                            //GMFinanceComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.GMFinanceComment : "",
+                            //ManagerPropertyComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ManagerPropertyComment : "",
+                            //SectionInchargeComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.SectionInchargeComment : "",
+                            //DateoOfSigningByCEO = allotementNotesheetDetail != null ? allotementNotesheetDetail.DateoOfSigningByCEO : null,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -302,18 +302,18 @@ namespace GidaGkpWeb.BAL
                             TenPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 10) / 100).ToString() : "",
                             NintyPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 90) / 100).ToString() : "",
                             AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 10) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
-                            AllotmentNumber = x.AllotmentNumber,
-                            AllotmentDate = x.AllotmentDate,
-                            InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
-                            InterviewMode = x.InterviewMode,
-                            AllotmentTransactionAmount = x.AllotmentTransactionAmount,
-                            ACEOComment = x.ACEOComment ,
-                            AssistantComment = x.AssistantComment ,
-                            CEOComment = x.CEOComment,
-                            GMFinanceComment = x.GMFinanceComment ,
-                            ManagerPropertyComment = x.ManagerPropertyComment ,
-                            SectionInchargeComment = x.SectionInchargeComment ,
-                            DateoOfSigningByCEO = x.DateoOfSigningByCEO != null ? x.DateoOfSigningByCEO.Value.ToString("dd/MM/yyyy") : "",
+                            //AllotmentNumber = x.AllotmentNumber,
+                            //AllotmentDate = x.AllotmentDate,
+                            //InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
+                            //InterviewMode = x.InterviewMode,
+                            //AllotmentTransactionAmount = x.AllotmentTransactionAmount,
+                            //ACEOComment = x.ACEOComment ,
+                            //AssistantComment = x.AssistantComment ,
+                            //CEOComment = x.CEOComment,
+                            //GMFinanceComment = x.GMFinanceComment ,
+                            //ManagerPropertyComment = x.ManagerPropertyComment ,
+                            //SectionInchargeComment = x.SectionInchargeComment ,
+                            //DateoOfSigningByCEO = x.DateoOfSigningByCEO != null ? x.DateoOfSigningByCEO.Value.ToString("dd/MM/yyyy") : "",
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,
@@ -365,6 +365,222 @@ namespace GidaGkpWeb.BAL
                     }
                 }
                 return new List<ApplicationUserModel>();
+            }
+        }
+
+        public ApplicationUserModel GetApplicantUserDetailBtApplicationId(int ApplicationId)
+        {
+            try
+            {
+                _db = new GidaGKPEntities();
+                return (from user in _db.ApplicantUsers
+                        join applicant1 in _db.ApplicantDetails on user.Id equals applicant1.UserId into applicant2
+                        from applicant in applicant2.DefaultIfEmpty()
+                        join application1 in _db.ApplicantApplicationDetails on user.Id equals application1.UserId into application2
+                        from application in application2.DefaultIfEmpty()
+                        join bankDetail1 in _db.ApplicantBankDetails on user.Id equals bankDetail1.UserId into bankDetail2
+                        from bankDetail in bankDetail2.DefaultIfEmpty()
+                        join plotDetail1 in _db.ApplicantPlotDetails on user.Id equals plotDetail1.UserId into plotDetail2
+                        from plotDetail in plotDetail2.DefaultIfEmpty()
+                        join sectorLookup1 in _db.Lookups on plotDetail.SectorName equals sectorLookup1.LookupId into sectorLookup2
+                        from sectorLookup in sectorLookup2.DefaultIfEmpty()
+                        join schemeLookup1 in _db.Lookups on plotDetail.SchemeName equals schemeLookup1.LookupId into schemeLookup2
+                        from schemeLookup in schemeLookup2.DefaultIfEmpty()
+                        join plotrangeLookup1 in _db.Lookups on plotDetail.PlotRange equals plotrangeLookup1.LookupId into plotrangeLookup2
+                        from plotrangeLookup in plotrangeLookup2.DefaultIfEmpty()
+                        join doc1 in _db.ApplicantUploadDocs on user.Id equals doc1.UserId into doc2
+                        from doc in doc2.DefaultIfEmpty()
+                        join transaction1 in _db.ApplicantTransactionDetails on application.ApplicationId equals transaction1.ApplicationId into transaction2
+                        from transaction in transaction2.DefaultIfEmpty()
+                        join ProjectDetail1 in _db.ApplicantProjectDetails on application.ApplicationId equals ProjectDetail1.ApplicationId into projectDetail2
+                        from ProjectDetail in projectDetail2.DefaultIfEmpty()
+                        join invitationLetter1 in _db.ApplicantInvitationLetters on application.ApplicationId equals invitationLetter1.ApplicationId into invitationLetter2
+                        from invitationLetter in invitationLetter2.DefaultIfEmpty()
+                        join plotMaster1 in _db.PlotMasters on invitationLetter.PlotId equals plotMaster1.PlotId into plotMaster2
+                        from plotMaster in plotMaster2.DefaultIfEmpty()
+                        join allocateAllotment1 in _db.AllocateAllotmentDetails on invitationLetter.ApplicationId equals allocateAllotment1.ApplicationId into allocateAllotment2
+                        from allocateAllotment in allocateAllotment2.DefaultIfEmpty()
+                        join allotmentTransaction1 in _db.AllotmentTransactionDetails on invitationLetter.ApplicationId equals allotmentTransaction1.ApplicationId into allotmentTransaction2
+                        from allotmentTransaction in allotmentTransaction2.DefaultIfEmpty()
+                        join allotementNotesheetDetail1 in _db.AllotementNotesheetDetails on invitationLetter.ApplicationId equals allotementNotesheetDetail1.ApplicationId into allotementNotesheetDetail2
+                        from allotementNotesheetDetail in allotementNotesheetDetail2.DefaultIfEmpty()
+                        where user.UserType != "Test" && application.ApplicationId == ApplicationId
+                        select new
+                        {
+                            ApplicationNumber = doc != null ? application.ApplicationNumber : "",
+                            PaidAmount = transaction != null ? transaction.amount : "",
+                            ApplicationId = transaction != null ? application.ApplicationId : 0,
+                            PlotArea = plotDetail != null ? plotDetail.PlotArea : "",
+                            UnitName = plotDetail != null ? plotDetail.UnitName : "",
+                            TotalInvestment = plotDetail != null ? plotDetail.TotalInvestment : 0,
+                            Skilled = ProjectDetail != null ? ProjectDetail.Skilled : "",
+                            AadharNumber = user.AadharNumber,
+                            ContactNo = user.ContactNo,
+                            CreationDate = user.CreationDate,
+                            Email = user.Email,
+                            FatherName = applicant != null ? applicant.FName : "",
+                            CAddress = applicant != null ? applicant.CAddress : "",
+                            PAddress = applicant != null ? applicant.PAddress : "",
+                            FullName = applicant != null ? applicant.FullApplicantName : "",
+                            Id = user.Id,
+                            SchemeName = user.SchemeName,
+                            SchemeType = user.SchemeType,
+                            SectorName = user.SectorName,
+                            PlotSectorName = plotDetail != null ? sectorLookup.LookupName : "",
+                            PlotSchemeName = plotDetail != null ? schemeLookup.LookupName : "",
+                            UserType = user.UserType,
+                            DOB = user.DOB,
+                            UserName = user.UserName,
+                            IsActive = user.IsActive,
+                            ApplicationStatus = application.ApprovalStatus,
+                            AccoutnNumber = bankDetail.BankAccountNo,
+                            BankName = bankDetail.BankName,
+                            BranchName = bankDetail.BBName,
+                            IFSCCode = bankDetail.IFSC_Code,
+                            TransactionID = transaction != null ? transaction.tracking_id : 0,
+                            TransactionDate = transaction != null ? transaction.trans_date : null,
+                            PaymentMode = transaction != null ? transaction.payment_mode : null,
+                            ApplicationFee = plotDetail != null ? plotDetail.ApplicationFee.ToString() : "",
+                            GST = plotDetail != null ? plotDetail.GST.ToString() : "",
+                            EarnestMoney = plotDetail != null ? plotDetail.EarnestMoney.ToString() : "",
+                            SchemeNameId = plotDetail != null ? plotDetail.SchemeName.ToString() : "",
+
+                            AMPaymentStatus = transaction != null ? transaction.AMApprovalStatus : "",
+                            CEOPaymentStatus = transaction != null ? transaction.CEOApprovalStatus : "",
+                            GMPaymentStatus = transaction != null ? transaction.GMApprovalStatus : "",
+
+                            AMPaymentComment = transaction != null ? transaction.AMComment : "",
+                            CEOPaymentComment = transaction != null ? transaction.CEOComment : "",
+                            GMPaymentComment = transaction != null ? transaction.GMComment : "",
+
+                            AMDocumentStatus = doc != null ? doc.AMApprovalStatus : "",
+                            ClerkDocumentStatus = doc != null ? doc.ClerkApprovalStatus : "",
+                            SIDocumentStatus = doc != null ? doc.SIApprovalStatus : "",
+                            GMDocumentStatus = doc != null ? doc.GMApprovalStatus : "",
+                            CEODocumentStatus = doc != null ? doc.CEOApprovalStatus : "",
+
+                            AMDocumentComment = doc != null ? doc.AMComment : "",
+                            ClerkDocumentComment = doc != null ? doc.ClerkComment : "",
+                            SIDocumentComment = doc != null ? doc.SIComment : "",
+                            GMDocumentComment = doc != null ? doc.GMComment : "",
+                            CEODocumentComment = doc != null ? doc.CEOComment : "",
+                            InterviewLetterStatus = invitationLetter != null && invitationLetter.InterviewLetterStatus == null || invitationLetter.InterviewLetterStatus == "" ? "Invitation Generated" : invitationLetter != null ? invitationLetter.InterviewLetterStatus : "",
+                            UserId = user.Id,
+                            PlotId = plotMaster != null ? plotMaster.PlotId : 0,
+                            PlotRange = plotrangeLookup != null ? plotrangeLookup.LookupName : "",
+                            PMPlotArea = plotMaster != null ? plotMaster.PlotArea : "",
+                            PlotNumber = plotMaster != null ? plotMaster.PlotNumber : "",
+                            PlotRate = plotMaster != null ? plotMaster.PlotRate : "",
+                            PlotSideCorner = plotMaster != null ? plotMaster.PlotSideCorner : false,
+                            PlotSideParkFacing = plotMaster != null ? plotMaster.PlotSideParkFacing : false,
+                            PlotSideWideRoad = plotMaster != null ? plotMaster.PlotSideWideRoad : false,
+                            PlotSidePercentage = plotMaster != null ? plotMaster.PercentageRate : "",
+                            PlotCost = plotMaster != null ? plotMaster.PlotCost : "",
+                            ExtraCharge = plotMaster != null ? plotMaster.ExtraCharge : "",
+                            GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
+                            AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
+                            AllotmentDate = allocateAllotment != null ? allocateAllotment.AllotmentDate : null,
+                            InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
+                            InterviewMode = invitationLetter != null ? invitationLetter.InterviewMode : null,
+                            AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
+                            ACEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ACEOComment : "",
+                            AssistantComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.AssistantComment : "",
+                            CEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.CEOComment : "",
+                            GMFinanceComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.GMFinanceComment : "",
+                            ManagerPropertyComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ManagerPropertyComment : "",
+                            SectionInchargeComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.SectionInchargeComment : "",
+                            DateoOfSigningByCEO = allotementNotesheetDetail != null ? allotementNotesheetDetail.DateoOfSigningByCEO : null,
+                        }).Distinct().ToList()
+                        .Select(x => new ApplicationUserModel()
+                        {
+                            ApplicationNumber = x.ApplicationNumber,
+                            PaidAmount = x.PaidAmount,
+                            ApplicationId = x.ApplicationId,
+                            PlotArea = x.PlotArea,
+                            UnitName = x.UnitName,
+                            TotalInvestment = x.TotalInvestment,
+                            Skilled = x.Skilled,
+                            AadharNumber = x.AadharNumber,
+                            ContactNo = x.ContactNo,
+                            CreationDate = x.CreationDate,
+                            Email = x.Email,
+                            FatherName = x.FatherName,
+                            CAddress = x.CAddress,
+                            PAddress = x.PAddress,
+                            FullName = x.FullName,
+                            Id = x.Id,
+                            SchemeName = x.SchemeName,
+                            SchemeType = x.SchemeType,
+                            SectorName = x.SectorName,
+                            PlotSchemeName = x.PlotSchemeName,
+                            PlotSectorName = x.PlotSectorName,
+                            UserType = x.UserType,
+                            DOB = x.DOB != null ? x.DOB.Value.ToString("dd/MM/yyyy") : string.Empty,
+                            UserName = x.UserName,
+                            IsActive = x.IsActive,
+                            ApplicationStatus = x.ApplicationStatus,
+                            AccoutnNumber = x.AccoutnNumber,
+                            BankName = x.BankName,
+                            BranchName = x.BranchName,
+                            IFSCCode = x.IFSCCode,
+                            TransactionDate = x.TransactionDate != null ? x.TransactionDate.Value.ToString("dd/MM/yyyy") : string.Empty,
+                            TransactionID = x.TransactionID,
+                            PaymentMode = x.PaymentMode,
+                            EarnestMoney = x.EarnestMoney,
+                            FormFee = x.ApplicationFee,
+                            GSTAmount = x.GST,
+                            SchemeNameId = x.SchemeNameId,
+
+                            AMPaymentStatus = !string.IsNullOrEmpty(x.AMPaymentComment) ? x.AMPaymentStatus + "(Comment : " + x.AMPaymentComment + ")" : x.AMPaymentStatus,
+                            CEOPaymentStatus = !string.IsNullOrEmpty(x.CEOPaymentComment) ? x.CEOPaymentStatus + "(Comment : " + x.CEOPaymentComment + ")" : x.CEOPaymentStatus,
+                            GMPaymentStatus = !string.IsNullOrEmpty(x.GMPaymentComment) ? x.GMPaymentStatus + "(Comment : " + x.GMPaymentComment + ")" : x.GMPaymentStatus,
+
+                            AMDocumentStatus = !string.IsNullOrEmpty(x.AMDocumentComment) ? x.AMDocumentStatus + "(Comment : " + x.AMDocumentComment + ")" : x.AMDocumentStatus,
+                            ClerkDocumentStatus = !string.IsNullOrEmpty(x.ClerkDocumentComment) ? x.ClerkDocumentStatus + "(Comment : " + x.ClerkDocumentComment + ")" : x.ClerkDocumentStatus,
+                            SIDocumentStatus = !string.IsNullOrEmpty(x.SIDocumentComment) ? x.SIDocumentStatus + "(Comment : " + x.SIDocumentComment + ")" : x.SIDocumentStatus,
+                            CEODocumentStatus = !string.IsNullOrEmpty(x.CEODocumentComment) ? x.CEODocumentStatus + "(Comment : " + x.CEODocumentComment + ")" : x.CEODocumentStatus,
+                            GMDocumentStatus = !string.IsNullOrEmpty(x.GMDocumentComment) ? x.GMDocumentStatus + "(Comment : " + x.GMDocumentComment + ")" : x.GMDocumentStatus,
+                            InterviewLetterStatus = !string.IsNullOrEmpty(x.InterviewLetterStatus) ? x.InterviewLetterStatus : "",
+                            UserId = x.UserId,
+                            PlotId = x.PlotId,
+                            PlotRange = x.PlotRange,
+                            PMPlotArea = x.PMPlotArea,
+                            PlotNumber = x.PlotNumber,
+                            PlotRate = x.PlotRate,
+                            PlotSideCorner = x.PlotSideCorner,
+                            PlotSideParkFacing = x.PlotSideParkFacing,
+                            PlotSideWideRoad = x.PlotSideWideRoad,
+                            PlotSidePercentage = x.PlotSidePercentage,
+                            PlotCost = x.PlotCost,
+                            ExtraCharge = x.ExtraCharge,
+                            GrandTotalCost = x.GrandTotalCost,
+                            TenPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 10) / 100).ToString() : "",
+                            NintyPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 90) / 100).ToString() : "",
+                            AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 10) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
+                            AllotmentNumber = x.AllotmentNumber,
+                            AllotmentDate = x.AllotmentDate,
+                            InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
+                            InterviewMode = x.InterviewMode,
+                            AllotmentTransactionAmount = x.AllotmentTransactionAmount,
+                            ACEOComment = x.ACEOComment,
+                            AssistantComment = x.AssistantComment,
+                            CEOComment = x.CEOComment,
+                            GMFinanceComment = x.GMFinanceComment,
+                            ManagerPropertyComment = x.ManagerPropertyComment,
+                            SectionInchargeComment = x.SectionInchargeComment,
+                            DateoOfSigningByCEO = x.DateoOfSigningByCEO != null ? x.DateoOfSigningByCEO.Value.ToString("dd/MM/yyyy") : "",
+                        }).FirstOrDefault();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+                    }
+                }
+                return new ApplicationUserModel();
             }
         }
 
