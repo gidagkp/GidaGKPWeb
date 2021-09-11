@@ -1114,23 +1114,13 @@ namespace GidaGkpWeb.Controllers
                 sendMessageStrategy.SendMessages();
             });
         }
-        public ActionResult PrintAllotmentNotesheet()
-        {
-            return View();
-        }
-        public ActionResult Logout()
-        {
-            Session.Abandon();
-            Session.Clear();
-            return RedirectToAction("AdminLogin", "Login");
-        }
         [HttpPost]
         public ActionResult SaveLeaseddeedNotesheet(string Id, HttpPostedFileBase Sfile, HttpPostedFileBase Mfile, HttpPostedFileBase AMfile, string BankGDate, string ApplicationId, string BankAddress, string Comments)
         {
             LeasdeedNotesheet Lnotesheet = new LeasdeedNotesheet();
             Lnotesheet.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
             if (UserData.Designation == "Assistant Manager")
-                {
+            {
                 if (Sfile != null && Sfile.ContentLength > 0)
                 {
                     Lnotesheet.Digsign_Propassist = new byte[Sfile.ContentLength];
@@ -1144,10 +1134,10 @@ namespace GidaGkpWeb.Controllers
             {
                 if (Mfile != null && Mfile.ContentLength > 0)
                 {
-                    Lnotesheet.Digsign_Manager  = new byte[Sfile.ContentLength];
+                    Lnotesheet.Digsign_Manager = new byte[Sfile.ContentLength];
                     Sfile.InputStream.Read(Lnotesheet.Digsign_Manager, 0, Sfile.ContentLength);
                     Lnotesheet.Docname_Digsignmanager = Mfile.FileName;
-                    Lnotesheet.Doctype_Digsignmanager  = Mfile.ContentType;
+                    Lnotesheet.Doctype_Digsignmanager = Mfile.ContentType;
                 }
                 Lnotesheet.Comment_Manager = Comments;
             }
@@ -1155,12 +1145,12 @@ namespace GidaGkpWeb.Controllers
             {
                 if (AMfile != null && AMfile.ContentLength > 0)
                 {
-                    Lnotesheet.Digsign_FManager  = new byte[Sfile.ContentLength];
+                    Lnotesheet.Digsign_FManager = new byte[Sfile.ContentLength];
                     Sfile.InputStream.Read(Lnotesheet.Digsign_FManager, 0, Sfile.ContentLength);
-                    Lnotesheet.Docname_FManager  = AMfile.FileName;
+                    Lnotesheet.Docname_FManager = AMfile.FileName;
                     Lnotesheet.Doctype_FManager = AMfile.ContentType;
                 }
-                Lnotesheet.Doctype_FManager  = Comments;
+                Lnotesheet.Doctype_FManager = Comments;
             }
 
 
@@ -1168,7 +1158,7 @@ namespace GidaGkpWeb.Controllers
             Lnotesheet.Bankaddress = BankAddress;
             Lnotesheet.ApplicantId = 55;
             Lnotesheet.Allotmentnumber = "10";
-            
+
 
 
             if (BankGDate != "")
@@ -1176,12 +1166,12 @@ namespace GidaGkpWeb.Controllers
                 Lnotesheet.Bankguranteedate = Convert.ToDateTime(BankGDate);
 
             }
-            
-                Lnotesheet.CreatedBy = UserData.UserId;
-                Lnotesheet.Createddate = DateTime.Now;
-           
-            
-              
+
+            Lnotesheet.CreatedBy = UserData.UserId;
+            Lnotesheet.Createddate = DateTime.Now;
+
+
+
 
             LeasedeedNotesheetDetails _details = new LeasedeedNotesheetDetails();
             var result = _details.SaveLeasedeedNotesheet(Lnotesheet);
@@ -1193,6 +1183,20 @@ namespace GidaGkpWeb.Controllers
             return RedirectToAction("LeaseddeedNotesheet");
 
         }
+        public ActionResult PrintAllotmentNotesheet(int applicationId)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetail(null).Where(x => x.ApplicationId == applicationId).FirstOrDefault();
+            ViewData["ApplicantData"] = data;
+            return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+            return RedirectToAction("AdminLogin", "Login");
+        }
+        
     }
 
 }

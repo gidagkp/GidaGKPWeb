@@ -3,23 +3,26 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var ApplicantData = ViewData["ApplicantData"] as ApplicationUserModel;
-    //decimal calculation = 0;
+    decimal calculation = 0;
 }
 <style type="text/css">
     .container {
         height: auto;
         overflow: hidden;
     }
+
     .column {
         float: left;
         width: 80%;
     }
+
     .row:after {
         content: "";
         display: table;
         clear: both;
     }
-        .left {
+
+    .left {
         width: auto;
         float: right;
         background: #fffc54;
@@ -33,13 +36,13 @@
 </style>
 <div class="container" id="allotementDiv">
     @*<div class="right">आवंटन पत्र संख्या:</div>
-    <div class="left">*@
+        <div class="left">*@
     <div class="row">
-        <div class="column">आवंटन पत्र संख्या:</div>
-        <div class="column">
+        <div class="col-xs-2 col-sm-2" style="margin-top: 2.5%;">आवंटन पत्र संख्या:</div>
+        <div class="col-xs-10 col-sm-10" style=" border-left: 1px solid;">
             <!-- User profile -->
-            <div class="panel panel-default" style="padding: 30px;">
-                <div class="panel-heading">
+            <div class="panel panel-default" style="padding: 30px; border: none;">
+                <div class="panel-heading" style=" background: transparent;">
 
                     <h4 class="panel-title text-center main_cla_profile">
                         गोरखपुर औद्योगिक विकास प्राधिकरण  (गीडा)<br>
@@ -49,7 +52,7 @@
 
                 </div>
                 <div class="panel-body">
-                    <div class="panel-heading">
+                    <div class="panel-heading" style=" background: transparent;">
                         <div class="row">
                             <div class="col-xs-12 col-sm-9" style="text-align:left">
                                 <h4 class="panel-title main_cla_profile">आवंटन पत्र संख्या: </h4>
@@ -60,8 +63,8 @@
                         </div>
                     </div>
                     @*<div class="profile__header">
-                        <h4>आवंटन पत्र संख्या: @ApplicantData.AllotmentNumber</h4>
-                    </div>*@
+                            <h4>आवंटन पत्र संख्या: @ApplicantData.AllotmentNumber</h4>
+                        </div>*@
                 </div>
                 <div class="panel-body">
                     <div class="profile__header">
@@ -78,7 +81,7 @@
 
                 <hr />
 
-                <div class="panel-heading">
+                <div class="panel-heading" style="background: transparent; ">
                     <h4 class="panel-title text-center">के पक्ष में आवंटित भूखण्ड संख्या: <strong>@*@ApplicantData.PlotNumber @ApplicantData.PlotSectorName*@</strong>चिन्हित हुआ है। अतः उक्त आवेदक के पक्ष में चिन्हित भूखण्ड के आवंटन का प्रस्ताव हैं। भूखण्ड का प्रोविजनल प्रीमियम एवं अन्य देय धनराशि का विवरण निम्नानुसार है:-</h4>
                 </div>
                 <div class="panel-body">
@@ -91,20 +94,20 @@
                                 <td><strong>क्षेत्रफल वर्ग मीटर में </strong></td>
                                 <td><strong>धनराशि (रुपये में) </strong></td>
                             </tr>
-                            @*@{
-                            var plotArea = Convert.ToDecimal(ApplicantData.PlotArea);
-                            int index = 0;
-                            decimal displayPlotArea;
-                            decimal displayCalculation;
-                            while (plotArea > 0)
-                            {
-                                if (index == 0)
+                            @{
+                                var plotArea = Convert.ToDecimal(ApplicantData.PlotArea);
+                                int index = 0;
+                                decimal displayPlotArea;
+                                decimal displayCalculation;
+                                while (plotArea > 0)
                                 {
-                                    if (plotArea >= 4000)
+                                    if (index == 0)
                                     {
-                                        displayCalculation = 4000 * 6000;
-                                        calculation += 4000 * 6000;
-                                        plotArea -= 4000;*@
+                                        if (plotArea >= 4000)
+                                        {
+                                            displayCalculation = 4000 * 6000;
+                                            calculation += 4000 * 6000;
+                                            plotArea -= 4000;
                             <tr>
                                 <td><strong>1 </strong></td>
                                 <td><strong>0-4000 </strong></td>
@@ -253,20 +256,20 @@
                                 <td colspan="2"><strong>30 मीटर अथवा उससे चौड़े मार्ग पर स्थित भूखण्डों हेतु 5 प्रतिशत अतिरिक्त धनराशि</strong></td>
                                 <td><strong></strong></td>
                                 @*@if (ApplicantData.PlotSideWideRoad == true)
-                                {
-                                    <td>
-                                        @{
-                                            var roadsideCal = (((calculation) * 5) / 100);
-                                            <strong>
-                                                @roadsideCal
-                                            </strong>
-                                        }
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }*@
+                                    {
+                                        <td>
+                                            @{
+                                                var roadsideCal = (((calculation) * 5) / 100);
+                                                <strong>
+                                                    @roadsideCal
+                                                </strong>
+                                            }
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }*@
 
                             </tr>
                             <tr>
@@ -274,21 +277,21 @@
                                 <td colspan="2"><strong>कोने पर स्थित भूखण्डों हेतु 10 प्रतिशत अतिरिक्त धनराशि</strong></td>
                                 <td><strong></strong></td>
                                 @*@if (ApplicantData.PlotSideCorner == true)
-                                {
-                                    <td>
+                                    {
+                                        <td>
 
-                                        @{
-                                            var cornerCal = (((calculation) * 10) / 100);
-                                            <strong>
-                                                @cornerCal
-                                            </strong>
-                                        }
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }*@
+                                            @{
+                                                var cornerCal = (((calculation) * 10) / 100);
+                                                <strong>
+                                                    @cornerCal
+                                                </strong>
+                                            }
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }*@
                             </tr>
 
                             <tr>
@@ -296,17 +299,17 @@
                                 <td colspan="3" style="text-align: right; padding-right: 6%;"><strong>महायोग(योग 5+6)</strong></td>
                                 <td>
                                     @*@{
-                                        decimal grandTotal = calculation;
-                                        if (ApplicantData.PlotSideWideRoad == true)
-                                        {
-                                            grandTotal += (((calculation) * 5) / 100);
-                                        }
-                                        if (ApplicantData.PlotSideCorner == true)
-                                        {
-                                            grandTotal += (((calculation) * 10) / 100);
-                                        }
-                                        <strong>@grandTotal</strong>
-                                    }*@
+                                            decimal grandTotal = calculation;
+                                            if (ApplicantData.PlotSideWideRoad == true)
+                                            {
+                                                grandTotal += (((calculation) * 5) / 100);
+                                            }
+                                            if (ApplicantData.PlotSideCorner == true)
+                                            {
+                                                grandTotal += (((calculation) * 10) / 100);
+                                            }
+                                            <strong>@grandTotal</strong>
+                                        }*@
                                 </td>
                             </tr>
                             <tr>
@@ -333,11 +336,11 @@
                                 <td colspan="3"><strong>धरोहर धनराशि समायोजन के उपरान्त अवशेष आरक्षण धनराशि</strong></td>
                                 <td>
                                     @*@{
-                                        var remainingAmount = Convert.ToDecimal(ApplicantData.TenPer_AllotmentMoney) - Convert.ToDecimal(ApplicantData.EarnestMoney);
-                                        <strong>
-                                            @remainingAmount
-                                        </strong>
-                                    }*@
+                                            var remainingAmount = Convert.ToDecimal(ApplicantData.TenPer_AllotmentMoney) - Convert.ToDecimal(ApplicantData.EarnestMoney);
+                                            <strong>
+                                                @remainingAmount
+                                            </strong>
+                                        }*@
 
                                 </td>
                             </tr>
@@ -345,7 +348,7 @@
                     </table>
                 </div>
                 <hr>
-                <div class="panel-heading" style="text-align:center">
+                <div class="panel-heading" style="text-align: center; background: transparent; ">
                     <h4 class="panel-title"><strong>भूखण्ड के कुल प्रीमियम की 10 प्रतिशत धनराशि (पंजीकरण धनराशि को समायोजित करते हुये अवशेष धनराशि) आवंटी को आवंटन पत्र में वर्णित विवरण के अनुसार आवंटन तिथि से 30 दिन के भीतर जमा करनी होगी। </strong></h4>
                     <p>गीडा प्राधिकारी बोर्ड की 53वीं बैठक दिनांक 12-02-2019 के बिन्दु संख्या 53ः04 पर वित्तीय वर्ष 2019-2020 हेतु अनुमोदित दर से भूखण्ड के कुल प्रीमियम की गणना की गयी है।</p>
                     <p>
@@ -353,7 +356,7 @@
                         करने वाली इकाई के स्थापनार्थ आवंटित कर दिया जाए। कृपया सहमति की दशा में  अनुमोदन प्रदान करते हुये आवंटन पत्र पर हस्ताक्षर करना चाहें।
                     </p>
                 </div>
-                <div class="panel-heading">
+                <div class="panel-heading" style="background: transparent;">
                     <h4 class="panel-title" style="text-align:right">For Gorakhpur Industrial Development Authority</h4>
                     <h4 class="panel-title" style="text-align:right">कृते गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा)</h4><br /><br />
                     <h4 class="panel-title" style="text-align:right">Authorised Signatory</h4>
@@ -375,40 +378,39 @@
         </div>
     </div>
 </div>
-</div>   
 
-            <script>
-                $(document).on('click', '#btnPrint', function () {
-                    var pageTitle = 'Allotment Notesheet';
-                    stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
-                        pageStyleSheet = 'https://gidagkp.in/styles/style.css',
-                        win = window.open('', 'Print', 'width=1000,height=1000');
-                    $('#btnPrint').css('display', 'none');
-                    $('#btnPrintDocument').css('display', 'block');
+<script>
+    $(document).on('click', '#btnPrint', function () {
+        var pageTitle = 'Allotment Notesheet';
+        stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+            pageStyleSheet = 'https://gidagkp.in/styles/style.css',
+            win = window.open('', 'Print', 'width=1000,height=1000');
+        $('#btnPrint').css('display', 'none');
+        $('#btnPrintDocument').css('display', 'block');
 
-                    var dd = $('#allotementDiv').clone();
-                    win.document.write('<html><head><title>' + pageTitle + '</title>' +
-                        '<link rel="stylesheet" href="' + stylesheet + '">' +
-                        '<link rel="stylesheet" href="' + pageStyleSheet + '">' +
-                        '</head><body>' + dd.html() + '</body ></html > ');
-                    win.document.close();
-                    //win.print();
-                    $('#btnPrint').css('display', 'block');
-                    $('#btnPrintDocument').css('display', 'none');
-                    //win.close();
-                    return false;
-                });
-            </script>
+        var dd = $('#allotementDiv').clone();
+        win.document.write('<html><head><title>' + pageTitle + '</title>' +
+            '<link rel="stylesheet" href="' + stylesheet + '">' +
+            '<link rel="stylesheet" href="' + pageStyleSheet + '">' +
+            '</head><body>' + dd.html() + '</body ></html > ');
+        win.document.close();
+        //win.print();
+        $('#btnPrint').css('display', 'block');
+        $('#btnPrintDocument').css('display', 'none');
+        //win.close();
+        return false;
+    });
+</script>
 
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('.navbar-nav li.active').removeClass('active');
-                    $('[href="/Admin/PrintAllotmentLetter"]').parent().addClass('active')
-                });
-            </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.navbar-nav li.active').removeClass('active');
+        $('[href="/Admin/PrintAllotmentLetter"]').parent().addClass('active')
+    });
+</script>
 
-            <style>
-                .profile-comments__content p {
-                    padding: 0 10px;
-                }
-            </style>
+<style>
+    .profile-comments__content p {
+        padding: 0 10px;
+    }
+</style>
