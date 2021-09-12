@@ -1,0 +1,256 @@
+﻿@model GidaGkpWeb.Models.MortgageModel
+@{
+    ViewBag.Title = "MortgageDetail";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+<link rel="stylesheet" href="~/styles/table_form.css">
+
+<div class="container">
+    <form action="~/Applicant/MortgageDetail" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <h3 style="font-size:18px;">Applicant to be filled while applying for the mortgage from bank </h3>
+                <hr />
+            </div>
+
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Name of the applicant</label>
+                <input id="txtApplicantName" type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Father’s Name of the Applicant </label>
+                <input id="txtFatherName" type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Application number</label>
+                <input id="txtApplicationNumber" type="text" class="form-control" placeholder="3456">
+            </div>
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Address of the Applicant </label>
+                <input id="txtApplicationAddress" type="text" class="form-control" placeholder="Address" readonly>
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Sector Number  </label>
+                <input id="txtSectorNumber" type="number" class="form-control" placeholder="10" readonly>
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Plot Number  </label>
+                <input id="txtPlotNumber" type="text" class="form-control" placeholder="1502" readonly>
+            </div>
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Allotment Number  </label>
+                <input type="text" id="txtAllotmentNumber" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Date of allotment </label>
+                <input type="date" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Plot fully paid or not </label>
+                <select class="form-control"><option>Yes</option> <option>No</option></select>
+            </div>
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">MHow many installments of the premium paid by the applicant/allottee/ lessee?  </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Total sum of money paid by the all the installments paid till date.  </label>
+                <input type="file" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">If mortgage to any FI then submit the bank NOC from bank of repayment of the loan. </label>
+                <input type="file" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">If the transferrer has got the plot form transfer by another transferee </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="col-sm-12 col-xs-12">
+                <p>
+                    List of challan numbers/ bank statement numbers by which the all the installments as written in point number 9 and amount paid by which the installment amount has been paid
+                    The applicant should be given the facility to add rows.
+                </p>
+                <div class="col-sm-12 col-xs-12" style="float:right">
+                    <button type="button" class="submit_plot_master" value="button" id="btnAddNewRow">Add New Row</button>
+                </div>
+                <div class="table-responsive" style="padding:10px 0 0px 0;">
+                    <table class="table table_css_main_cl table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Installment Number  </th>
+                                <th class="text-center">Challan Number </th>
+                                <th class="text-center">Amount Paid  </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tableBodyPlot">
+                            <tr>
+                                <td class="text-center"><input type="number"></td>
+                                <td class="text-center"><input type="number"></td>
+                                <td class="text-center"><input type="number"></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">How many installments of interest has been paid by the applicant/allottee/ lessee?  </label>
+                <input type="number" class="form-control" placeholder="7680978">
+            </div>
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Total sum of money paid by the all the interest dues paid till date.  </label>
+                <input type="date" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="col-sm-12 col-xs-12">
+                <p>
+                    List of challan numbers/ bank statement numbers by which the all the installments as written in point number 12 and amount paid by which the interest for the period has been paid. The applicant should be given the facility to add rows.
+                </p>
+                <div class="col-sm-12 col-xs-12" style="float:right">
+                    <button type="button" class="submit_plot_master" value="button" id="btnAddNewRow1">Add New Row</button>
+                </div>
+                <div class="table-responsive" style="padding:10px 0 0px 0;">
+                    <table class="table table_css_main_cl table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Interest for period   </th>
+                                <th class="text-center">Challan Number </th>
+                                <th class="text-center">Amount Paid  </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tableBodyPlot1">
+                            <tr>
+                                <td class="text-center"><input type="number"></td>
+                                <td class="text-center"><input type="number"></td>
+                                <td class="text-center"><input type="number"></td>
+                            </tr>
+                        </tbody>
+
+
+                    </table>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Name of the bank which will do the mortgage  </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Address of the bank</label>
+                <input type="number" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">E Mail ID of the Bank officer to which the NOC will be sent and any other communication or letter.  </label>
+                <input type="number" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Bank Ready to Pay the Provisional Premium </label>
+                <select class="form-control"><option>Yes</option> <option>No</option></select>
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Bank Ready to Pay for the Due Interests  </label>
+                <select class="form-control"><option>Yes</option> <option>No</option></select>
+            </div>
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Request letter from the bank to GIDA for doing the mortgage by the transfer of lease deed to bank.  </label>
+                <input type="file" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Date on which the Request letter from the bank to GIDA for doing the mortgage by the transfer of lease deed to bank.  </label>
+                <input type="date" class="form-control" placeholder="">
+            </div>
+
+
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Duplicate copy of registered lease deed.  </label>
+                <input type="file" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Bank Statement Number/ Challan Number/ Transaction Number by which provisional premium and interest payment has been paid by the Bank to GIDA.  </label>
+                <input type="number" class="form-control" placeholder="">
+            </div>
+
+
+
+
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Purpose for the mortgage  </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Bank ready to sanction the loan    </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group col-sm-6 col-xs-12">
+                <label for="user" class="">Quantum of the loan which the bank is ready to pay.  </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Loan Sanctioned for  </label>
+                <input type="tex" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Challan Number/ Bank Statement Number for the payment of the Provisional Premium  </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Challan Number for the payment of the provisional premium    </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Date on which the provisional premium was sent to the GIDA account.   </label>
+                <input type="date" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Challan Number/ Bank Statement Number for the payment of the interest dues.   </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="form-group col-sm-12 col-xs-12">
+                <label for="user" class="">Date on which interest due was sent to the GIDA account by the bank.    </label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="col-sm-12 col-xs-12" style="padding:20px 15px 50px 15px;">
+                <button type="button" class="submit_plot_master" value="button">Submit</button>
+                <button type="button" class="cancel_plot_master" value="button">Cancel</button>
+
+            </div>
+
+        </div>
+    </form>
+
+</div>
+<script src="~/Scripts/App/Masters/MortgageDetails.js"></script>
+
+

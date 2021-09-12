@@ -20,6 +20,7 @@ using System.Net.Http;
 using System.Net;
 using System.Text;
 using System.IO;
+using GidaGkpWeb.BAL.Masters;
 
 namespace GidaGkpWeb.Controllers
 {
@@ -1026,5 +1027,21 @@ namespace GidaGkpWeb.Controllers
             ViewData["UserData"] = data;
             return View();
         }
+		
+        #region mortgage from bank by Sooraj
+        public ActionResult MortgageDetail()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetmortgageDetail(int ApplicationId)
+        {
+            MortageDetails _details = new MortageDetails();
+            var mortgageDetails = _details.GetmortgageDetailById(ApplicationId);
+            return Json(mortgageDetails, JsonRequestBehavior.AllowGet);
+
+        }
+
+        #endregion
     }
 }
