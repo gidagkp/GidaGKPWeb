@@ -38,7 +38,9 @@
     @*<div class="right">आवंटन पत्र संख्या:</div>
         <div class="left">*@
     <div class="row">
-        <div class="col-xs-2 col-sm-2" style="margin-top: 2.5%;">आवंटन पत्र संख्या:    </div>
+        <div class="col-xs-2 col-sm-2" style="margin-top: 2.5%;">
+            <h5 class="panel-title text-center main_cla_profile"><strong>पृष्ठ संख्या: </strong></h5>
+        </div>
         <div class="col-xs-10 col-sm-10" style=" border-left: 1px solid;">
             <!-- User profile -->
             <div class="panel panel-default" style="padding: 30px; border: none;">
@@ -48,41 +50,23 @@
                         गोरखपुर औद्योगिक विकास प्राधिकरण  (गीडा)<br>
                     </h4><br />
                     <h4 class="panel-title text-center main_cla_profile"> टीपें एवम् आज्ञायें</h4><br />
-                    <h4 class="panel-title text-center main_cla_profile">प्रबन्धक (सम्पत्ति)/सहायक महा प्रबन्धक (सम्पत्ति)/महा प्रबन्धक (वित्त)/अपर मुख्य कार्यपालक अधिकारी/मुख्य कार्यपालक अधिकारी</h4><br />
+                    <h5 class="panel-title text-center main_cla_profile"><strong>प्रबन्धक (सम्पत्ति)/सहायक महा प्रबन्धक (सम्पत्ति)/महा प्रबन्धक (वित्त)/अपर मुख्य कार्यपालक अधिकारी/मुख्य कार्यपालक अधिकारी</strong></h5><br />
 
                 </div>
                 <div class="panel-body">
                     <div class="panel-heading" style=" background: transparent;">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-9" style="text-align:left">
-                                <h4 class="panel-title main_cla_profile">आवंटन पत्र संख्या: </h4>
-                            </div>
-                            <div class="col-xs-12 col-sm-3" style="text-align:right">
-                                <h4>दिनांक / Date : </h4>
-                            </div>
-                        </div>
+                        <h5 class="panel-title text-left">
+                            हेतु आन-लाईन प्राप्त आवेदकों के मध्य औद्योगिक भूखण्डों की लाटरी दिनांक 23-09-2019 एवं साक्षात्कार की कार्यवाही दिनांक 24-09-2019 से 26-09-2019 तक गीडा कार्यालय में सम्पन्न हुई। लाटरी/साक्षात्कार में
+                        </h5>
                     </div>
-                    @*<div class="profile__header">
-                            <h4>आवंटन पत्र संख्या: @ApplicantData.AllotmentNumber</h4>
-                        </div>*@
-                </div>
-                <div class="panel-body">
                     <div class="profile__header">
-                        <h4>
-                            @*@ApplicantData.UnitName*@
-                        </h4>
-                        <h4>
-                            @*@ApplicantData.FullName<br />@ApplicantData.CAddress*@
-                        </h4>
+                        <h5><strong>आवेदक का नाम: </strong></h5>
+                        <h5><strong>पिता का नाम: </strong></h5>
+                        <h5><strong>स्थायी पता: </strong></h5>
                     </div>
                 </div>
-
-
-
-                <hr />
-
                 <div class="panel-heading" style="background: transparent; ">
-                    <h4 class="panel-title text-center">के पक्ष में आवंटित भूखण्ड संख्या: <strong>@*@ApplicantData.PlotNumber @ApplicantData.PlotSectorName*@</strong>चिन्हित हुआ है। अतः उक्त आवेदक के पक्ष में चिन्हित भूखण्ड के आवंटन का प्रस्ताव हैं। भूखण्ड का प्रोविजनल प्रीमियम एवं अन्य देय धनराशि का विवरण निम्नानुसार है:-</h4>
+                    <h5 class="panel-title text-left">के पक्ष में आवंटित भूखण्ड संख्या: <strong>@*@ApplicantData.PlotNumber @ApplicantData.PlotSectorName*@</strong>चिन्हित हुआ है। अतः उक्त आवेदक के पक्ष में चिन्हित भूखण्ड के आवंटन का प्रस्ताव हैं। भूखण्ड का प्रोविजनल प्रीमियम एवं अन्य देय धनराशि का विवरण निम्नानुसार है:-</h5><br />
                 </div>
                 <div class="panel-body">
                     <table class="table profile__table table-bordered">
@@ -108,109 +92,109 @@
                                             displayCalculation = 4000 * 6000;
                                             calculation += 4000 * 6000;
                                             plotArea -= 4000;
-                            <tr>
-                                <td><strong>1 </strong></td>
-                                <td><strong>0-4000 </strong></td>
-                                <td><strong>6000</strong></td>
-                                <td><strong>4000</strong></td>
-                                <td><strong>@*@displayCalculation*@</strong></td>
-                            </tr>
-                            }
-                            else
-                            {
-                            displayCalculation = plotArea * 6000;
-                            calculation += plotArea * 6000;
-                            displayPlotArea = plotArea;
-                            plotArea -= plotArea;
-                            <tr>
-                                <td><strong>1 </strong></td>
-                                <td><strong>0-4000 </strong></td>
-                                <td><strong>6000</strong></td>
-                                <td><strong>@*@displayPlotArea*@</strong></td>
-                                <td><strong>@*@displayCalculation*@</strong></td>
-                            </tr>
-                            }
-                            index++;
-                            }
-                            else if (index == 1)
-                            {
-                            if (plotArea >= 16000)
-                            {
-                            displayCalculation = 16000 * 5600;
-                            calculation += 16000 * 5600;
-                            plotArea -= 16000;
-                            <tr>
-                                <td><strong>2 </strong></td>
-                                <td><strong>4001-20000</strong></td>
-                                <td><strong>5600</strong></td>
-                                <td><strong>16000</strong></td>
-                                <td><strong>@*@displayCalculation*@</strong></td>
-                            </tr>
-                            }
-                            else
-                            {
-                            displayCalculation = plotArea * 5600;
-                            calculation += plotArea * 5600;
-                            displayPlotArea = plotArea;
-                            plotArea -= plotArea;
-                            <tr>
-                                <td><strong>2 </strong></td>
-                                <td><strong>4001-20000</strong></td>
-                                <td><strong>5600</strong></td>
-                                <td><strong>@*@displayPlotArea*@</strong></td>
-                                <td><strong>@*@displayCalculation*@</strong></td>
-                            </tr>
-                            }
+                                            <tr>
+                                                <td><strong>1 </strong></td>
+                                                <td><strong>0-4000 </strong></td>
+                                                <td><strong>6000</strong></td>
+                                                <td><strong>4000</strong></td>
+                                                <td><strong>@*@displayCalculation*@</strong></td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            displayCalculation = plotArea * 6000;
+                                            calculation += plotArea * 6000;
+                                            displayPlotArea = plotArea;
+                                            plotArea -= plotArea;
+                                            <tr>
+                                                <td><strong>1 </strong></td>
+                                                <td><strong>0-4000 </strong></td>
+                                                <td><strong>6000</strong></td>
+                                                <td><strong>@*@displayPlotArea*@</strong></td>
+                                                <td><strong>@*@displayCalculation*@</strong></td>
+                                            </tr>
+                                        }
+                                        index++;
+                                    }
+                                    else if (index == 1)
+                                    {
+                                        if (plotArea >= 16000)
+                                        {
+                                            displayCalculation = 16000 * 5600;
+                                            calculation += 16000 * 5600;
+                                            plotArea -= 16000;
+                                            <tr>
+                                                <td><strong>2 </strong></td>
+                                                <td><strong>4001-20000</strong></td>
+                                                <td><strong>5600</strong></td>
+                                                <td><strong>16000</strong></td>
+                                                <td><strong>@*@displayCalculation*@</strong></td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            displayCalculation = plotArea * 5600;
+                                            calculation += plotArea * 5600;
+                                            displayPlotArea = plotArea;
+                                            plotArea -= plotArea;
+                                            <tr>
+                                                <td><strong>2 </strong></td>
+                                                <td><strong>4001-20000</strong></td>
+                                                <td><strong>5600</strong></td>
+                                                <td><strong>@*@displayPlotArea*@</strong></td>
+                                                <td><strong>@*@displayCalculation*@</strong></td>
+                                            </tr>
+                                        }
 
-                            index++;
-                            }
-                            else if (index == 2)
-                            {
-                            if (plotArea >= 60000)
-                            {
-                            displayCalculation = 60000 * 5200;
-                            calculation += 60000 * 5200;
-                            plotArea -= 60000;
-                            <tr>
-                                <td><strong>3 </strong></td>
-                                <td><strong>20001-80000 </strong></td>
-                                <td><strong>5200</strong></td>
-                                <td><strong>60000</strong></td>
-                                <td><strong>@*@displayCalculation*@</strong></td>
-                            </tr>
-                            }
-                            else
-                            {
-                            displayCalculation = plotArea * 5200;
-                            calculation += plotArea * 5200;
-                            displayPlotArea = plotArea;
-                            plotArea -= plotArea;
-                            <tr>
-                                <td><strong>3 </strong></td>
-                                <td><strong>20001-80000 </strong></td>
-                                <td><strong>5200</strong></td>
-                                <td><strong>@*@displayPlotArea*@</strong></td>
-                                <td><strong>@*@displayCalculation*@</strong></td>
-                            </tr>
-                            }
-                            index++;
-                            }
-                            else if (plotArea >= 0 && index == 3)
-                            {
-                            displayCalculation = plotArea * 4800;
-                            calculation += plotArea * 4800;
-                            displayPlotArea = plotArea;
-                            plotArea -= plotArea;
-                            index++;
-                            <tr>
-                                <td><strong>4 </strong></td>
-                                <td><strong>80001-above</strong></td>
-                                <td><strong>4800</strong></td>
-                                <td><strong>@*@displayPlotArea*@</strong></td>
-                                <td><strong>@*@displayCalculation*@</strong></td>
-                            </tr>
-                            }
-                            }
+                                        index++;
+                                    }
+                                    else if (index == 2)
+                                    {
+                                        if (plotArea >= 60000)
+                                        {
+                                            displayCalculation = 60000 * 5200;
+                                            calculation += 60000 * 5200;
+                                            plotArea -= 60000;
+                                            <tr>
+                                                <td><strong>3 </strong></td>
+                                                <td><strong>20001-80000 </strong></td>
+                                                <td><strong>5200</strong></td>
+                                                <td><strong>60000</strong></td>
+                                                <td><strong>@*@displayCalculation*@</strong></td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            displayCalculation = plotArea * 5200;
+                                            calculation += plotArea * 5200;
+                                            displayPlotArea = plotArea;
+                                            plotArea -= plotArea;
+                                            <tr>
+                                                <td><strong>3 </strong></td>
+                                                <td><strong>20001-80000 </strong></td>
+                                                <td><strong>5200</strong></td>
+                                                <td><strong>@*@displayPlotArea*@</strong></td>
+                                                <td><strong>@*@displayCalculation*@</strong></td>
+                                            </tr>
+                                        }
+                                        index++;
+                                    }
+                                    else if (plotArea >= 0 && index == 3)
+                                    {
+                                        displayCalculation = plotArea * 4800;
+                                        calculation += plotArea * 4800;
+                                        displayPlotArea = plotArea;
+                                        plotArea -= plotArea;
+                                        index++;
+                                        <tr>
+                                            <td><strong>4 </strong></td>
+                                            <td><strong>80001-above</strong></td>
+                                            <td><strong>4800</strong></td>
+                                            <td><strong>@*@displayPlotArea*@</strong></td>
+                                            <td><strong>@*@displayCalculation*@</strong></td>
+                                        </tr>
+                                    }
+                                }
                             }
                             @*@for (int i = index; i < 4; i++)*@
                             @for (int i = 0; i < 4; i++)
@@ -356,12 +340,12 @@
                         करने वाली इकाई के स्थापनार्थ आवंटित कर दिया जाए। कृपया सहमति की दशा में  अनुमोदन प्रदान करते हुये आवंटन पत्र पर हस्ताक्षर करना चाहें।
                     </p>
                 </div>
-                <div class="panel-heading" style="background: transparent;">
-                    <h4 class="panel-title" style="text-align:right">For Gorakhpur Industrial Development Authority</h4>
-                    <h4 class="panel-title" style="text-align:right">कृते गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा)</h4><br /><br />
-                    <h4 class="panel-title" style="text-align:right">Authorised Signatory</h4>
-                    <h4 class="panel-title" style="text-align:right">अधिकृत हस्ताक्षरकर्ता</h4>
-                </div>
+                @*<div class="panel-heading" style="background: transparent;">
+                        <h4 class="panel-title" style="text-align:right">For Gorakhpur Industrial Development Authority</h4>
+                        <h4 class="panel-title" style="text-align:right">कृते गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा)</h4><br /><br />
+                        <h4 class="panel-title" style="text-align:right">Authorised Signatory</h4>
+                        <h4 class="panel-title" style="text-align:right">अधिकृत हस्ताक्षरकर्ता</h4>
+                    </div>*@
                 <div class="panel-body">
                     <div class="col-sm-6 col-xs-6">
                         <input type="submit" name="next" id="btnPrint" class="btn btn-primary" value="Print Receipt" />
