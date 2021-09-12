@@ -490,6 +490,7 @@ namespace GidaGkpWeb.BAL
                             ManagerPropertyComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ManagerPropertyComment : "",
                             SectionInchargeComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.SectionInchargeComment : "",
                             DateoOfSigningByCEO = allotementNotesheetDetail != null ? allotementNotesheetDetail.DateoOfSigningByCEO : null,
+                            AssistantSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByAssistant : null,
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
@@ -569,6 +570,7 @@ namespace GidaGkpWeb.BAL
                             ManagerPropertyComment = x.ManagerPropertyComment,
                             SectionInchargeComment = x.SectionInchargeComment,
                             DateoOfSigningByCEO = x.DateoOfSigningByCEO != null ? x.DateoOfSigningByCEO.Value.ToString("dd/MM/yyyy") : "",
+                            AssistantSignature = x.AssistantSignature
                         }).FirstOrDefault();
             }
             catch (DbEntityValidationException e)
