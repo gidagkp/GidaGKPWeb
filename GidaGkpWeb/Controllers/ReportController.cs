@@ -67,5 +67,8 @@ namespace GidaGkpWeb.Controllers
             var data = _details.GetApplicantSubmittedForInterview(schemeName).Where(x => x.InterviewLetterStatus == "Rejected" ).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+
+
     }
 }
