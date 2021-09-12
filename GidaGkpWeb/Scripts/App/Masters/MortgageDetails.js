@@ -14,7 +14,8 @@ $(document).ready(function () {
                 $('#txtApplicationAddress').val(data.AddressOfApplicant);
                 $('#txtSectorNumber').val(data.SectorName);
                 $('#txtPlotNumber').val(data.PlotNo);
-                $('#txtAllotmentNumber').val(data.AllotmentNumber);
+                $('#txtAllotmentNumber').val(data.allotment.Id);
+                $('#txtAllotmentDate').val(data.DateofAllotmentLetter);
             },
             failure: function (response) {
                 console.log(response);
