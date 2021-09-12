@@ -99,6 +99,11 @@ namespace GidaGkpWeb.Models
         public string SectionInchargeComment { get; set; }
         public string DateoOfSigningByCEO { get; set; }
         public byte[] AssistantSignature { get; set; }
+        public byte[] ManagerSignature { get; set; }
+        public byte[] SISignature { get; set; }
+        public byte[] GMSignature { get; set; }
+        public byte[] ACEOSignature { get; set; }
+        public byte[] CEOSignature { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 

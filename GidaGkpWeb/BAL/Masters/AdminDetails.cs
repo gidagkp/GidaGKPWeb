@@ -491,6 +491,11 @@ namespace GidaGkpWeb.BAL
                             SectionInchargeComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.SectionInchargeComment : "",
                             DateoOfSigningByCEO = allotementNotesheetDetail != null ? allotementNotesheetDetail.DateoOfSigningByCEO : null,
                             AssistantSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByAssistant : null,
+                            ManagerSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByManagerProperty : null,
+                            SISignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignBySectionIncharge : null,
+                            GMSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByGMFinance : null,
+                            ACEOSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByACEO : null,
+                            CEOSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByCEO : null,
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
@@ -570,7 +575,12 @@ namespace GidaGkpWeb.BAL
                             ManagerPropertyComment = x.ManagerPropertyComment,
                             SectionInchargeComment = x.SectionInchargeComment,
                             DateoOfSigningByCEO = x.DateoOfSigningByCEO != null ? x.DateoOfSigningByCEO.Value.ToString("dd/MM/yyyy") : "",
-                            AssistantSignature = x.AssistantSignature
+                            AssistantSignature = x.AssistantSignature,
+                            ManagerSignature = x.ManagerSignature,
+                            SISignature = x.SISignature,
+                            GMSignature = x.GMSignature,
+                            ACEOSignature = x.ACEOSignature,
+                            CEOSignature = x.CEOSignature
                         }).FirstOrDefault();
             }
             catch (DbEntityValidationException e)

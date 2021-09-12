@@ -4,11 +4,41 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var ApplicantData = ViewData["ApplicantData"] as ApplicationUserModel;
     decimal calculation = 0;
-    string imgSignaturesrc = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    string imgSignaturesrcAssistant = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
     if (ApplicantData != null && ApplicantData.AssistantSignature != null)
     {
         var base64 = Convert.ToBase64String(ApplicantData.AssistantSignature);
-        imgSignaturesrc = string.Format("data:image/jpg;base64,{0}", base64);
+        imgSignaturesrcAssistant = string.Format("data:image/jpg;base64,{0}", base64);
+    }
+    string imgSignaturesrcManager = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    if (ApplicantData != null && ApplicantData.ManagerSignature!= null)
+    {
+        var base64 = Convert.ToBase64String(ApplicantData.ManagerSignature);
+        imgSignaturesrcManager = string.Format("data:image/jpg;base64,{0}", base64);
+    }
+    string imgSignaturesrcSI = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    if (ApplicantData != null && ApplicantData.SISignature != null)
+    {
+        var base64 = Convert.ToBase64String(ApplicantData.SISignature);
+        imgSignaturesrcSI = string.Format("data:image/jpg;base64,{0}", base64);
+    }
+    string imgSignaturesrcGM = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    if (ApplicantData != null && ApplicantData.GMSignature != null)
+    {
+        var base64 = Convert.ToBase64String(ApplicantData.GMSignature);
+        imgSignaturesrcGM = string.Format("data:image/jpg;base64,{0}", base64);
+    }
+    string imgSignaturesrcACEO = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    if (ApplicantData != null && ApplicantData.ACEOSignature != null)
+    {
+        var base64 = Convert.ToBase64String(ApplicantData.ACEOSignature);
+        imgSignaturesrcACEO = string.Format("data:image/jpg;base64,{0}", base64);
+    }
+    string imgSignaturesrcCEO = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    if (ApplicantData != null && ApplicantData.CEOSignature != null)
+    {
+        var base64 = Convert.ToBase64String(ApplicantData.CEOSignature);
+        imgSignaturesrcCEO = string.Format("data:image/jpg;base64,{0}", base64);
     }
 }
 <style type="text/css">
@@ -62,7 +92,7 @@
                 <div class="panel-body">
                     <div class="panel-heading" style=" background: transparent;">
                         <h5 class="panel-title text-left">
-                            <span>@ApplicantData.PlotSchemeName</span>हेतु आन-लाईन प्राप्त आवेदकों के मध्य औद्योगिक भूखण्डों की लाटरी/साक्षात्कार की कार्यवाही दिनांक  @ApplicantData.InterviewDateTime तक गीडा कार्यालय में सम्पन्न हुई। लाटरी/साक्षात्कार में
+                            <span>@ApplicantData.PlotSchemeName</span>&nbsp;हेतु आन-लाईन प्राप्त आवेदकों के मध्य औद्योगिक भूखण्डों की लाटरी/साक्षात्कार की कार्यवाही दिनांक  @ApplicantData.InterviewDateTime तक गीडा कार्यालय में सम्पन्न हुई। लाटरी/साक्षात्कार में
                         </h5>
                     </div>
                     <div class="profile__header">
@@ -345,25 +375,74 @@
                         करने वाली इकाई के स्थापनार्थ आवंटित कर दिया जाए। कृपया सहमति की दशा में  अनुमोदन प्रदान करते हुये आवंटन पत्र पर हस्ताक्षर करना चाहें।
                     </h5>
                     <br />
+                </div><br />
+                <div class="col-sm-9 col-xs-12">
+                    <span><strong>Assistant Comment -</strong> @ApplicantData.AssistantComment</span>
                 </div>
-
-                <div class="col-sm-6 col-xs-6">
+                <div class="col-sm-3 col-xs-12">
                     <div class="signture">
-                        <img style="width:150px;" src="@imgSignaturesrc">
+                        <img style="width:150px;" src="@imgSignaturesrcAssistant">
+                        @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
+                    </div>
+                </div><br />
+                <div class="col-sm-9 col-xs-12">
+                    <span><strong>Manager Comment -</strong> @ApplicantData.ManagerPropertyComment</span>
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <div class="signture">
+                        <img style="width:150px;" src="@imgSignaturesrcManager">
+                        @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
+                    </div>
+                </div><br />
+                <div class="col-sm-9 col-xs-12">
+                    <div class="col-sm-6 col-xs-6">
+                        <span><strong>Section In charge Comment -</strong> @ApplicantData.SectionInchargeComment</span>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <div class="signture">
+                        <img style="width:150px;" src="@imgSignaturesrcSI">
+                        @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
+                    </div>
+                </div><br />
+                <div class="col-sm-9 col-xs-12">
+                    <span><strong>General Manager Comment -</strong> @ApplicantData.GMFinanceComment</span>
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <div class="signture">
+                        <img style="width:150px;" src="@imgSignaturesrcGM">
+                        @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
+                    </div>
+                </div><br />
+                <div class="col-sm-9 col-xs-12">
+                    <span><strong>ACEO Comment -</strong> @ApplicantData.ACEOComment</span>
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <div class="signture">
+                        <img style="width:150px;" src="@imgSignaturesrcACEO">
+                        @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
+                    </div>
+                </div><br />
+                <div class="col-sm-9 col-xs-12">
+                    <span><strong>CEO Comment -</strong> @ApplicantData.CEOComment</span>
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <div class="signture">
+                        <img style="width:150px;" src="@imgSignaturesrcCEO">
                         @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
                     </div>
                 </div>
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                <br />
                 @*<div class="panel-heading" style="background: transparent;">
-                        <h4 class="panel-title" style="text-align:right">For Gorakhpur Industrial Development Authority</h4>
-                        <h4 class="panel-title" style="text-align:right">कृते गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा)</h4><br /><br />
-                        <h4 class="panel-title" style="text-align:right">Authorised Signatory</h4>
-                        <h4 class="panel-title" style="text-align:right">अधिकृत हस्ताक्षरकर्ता</h4>
-                    </div>*@
+            <h4 class="panel-title" style="text-align:right">For Gorakhpur Industrial Development Authority</h4>
+            <h4 class="panel-title" style="text-align:right">कृते गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा)</h4><br /><br />
+            <h4 class="panel-title" style="text-align:right">Authorised Signatory</h4>
+            <h4 class="panel-title" style="text-align:right">अधिकृत हस्ताक्षरकर्ता</h4>
+        </div>*@
 
                 <div class="panel-body">
                     <div class="col-sm-6 col-xs-6">
-                        <input type="submit" name="next" id="btnPrint" class="btn btn-primary" value="Print Receipt" />
+                        <input type="submit" name="next" id="btnPrint" class="btn btn-primary" value="Print" />
                         <input type="submit" name="next" style="display:none" id="btnPrintDocument" class="btn btn-primary" value="Print" onclick="window.print();" />
                     </div>
                 </div>
