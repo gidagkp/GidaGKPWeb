@@ -98,6 +98,7 @@ namespace GidaGkpWeb.Models
         public string ManagerPropertyComment { get; set; }
         public string SectionInchargeComment { get; set; }
         public string DateoOfSigningByCEO { get; set; }
+        public byte[] AssistantSignature { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 
