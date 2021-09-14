@@ -4,37 +4,37 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var ApplicantData = ViewData["ApplicantData"] as ApplicationUserModel;
     decimal calculation = 0;
-    string imgSignaturesrcAssistant = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    string imgSignaturesrcAssistant = "/content/files/assets/signature_required.png";
     if (ApplicantData != null && ApplicantData.AssistantSignature != null)
     {
         var base64 = Convert.ToBase64String(ApplicantData.AssistantSignature);
         imgSignaturesrcAssistant = string.Format("data:image/jpg;base64,{0}", base64);
     }
-    string imgSignaturesrcManager = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    string imgSignaturesrcManager = "/content/files/assets/signature_required.png";
     if (ApplicantData != null && ApplicantData.ManagerSignature!= null)
     {
         var base64 = Convert.ToBase64String(ApplicantData.ManagerSignature);
         imgSignaturesrcManager = string.Format("data:image/jpg;base64,{0}", base64);
     }
-    string imgSignaturesrcSI = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    string imgSignaturesrcSI = "/content/files/assets/signature_required.png";
     if (ApplicantData != null && ApplicantData.SISignature != null)
     {
         var base64 = Convert.ToBase64String(ApplicantData.SISignature);
         imgSignaturesrcSI = string.Format("data:image/jpg;base64,{0}", base64);
     }
-    string imgSignaturesrcGM = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    string imgSignaturesrcGM = "/content/files/assets/signature_required.png";
     if (ApplicantData != null && ApplicantData.GMSignature != null)
     {
         var base64 = Convert.ToBase64String(ApplicantData.GMSignature);
         imgSignaturesrcGM = string.Format("data:image/jpg;base64,{0}", base64);
     }
-    string imgSignaturesrcACEO = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    string imgSignaturesrcACEO = "/content/files/assets/signature_required.png";
     if (ApplicantData != null && ApplicantData.ACEOSignature != null)
     {
         var base64 = Convert.ToBase64String(ApplicantData.ACEOSignature);
         imgSignaturesrcACEO = string.Format("data:image/jpg;base64,{0}", base64);
     }
-    string imgSignaturesrcCEO = "https://www.docsketch.com/assets/vip-signatures/barack-obama-signature-b8614607575251b55f9386853536ef918f439600ccbda927b11aca9bf1d1842e.png";
+    string imgSignaturesrcCEO = "/content/files/assets/signature_required.png";
     if (ApplicantData != null && ApplicantData.CEOSignature != null)
     {
         var base64 = Convert.ToBase64String(ApplicantData.CEOSignature);
@@ -91,19 +91,19 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-heading" style=" background: transparent;">
-                        <h5 class="panel-title text-left">
-                            <span>@ApplicantData.PlotSchemeName</span>&nbsp;हेतु आन-लाईन प्राप्त आवेदकों के मध्य औद्योगिक भूखण्डों की लाटरी/साक्षात्कार की कार्यवाही दिनांक  @ApplicantData.InterviewDateTime तक गीडा कार्यालय में सम्पन्न हुई। लाटरी/साक्षात्कार में
+                        <h5 class="panel-title text-left" style="line-height:22px">
+                            <span><strong>@ApplicantData.PlotSchemeName</strong></span>&nbsp;हेतु आन-लाईन प्राप्त आवेदकों के मध्य औद्योगिक भूखण्डों की लाटरी/साक्षात्कार की कार्यवाही दिनांक <strong>@ApplicantData.InterviewDateTime</strong> तक गीडा कार्यालय में सम्पन्न हुई। लाटरी/साक्षात्कार में
                         </h5>
                     </div>
                     <div class="profile__header">
-                        <h5><strong>@ApplicantData.UnitName</strong></h5>
-                        <h5><strong>@ApplicantData.FullName</strong></h5>
-                        <h5><strong>@ApplicantData.FatherName</strong></h5>
-                        <h5><strong>@ApplicantData.PAddress</strong></h5>
+                        <h5 class="text-uppercase"><strong>@ApplicantData.UnitName</strong></h5>
+                        <h5 class="text-uppercase"><strong>@ApplicantData.FullName</strong></h5>
+                        <h5 class="text-uppercase"><strong>@ApplicantData.FatherName</strong></h5>
+                        <h5 class="text-uppercase"><strong>@ApplicantData.PAddress</strong></h5>
                     </div>
                 </div>
                 <div class="panel-heading" style="background: transparent; ">
-                    <h5 class="panel-title text-left">&nbsp;&nbsp;&nbsp;&nbsp;के पक्ष में आवंटित भूखण्ड संख्या: @ApplicantData.PlotNumber, <strong>@ApplicantData.PlotSectorName &nbsp;</strong>चिन्हित हुआ है। अतः उक्त आवेदक के पक्ष में चिन्हित भूखण्ड के आवंटन का प्रस्ताव हैं। भूखण्ड का प्रोविजनल प्रीमियम एवं अन्य देय धनराशि का विवरण निम्नानुसार है:-</h5><br />
+                    <h5 class="panel-title text-left" style="line-height:22px">&nbsp;&nbsp;&nbsp;&nbsp;के पक्ष में आवंटित भूखण्ड संख्या: <strong>@ApplicantData.PlotNumber, @ApplicantData.PlotSectorName &nbsp;</strong>चिन्हित हुआ है। अतः उक्त आवेदक के पक्ष में चिन्हित भूखण्ड के आवंटन का प्रस्ताव हैं। भूखण्ड का प्रोविजनल प्रीमियम एवं अन्य देय धनराशि का विवरण निम्नानुसार है:-</h5><br />
                 </div>
                 <div class="panel-body">
                     <table class="table profile__table table-bordered">
@@ -369,9 +369,9 @@
                 </div>
                 <hr>
                 <div class="panel-heading" style="text-align: left; background: transparent; ">
-                    <h5 class="panel-title text-left">&nbsp;&nbsp;&nbsp;&nbsp;भूखण्ड के कुल प्रीमियम की 10 प्रतिशत धनराशि (पंजीकरण धनराशि को समायोजित करते हुये अवशेष धनराशि) आवंटी को आवंटन पत्र में वर्णित विवरण के अनुसार आवंटन तिथि से 30 दिन के भीतर जमा करनी होगी। </h5><br />
-                    <h5 class="panel-title text-left">&nbsp;&nbsp;&nbsp;&nbsp;गीडा प्राधिकारी बोर्ड की 53वीं बैठक दिनांक 12-02-2019 के बिन्दु संख्या 53ः04 पर वित्तीय वर्ष 2019-2020 हेतु अनुमोदित दर से भूखण्ड के कुल प्रीमियम की गणना की गयी है।</h5><br />
-                    <h5 class="panel-title text-left">
+                    <h5 class="panel-title text-left" style="line-height:22px">&nbsp;&nbsp;&nbsp;&nbsp;भूखण्ड के कुल प्रीमियम की 10 प्रतिशत धनराशि (पंजीकरण धनराशि को समायोजित करते हुये अवशेष धनराशि) आवंटी को आवंटन पत्र में वर्णित विवरण के अनुसार आवंटन तिथि से 30 दिन के भीतर जमा करनी होगी। </h5><br />
+                    <h5 class="panel-title text-left" style="line-height:22px">&nbsp;&nbsp;&nbsp;&nbsp;गीडा प्राधिकारी बोर्ड की 53वीं बैठक दिनांक 12-02-2019 के बिन्दु संख्या 53ः04 पर वित्तीय वर्ष 2019-2020 हेतु अनुमोदित दर से भूखण्ड के कुल प्रीमियम की गणना की गयी है।</h5><br />
+                    <h5 class="panel-title text-left" style="line-height:22px">
                         &nbsp;&nbsp;&nbsp;&nbsp;प्रस्ताव है कि उपर्युक्तानुसार आवंटी <strong>@ApplicantData.FullName</strong>, पिता <strong>@ApplicantData.FatherName</strong> के पक्ष में भूखण्ड संख्या <strong>@ApplicantData.PlotNumber</strong> सेक्टर <strong>@ApplicantData.PlotSectorName</strong> क्षेत्रफल <strong>@ApplicantData.PMPlotArea</strong> वर्गमीटर का उत्पाद
                         करने वाली इकाई के स्थापनार्थ आवंटित कर दिया जाए। कृपया सहमति की दशा में  अनुमोदन प्रदान करते हुये आवंटन पत्र पर हस्ताक्षर करना चाहें।
                     </h5>
@@ -380,7 +380,7 @@
                 <div class="col-sm-9 col-xs-12">
                     <span><strong>Assistant Comment -</strong> @ApplicantData.AssistantComment</span>
                 </div>
-                <div class="col-sm-3 col-xs-12">
+                <div class="col-sm-3 col-xs-12" style="padding-top: 15px">
                     <div class="signture">
                         <img style="width:150px;" src="@imgSignaturesrcAssistant"><br />
                         @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
@@ -389,7 +389,7 @@
                 <div class="col-sm-9 col-xs-12">
                     <span><strong>Manager Comment -</strong> @ApplicantData.ManagerPropertyComment</span>
                 </div>
-                <div class="col-sm-3 col-xs-12">
+                <div class="col-sm-3 col-xs-12" style="padding-top: 15px">
                     <div class="signture">
                         <img style="width:150px;" src="@imgSignaturesrcManager"><br />
                         @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
@@ -398,7 +398,7 @@
                 <div class="col-sm-9 col-xs-12">
                         <span><strong>Section In charge Comment -</strong> @ApplicantData.SectionInchargeComment</span>
                 </div>
-                <div class="col-sm-3 col-xs-12">
+                <div class="col-sm-3 col-xs-12" style="padding-top: 15px">
                     <div class="signture">
                         <img style="width:150px;" src="@imgSignaturesrcSI"><br />
                         @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
@@ -407,7 +407,7 @@
                 <div class="col-sm-9 col-xs-12">
                     <span><strong>General Manager Comment -</strong> @ApplicantData.GMFinanceComment</span>
                 </div>
-                <div class="col-sm-3 col-xs-12">
+                <div class="col-sm-3 col-xs-12" style="padding-top: 15px">
                     <div class="signture">
                         <img style="width:150px;" src="@imgSignaturesrcGM"><br />
                         @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
@@ -416,7 +416,7 @@
                 <div class="col-sm-9 col-xs-12">
                     <span><strong>ACEO Comment -</strong> @ApplicantData.ACEOComment</span>
                 </div>
-                <div class="col-sm-3 col-xs-12">
+                <div class="col-sm-3 col-xs-12" style="padding-top: 15px">
                     <div class="signture">
                         <img style="width:150px;" src="@imgSignaturesrcACEO"><br />
                         @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@
@@ -425,7 +425,7 @@
                 <div class="col-sm-9 col-xs-12">
                     <span><strong>CEO Comment -</strong> @ApplicantData.CEOComment</span>
                 </div>
-                <div class="col-sm-3 col-xs-12">
+                <div class="col-sm-3 col-xs-12" style="padding-top: 15px">
                     <div class="signture">
                         <img style="width:150px;" src="@imgSignaturesrcCEO"><br />
                         @*<p style="padding-top: 15px; font-style: italic;"><b>आवेदक के हस्ताक्षर</b></p>*@

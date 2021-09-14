@@ -66,14 +66,14 @@
 
             @if (UserData.Department == "Property" && UserData.Designation == "Clerk")
             {
-                <div class="col-sm-12 col-xs-12">
+                <div class="col-sm-12 col-xs-12" style="padding-bottom:15px">
                     <label for="usertype" class="text-uppercase">
                         Write Comments
                         <span class="required-field"></span>
                     </label>
                     <textarea name="UserComment" id="UserComment" class="form-control"></textarea>
                 </div>
-
+                
                 <div class="form-group col-sm-6 col-xs-12">
                     <label for="file" class="sr-only">Digital Signature of the Assistant<span class="required-field"></span> </label>
                     <div class="input-group">
@@ -91,14 +91,14 @@
             {
                 if (!string.IsNullOrEmpty(ApplicantData.AssistantComment))
                 {
-                    <div class="col-sm-12 col-xs-12">
+                    <div class="col-sm-12 col-xs-12" style="padding-bottom:15px">
                         <label for="usertype" class="text-uppercase">
                             Write Comments
                             <span class="required-field"></span>
                         </label>
                         <textarea name="UserComment" id="UserComment" class="form-control"></textarea>
                     </div>
-
+                    
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="file" class="sr-only">Digital Signature of Manager Property/General/Admin <span class="required-field"></span> </label>
                         <div class="input-group">
@@ -118,14 +118,14 @@
                 if (!string.IsNullOrEmpty(ApplicantData.AssistantComment)
                     && !string.IsNullOrEmpty(ApplicantData.ManagerPropertyComment))
                 {
-                    <div class="col-sm-12 col-xs-12">
+                    <div class="col-sm-12 col-xs-12" style="padding-bottom:15px">
                         <label for="usertype" class="text-uppercase">
                             Write Comments
                             <span class="required-field"></span>
                         </label>
                         <textarea name="UserComment" id="UserComment" class="form-control"></textarea>
                     </div>
-
+                    
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="file" class="sr-only">Digital Signature of AGM Property/ OSD/ Section-In Charge  <span class="required-field"></span> </label>
                         <div class="input-group">
@@ -147,14 +147,14 @@
                   && !string.IsNullOrEmpty(ApplicantData.ManagerPropertyComment)
                   && !string.IsNullOrEmpty(ApplicantData.SectionInchargeComment))
                 {
-                    <div class="col-sm-12 col-xs-12">
+                    <div class="col-sm-12 col-xs-12" style="padding-bottom:15px">
                         <label for="usertype" class="text-uppercase">
                             Write Comments
                             <span class="required-field"></span>
                         </label>
                         <textarea name="UserComment" id="UserComment" class="form-control"></textarea>
                     </div>
-
+                    
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="file" class="sr-only">Digital Signature of GM Finance  <span class="required-field"></span> </label>
                         <div class="input-group">
@@ -177,14 +177,14 @@
                   && !string.IsNullOrEmpty(ApplicantData.SectionInchargeComment)
                   && !string.IsNullOrEmpty(ApplicantData.GMFinanceComment))
                 {
-                    <div class="col-sm-12 col-xs-12">
+                    <div class="col-sm-12 col-xs-12" style="padding-bottom:15px">
                         <label for="usertype" class="text-uppercase">
                             Write Comments
                             <span class="required-field"></span>
                         </label>
                         <textarea name="UserComment" id="UserComment" class="form-control"></textarea>
                     </div>
-
+                    
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="file" class="sr-only">Digital Signature of ACEO<span class="required-field"></span> </label>
                         <div class="input-group">
@@ -208,14 +208,14 @@
                     && !string.IsNullOrEmpty(ApplicantData.GMFinanceComment)
                     && !string.IsNullOrEmpty(ApplicantData.ACEOComment))
                 {
-                    <div class="col-sm-12 col-xs-12">
+                    <div class="col-sm-12 col-xs-12" style="padding-bottom:15px">
                         <label for="usertype" class="text-uppercase">
                             Write Comments
                             <span class="required-field"></span>
                         </label>
                         <textarea name="UserComment" id="UserComment" class="form-control"></textarea>
                     </div>
-
+                    
                     <div class="form-group col-sm-6 col-xs-12">
                         <label for="user" class=""> Date for signing the note sheet by the CEO </label>
                         <input type="date" name="CEOSigningDate" class="form-control" placeholder="12/06/2021">

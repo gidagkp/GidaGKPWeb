@@ -5,6 +5,12 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var ApplicantData = ViewData["ApplicantData"] as ApplicationUserModel;
     decimal calculation = 0;
+    string imgSignaturesrcCEO = "/content/files/assets/signature_required.png";
+    if (ApplicantData != null && ApplicantData.Allocate_CEO_Sign != null)
+    {
+        var base64 = Convert.ToBase64String(ApplicantData.Allocate_CEO_Sign);
+        imgSignaturesrcCEO = string.Format("data:image/jpg;base64,{0}", base64);
+    }
 }
 
 <div class="container aknowgmnt" id="allotementDiv">
@@ -47,10 +53,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="profile__header">
-                        <h4>
+                        <h4 class="text-uppercase">
                             @ApplicantData.UnitName
                         </h4>
-                        <h4>
+                        <h4 class="text-uppercase">
                             @ApplicantData.FullName<br />@ApplicantData.CAddress
                         </h4>
                     </div>
@@ -550,7 +556,8 @@
                 </div>
                 <div class="panel-heading">
                     <h4 class="panel-title" style="text-align:right">For Gorakhpur Industrial Development Authority</h4>
-                    <h4 class="panel-title" style="text-align:right">कृते गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा)</h4><br /><br />
+                    <h4 class="panel-title" style="text-align:right">कृते गोरखपुर औद्योगिक विकास प्राधिकरण (गीडा)</h4><br />
+                    <h4 class="panel-title" style="text-align:right"><img style="width:150px;" src="@imgSignaturesrcCEO"></h4>
                     <h4 class="panel-title" style="text-align:right">Authorised Signatory</h4>
                     <h4 class="panel-title" style="text-align:right">अधिकृत हस्ताक्षरकर्ता</h4>
                 </div>
