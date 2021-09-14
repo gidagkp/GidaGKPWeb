@@ -484,6 +484,7 @@
     <Content Include="Scripts\App\Masters\MortgageDetails.js" />
     <Content Include="Scripts\App\Masters\navigation.js" />
     <Content Include="Scripts\App\Masters\ApplicantAllotmentReport.js" />
+    <Content Include="Scripts\App\Masters\AllocateAllotement.js" />
     <Content Include="Scripts\App\Masters\SchemeWiseApplicationList.js" />
     <Content Include="Scripts\App\Masters\PlotMaster.js" />
     <Content Include="Scripts\App\Masters\RoleMaster.js" />

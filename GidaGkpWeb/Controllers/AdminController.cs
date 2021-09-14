@@ -720,14 +720,14 @@ namespace GidaGkpWeb.Controllers
         public ActionResult AllotmentStatus(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
+            var data = _details.GetApplicantUserDetailByApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
             return View();
         }
         public ActionResult PrintAllotmentLetter(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
+            var data = _details.GetApplicantUserDetailByApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
             return View();
         }
@@ -943,10 +943,14 @@ namespace GidaGkpWeb.Controllers
         public ActionResult AllocateAllotmentLetter(int applicationId)
         {
             ViewData["ApplicationId"] = applicationId;
-            AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
-            ViewData["UserDetail"] = data;
             return View();
+        }
+        [HttpPost]
+        public JsonResult GetApplicantUserDetailByApplicationId(int applicationId)
+        {
+            AdminDetails _details = new AdminDetails();
+            var data = _details.GetApplicantUserDetailByApplicationId(applicationId);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult SaveAllocateAllotmentLetter(HttpPostedFileBase Document, string applicationId, string AllotmentNumber,
@@ -1023,7 +1027,7 @@ namespace GidaGkpWeb.Controllers
         {
             ViewData["ApplicationId"] = applicationId;
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
+            var data = _details.GetApplicantUserDetailByApplicationId(applicationId);
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -1069,7 +1073,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult LeasedeedStatus(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
+            var data = _details.GetApplicantUserDetailByApplicationId(applicationId);
             ViewData["UserDetail"] = data;
             return View();
         }
@@ -1089,7 +1093,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult SendAllotmentEmailToApplicant(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
+            var data = _details.GetApplicantUserDetailByApplicationId(applicationId);
             string baseUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
             var encryptedApplicationId = CryptoEngine.Encrypt(data.ApplicationId.ToString());
             this.SendMailToApplicantAllotmentMoney(data.FullName, data.Email, data.AllotementMoneyTobePaid, data.AllotmentDate, encryptedApplicationId, baseUrl);
@@ -1186,7 +1190,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult DataForAllotmentNotesheet(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
+            var data = _details.GetApplicantUserDetailByApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
             return View();
         }
@@ -1194,7 +1198,7 @@ namespace GidaGkpWeb.Controllers
         public ActionResult PrintAllotmentNotesheet(int applicationId)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetailBtApplicationId(applicationId);
+            var data = _details.GetApplicantUserDetailByApplicationId(applicationId);
             ViewData["ApplicantData"] = data;
             return View();
         }

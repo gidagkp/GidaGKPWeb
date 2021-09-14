@@ -3,10 +3,10 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var applicationId = Convert.ToInt32(ViewData["ApplicationId"]);
-    var userdetail = ViewData["UserDetail"] as ApplicationUserModel;
+    //var userdetail = ViewData["UserDetail"] as ApplicationUserModel;
 }
 <link rel="stylesheet" href="~/styles/table_form.css">
-<script src="~/Scripts/App/Masters/PlotMaster.js"></script>
+<script src="~/Scripts/App/Masters/AllocateAllotement.js"></script>
 <script src="~/Scripts/App/Masters/navigation.js"></script>
 <style>
     button.submit_plot_master353 {
@@ -25,11 +25,11 @@
                 <h3 style="font-size:18px;">Allotment letter to be given to the applicants  </h3>
                 <hr />
             </div>
-            <input type="hidden" value="@applicationId" name="applicationId" />
+            <input type="hidden" value="@applicationId" name="applicationId" id="applicationId" />
             <div class="form-group col-sm-6 col-xs-12">
                 <label for="user" class="">Allotment Number</label>
                 @*<input type="text" class="form-control" name="AllotmentNumber" placeholder="" readonly value="@userdetail.PlotSchemeName/@userdetail.PlotSectorName/@userdetail.PlotNumber">*@
-                <input type="text" class="form-control" name="AllotmentNumber" placeholder="" value="" />
+                <input type="text" class="form-control" name="AllotmentNumber" placeholder="" />
 
             </div>
             <div class="form-group col-sm-6 col-xs-12">

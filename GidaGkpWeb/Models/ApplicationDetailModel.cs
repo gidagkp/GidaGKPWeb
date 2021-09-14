@@ -73,6 +73,9 @@ namespace GidaGkpWeb.Models
         public string GMDocumentComment { get; set; }
 
         public string InterviewDateTime { get; set; }
+        public DateTime? StartingDateofInterview { get; set; }
+        public DateTime? EndDateofInterview { get; set; }
+        public DateTime? DateofAllotmentLetter { get; set; }
         public string InterviewMode { get; set; }
         public string PlotNumber { get; set; }
         public string InterviewLetterStatus { get; set; }
@@ -104,6 +107,7 @@ namespace GidaGkpWeb.Models
         public byte[] GMSignature { get; set; }
         public byte[] ACEOSignature { get; set; }
         public byte[] CEOSignature { get; set; }
+        public byte[] Allocate_CEO_Sign { get; set; }
         public ApplicantUploadDocumentModel ApplicantDocument { get; set; }
     }
 

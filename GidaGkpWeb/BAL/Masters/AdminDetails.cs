@@ -368,7 +368,7 @@ namespace GidaGkpWeb.BAL
             }
         }
 
-        public ApplicationUserModel GetApplicantUserDetailBtApplicationId(int ApplicationId)
+        public ApplicationUserModel GetApplicantUserDetailByApplicationId(int ApplicationId)
         {
             try
             {
@@ -480,6 +480,9 @@ namespace GidaGkpWeb.BAL
                             GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
                             AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
                             AllotmentDate = allocateAllotment != null ? allocateAllotment.AllotmentDate : null,
+                            StartingDateofInterview = allocateAllotment != null ? allocateAllotment.StartingDateofInterview_L : null,
+                            EndDateofInterview = allocateAllotment != null ? allocateAllotment.EndDateofInterview_L : null,
+                            DateofAllotmentLetter = allocateAllotment != null ? allocateAllotment.DateofAllotmentLetter : null,
                             InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
                             InterviewMode = invitationLetter != null ? invitationLetter.InterviewMode : null,
                             AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
@@ -496,6 +499,7 @@ namespace GidaGkpWeb.BAL
                             GMSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByGMFinance : null,
                             ACEOSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByACEO : null,
                             CEOSignature = allotementNotesheetDetail != null ? allotementNotesheetDetail.DigiSignByCEO : null,
+                            Allocate_CEO_Sign = allocateAllotment != null ? allocateAllotment.CEO_Sign : null,
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
@@ -565,6 +569,9 @@ namespace GidaGkpWeb.BAL
                             AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 10) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
                             AllotmentNumber = x.AllotmentNumber,
                             AllotmentDate = x.AllotmentDate,
+                            StartingDateofInterview = x.StartingDateofInterview,
+                            EndDateofInterview = x.EndDateofInterview,
+                            DateofAllotmentLetter = x.DateofAllotmentLetter,
                             InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
                             InterviewMode = x.InterviewMode,
                             AllotmentTransactionAmount = x.AllotmentTransactionAmount,
@@ -580,7 +587,8 @@ namespace GidaGkpWeb.BAL
                             SISignature = x.SISignature,
                             GMSignature = x.GMSignature,
                             ACEOSignature = x.ACEOSignature,
-                            CEOSignature = x.CEOSignature
+                            CEOSignature = x.CEOSignature,
+                            Allocate_CEO_Sign=x.Allocate_CEO_Sign
                         }).FirstOrDefault();
             }
             catch (DbEntityValidationException e)
@@ -1513,12 +1521,12 @@ namespace GidaGkpWeb.BAL
                         allocatationLetterDb.CEO_SignFileType = allotmentDetail.CEO_SignFileType;
                         allocatationLetterDb.CEO_SignFileName = allotmentDetail.CEO_SignFileName;
                     }
-                    allotmentDetail.ApplicationId = allotmentDetail.ApplicationId;
-                    allotmentDetail.AllotmentNumber = allotmentDetail.AllotmentNumber;
-                    allotmentDetail.AllotmentDate = allotmentDetail.AllotmentDate;
-                    allotmentDetail.StartingDateofInterview_L = allotmentDetail.StartingDateofInterview_L;
-                    allotmentDetail.EndDateofInterview_L = allotmentDetail.EndDateofInterview_L;
-                    allotmentDetail.DateofAllotmentLetter = allotmentDetail.DateofAllotmentLetter;
+                    allocatationLetterDb.ApplicationId = allotmentDetail.ApplicationId;
+                    allocatationLetterDb.AllotmentNumber = allotmentDetail.AllotmentNumber;
+                    allocatationLetterDb.AllotmentDate = allotmentDetail.AllotmentDate;
+                    allocatationLetterDb.StartingDateofInterview_L = allotmentDetail.StartingDateofInterview_L;
+                    allocatationLetterDb.EndDateofInterview_L = allotmentDetail.EndDateofInterview_L;
+                    allocatationLetterDb.DateofAllotmentLetter = allotmentDetail.DateofAllotmentLetter;
                     _db.Entry(allocatationLetterDb).State = EntityState.Modified;
                     _effectRow = _db.SaveChanges();
                 }
