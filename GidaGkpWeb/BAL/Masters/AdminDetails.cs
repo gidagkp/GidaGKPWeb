@@ -1504,26 +1504,23 @@ namespace GidaGkpWeb.BAL
             {
                 _db = new GidaGKPEntities();
                 int _effectRow = 0;
-                if (allotmentDetail.Id > 0)
+                var allocatationLetterDb = _db.AllocateAllotmentDetails.Where(x => x.ApplicationId == allotmentDetail.ApplicationId).FirstOrDefault();
+                if (allocatationLetterDb != null)
                 {
-                    var allocatationLetterDb = _db.AllocateAllotmentDetails.Where(x => x.Id == allotmentDetail.Id).FirstOrDefault();
-                    if (allocatationLetterDb != null)
+                    if (allotmentDetail.CEO_Sign != null)
                     {
-                        if (allotmentDetail.CEO_Sign != null)
-                        {
-                            allocatationLetterDb.CEO_Sign = allotmentDetail.CEO_Sign;
-                            allocatationLetterDb.CEO_SignFileType = allotmentDetail.CEO_SignFileType;
-                            allocatationLetterDb.CEO_SignFileName = allotmentDetail.CEO_SignFileName;
-                        }
-                        allotmentDetail.ApplicationId = allotmentDetail.ApplicationId;
-                        allotmentDetail.AllotmentNumber = allotmentDetail.AllotmentNumber;
-                        allotmentDetail.AllotmentDate = allotmentDetail.AllotmentDate;
-                        allotmentDetail.StartingDateofInterview_L = allotmentDetail.StartingDateofInterview_L;
-                        allotmentDetail.EndDateofInterview_L = allotmentDetail.EndDateofInterview_L;
-                        allotmentDetail.DateofAllotmentLetter = allotmentDetail.DateofAllotmentLetter;
-                        _db.Entry(allocatationLetterDb).State = EntityState.Modified;
-                        _effectRow = _db.SaveChanges();
+                        allocatationLetterDb.CEO_Sign = allotmentDetail.CEO_Sign;
+                        allocatationLetterDb.CEO_SignFileType = allotmentDetail.CEO_SignFileType;
+                        allocatationLetterDb.CEO_SignFileName = allotmentDetail.CEO_SignFileName;
                     }
+                    allotmentDetail.ApplicationId = allotmentDetail.ApplicationId;
+                    allotmentDetail.AllotmentNumber = allotmentDetail.AllotmentNumber;
+                    allotmentDetail.AllotmentDate = allotmentDetail.AllotmentDate;
+                    allotmentDetail.StartingDateofInterview_L = allotmentDetail.StartingDateofInterview_L;
+                    allotmentDetail.EndDateofInterview_L = allotmentDetail.EndDateofInterview_L;
+                    allotmentDetail.DateofAllotmentLetter = allotmentDetail.DateofAllotmentLetter;
+                    _db.Entry(allocatationLetterDb).State = EntityState.Modified;
+                    _effectRow = _db.SaveChanges();
                 }
                 else
                 {
