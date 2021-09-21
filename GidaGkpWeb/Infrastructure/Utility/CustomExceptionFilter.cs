@@ -10,6 +10,7 @@ namespace GidaGkpWeb.Infrastructure.Utility
     {
         List<string> ByPassActions = new List<string>()
         {
+            "ApplicantDashboard",//Used for NIVESH MANTRA
             "PaymentResponse",
             "PayAllotementMoney",
             "PaymentResponseAllotment",

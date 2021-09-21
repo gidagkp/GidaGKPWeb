@@ -52,7 +52,15 @@ namespace GidaGkpWeb.Controllers
             return View();
         }
 
-        public ActionResult ApplicantDashboard(int? applicationId = null)
+        //Used for NIVESH MANTRA
+        [HttpPost]
+        public string ApplicantDashboard(string TxtControlID, string TxtUnitID, string TxtServiceID, string TxtProcessIndustryID, string TxtApplicationID, string TxtRequestID)
+        {
+            var saveResult = new ApplicantDetails().SaveApplicantProjectChangeDetail(new ApplicantProjectChangeDetail {ApplicationId=62,ApplicantName= $"{TxtControlID}=>{TxtUnitID}=>{TxtServiceID}=>{TxtProcessIndustryID}=>{TxtApplicationID}=>{TxtRequestID}"});
+            return "success";
+
+        }
+        public ActionResult ApplicantApplication(int? applicationId = null)
         {
             if (applicationId != null && applicationId > 0)
             {
@@ -294,7 +302,7 @@ namespace GidaGkpWeb.Controllers
             else
             {
                 SetAlertMessage("Document detail not saved, Please Attach all reqired document", "Document Entry");
-                return RedirectToAction("ApplicantDashboard");
+                return RedirectToAction("ApplicantApplication");
             }
         }
 
