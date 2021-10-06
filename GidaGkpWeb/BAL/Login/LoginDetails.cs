@@ -44,24 +44,24 @@ namespace GidaGkpWeb.BAL.Login
             //string _passwordHash = Utility.GetHashString(Password);
             _db = new GidaGKPEntities();
 
-            var _userRow = _db.GidaUsers.Where(x => x.UserName.Equals(UserName) && x.Password.Equals(Password) && x.IsActive == true).FirstOrDefault();
+            var _userRow = _db.AdminUsers.Where(x => x.UserName.Equals(UserName) && x.Password.Equals(Password) && x.IsActive == true).FirstOrDefault();
 
             if (_userRow != null)
             {
                 UserData.UserId = _userRow.Id;
                 UserData.Username = _userRow.UserName;
-                UserData.UserType = Convert.ToString(_userRow.UserRoleId);
-                var permissionList = _db.RoleWisePermissions.Where(x => x.DepartmentId == _userRow.Department && x.DesignationId == _userRow.Designation && x.RoleId == _userRow.UserRoleId).ToList();
+                //UserData.UserType = Convert.ToString(_userRow.UserRoleId);
+                //var permissionList = _db.RoleWisePermissions.Where(x => x.DepartmentId == _userRow.Department && x.DesignationId == _userRow.Designation && x.RoleId == _userRow.UserRoleId).ToList();
                 var permissiondata = new List<UserPermission>();
-                permissionList.ForEach(x =>
-                {
-                    permissiondata.Add(new UserPermission()
-                    {
-                        PageId = x.PageId.Value,
-                        PageName = _db.PageMasters.FirstOrDefault(y => y.Id == x.PageId).PageName,
-                        PermissionName = _db.Lookups.FirstOrDefault(y => y.LookupId == x.PermissionId).LookupName
-                    });
-                });
+                //permissionList.ForEach(x =>
+                //{
+                //    permissiondata.Add(new UserPermission()
+                //    {
+                //        PageId = x.PageId.Value,
+                //        PageName = _db.PageMasters.FirstOrDefault(y => y.Id == x.PageId).PageName,
+                //        PermissionName = _db.Lookups.FirstOrDefault(y => y.LookupId == x.PermissionId).LookupName
+                //    });
+                //});
                 UserData.UserPermissions = permissiondata;
                 return Enums.LoginMessage.Authenticated;
             }

@@ -434,19 +434,19 @@ namespace GidaGkpWeb.Controllers
         [HttpPost]
         public ActionResult SaveNewUser(string userId, string username, string name, string Role, string email, string mobileNumber, string Designation, string Department, string active)
         {
-            GidaUser user = new GidaUser();
+            AdminUser user = new AdminUser();
             user.Id = !string.IsNullOrEmpty(userId) ? Convert.ToInt32(userId) : 0;
             user.UserName = username;
-            user.Name = name;
-            user.Email = email;
-            user.MobileNo = mobileNumber;
-            user.Designation = Convert.ToInt32(Designation);
-            user.Department = Convert.ToInt32(Department);
-            user.CreatedBy = UserData.UserId;
+            //user.Name = name;
+            //user.Email = email;
+            //user.MobileNo = mobileNumber;
+            //user.Designation = Convert.ToInt32(Designation);
+            //user.Department = Convert.ToInt32(Department);
+            //user.CreatedBy = UserData.UserId;
             user.CreatedDate = DateTime.Now;
             user.IsActive = active == "on" ? true : false;
             user.Password = ConfigurationManager.AppSettings["GidaUserPassword"].ToString();
-            user.UserRoleId = Convert.ToInt32(Role);
+            //user.UserRoleId = Convert.ToInt32(Role);
 
             AdminDetails _details = new AdminDetails();
             var result = _details.SaveGidaUser(user);
@@ -489,37 +489,37 @@ namespace GidaGkpWeb.Controllers
         public ActionResult AddPageMaster()
         {
             AdminDetails _details = new AdminDetails();
-            ViewData["PageData"] = _details.GePageMaster();
+            //ViewData["PageData"] = _details.GePageMaster();
             return View();
         }
         [HttpPost]
-        public ActionResult SavePageMaster(string PageId, string pagename, string active)
-        {
-            PageMaster pages = new PageMaster();
-            pages.Id = !string.IsNullOrEmpty(PageId) ? Convert.ToInt32(PageId) : 0;
-            pages.PageName = pagename;
-            pages.CreatedBy = UserData.UserId;
-            pages.CreatedDate = DateTime.Now;
-            pages.IsActive = active == "on" ? true : false;
-            AdminDetails _details = new AdminDetails();
-            var result = _details.SavePageMaster(pages);
-            if (result == Enums.CrudStatus.Saved)
-            {
-                SetAlertMessage("Page created", "Save Page master");
-            }
-            else
-                SetAlertMessage("Page creation failed", "Save Page master");
-            return RedirectToAction("AddPageMaster");
+        //public ActionResult SavePageMaster(string PageId, string pagename, string active)
+        //{
+        //    PageMaster pages = new PageMaster();
+        //    pages.Id = !string.IsNullOrEmpty(PageId) ? Convert.ToInt32(PageId) : 0;
+        //    pages.PageName = pagename;
+        //    pages.CreatedBy = UserData.UserId;
+        //    pages.CreatedDate = DateTime.Now;
+        //    pages.IsActive = active == "on" ? true : false;
+        //    AdminDetails _details = new AdminDetails();
+        //    var result = _details.SavePageMaster(pages);
+        //    if (result == Enums.CrudStatus.Saved)
+        //    {
+        //        SetAlertMessage("Page created", "Save Page master");
+        //    }
+        //    else
+        //        SetAlertMessage("Page creation failed", "Save Page master");
+        //    return RedirectToAction("AddPageMaster");
 
-        }
+        //}
 
-        [HttpPost]
-        public JsonResult GetPageDetail(int PageId)
-        {
-            AdminDetails _details = new AdminDetails();
-            var result = _details.GetPageDetail(PageId);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public JsonResult GetPageDetail(int PageId)
+        //{
+        //    AdminDetails _details = new AdminDetails();
+        //    var result = _details.GetPageDetail(PageId);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
         public ActionResult RoleUserMaster()
         {
             MasterDetails _details = new MasterDetails();
@@ -538,40 +538,40 @@ namespace GidaGkpWeb.Controllers
             return Json(_details.GetLookupDetail(lookupTypeId, lookupType, active).OrderBy(x => x.LookupId).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public JsonResult GetRoleWisePermission(int departmentId, int designationId, int roleId)
-        {
-            AdminDetails _details = new AdminDetails();
-            var usrs = _details.GetRoleWisePermission(departmentId, designationId, roleId);
-            return Json(usrs, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public JsonResult GetRoleWisePermission(int departmentId, int designationId, int roleId)
+        //{
+        //    AdminDetails _details = new AdminDetails();
+        //    var usrs = _details.GetRoleWisePermission(departmentId, designationId, roleId);
+        //    return Json(usrs, JsonRequestBehavior.AllowGet);
+        //}
 
-        [HttpPost]
-        public JsonResult SaveUserPermission(List<RoleWisePermission> permissionList)
-        {
-            AdminDetails _details = new AdminDetails();
-            var result = _details.SaveUserPermission(permissionList);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public JsonResult SaveUserPermission(List<RoleWisePermission> permissionList)
+        //{
+        //    AdminDetails _details = new AdminDetails();
+        //    var result = _details.SaveUserPermission(permissionList);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
         public ActionResult CreatePlotMaster()
         {
             return View();
         }
 
-        [HttpPost]
-        public JsonResult SavePlotMaster(List<PlotMaster> plotMaster)
-        {
-            AdminDetails _details = new AdminDetails();
-            var result = _details.SavePlotMaster(plotMaster);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public JsonResult SavePlotMaster(List<PlotMaster> plotMaster)
+        //{
+        //    AdminDetails _details = new AdminDetails();
+        //    var result = _details.SavePlotMaster(plotMaster);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
-        [HttpPost]
-        public JsonResult GetPlotMasterDetail(int SchemeType, int SchemeName, int SectorId)
-        {
-            AdminDetails _details = new AdminDetails();
-            return Json(_details.GetPlotMasterDetail(SchemeType, SchemeName, SectorId), JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public JsonResult GetPlotMasterDetail(int SchemeType, int SchemeName, int SectorId)
+        //{
+        //    AdminDetails _details = new AdminDetails();
+        //    return Json(_details.GetPlotMasterDetail(SchemeType, SchemeName, SectorId), JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult SchemeWiseApplicantList()
         {
@@ -677,71 +677,71 @@ namespace GidaGkpWeb.Controllers
             return Json(usrs, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult SaveNewInvitation(string Id, string Applicant, string Address, string SectorName, string ApplicationNo, string PlotRange, string TotalNoOfPlots, string InterviewDateTime, string InterviewMode)
-        {
-            ApplicantInvitationLetter invt = new ApplicantInvitationLetter();
-            invt.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
-            invt.UserId = Convert.ToInt32(Applicant);
-            invt.ApplicationNo = ApplicationNo;
-            invt.ApplicantAddress = Address;
-            invt.SectorName = Convert.ToInt32(SectorName);
-            invt.PlotRange = PlotRange;
-            invt.TotalNoOfPlots = TotalNoOfPlots;
-            invt.InterviewDateTime = Convert.ToDateTime(InterviewDateTime);
-            invt.InterviewMode = InterviewMode;
+        //public ActionResult SaveNewInvitation(string Id, string Applicant, string Address, string SectorName, string ApplicationNo, string PlotRange, string TotalNoOfPlots, string InterviewDateTime, string InterviewMode)
+        //{
+        //    ApplicantInvitationLetter invt = new ApplicantInvitationLetter();
+        //    invt.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
+        //    invt.UserId = Convert.ToInt32(Applicant);
+        //    invt.ApplicationNo = ApplicationNo;
+        //    invt.ApplicantAddress = Address;
+        //    invt.SectorName = Convert.ToInt32(SectorName);
+        //    invt.PlotRange = PlotRange;
+        //    invt.TotalNoOfPlots = TotalNoOfPlots;
+        //    invt.InterviewDateTime = Convert.ToDateTime(InterviewDateTime);
+        //    invt.InterviewMode = InterviewMode;
 
-            //user.CreatedBy = UserData.UserId;
-            //user.CreatedDate = DateTime.Now;
-            //user.IsActive = active == "on" ? true : false;
-            //user.Password = ConfigurationManager.AppSettings["GidaUserPassword"].ToString();
-            //user.UserType = "user";
+        //    //user.CreatedBy = UserData.UserId;
+        //    //user.CreatedDate = DateTime.Now;
+        //    //user.IsActive = active == "on" ? true : false;
+        //    //user.Password = ConfigurationManager.AppSettings["GidaUserPassword"].ToString();
+        //    //user.UserType = "user";
 
-            InvitationDetails _details = new InvitationDetails();
-            var result = _details.SaveInvitation(invt);
-            if (result == Enums.CrudStatus.Saved)
-            {
-                SetAlertMessage("Invitation created", "Save Invitation");
-                //SendMailForGidaUserCreation(name, email, username, user.Password);
-            }
-            else
-                SetAlertMessage("User creation failed", "Save User");
-            return RedirectToAction("Invitation");
+        //    InvitationDetails _details = new InvitationDetails();
+        //    var result = _details.SaveInvitation(invt);
+        //    if (result == Enums.CrudStatus.Saved)
+        //    {
+        //        SetAlertMessage("Invitation created", "Save Invitation");
+        //        //SendMailForGidaUserCreation(name, email, username, user.Password);
+        //    }
+        //    else
+        //        SetAlertMessage("User creation failed", "Save User");
+        //    return RedirectToAction("Invitation");
 
 
-        }
+        //}
         public ActionResult LeasedDutyWork()
         {
             return View();
         }
         public ActionResult SaveNewLeasedDutyWork(string Id, string ApplicantionId, decimal AllotmentMoneyPaid, string BankGauranteeChallanNo, decimal PurchasedStampValue, decimal StampValueForBankGaurantee, DateTime BankGauranteeDate, string EntityNameBehalfOfApplicant)
         {
-            LeaseDeedDetail LeasedDutyWork1 = new LeaseDeedDetail();
-            LeasedDutyWork1.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
-            LeasedDutyWork1.ApplicationId  = Convert.ToInt32(ApplicantionId);
-            LeasedDutyWork1.AllotmentMoneyPaid = Convert.ToDecimal (AllotmentMoneyPaid);
-            LeasedDutyWork1.BankGauranteeChallanNo = BankGauranteeChallanNo;
-            LeasedDutyWork1.PurchasedStampValue = Convert.ToDecimal(PurchasedStampValue);
-            LeasedDutyWork1.StampValueForBankGaurantee = Convert.ToDecimal (StampValueForBankGaurantee);
-            LeasedDutyWork1.BankGauranteeDate = Convert.ToDateTime(BankGauranteeDate);
-            LeasedDutyWork1.EntityNameBehalfOfApplicant = EntityNameBehalfOfApplicant;
-            LeasedDutyWork1.CreatedDate = DateTime.Now;
+            //LeaseDeedDetail LeasedDutyWork1 = new LeaseDeedDetail();
+            //LeasedDutyWork1.Id = !string.IsNullOrEmpty(Id) ? Convert.ToInt32(Id) : 0;
+            //LeasedDutyWork1.ApplicationId  = Convert.ToInt32(ApplicantionId);
+            //LeasedDutyWork1.AllotmentMoneyPaid = Convert.ToDecimal (AllotmentMoneyPaid);
+            //LeasedDutyWork1.BankGauranteeChallanNo = BankGauranteeChallanNo;
+            //LeasedDutyWork1.PurchasedStampValue = Convert.ToDecimal(PurchasedStampValue);
+            //LeasedDutyWork1.StampValueForBankGaurantee = Convert.ToDecimal (StampValueForBankGaurantee);
+            //LeasedDutyWork1.BankGauranteeDate = Convert.ToDateTime(BankGauranteeDate);
+            //LeasedDutyWork1.EntityNameBehalfOfApplicant = EntityNameBehalfOfApplicant;
+            //LeasedDutyWork1.CreatedDate = DateTime.Now;
 
-            //user.CreatedBy = UserData.UserId;
-            //user.CreatedDate = DateTime.Now;
-            //user.IsActive = active == "on" ? true : false;
-            //user.Password = ConfigurationManager.AppSettings["GidaUserPassword"].ToString();
-            //user.UserType = "user";
+            ////user.CreatedBy = UserData.UserId;
+            ////user.CreatedDate = DateTime.Now;
+            ////user.IsActive = active == "on" ? true : false;
+            ////user.Password = ConfigurationManager.AppSettings["GidaUserPassword"].ToString();
+            ////user.UserType = "user";
 
-            //LeasedDutyDetails _details = new LeasedDutyDetails();
-            LeasedDeedDutyWorkDetails _details = new LeasedDeedDutyWorkDetails();
-            var result = _details.SaveLeasedDutyWork(LeasedDutyWork1);
-            if (result == Enums.CrudStatus.Saved)
-            {
-                SetAlertMessage("Leased Duty Work created", "Save Leased Duty Work");
-                //SendMailForGidaUserCreation(name, email, username, user.Password);
-            }
-            else
-                SetAlertMessage("Leased Duty Work creation failed", "Save Leased Duty Work");
+            ////LeasedDutyDetails _details = new LeasedDutyDetails();
+            //LeasedDeedDutyWorkDetails _details = new LeasedDeedDutyWorkDetails();
+            //var result = _details.SaveLeasedDutyWork(LeasedDutyWork1);
+            //if (result == Enums.CrudStatus.Saved)
+            //{
+            //    SetAlertMessage("Leased Duty Work created", "Save Leased Duty Work");
+            //    //SendMailForGidaUserCreation(name, email, username, user.Password);
+            //}
+            //else
+            //    SetAlertMessage("Leased Duty Work creation failed", "Save Leased Duty Work");
             return RedirectToAction("LeasedDutyWork");
 
 

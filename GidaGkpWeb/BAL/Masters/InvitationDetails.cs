@@ -76,49 +76,49 @@ namespace GidaGkpWeb.BAL.Masters
                 return null;
             }
         }
-        public Enums.CrudStatus SaveInvitation(ApplicantInvitationLetter Invitation)
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                int _effectRow = 0;
-                if (Invitation.Id > 0)
-                {
-                    var applicantinvitationletter = _db.ApplicantInvitationLetters.Where(x => x.Id == Invitation.Id).FirstOrDefault();
-                    if (applicantinvitationletter != null)
-                    {
-                        applicantinvitationletter.UserId = Invitation.UserId;
-                        applicantinvitationletter.ApplicationNo = Invitation.ApplicationNo;
+        //public Enums.CrudStatus SaveInvitation(ApplicantInvitationLetter Invitation)
+        //{
+        //    try
+        //    {
+        //        _db = new GidaGKPEntities();
+        //        int _effectRow = 0;
+        //        if (Invitation.Id > 0)
+        //        {
+        //            var applicantinvitationletter = _db.ApplicantInvitationLetters.Where(x => x.Id == Invitation.Id).FirstOrDefault();
+        //            if (applicantinvitationletter != null)
+        //            {
+        //                applicantinvitationletter.UserId = Invitation.UserId;
+        //                applicantinvitationletter.ApplicationNo = Invitation.ApplicationNo;
 
-                        //applicantinvitationletter.Sector = Invitation.Sector;
-                        applicantinvitationletter.ApplicantAddress = Invitation.ApplicantAddress;
-                        applicantinvitationletter.PlotRange = Invitation.PlotRange;
-                        applicantinvitationletter.TotalNoOfPlots = Invitation.TotalNoOfPlots;
-                        applicantinvitationletter.InterviewMode = Invitation.InterviewMode;
-                        applicantinvitationletter.InterviewDateTime = Invitation.InterviewDateTime;
-                        _db.Entry(applicantinvitationletter).State = EntityState.Modified;
-                        _effectRow = _db.SaveChanges();
-                    }
-                }
-                else
-                {
-                    _db.Entry(Invitation).State = EntityState.Added;
-                    _effectRow = _db.SaveChanges();
-                }
+        //                //applicantinvitationletter.Sector = Invitation.Sector;
+        //                applicantinvitationletter.ApplicantAddress = Invitation.ApplicantAddress;
+        //                applicantinvitationletter.PlotRange = Invitation.PlotRange;
+        //                applicantinvitationletter.TotalNoOfPlots = Invitation.TotalNoOfPlots;
+        //                applicantinvitationletter.InterviewMode = Invitation.InterviewMode;
+        //                applicantinvitationletter.InterviewDateTime = Invitation.InterviewDateTime;
+        //                _db.Entry(applicantinvitationletter).State = EntityState.Modified;
+        //                _effectRow = _db.SaveChanges();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            _db.Entry(Invitation).State = EntityState.Added;
+        //            _effectRow = _db.SaveChanges();
+        //        }
 
-                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return Enums.CrudStatus.InternalError;
-            }
-        }
+        //        return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+        //        foreach (var eve in e.EntityValidationErrors)
+        //        {
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+        //            }
+        //        }
+        //        return Enums.CrudStatus.InternalError;
+        //    }
+        //}
     }
 }

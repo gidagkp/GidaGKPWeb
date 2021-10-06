@@ -33,9 +33,5 @@ namespace DataLayer
         public string ChalanDocumentFileName { get; set; }
         public string ChalanDocumentFileType { get; set; }
         public string TransactionType { get; set; }
-        public string ApprovalStatus { get; set; }
-        public string RejectedComment { get; set; }
-    
-        public virtual ApplicantApplicationDetail ApplicantApplicationDetail { get; set; }
     }
 }

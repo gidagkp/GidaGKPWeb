@@ -131,10 +131,10 @@ namespace GidaGkpWeb.BAL
                             GST = plotDetail != null ? plotDetail.GST.ToString() : "",
                             EarnestMoney = plotDetail != null ? plotDetail.EarnestMoney.ToString() : "",
                             SchemeNameId = plotDetail != null ? plotDetail.SchemeName.ToString() : "",
-                            PaymentStatus = transaction != null ? transaction.ApprovalStatus : "",
-                            DocumentStatus = doc != null ? doc.ApprovalStatus : "",
-                            PaymentRejectionComment = transaction != null ? transaction.RejectedComment : "",
-                            DocumentRejectionComment = doc != null ? doc.RejectedComment : "",
+                           // PaymentStatus = transaction != null ? transaction.ApprovalStatus : "",
+                            //DocumentStatus = doc != null ? doc.ApprovalStatus : "",
+                            //PaymentRejectionComment = transaction != null ? transaction.RejectedComment : "",
+                            //DocumentRejectionComment = doc != null ? doc.RejectedComment : "",
                         }).Distinct().ToList()
                         .Select(x => new ApplicationUserModel()
                         {
@@ -173,8 +173,8 @@ namespace GidaGkpWeb.BAL
                             FormFee = x.ApplicationFee,
                             GSTAmount = x.GST,
                             SchemeNameId = x.SchemeNameId,
-                            PaymentStatus = x.PaymentStatus == "Not Approved" ? x.PaymentStatus + "(Comment : " + x.PaymentRejectionComment + ")" : x.PaymentStatus,
-                            DocumentStatus = x.DocumentStatus == "Not Approved" ? x.DocumentStatus + "(Comment : " + x.DocumentRejectionComment + ")" : x.DocumentStatus,
+                            //PaymentStatus = x.PaymentStatus == "Not Approved" ? x.PaymentStatus + "(Comment : " + x.PaymentRejectionComment + ")" : x.PaymentStatus,
+                            //DocumentStatus = x.DocumentStatus == "Not Approved" ? x.DocumentStatus + "(Comment : " + x.DocumentRejectionComment + ")" : x.DocumentStatus,
                         }).ToList();
             }
             catch (DbEntityValidationException e)
@@ -391,23 +391,23 @@ namespace GidaGkpWeb.BAL
             try
             {
                 _db = new GidaGKPEntities();
-                return (from user in _db.GidaUsers
-                        join departmentLookup in _db.Lookups on user.Department equals departmentLookup.LookupId
-                        join designationLookup in _db.Lookups on user.Designation equals designationLookup.LookupId
-                        join roleLookup in _db.Lookups on user.UserRoleId equals roleLookup.LookupId
-                        where roleLookup.LookupName != "Super Admin"
+                return (from user in _db.AdminUsers
+                        //join departmentLookup in _db.Lookups on user.Department equals departmentLookup.LookupId
+                        //join designationLookup in _db.Lookups on user.Designation equals designationLookup.LookupId
+                        //join roleLookup in _db.Lookups on user.UserRoleId equals roleLookup.LookupId
+                        //where roleLookup.LookupName != "Super Admin"
                         select new GidaUserModel
                         {
-                            Department = departmentLookup.LookupName,
-                            Designation = designationLookup.LookupName,
-                            Email = user.Email,
+                           // Department = departmentLookup.LookupName,
+                           // Designation = designationLookup.LookupName,
+                            //Email = user.Email,
                             Id = user.Id,
                             IsActive = user.IsActive,
-                            MobileNo = user.MobileNo,
-                            Name = user.Name,
+                            //MobileNo = user.MobileNo,
+                            //Name = user.Name,
                             Password = user.Password,
                             UserName = user.UserName,
-                            UserRole = roleLookup.LookupName
+                            //UserRole = roleLookup.LookupName
                         }).OrderByDescending(x => x.Name).ToList();
             }
             catch (DbEntityValidationException e)
@@ -423,7 +423,7 @@ namespace GidaGkpWeb.BAL
             }
         }
 
-        public Enums.CrudStatus SaveGidaUser(GidaUser user)
+        public Enums.CrudStatus SaveGidaUser(AdminUser user)
         {
             try
             {
@@ -431,17 +431,17 @@ namespace GidaGkpWeb.BAL
                 int _effectRow = 0;
                 if (user.Id > 0)
                 {
-                    var gidaUser = _db.GidaUsers.Where(x => x.Id == user.Id).FirstOrDefault();
+                    var gidaUser = _db.AdminUsers.Where(x => x.Id == user.Id).FirstOrDefault();
                     if (gidaUser != null)
                     {
                         gidaUser.IsActive = user.IsActive;
-                        gidaUser.Department = user.Department;
-                        gidaUser.Designation = user.Designation;
-                        gidaUser.Email = user.Email;
-                        gidaUser.MobileNo = user.MobileNo;
-                        gidaUser.Name = user.Name;
+                     //   gidaUser.Department = user.Department;
+                       // gidaUser.Designation = user.Designation;
+                        //gidaUser.Email = user.Email;
+                       // gidaUser.MobileNo = user.MobileNo;
+                        //gidaUser.Name = user.Name;
                         gidaUser.UserName = user.UserName;
-                        gidaUser.UserRoleId = user.UserRoleId;
+                        //gidaUser.UserRoleId = user.UserRoleId;
                         _db.Entry(gidaUser).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                     }
@@ -468,30 +468,30 @@ namespace GidaGkpWeb.BAL
         }
         public GidaUserPermissionModel GetUserDetail(int userId)
         {
-            try
-            {
+            try { 
+            
                 _db = new GidaGKPEntities();
                 var model = new GidaUserPermissionModel();
-                model.UserModel = (from user in _db.GidaUsers
-                                   join departmentLookup in _db.Lookups on user.Department equals departmentLookup.LookupId
-                                   join designationLookup in _db.Lookups on user.Designation equals designationLookup.LookupId
-                                   join roleLookup in _db.Lookups on user.UserRoleId equals roleLookup.LookupId
+                model.UserModel = (from user in _db.AdminUsers
+                                  //// join departmentLookup in _db.Lookups on user.Department equals departmentLookup.LookupId
+                                   ////join designationLookup in _db.Lookups on user.Designation equals designationLookup.LookupId
+                                   //join roleLookup in _db.Lookups on user.UserRoleId equals roleLookup.LookupId
                                    where user.Id == userId
                                    select new GidaUserModel
                                    {
-                                       Department = departmentLookup.LookupName,
-                                       Designation = designationLookup.LookupName,
-                                       Email = user.Email,
+                                     //  Department = departmentLookup.LookupName,
+                                      // Designation = designationLookup.LookupName,
+                                      // Email = user.Email,
                                        Id = user.Id,
                                        IsActive = user.IsActive,
-                                       MobileNo = user.MobileNo,
-                                       Name = user.Name,
+                                       //MobileNo = user.MobileNo,
+                                       //Name = user.Name,
                                        Password = user.Password,
                                        UserName = user.UserName,
-                                       UserRole = roleLookup.LookupName,
-                                       DepartmentId = departmentLookup.LookupId,
-                                       DesignationId = designationLookup.LookupId,
-                                       UserRoleId = roleLookup.LookupId,
+                                       //UserRole = roleLookup.LookupName,
+                                       //DepartmentId = departmentLookup.LookupId,
+                                       //DesignationId = designationLookup.LookupId,
+                                       //UserRoleId = roleLookup.LookupId,
                                    }).FirstOrDefault();
                 return model;
 
@@ -508,211 +508,211 @@ namespace GidaGkpWeb.BAL
                 return null;
             }
         }
-        public GidaUserPermissionModel GetRoleWisePermission(int departmentId, int designationId, int roleId)
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                var model = new GidaUserPermissionModel();
-                var PageList = (from page in _db.PageMasters
-                                where page.IsActive == true
-                                select new UserPermissionModel
-                                {
-                                    PageId = page.Id,
-                                    PageName = page.PageName
-                                }).ToList();
-                PageList.ForEach(x =>
-                {
-                    List<RoleWisePermission> roles = _db.RoleWisePermissions.Where(y => y.DepartmentId == departmentId && y.DesignationId == designationId && y.RoleId == roleId && y.PageId == x.PageId).ToList();
-                    if (roles.Any())
-                    {
-                        roles.ForEach(y =>
-                        {
-                            x.PermissionTypeIdList.Add(y.PermissionId.Value);
-                        });
-                    }
-                });
+        //public GidaUserPermissionModel GetRoleWisePermission(int departmentId, int designationId, int roleId)
+        //{
+        //    try
+        //    {
+        //        _db = new GidaGKPEntities();
+        //        var model = new GidaUserPermissionModel();
+        //        var PageList = (from page in _db.PageMasters
+        //                        where page.IsActive == true
+        //                        select new UserPermissionModel
+        //                        {
+        //                            PageId = page.Id,
+        //                            PageName = page.PageName
+        //                        }).ToList();
+        //        PageList.ForEach(x =>
+        //        {
+        //            List<RoleWisePermission> roles = _db.RoleWisePermissions.Where(y => y.DepartmentId == departmentId && y.DesignationId == designationId && y.RoleId == roleId && y.PageId == x.PageId).ToList();
+        //            if (roles.Any())
+        //            {
+        //                roles.ForEach(y =>
+        //                {
+        //                    x.PermissionTypeIdList.Add(y.PermissionId.Value);
+        //                });
+        //            }
+        //        });
 
-                model.PermissionModel = PageList;
-                return model;
+        //        model.PermissionModel = PageList;
+        //        return model;
 
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return null;
-            }
-        }
-        public List<PageMasterModel> GePageMaster()
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                return (from page in _db.PageMasters
-                        select new PageMasterModel
-                        {
-                            Id = page.Id,
-                            PageName = page.PageName,
-                            IsActive = page.IsActive
-                        }).OrderByDescending(x => x.PageName).ToList();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return new List<PageMasterModel>();
-            }
-        }
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+        //        foreach (var eve in e.EntityValidationErrors)
+        //        {
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+        //            }
+        //        }
+        //        return null;
+        //    }
+        //}
+        //public List<PageMasterModel> GePageMaster()
+        //{
+        //    try
+        //    {
+        //        _db = new GidaGKPEntities();
+        //        return (from page in _db.PageMasters
+        //                select new PageMasterModel
+        //                {
+        //                    Id = page.Id,
+        //                    PageName = page.PageName,
+        //                    IsActive = page.IsActive
+        //                }).OrderByDescending(x => x.PageName).ToList();
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+        //        foreach (var eve in e.EntityValidationErrors)
+        //        {
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+        //            }
+        //        }
+        //        return new List<PageMasterModel>();
+        //    }
+        //}
 
-        public Enums.CrudStatus SavePageMaster(PageMaster page)
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                int _effectRow = 0;
-                if (page.Id > 0)
-                {
-                    var pages = _db.PageMasters.Where(x => x.Id == page.Id).FirstOrDefault();
-                    if (pages != null)
-                    {
-                        pages.IsActive = page.IsActive;
-                        pages.PageName = page.PageName;
-                        _db.Entry(pages).State = EntityState.Modified;
-                        _effectRow = _db.SaveChanges();
-                    }
-                }
-                else
-                {
-                    _db.Entry(page).State = EntityState.Added;
-                    _effectRow = _db.SaveChanges();
-                }
+        //public Enums.CrudStatus SavePageMaster(PageMaster page)
+        //{
+        //    try
+        //    {
+        //        _db = new GidaGKPEntities();
+        //        int _effectRow = 0;
+        //        if (page.Id > 0)
+        //        {
+        //            var pages = _db.PageMasters.Where(x => x.Id == page.Id).FirstOrDefault();
+        //            if (pages != null)
+        //            {
+        //                pages.IsActive = page.IsActive;
+        //                pages.PageName = page.PageName;
+        //                _db.Entry(pages).State = EntityState.Modified;
+        //                _effectRow = _db.SaveChanges();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            _db.Entry(page).State = EntityState.Added;
+        //            _effectRow = _db.SaveChanges();
+        //        }
 
-                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return Enums.CrudStatus.InternalError;
-            }
-        }
-        public PageMaster GetPageDetail(int pageId)
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                return _db.PageMasters.Where(x => x.Id == pageId).FirstOrDefault();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return null;
-            }
-        }
+        //        return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+        //        foreach (var eve in e.EntityValidationErrors)
+        //        {
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+        //            }
+        //        }
+        //        return Enums.CrudStatus.InternalError;
+        //    }
+        //}
+        //public PageMaster GetPageDetail(int pageId)
+        //{
+        //    try
+        //    {
+        //        _db = new GidaGKPEntities();
+        //        return _db.PageMasters.Where(x => x.Id == pageId).FirstOrDefault();
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+        //        foreach (var eve in e.EntityValidationErrors)
+        //        {
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+        //            }
+        //        }
+        //        return null;
+        //    }
+        //}
 
-        public Enums.CrudStatus SaveUserPermission(List<RoleWisePermission> permissionList)
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                int _effectRow = 0;
-                if (permissionList.Any())
-                {
-                    var roleId = permissionList[0].RoleId;
-                    var dataOfRole = _db.RoleWisePermissions.Where(x => x.RoleId == roleId).ToList();
-                    dataOfRole.ForEach(x =>
-                    {
-                        _db.Entry(x).State = EntityState.Deleted;
-                    });
-                    _db.SaveChanges();
-                }
+        //public Enums.CrudStatus SaveUserPermission(List<RoleWisePermission> permissionList)
+        //{
+        //    try
+        //    {
+        //        _db = new GidaGKPEntities();
+        //        int _effectRow = 0;
+        //        if (permissionList.Any())
+        //        {
+        //            var roleId = permissionList[0].RoleId;
+        //            var dataOfRole = _db.RoleWisePermissions.Where(x => x.RoleId == roleId).ToList();
+        //            dataOfRole.ForEach(x =>
+        //            {
+        //                _db.Entry(x).State = EntityState.Deleted;
+        //            });
+        //            _db.SaveChanges();
+        //        }
 
-                permissionList.ForEach(permissionData =>
-                {
-                    permissionData.CreatedBy = UserData.UserId;
-                    permissionData.CreatedDate = DateTime.Now;
-                    _db.Entry(permissionData).State = EntityState.Added;
-                    _effectRow = _db.SaveChanges();
-                });
+        //        permissionList.ForEach(permissionData =>
+        //        {
+        //            permissionData.CreatedBy = UserData.UserId;
+        //            permissionData.CreatedDate = DateTime.Now;
+        //            _db.Entry(permissionData).State = EntityState.Added;
+        //            _effectRow = _db.SaveChanges();
+        //        });
 
-                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return Enums.CrudStatus.InternalError;
-            }
-        }
+        //        return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+        //        foreach (var eve in e.EntityValidationErrors)
+        //        {
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+        //            }
+        //        }
+        //        return Enums.CrudStatus.InternalError;
+        //    }
+        //}
 
-        public Enums.CrudStatus SavePlotMaster(List<PlotMaster> plotMaster)
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                int _effectRow = 0;
-                if (plotMaster.Any())
-                {
-                    var schemeType = plotMaster[0].SchemeType;
-                    var schemeName = plotMaster[0].SchemeName;
-                    var sectorName = plotMaster[0].SectorName;
-                    var dataOfPlots = _db.PlotMasters.Where(x => x.SchemeType == schemeType && x.SchemeName == schemeName && x.SectorName == sectorName).ToList();
-                    dataOfPlots.ForEach(x =>
-                    {
-                        _db.Entry(x).State = EntityState.Deleted;
-                    });
-                    _db.SaveChanges();
-                }
+        //public Enums.CrudStatus SavePlotMaster(List<PlotMaster> plotMaster)
+        //{
+        //    try
+        //    {
+        //        _db = new GidaGKPEntities();
+        //        int _effectRow = 0;
+        //        if (plotMaster.Any())
+        //        {
+        //            var schemeType = plotMaster[0].SchemeType;
+        //            var schemeName = plotMaster[0].SchemeName;
+        //            var sectorName = plotMaster[0].SectorName;
+        //            var dataOfPlots = _db.PlotMasters.Where(x => x.SchemeType == schemeType && x.SchemeName == schemeName && x.SectorName == sectorName).ToList();
+        //            dataOfPlots.ForEach(x =>
+        //            {
+        //                _db.Entry(x).State = EntityState.Deleted;
+        //            });
+        //            _db.SaveChanges();
+        //        }
 
-                plotMaster.ForEach(plotData =>
-                {
-                    plotData.CreatedBy = UserData.UserId;
-                    plotData.CreatedDate = DateTime.Now;
-                    _db.Entry(plotData).State = EntityState.Added;
-                    _effectRow = _db.SaveChanges();
-                });
+        //        plotMaster.ForEach(plotData =>
+        //        {
+        //            plotData.CreatedBy = UserData.UserId;
+        //            plotData.CreatedDate = DateTime.Now;
+        //            _db.Entry(plotData).State = EntityState.Added;
+        //            _effectRow = _db.SaveChanges();
+        //        });
 
-                return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return Enums.CrudStatus.InternalError;
-            }
-        }
+        //        return _effectRow > 0 ? Enums.CrudStatus.Saved : Enums.CrudStatus.NotSaved;
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+        //        foreach (var eve in e.EntityValidationErrors)
+        //        {
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+        //            }
+        //        }
+        //        return Enums.CrudStatus.InternalError;
+        //    }
+        //}
 
         public Enums.CrudStatus ApproveRejectPayment(int applicationId, string status, string comment = "")
         {
@@ -725,8 +725,8 @@ namespace GidaGkpWeb.BAL
                     var transactionDetail = _db.ApplicantTransactionDetails.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (transactionDetail != null)
                     {
-                        transactionDetail.ApprovalStatus = status;
-                        transactionDetail.RejectedComment = comment;
+                        //transactionDetail.ApprovalStatus = status;
+                        //transactionDetail.RejectedComment = comment;
                         _db.Entry(transactionDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                         return Enums.CrudStatus.Updated;
@@ -757,8 +757,8 @@ namespace GidaGkpWeb.BAL
                     var documentDetail = _db.ApplicantUploadDocs.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
                     if (documentDetail != null)
                     {
-                        documentDetail.ApprovalStatus = status;
-                        documentDetail.RejectedComment = comment;
+                        //documentDetail.ApprovalStatus = status;
+                        //documentDetail.RejectedComment = comment;
                         _db.Entry(documentDetail).State = EntityState.Modified;
                         _effectRow = _db.SaveChanges();
                         return Enums.CrudStatus.Updated;
@@ -779,48 +779,48 @@ namespace GidaGkpWeb.BAL
             }
         }
 
-        public List<PlotMasterModel> GetPlotMasterDetail(int SchemeType, int SchemeName, int SectorId)
-        {
-            try
-            {
-                _db = new GidaGKPEntities();
-                return (from plot in _db.PlotMasters
-                        where plot.SchemeName == SchemeName && plot.SchemeType == SchemeType && plot.SectorName == SectorId
-                        select new PlotMasterModel
-                        {
-                            CreatedBy = plot.CreatedBy,
-                            CreatedDate = plot.CreatedDate,
-                            ExtraCharge = plot.ExtraCharge,
-                            GrandTotalCost = plot.GrandTotalCost,
-                            NoOfPlots = plot.NoOfPlots,
-                            PercentageRate = plot.PercentageRate,
-                            PlotArea = plot.PlotArea,
-                            PlotCategory = plot.PlotCategory,
-                            PlotCost = plot.PlotCost,
-                            PlotId = plot.PlotId,
-                            PlotRange = plot.PlotRange,
-                            PlotRate = plot.PlotRate,
-                            PlotSideCorner = plot.PlotSideCorner,
-                            PlotSideParkFacing = plot.PlotSideParkFacing,
-                            PlotSideWideRoad = plot.PlotSideWideRoad,
-                            RateForPlotSide = plot.RateForPlotSide,
-                            SchemeName = plot.SchemeName,
-                            SchemeType = plot.SchemeType,
-                            SectorName = plot.SectorName,
-                            UserId = plot.UserId
-                        }).ToList();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
-                    }
-                }
-                return new List<PlotMasterModel>();
-            }
-        }
+        //public List<PlotMasterModel> GetPlotMasterDetail(int SchemeType, int SchemeName, int SectorId)
+        //{
+        //    try
+        //    {
+        //        _db = new GidaGKPEntities();
+        //        return (from plot in _db.PlotMasters
+        //                where plot.SchemeName == SchemeName && plot.SchemeType == SchemeType && plot.SectorName == SectorId
+        //                select new PlotMasterModel
+        //                {
+        //                    CreatedBy = plot.CreatedBy,
+        //                    CreatedDate = plot.CreatedDate,
+        //                    ExtraCharge = plot.ExtraCharge,
+        //                    GrandTotalCost = plot.GrandTotalCost,
+        //                    NoOfPlots = plot.NoOfPlots,
+        //                    PercentageRate = plot.PercentageRate,
+        //                    PlotArea = plot.PlotArea,
+        //                    PlotCategory = plot.PlotCategory,
+        //                    PlotCost = plot.PlotCost,
+        //                    PlotId = plot.PlotId,
+        //                    PlotRange = plot.PlotRange,
+        //                    PlotRate = plot.PlotRate,
+        //                    PlotSideCorner = plot.PlotSideCorner,
+        //                    PlotSideParkFacing = plot.PlotSideParkFacing,
+        //                    PlotSideWideRoad = plot.PlotSideWideRoad,
+        //                    RateForPlotSide = plot.RateForPlotSide,
+        //                    SchemeName = plot.SchemeName,
+        //                    SchemeType = plot.SchemeType,
+        //                    SectorName = plot.SectorName,
+        //                    UserId = plot.UserId
+        //                }).ToList();
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+        //        foreach (var eve in e.EntityValidationErrors)
+        //        {
+        //            foreach (var ve in eve.ValidationErrors)
+        //            {
+        //                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(e));
+        //            }
+        //        }
+        //        return new List<PlotMasterModel>();
+        //    }
+        //}
     }
 }
