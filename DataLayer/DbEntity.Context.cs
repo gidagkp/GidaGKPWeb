@@ -15,11 +15,16 @@ namespace DataLayer
     
     public partial class GidaGKPEntities : DbContext
     {
+        //public GidaGKPEntities()
+        //    : base("name=GidaGKPEntities")
+        //{
+
+        //}
         public GidaGKPEntities()
-            : base("name=GidaGKPEntities")
+        : base("GidaGKPEntities")
         {
+            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = 360; // seconds
         }
-    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

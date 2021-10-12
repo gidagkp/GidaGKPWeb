@@ -28,9 +28,37 @@ using GidaGkpWeb.BAL.Masters;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace GidaGkpWeb.Controllers
 {
+    public class Report
+    {
+
+        public string UserName { get; set; }
+        public string FullName { get; set; }
+        public string ApplicationNumber { get; set; }
+        public string PlotArea { get; set; }
+        public string PaidAmount { get; set; }
+        public string FatherName { get; set; }
+        public string ContactNo { get; set; }
+        public string Email { get; set; }
+        public string AadharNumber { get; set; }
+        public string UserType { get; set; }
+        public string DOB { get; set; }
+        public string UnitName { get; set; }
+        public string TotalInvestment { get; set; }
+        public string Skilled { get; set; }
+        public string CAddress { get; set; }
+        public string PAddress { get; set; }
+        public string ApplicationId { get; set; }
+        public string BankName { get; set; }
+        public string BBAddress { get; set; }
+        public string bank_ref_no { get; set; }
+        
+
+    }
     public enum DocumentName
     {
         ApplicantEduTechQualification,
@@ -104,7 +132,47 @@ namespace GidaGkpWeb.Controllers
         public JsonResult GetTransactionCompletedDetail(int schemeName)
         {
             AdminDetails _details = new AdminDetails();
-            var data = _details.GetApplicantUserDetail(schemeName).Where(x => x.PaidAmount != "").ToList();
+            //var data = _details.GetApplicantUserDetail(schemeName).Where(x => x.PaidAmount != "").ToList();
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["GidaGKPEntities123"].ConnectionString);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+            DataSet ds = new DataSet();
+            SqlDataAdapter adp = new SqlDataAdapter("STP_Select_Report " + schemeName + "", conn);
+            adp.Fill(ds);
+            List<Report> data = new List<Report>();
+            Report aaa = null;
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    aaa = new Report();
+                    aaa.ApplicationId = dr["ApplicationId"].ToString();
+                    aaa.UserName = dr["UserName"].ToString();
+                    aaa.FullName = dr["FullApplicantName"].ToString();
+                    aaa.ApplicationNumber = dr["ApplicationNumber"].ToString();
+                    aaa.PlotArea = dr["PlotArea"].ToString();
+                    aaa.PaidAmount = dr["AmountPaid"].ToString();
+                    aaa.FatherName = dr["FatherName"].ToString();
+                    aaa.ContactNo = dr["ContactNo"].ToString();
+                    aaa.AadharNumber = dr["AadharNumber"].ToString();
+                    aaa.Email = dr["Email"].ToString();
+                    aaa.DOB = dr["DOB"].ToString();
+                    aaa.UserType = dr["UserType"].ToString();
+                    aaa.UnitName = dr["CompanyName"].ToString();
+                    aaa.CAddress = dr["CAddress"].ToString();
+                    aaa.TotalInvestment = dr["TotalInvestment"].ToString();
+                    aaa.Skilled = dr["Skilled"].ToString();
+                    aaa.BankName = dr["BankName"].ToString();
+                    aaa.BBAddress = dr["BBAddress"].ToString();
+                    aaa.PAddress = dr["PAddress"].ToString();
+                    aaa.bank_ref_no = dr["bank_ref_no"].ToString();
+
+                    data.Add(aaa);
+                }
+            }
+
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ApplicantFinancialDetails()

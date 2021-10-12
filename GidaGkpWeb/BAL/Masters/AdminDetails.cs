@@ -103,15 +103,18 @@ namespace GidaGkpWeb.BAL
                         from invitationLetter in invitationLetter2.DefaultIfEmpty()
                         join plotMaster1 in _db.PlotMasters on invitationLetter.PlotId equals plotMaster1.PlotId into plotMaster2
                         from plotMaster in plotMaster2.DefaultIfEmpty()
-                            //join allocateAllotment1 in _db.AllocateAllotmentDetails on invitationLetter.ApplicationId equals allocateAllotment1.ApplicationId into allocateAllotment2
-                            //from allocateAllotment in allocateAllotment2.DefaultIfEmpty()
-                            //join allotmentTransaction1 in _db.AllotmentTransactionDetails on invitationLetter.ApplicationId equals allotmentTransaction1.ApplicationId into allotmentTransaction2
-                            //from allotmentTransaction in allotmentTransaction2.DefaultIfEmpty()
-                            //join allotementNotesheetDetail1 in _db.AllotementNotesheetDetails on invitationLetter.ApplicationId equals allotementNotesheetDetail1.ApplicationId into allotementNotesheetDetail2
-                            //from allotementNotesheetDetail in allotementNotesheetDetail2.DefaultIfEmpty()
+
+
+                        join allocateAllotment1 in _db.AllocateAllotmentDetails on invitationLetter.ApplicationId equals allocateAllotment1.ApplicationId into allocateAllotment2
+                        from allocateAllotment in allocateAllotment2.DefaultIfEmpty()
+                        join allotmentTransaction1 in _db.AllotmentTransactionDetails on invitationLetter.ApplicationId equals allotmentTransaction1.ApplicationId into allotmentTransaction2
+                        from allotmentTransaction in allotmentTransaction2.DefaultIfEmpty()
+                        join allotementNotesheetDetail1 in _db.AllotementNotesheetDetails on invitationLetter.ApplicationId equals allotementNotesheetDetail1.ApplicationId into allotementNotesheetDetail2
+                        from allotementNotesheetDetail in allotementNotesheetDetail2.DefaultIfEmpty()
                         where user.UserType != "Test" && ((schemeName != null && plotDetail.SchemeName == schemeName) || schemeName == null)
                         select new
                         {
+                            //ApplicationNumber= application.ApplicationNumber,
                             ApplicationNumber = doc != null ? application.ApplicationNumber : "",
                             PaidAmount = transaction != null ? transaction.amount : "",
                             ApplicationId = transaction != null ? application.ApplicationId : 0,
@@ -183,18 +186,21 @@ namespace GidaGkpWeb.BAL
                             PlotCost = plotMaster != null ? plotMaster.PlotCost : "",
                             ExtraCharge = plotMaster != null ? plotMaster.ExtraCharge : "",
                             GrandTotalCost = plotMaster != null ? plotMaster.GrandTotalCost : "",
-                            //AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
-                            //AllotmentDate = allocateAllotment != null ? allocateAllotment.AllotmentDate : null,
-                            //InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
-                            //InterviewMode = invitationLetter != null ? invitationLetter.InterviewMode : null,
-                            //AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
-                            //ACEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ACEOComment : "",
-                            //AssistantComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.AssistantComment : "",
-                            //CEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.CEOComment : "",
-                            //GMFinanceComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.GMFinanceComment : "",
-                            //ManagerPropertyComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ManagerPropertyComment : "",
-                            //SectionInchargeComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.SectionInchargeComment : "",
-                            //DateoOfSigningByCEO = allotementNotesheetDetail != null ? allotementNotesheetDetail.DateoOfSigningByCEO : null,
+
+                            /*end */
+
+                            AllotmentNumber = allocateAllotment != null ? allocateAllotment.AllotmentNumber : "",
+                            AllotmentDate = allocateAllotment != null ? allocateAllotment.AllotmentDate : null,
+                            InterviewDateTime = invitationLetter != null ? invitationLetter.InterviewDateTime : null,
+                            InterviewMode = invitationLetter != null ? invitationLetter.InterviewMode : null,
+                            AllotmentTransactionAmount = allotmentTransaction != null ? allotmentTransaction.amount : null,
+                            ACEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ACEOComment : "",
+                            AssistantComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.AssistantComment : "",
+                            CEOComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.CEOComment : "",
+                            GMFinanceComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.GMFinanceComment : "",
+                            ManagerPropertyComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.ManagerPropertyComment : "",
+                            SectionInchargeComment = allotementNotesheetDetail != null ? allotementNotesheetDetail.SectionInchargeComment : "",
+                            DateoOfSigningByCEO = allotementNotesheetDetail != null ? allotementNotesheetDetail.DateoOfSigningByCEO : null,
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = doc.ApplicantEduTechQualificationFileName,
@@ -239,7 +245,7 @@ namespace GidaGkpWeb.BAL
                         .Select(x => new ApplicationUserModel()
                         {
                             ApplicationNumber = x.ApplicationNumber,
-                            PaidAmount = x.PaidAmount,
+                           PaidAmount = x.PaidAmount,
                             ApplicationId = x.ApplicationId,
                             PlotArea = x.PlotArea,
                             UnitName = x.UnitName,
@@ -302,18 +308,20 @@ namespace GidaGkpWeb.BAL
                             TenPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 10) / 100).ToString() : "",
                             NintyPer_AllotmentMoney = !string.IsNullOrEmpty(x.PlotCost) ? ((Convert.ToInt64(x.PlotCost) * 90) / 100).ToString() : "",
                             AllotementMoneyTobePaid = !string.IsNullOrEmpty(x.PlotCost) && !string.IsNullOrEmpty(x.EarnestMoney) ? (((Convert.ToInt64(x.PlotCost) * 10) / 100) - Convert.ToInt64(x.EarnestMoney)).ToString() : "",
-                            //AllotmentNumber = x.AllotmentNumber,
-                            //AllotmentDate = x.AllotmentDate,
-                            //InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
-                            //InterviewMode = x.InterviewMode,
-                            //AllotmentTransactionAmount = x.AllotmentTransactionAmount,
-                            //ACEOComment = x.ACEOComment ,
-                            //AssistantComment = x.AssistantComment ,
-                            //CEOComment = x.CEOComment,
-                            //GMFinanceComment = x.GMFinanceComment ,
-                            //ManagerPropertyComment = x.ManagerPropertyComment ,
-                            //SectionInchargeComment = x.SectionInchargeComment ,
-                            //DateoOfSigningByCEO = x.DateoOfSigningByCEO != null ? x.DateoOfSigningByCEO.Value.ToString("dd/MM/yyyy") : "",
+
+
+                            AllotmentNumber = x.AllotmentNumber,
+                            AllotmentDate = x.AllotmentDate,
+                            InterviewDateTime = x.InterviewDateTime != null ? x.InterviewDateTime.Value.ToString("dd/MM/yyyy") : "",
+                            InterviewMode = x.InterviewMode,
+                            AllotmentTransactionAmount = x.AllotmentTransactionAmount,
+                            ACEOComment = x.ACEOComment,
+                            AssistantComment = x.AssistantComment,
+                            CEOComment = x.CEOComment,
+                            GMFinanceComment = x.GMFinanceComment,
+                            ManagerPropertyComment = x.ManagerPropertyComment,
+                            SectionInchargeComment = x.SectionInchargeComment,
+                            DateoOfSigningByCEO = x.DateoOfSigningByCEO != null ? x.DateoOfSigningByCEO.Value.ToString("dd/MM/yyyy") : "",
                             ApplicantDocument = new ApplicantUploadDocumentModel()
                             {
                                 ApplicantEduTechQualificationFileName = x.ApplicantDocument.ApplicantEduTechQualificationFileName,

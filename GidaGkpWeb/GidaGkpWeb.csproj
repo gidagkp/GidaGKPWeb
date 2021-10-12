@@ -333,6 +333,7 @@
     <Compile Include="Models\GidaUserModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\ApplicationDetailModel.cs" />
+    <Compile Include="Models\Report.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

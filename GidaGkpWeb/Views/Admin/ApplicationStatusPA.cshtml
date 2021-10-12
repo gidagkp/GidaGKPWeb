@@ -118,8 +118,10 @@
                         </td>
                         <td class="text-right">
                             @if (hasPermissionOnPage("Scheme Wise Applicant List - Application Status - Finance Approval")
-                                && hasPermission(PermissionName.AllAccess))
+                                            && hasPermission(PermissionName.AllAccess))
                             {
+                                var abc = (UserData.Department+"--"+ UserData.Designation);
+                                
                                 if (UserData.Department == "Finance & Accounts" && UserData.Designation == "Assistant Manager")
                                 {
                                     if (string.IsNullOrEmpty(UserDataModel.AMPaymentStatus))
