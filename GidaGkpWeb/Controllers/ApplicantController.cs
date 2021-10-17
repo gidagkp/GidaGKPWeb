@@ -21,6 +21,7 @@ using System.Net;
 using System.Text;
 using System.IO;
 using GidaGkpWeb.BAL.Masters;
+using GidaGkpWeb.Infrastructure;
 
 namespace GidaGkpWeb.Controllers
 {
@@ -54,10 +55,36 @@ namespace GidaGkpWeb.Controllers
 
         //Used for NIVESH MANTRA
         [HttpPost]
-        public string ApplicantDashboard(string TxtControlID, string TxtUnitID, string TxtServiceID, string TxtProcessIndustryID, string TxtApplicationID, string TxtRequestID)
+        public ActionResult ApplicantDashboard(string TxtControlID, string TxtUnitID, string TxtServiceID, string TxtProcessIndustryID, string TxtApplicationID, string TxtRequestID)
         {
-            var saveResult = new ApplicantDetails().SaveApplicantProjectChangeDetail(new ApplicantProjectChangeDetail {ApplicationId=62,ApplicantName= $"{TxtControlID}=>{TxtUnitID}=>{TxtServiceID}=>{TxtProcessIndustryID}=>{TxtApplicationID}=>{TxtRequestID}"});
-            return "success";
+            //Send Email
+            try
+            {
+                Message msg = new Message()
+                {
+                    MessageTo = "vchauhan.mca@outlook.com",
+                    MessageNameTo = "Nivesh Mantra Test",
+                    Subject = "Nivesh Mantra Test",
+                    Body = $"Control-{TxtControlID}=> UnitID -{TxtUnitID}=>ServiceID - {TxtServiceID}=> IndustryID - {TxtProcessIndustryID}=> ApplicantID- {TxtApplicationID}=> ReqeustID- {TxtRequestID}"
+                };
+                ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
+                sendMessageStrategy.SendMessages();
+
+            }
+            catch (Exception ex)
+            {
+                Message msg = new Message()
+                {
+                    MessageTo = "vchauhan.mca@outlook.com",
+                    MessageNameTo = "Nivesh Mantra Test",
+                    Subject = "Nivesh Mantra Test",
+                    Body = ex.Message
+                };
+                ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
+                sendMessageStrategy.SendMessages();
+            }
+
+            return View("Dashboard");
 
         }
         public ActionResult ApplicantApplication(int? applicationId = null)
