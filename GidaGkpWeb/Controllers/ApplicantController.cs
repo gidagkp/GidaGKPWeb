@@ -55,34 +55,42 @@ namespace GidaGkpWeb.Controllers
 
         //Used for NIVESH MANTRA
         [HttpPost]
-        public ActionResult ApplicantDashboard(string TxtControlID, string TxtUnitID, string TxtServiceID, string TxtProcessIndustryID, string TxtApplicationID, string TxtRequestID)
+        public ActionResult ApplicantDashboard()
         {
-            //Send Email
-            try
-            {
-                Message msg = new Message()
-                {
-                    MessageTo = "vchauhan.mca@outlook.com",
-                    MessageNameTo = "Nivesh Mantra Test",
-                    Subject = "Nivesh Mantra Test",
-                    Body = $"Control-{TxtControlID}=> UnitID -{TxtUnitID}=>ServiceID - {TxtServiceID}=> IndustryID - {TxtProcessIndustryID}=> ApplicantID- {TxtApplicationID}=> ReqeustID- {TxtRequestID}"
-                };
-                ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
-                sendMessageStrategy.SendMessages();
+            string TxtControlID = Request.Form["TxtControlID"];
+            string TxtUnitID = Request.Form["TxtUnitID"];
+            string TxtServiceID = Request.Form["TxtServiceID"];
+            string TxtProcessIndustryID = Request.Form["TxtProcessIndustryID"];
+            string TxtApplicationID = Request.Form["TxtApplicationID"];
+            string TxtRequestID = Request.Form["TxtRequestID"];
 
-            }
-            catch (Exception ex)
-            {
-                Message msg = new Message()
-                {
-                    MessageTo = "vchauhan.mca@outlook.com",
-                    MessageNameTo = "Nivesh Mantra Test",
-                    Subject = "Nivesh Mantra Test",
-                    Body = ex.Message
-                };
-                ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
-                sendMessageStrategy.SendMessages();
-            }
+            SetAlertMessage($"Control-{TxtControlID}=> UnitID -{TxtUnitID}=>ServiceID - {TxtServiceID}=> IndustryID - {TxtProcessIndustryID}=> ApplicantID- {TxtApplicationID}=> ReqeustID- {TxtRequestID}", "Login Response");
+            //Send Email
+            //try
+            //{
+            //    Message msg = new Message()
+            //    {
+            //        MessageTo = "vchauhan.mca@outlook.com",
+            //        MessageNameTo = "Nivesh Mantra Test",
+            //        Subject = "Nivesh Mantra Test",
+            //        Body = $"Control-{TxtControlID}=> UnitID -{TxtUnitID}=>ServiceID - {TxtServiceID}=> IndustryID - {TxtProcessIndustryID}=> ApplicantID- {TxtApplicationID}=> ReqeustID- {TxtRequestID}"
+            //    };
+            //    ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
+            //    sendMessageStrategy.SendMessages();
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    Message msg = new Message()
+            //    {
+            //        MessageTo = "vchauhan.mca@outlook.com",
+            //        MessageNameTo = "Nivesh Mantra Test",
+            //        Subject = "Nivesh Mantra Test",
+            //        Body = ex.Message
+            //    };
+            //    ISendMessageStrategy sendMessageStrategy = new SendMessageStrategyForEmail(msg);
+            //    sendMessageStrategy.SendMessages();
+            //}
 
             return View("Dashboard");
 
