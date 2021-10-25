@@ -54,6 +54,10 @@ namespace GidaGkpWeb.Controllers
         public string PAddress { get; set; }
         public string ApplicationId { get; set; }
         public string BankName { get; set; }
+        public string AccountHolderName { get; set; }
+        public string BankAccountNo { get; set; }
+        public string IFSC_Code { get; set; }
+
         public string BBAddress { get; set; }
         public string bank_ref_no { get; set; }
         
@@ -167,6 +171,10 @@ namespace GidaGkpWeb.Controllers
                     aaa.BankName = dr["BankName"].ToString();
                     aaa.BBAddress = dr["BBAddress"].ToString();
                     aaa.PAddress = dr["PAddress"].ToString();
+                    aaa.BankName = dr["BankName"].ToString();
+                    aaa.AccountHolderName = dr["AccountHolderName"].ToString();
+                    aaa.BankAccountNo = dr["BankAccountNo"].ToString();
+                    aaa.IFSC_Code = dr["IFSC_Code"].ToString();
                     aaa.bank_ref_no = dr["bank_ref_no"].ToString();
 
                     data.Add(aaa);

@@ -148,6 +148,10 @@ $(document).ready(function () {
                         '<td>' + entry.Skilled + '</td>' +
                         '<td>' + entry.CAddress + '</td>' +
                         '<td>' + entry.PAddress + '</td>' +
+                        '<td>' + entry.BankName + '</td>' +
+                        '<td>' + entry.AccountHolderName + '</td>' +
+                        '<td>' + entry.BankAccountNo + '</td>' +
+                        '<td>' + entry.IFSC_Code + '</td>' +
                         '<td><a target="_blank" href="/Admin/DownloadAttachment?applicationId=' + entry.ApplicationId + '"><strong>Download</strong></a>' +
                         '</td>' +
                         '<td><a class="previous action-button-previous pull-right" target="_blank" href="/Applicant/PaymentReciept?applicationId=' + entry.ApplicationId + '">Print Reciept</a></td>' +
